@@ -1,0 +1,28 @@
+{
+  "name": "gameboard-mobile-app",
+  "version": "0.0.1",
+  "description": "game-board mobile app",
+  "keywords": [
+    "game"
+  ],
+  "authors": [
+    "Matt Perrins"
+  ],
+  "license": "Gameboard Ltd",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor",
+    "tests"
+  ],
+  "dependencies": {
+    "masonry": "*",
+    "swipe": "*",
+    "fastclick": "*",
+    "outlayer": "*",
+    "unveil": "*",
+    "angular-masonry": "*",
+    "jquery": "~2.1.0"
+  }
+}

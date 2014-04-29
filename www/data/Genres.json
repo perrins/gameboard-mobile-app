@@ -1,0 +1,66 @@
+[	
+
+	{
+		"gid" : 1,
+		"imageUrl": "http://images.forwallpaper.com/files/thumbs/preview/38/383000__action-game-wallpaper_p.jpg",
+		"title": "Action",
+		"subTitle" : "Games involving action",
+		"count" : 4,
+		"endDate": "2013-12-31"
+	},
+
+	{
+		"gid" : 2,
+		"imageUrl": "http://www.pcgamewatch.net/wp-content/uploads/2010/07/shooter.jpg",
+		"title": "Shooter",
+		"subTitle" : "First person shooter games",
+		"count" : 4,
+		"endDate": "2013-12-31"
+	},
+
+	{
+		"gid" : 3,
+		"imageUrl": "http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg",
+		"title": "Role playing",
+		"subTitle" : "Role Playing & RPGs",
+		"count" : 4,
+		"endDate": "2013-12-31"
+	},
+
+	{
+		"gid" : 4,
+		"imageUrl": "http://www.prlog.org/11873543-flying-simulator-games.jpg",
+		"title": "Simulation",
+		"subTitle" : "Simulation games",
+		"count" : 4,
+		"endDate": "2013-12-31"
+	},
+
+	{
+		"gid" : 5,
+		"imageUrl": "http://first.cdn.pcplayerhub.com/wp-content/uploads/2013/02/best-strategy-games-pc-civilization-v1.jpg",
+		"title": "Strategy",
+		"subTitle" : "Strategy games",
+		"count" : 4,
+		"endDate": "2013-12-31"
+	},
+
+	{
+		"gid" : 6,
+		"imageUrl": "http://www.tophostgames.com/wp-content/uploads/2013/09/music-gamesharmonix-music-systems-kotaku-australia-xidlo92g.jpg",
+		"title": "Music",
+		"subTitle" : "Music games",
+		"count" : 4,
+		"endDate": "2013-12-31"
+	},
+
+	{
+		"gid" : 7,
+		"imageUrl": "http://images.techhive.com/images/article/2013/06/forza4-100042575-orig.jpg",
+		"title": "Racing",
+		"subTitle" : "Racing games",
+		"count" : 4,
+		"endDate": "2013-12-31"
+	}
+
+]

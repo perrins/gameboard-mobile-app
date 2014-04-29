@@ -12,3 +12,25 @@
 2014-04-29 09:47:11.315 HelloCordova[26230:70b] [CDVTimer][TotalPluginStartup] 0.802994ms
 2014-04-29 09:47:11.426 HelloCordova[26230:70b] Resetting plugins due to page load.
 2014-04-29 09:47:11.641 HelloCordova[26230:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/BCC5FEC5-9914-4CE6-872B-A68A325C3B33/HelloCordova.app/www/index.html#/app/playlists
+2014-04-29 10:14:39.372 HelloCordova[37592:70b] Multi-tasking -> Device: YES, App: YES
+2014-04-29 10:14:39.429 HelloCordova[37592:70b] Unlimited access to network resources
+2014-04-29 10:14:39.576 HelloCordova[37592:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-04-29 10:14:39.577 HelloCordova[37592:70b] [CDVTimer][statusbar] 0.652015ms
+2014-04-29 10:14:39.578 HelloCordova[37592:70b] [CDVTimer][TotalPluginStartup] 1.160026ms
+2014-04-29 10:14:39.705 HelloCordova[37592:70b] Resetting plugins due to page load.
+2014-04-29 10:14:39.918 HelloCordova[37592:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/BCC5FEC5-9914-4CE6-872B-A68A325C3B33/HelloCordova.app/www/index.html#/app/playlists
+2014-04-29 12:58:11.833 Game-board[888:70b] Multi-tasking -> Device: YES, App: YES
+2014-04-29 12:58:11.886 Game-board[888:70b] Unlimited access to network resources
+2014-04-29 12:58:11.896 Game-board[888:70b] Fix applied for database locations?: YES
+2014-04-29 12:58:12.311 Game-board[888:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-04-29 12:58:12.312 Game-board[888:70b] [CDVTimer][statusbar] 0.416994ms
+2014-04-29 12:58:12.312 Game-board[888:70b] [CDVTimer][TotalPluginStartup] 0.739992ms
+2014-04-29 12:58:12.495 Game-board[888:70b] Resetting plugins due to page load.
+2014-04-29 12:58:12.753 Game-board[888:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/457FEF0A-4435-4A2E-B9EB-7D5B62D51808/Game-board.app/www/index.html#/app/playlists
+2014-04-29 12:58:56.226 Game-board[1840:70b] Multi-tasking -> Device: YES, App: YES
+2014-04-29 12:58:56.235 Game-board[1840:70b] Unlimited access to network resources
+2014-04-29 12:58:56.252 Game-board[1840:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-04-29 12:58:56.252 Game-board[1840:70b] [CDVTimer][statusbar] 0.388026ms
+2014-04-29 12:58:56.253 Game-board[1840:70b] [CDVTimer][TotalPluginStartup] 0.752985ms
+2014-04-29 12:58:56.331 Game-board[1840:70b] Resetting plugins due to page load.
+2014-04-29 12:58:56.466 Game-board[1840:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/457FEF0A-4435-4A2E-B9EB-7D5B62D51808/Game-board.app/www/index.html#/app/playlists
