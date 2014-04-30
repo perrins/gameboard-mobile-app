@@ -23,6 +23,7 @@
     "outlayer": "*",
     "unveil": "*",
     "angular-masonry": "*",
-    "jquery": "~2.1.0"
+    "jquery": "~2.1.0",
+    "angular-touch": "~1.2.16"
   }
 }

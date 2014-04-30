@@ -1,0 +1,26 @@
+<ion-view title="Genres" left-buttons="leftButtons">
+
+    <ion-content class="has-header padding=">
+
+        <div id="genres">
+
+            <div class="genreItem ImageButton" ng-repeat="genre in genres" masonary>
+  
+                <a href="#/board/games/{{genre.gid}}">
+
+                  <img alt="{{genre.title}}" ng-src="{{genre.imageUrl}}" lazyload>
+
+                  <div class="summary">
+                      <div class="title">{{genre.title}}</div>
+                      <div class="subtitle">{{genre.subTitle}}</div>
+                      <div class="count">{{genre.count}}</div>
+                      <div class="enddate">{{genre.endDate}}</div>
+                  </div>
+                </a>
+            </div>
+
+        </div>
+
+    </ion-content>
+
+</ion-view>

@@ -3,36 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>Gameboard Mobile</title>
+    <title>game-board</title>
 
-    <!-- ionic css -->
-    <link href="lib/css/ionic.min.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
 
-    <!-- your app's css -->
+    <!-- Gameboards Style Sheets NB. look to move to less or other -->
     <link href="css/app.css" rel="stylesheet">
     <link href="css/gameboard.css" rel="stylesheet">
 
-    <!-- Vendore Modules -->
-    <script src="js/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="js/vendor/jquery-bridget/jquery.bridget.js"></script>
-    <script src="js/vendor/get-style-property/get-style-property.js"></script>
-    <script src="js/vendor/get-size/get-size.js"></script>
-    <script src="js/vendor/eventEmitter/EventEmitter.js"></script>
-    <script src="js/vendor/eventie/eventie.js"></script>
-    <script src="js/vendor/doc-ready/doc-ready.js"></script>
-    <script src="js/vendor/matches-selector/matches-selector.js"></script>
-    <script src="js/vendor/outlayer/item.js"></script>
-    <script src="js/vendor/outlayer/outlayer.js"></script>
-    <script src="js/vendor/masonry/masonry.js"></script>
-    <script src="js/vendor/swipe/swipe.js"></script>
-    <script src="js/vendor/sizzle/dist/sizzle.js"></script>
-    <script src="js/vendor/spin/spin.min.js"></script>
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
 
-    <!-- angularjs scripts -->
-    <script src="lib/js/ionic.bundle.js"></script>
-    <script src="lib/js/angular/angular-sanitize.js"></script>
-    <script src="lib/js/angular/angular-touch.js"></script>
+    <!------------------- IONIC/ANGULAR/VENDOR ------------------>
 
+    <script src="lib/jquery.min.js"></script>
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="lib/angular/angular-sanitize.min.js"></script>
+    <script src="lib/angular/angular-touch.min.js"></script>
+
+    <!-- Load the Vendor Elements -->    
+    <script src="lib/gameboard-mobile-app.vendor.min.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!--------------------- CODE LOADING ------------------------->
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+
+    <!-- Handle any global Script code needed outside the angular framework -->
     <script src="js/base/core.js"></script>
 
     <!-- your app's scripts -->
@@ -40,207 +44,32 @@
     <script src="js/app.js"></script>
     <script src="js/filters.js"></script>
 
-    <!-- Filters -->
+
+    <!-- Services -->
     <script src="js/services/settings.js"></script>
-    <script src="js/services/services.js"></script>
     <script src="js/services/boardService.js"></script>
     <script src="js/services/memberService.js"></script>
 
     <script src="js/base/splash.js"></script>
 
-    <script src="js/directives/directives.js"></script>
-
     <!-- Controllers -->
     <script src="js/controllers/controllers.js"></script>
     <script src="js/controllers/boardController.js"></script>
     <script src="js/controllers/memberController.js"></script>
-
     <script src="js/controllers/settings.js"></script>
+
+    <!-- Directives -->
+    <script src="js/directives/directives.js"></script>
 
   </head>
 
-  <body ng-app="gameboard" animation="slide-left-right-ios7">
+  <!--body ng-app="starter">
+    <ion-nav-view></ion-nav-view>
+  </body-->
 
-    <div ng-controller="MainCtrl">       
-      <ion-nav-view></ion-nav-view>
-    </div>
+<body ng-app="gameboard" animation="slide-left-right-ios7">
 
-    <!--div ng-controller="SplashCtrl">
-      <pane id="wrapper">
+    <ion-nav-view></ion-nav-view>
 
-        <backgroundImage url="img/call-of-duty-ghosts.jpg"></backgroundIMage>
-
-        <background-cycler class="bg-fade"></background-cycler>
-
-        <ion-content scroll-event-interval="20" on-refresh="refreshData()" scroll-effects scrollbar-y="false">
-
-            <div class="splash">   
-              <div class="wrapper">
-                  <div class="wrapper-center">
-                      <h1 class="padding bottom">gameboard</h1> 
-
-                      <div class="placescore">
-                          <div>
-                              <div class="placescore-dot placescore-dot-1">
-                                  <div></div> 
-                              </div>
-                              <div class="placescore-dot placescore-dot-2">
-                                  <div></div> 
-                              </div>
-                              <div class="placescore-dot placescore-dot-3">
-                                  <div></div> 
-                              </div>
-                              <div class="placescore-dot placescore-dot-4">
-                                  <div></div> 
-                              </div>
-                              <div class="placescore-dot placescore-dot-5">
-                                  <div></div> 
-                              </div>
-                          </div>
-                      </div>
-                      <h2 class="padding top">10th March 2014</h2> 
-
-                  <div>
-              <div>    
-            </div>
-
-          <div id="main-content">
-
-            <button ng-click="goHome" class="button button-balanced">
-              Login
-            </button>
-          </div>
-        </ion-content>
-      </pane>
-    </div-->
-
-    <script id="board.html" type="text/ng-template">
-      <div id="settings-modal" class="modal" ng-controller="SettingsCtrl">
-        <header class="bar bar-header bar-dark">
-          <h1 class="title">Settings</h1>
-          <button class="button button-clear" ng-click="closeSettings()">Close</button>
-        </header>
-        <content has-header="true">
-          <div class="padding">
-            <div class="list">
-              <label class="item item-input">
-                <span class="input-label">Units</span>
-
-                <radio-buttons ng-model="settings.tempUnits">
-                  <button class="button button-positive button-radio" ng-value="'f'">&deg;F</button>
-                  <button class="button button-positive button-radio" ng-value="'c'">&deg;C</button>
-                </radio-buttons>
-              </label>
-            </div>
-          </div>
-        </content>
-      </div>
-    </script>
-
-    <script id="board.html" type="text/ng-template">
-
-      <ion-side-menus>
-
-        <ion-pane ion-side-menu-content>
-            <ion-nav-bar animation="nav-title-slide-ios7" type="bar-positive" back-button-type="button-icon" back-button-icon="ion-arrow-left-c"></ion-nav-bar>
-            <ion-nav-view animation="slide-left-right">
-
-            </ion-nav-view>
-
-            <ion-nav-view name="menuContent">
-
-            </ion-nav-view>
-            
-        </ion-pane>
-
-        <ion-side-menu side="left">
-            <header class="bar bar-header bar-dark">
-                <div class="h1 title">game-board</div>
-            </header>
-            <ion-content has-header="true">
-
-                <ion-list>
-
-                    <a class="item item-icon-left"ng-click="select('board.genres')">
-                        <i class="icon ion-game-controller-b"></i>
-                        Genres
-                    </a>
-
-                    <a class="item item-icon-left" href="javascript:void(0);" data-dojo-attach-event="click:_prizes">
-                        <i class="icon ion-film-marker"></i>
-                        Prizes
-                        <span class="badge badge-royal">£12,500</span>
-                    </a>
-
-                    <a class="item item-icon-left">
-                        <i class="icon ion-videocamera"></i>
-                        Videos
-                        <span class="badge badge-positive">4</span>
-                    </a>
-
-                    <a class="item item-icon-left" ng-click="select('board.favourites')">
-                        <i class="icon ion-ios7-bookmarks"></i>
-                        Favourites
-                        <span class="badge badge-calm">8</span>
-                    </a>
-
-                    <a class="item item-icon-left" href="javascript:void(0);" data-dojo-attach-event="click:_search">
-                        <i class="icon ion-ios7-search-strong"></i>
-                        Search
-                        <span class="item-note">
-                            find videos
-                        </span>
-                    </a>
-
-                    <a class="item item-icon-left" href="javascript:void(0);" data-dojo-attach-event="click:_members">
-                        <i class="icon ion-person-stalker"></i>
-                        Members
-                        <span class="badge badge-balanced">12,342</span>
-                    </a>
-
-                    <a class="item item-icon-left" href="#">
-                        <i class="icon ion-person"></i>
-                        Account
-                    </a>
-
-                    <div class="item item-divider">
-                        Other
-                    </div>
-
-                    <a class="item item-icon-left" ng-click="select('board.settings')">
-                        <i class="icon ion-gear-a"></i>
-                        Settings
-                    </a>
-
-                    <a class="item item-icon-left" href="javascript:void(0);" data-dojo-attach-event="click:_help">
-                        <i class="icon ion-ios7-help-outline"></i>
-                        Help
-                        <span class="item-note">
-                            more information
-                        </span>
-                    </a>
-
-                    <a class="item" href="javascript:void(0);" data-dojo-attach-event="click:_logout">
-                        <i class="icon ion-log-out"></i>
-                        Logout
-                    </a>
-
-                </ion-list>
-
-                </div>
-                </div>
-
-            </ion-content>
-        </ion-side-menu>
-
-        <!-- Right menu -->
-        <ion-side-menu side="right">
-            <p>Right</p>
-        </ion-side-menu>
-
-          </ion-side-menus>
-    </script>
-
-    
-  </body>
+</body>  
 </html>

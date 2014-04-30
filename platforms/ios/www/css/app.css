@@ -1,0 +1,18 @@
+/* Your app's CSS, go crazy, make it your own */
+
+body {
+  background-color: black;
+}
+
+.ionic-logo {
+  display: block;
+  margin: 15px auto;
+  width: 96px;
+  height: 96px;
+}
+
+hidden {
+	display:none
+};
+
+

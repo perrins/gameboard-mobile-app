@@ -1,0 +1,141 @@
+<ion-view title="'Settings'" left-buttons="leftButtons" right-button="actionButtons">
+
+    <ion-content has-header="true" padding="true">
+
+        <ul class="list card">
+
+            <div class="item item-divider">
+                Search
+            </div>
+
+            <li class="item item-icon-left item-toggle">
+                <i class="icon ion-person-stalker"></i>
+                Members
+
+                <span class="item-note">
+                    include members in search
+                </span>
+                <label class="toggle">
+
+                    <input data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+
+            </li>
+
+            <li class="item item-icon-left item-toggle">
+                <i class="icon ion-beer"></i>
+                Winners
+
+                <span class="item-note">
+                    only include winners
+                </span>
+                <label class="toggle">
+
+                    <input data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </li>
+
+            <div class="item item-divider">
+                Results
+            </div>
+
+            <li class="item range range-positive">
+                1
+                <input type="range" name="volume" min="0" max="1000" value="500">1000
+            </li>
+
+
+        </ul>
+
+        <ul class="list card">
+
+            <div class="item item-divider">
+                Notifications
+            </div>
+
+            <li class="item item-icon-left item-toggle">
+                <i class="icon ion-social-facebook"></i>
+                Facebook
+
+                <span class="item-note">
+                    update your facebook wall
+                </span>
+                <label class="toggle">
+
+                    <input id="facebook" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+
+            </li>
+
+            <li class="item item-icon-left item-toggle">
+                <i class="icon ion-social-twitter"></i>
+                Twitter
+
+                <span class="item-note">
+                    tweet your progress
+                </span>
+                <label class="toggle">
+
+                    <input id="twitter" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+
+            </li>
+
+            <li class="item item-icon-left  item-toggle">
+                <i class="icon ion-social-googleplus"></i>
+                Google+
+
+                <span class="item-note">
+                    update your Google+ wall
+                </span>
+                <label class="toggle">
+
+                    <input id="googleplus" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+
+            </li>
+
+
+            <li class="item item-icon-left item-toggle">
+                <i class="icon ion-email"></i>
+                eMail
+
+                <span class="item-note">
+                    email your progress
+                </span>
+                <label class="toggle">
+
+                    <input id="email" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+
+            </li>
+
+        </ul>
+
+
+    </ion-content>
+</ion-view>

@@ -34,3 +34,30 @@
 2014-04-29 12:58:56.253 Game-board[1840:70b] [CDVTimer][TotalPluginStartup] 0.752985ms
 2014-04-29 12:58:56.331 Game-board[1840:70b] Resetting plugins due to page load.
 2014-04-29 12:58:56.466 Game-board[1840:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/457FEF0A-4435-4A2E-B9EB-7D5B62D51808/Game-board.app/www/index.html#/app/playlists
+2014-04-30 06:49:54.244 Game-board[80860:70b] Multi-tasking -> Device: YES, App: YES
+2014-04-30 06:49:54.268 Game-board[80860:70b] Unlimited access to network resources
+2014-04-30 06:49:54.272 Game-board[80860:70b] Fix applied for database locations?: YES
+2014-04-30 06:49:54.533 Game-board[80860:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-04-30 06:49:54.533 Game-board[80860:70b] [CDVTimer][statusbar] 0.474989ms
+2014-04-30 06:49:54.534 Game-board[80860:70b] [CDVTimer][TotalPluginStartup] 1.008987ms
+2014-04-30 06:49:54.664 Game-board[80860:70b] Resetting plugins due to page load.
+2014-04-30 06:49:54.997 Game-board[80860:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/D9EF098B-A693-40A8-B76A-8E085FF39B6A/Game-board.app/www/index.html#/board/genres
+2014-04-30 06:50:03.153 Game-board[80860:70b] ACTIVATING
+2014-04-30 06:50:03.178 Game-board[80860:70b] GID 1
+2014-04-30 06:50:03.179 Game-board[80860:70b] GID: 1
+2014-04-30 06:50:04.699 Game-board[80860:70b] CID: 1
+2014-04-30 06:50:06.212 Game-board[80860:70b] ACTIVATING
+2014-04-30 06:50:06.275 Game-board[80860:70b] GID 1
+2014-04-30 06:50:06.986 Game-board[80860:70b] ACTIVATING
+2014-04-30 06:50:10.144 Game-board[80860:70b] ACTIVATING
+2014-04-30 06:50:10.243 Game-board[80860:70b] GID 7
+2014-04-30 06:50:12.921 Game-board[80860:70b] ACTIVATING
+2014-04-30 06:50:14.971 Game-board[80860:70b] ACTIVATING
+2014-04-30 06:52:28.776 Game-board[80860:70b] ACTIVATING
+2014-04-30 06:52:38.423 Game-board[80860:70b] GID 2
+2014-04-30 06:52:39.482 Game-board[80860:70b] CID: 1
+2014-04-30 06:52:43.752 Game-board[80860:70b] GID 2
+2014-04-30 06:52:46.201 Game-board[80860:70b] ACTIVATING
+2014-04-30 06:52:46.265 Game-board[80860:70b] GID 2
+2014-04-30 06:52:47.142 Game-board[80860:70b] CID: 1
+2014-04-30 06:52:50.981 Game-board[80860:70b] GID 2

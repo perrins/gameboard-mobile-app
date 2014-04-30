@@ -3,27 +3,73 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <title>game-board</title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+
+    <!-- Gameboards Style Sheets NB. look to move to less or other -->
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/gameboard.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
+    <!------------------- IONIC/ANGULAR/VENDOR ------------------>
+
+    <script src="lib/jquery.min.js"></script>
+
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="lib/angular/angular-sanitize.min.js"></script>
+    <script src="lib/angular/angular-touch.min.js"></script>
+
+    <!-- Load the Vendor Elements -->    
+    <script src="lib/gameboard-mobile-app.vendor.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
+    <!--------------------- CODE LOADING ------------------------->
+
     <!-- your app's js -->
     <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
+
+    <!-- Handle any global Script code needed outside the angular framework -->
+    <script src="js/base/core.js"></script>
+
+    <!-- your app's scripts -->
+    <!-- Replace this at runtime with a Compressed Version -->
+    <script src="js/app.js"></script>
+    <script src="js/filters.js"></script>
+
+
+    <!-- Services -->
+    <script src="js/services/settings.js"></script>
+    <script src="js/services/boardService.js"></script>
+    <script src="js/services/memberService.js"></script>
+
+    <script src="js/base/splash.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/controllers.js"></script>
+    <script src="js/controllers/boardController.js"></script>
+    <script src="js/controllers/memberController.js"></script>
+    <script src="js/controllers/settings.js"></script>
+
+    <!-- Directives -->
+    <script src="js/directives/directives.js"></script>
+
   </head>
 
-  <body ng-app="starter">
+  <!--body ng-app="starter">
     <ion-nav-view></ion-nav-view>
-  </body>
+  </body-->
+
+<body ng-app="gameboard" animation="slide-left-right-ios7">
+
+    <ion-nav-view></ion-nav-view>
+
+</body>  
 </html>

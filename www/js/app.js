@@ -1,6 +1,8 @@
 // Gameboard Mobile Angular App
 
-angular.module('gameboard', ['ionic', 'gameboard.directives',
+angular.module('gameboard', [
+    'ionic', 
+    'gameboard.directives',
     'gameboard.controllers',
     'gameboard.board.controllers',
     'gameboard.member.controllers',
@@ -8,6 +10,17 @@ angular.module('gameboard', ['ionic', 'gameboard.directives',
     'gameboard.member.services'
 ])
 
+// Handle Status Bar Styling on Load
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    if(window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+})
+
+// Configure the Angular Rules
 .config(function($stateProvider, $urlRouterProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
@@ -15,12 +28,54 @@ angular.module('gameboard', ['ionic', 'gameboard.directives',
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
 
-    $stateProvider
+    $stateProvider .state('app', {
+      url: "/app",
+      abstract: true,
+      templateUrl: "templates/menu.html",
+      controller: 'AppCtrl'
+    })
+
+    .state('app.search', {
+      url: "/search",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/search.html"
+        }
+      }
+    })
+
+    .state('app.browse', {
+      url: "/browse",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/browse.html"
+        }
+      }
+    })
+    .state('app.playlists', {
+      url: "/playlists",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/playlists.html",
+          controller: 'PlaylistsCtrl'
+        }
+      }
+    })
+
+    .state('app.single', {
+      url: "/playlists/:playlistId",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/playlist.html",
+          controller: 'PlaylistCtrl'
+        }
+      }
+    })
 
     .state('board', {
         url: "/board",
         abstract: true,
-        templateUrl: "board.html",
+        templateUrl: "templates/board.html",
         controller: 'MainCtrl'
     })
 
@@ -105,6 +160,9 @@ angular.module('gameboard', ['ionic', 'gameboard.directives',
             }
         }
     });
+
+    // if none of the above states are matched, use this as the fallback
+    //$urlRouterProvider.otherwise('/app/playlists')
 
     // Default to Home
     $urlRouterProvider.otherwise("/board/genres");

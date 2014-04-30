@@ -1,0 +1,31 @@
+<ion-view title="'Categories'" class="Categories">
+    <ion-content has-header="true">
+
+        <img class="Banner" ng-src="{{banner}}" lazyload></div>
+
+        <ion-list data-dojo-attach-point="games">
+
+			<a ng-repeat="cat in categories" class="item" href="#/board/list/{{cat.id}}">
+                    <h2>{{cat.title}}</h2>
+                    <p>{{cat.subtitle}}</p>
+                    <p>{{cat.description}}</p>
+                    <div class="prize">{{cat.prize}}</div>
+                    <span class="badge badge-calm">{{cat.videos}}</span>
+            </a>
+
+        </div>
+
+        <div id="notfound" class="card hidden">
+            <div class="item item-text-wrap">
+                No Categories have been found for this Genre
+            </div>
+        </div>
+
+        </div>
+    </ion-content>
+
+    <div class="bar bar-footer bar-balanced">
+        <div class="title" id="numberNode">{{categories.length}} Categories</div>
+    </div>
+
+</ion-view>

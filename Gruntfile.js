@@ -39,10 +39,16 @@ module.exports = function(grunt) {
         // node modules and ignore
         // to include in the combined SDK
         copy: {
-            jquery: {
+            dist: {
                 files: [{
                     src: "vendor/jquery/dist/jquery.min.js",
-                    dest: "www/js/lib/jquery.min.js"
+                    dest: "www/lib/jquery.min.js"
+                },{
+                    src: "vendor/angular-sanitize/angular-sanitize.min.js",
+                    dest: "www/lib/angular/angular-sanitize.min.js"
+                },{
+                    src: "vendor/angular-touch/angular-touch.min.js",
+                    dest: "www/lib/angular/angular-touch.min.js"
                 }]
             }
         },
@@ -58,7 +64,7 @@ module.exports = function(grunt) {
                 },
                 src: [
                     'vendor/jquery/dist/jquery.js',
-                    'vendor/jquery-bridget/jquery.bridget.js',
+                    'vendor/jquery-bridget/jquery.bridge.js',
                     'vendor/get-style-property/get-style-property.js',
                     'vendor/get-size/get-size.js',
                     'vendor/eventEmitter/EventEmitter.js',
@@ -87,7 +93,7 @@ module.exports = function(grunt) {
         uglify: {
             vendor: {
                 files: {
-                    'www/js/lib/<%= pkg.name%>.vendor.min.js': 'tmp/js/<%= pkg.name%>.vendor.js'
+                    'www/lib/<%= pkg.name%>.vendor.min.js': 'tmp/js/<%= pkg.name%>.vendor.js'
                 }
             },
 
@@ -194,7 +200,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
         'bump',
         'clean:dist',
-        'copy:jquery',
+        'copy:dist',
         'concat:vendor',
         'version',
         'string-replace',
