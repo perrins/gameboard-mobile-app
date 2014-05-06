@@ -77,8 +77,7 @@ module.exports = function(grunt) {
                     'vendor/swipe/swipe.js',
                     'vendor/sizzle/sizzle.js',
                     'vendor/spin/spin.min.js',
-                    'vendor/fastclick/lib/fastclick.js',
-                    'vendor/angular-masonry/angular-masonry.js'
+                    'vendor/fastclick/lib/fastclick.js'
                 ],
                 dest: 'tmp/js/<%= pkg.name%>.vendor.js'
             }

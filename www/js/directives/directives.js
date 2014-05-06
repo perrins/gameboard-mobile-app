@@ -1,19 +1,21 @@
 angular.module('gameboard.directives', [])
 
 
-
 .directive('masonary', function() {
     return {
         restrict: 'A',
         link: function($scope, $element, $attrs) {
 
             // Register Masonary for our Directive.
-            if($scope.$last) {
-              $($element.parent()).masonry({
-                  columnWidth: 200,
-                  itemSelector: '.genreItem'
-              });
-            }  
+            if ($scope.$last) {
+                var parent = $($element.parent())[0];
+                var msnry = new Masonry(parent, {
+                    // options
+                    columnWidth: 160,
+                    itemSelector: '.genreItem'
+                });
+
+            }
 
         }
     };
@@ -22,39 +24,20 @@ angular.module('gameboard.directives', [])
 .directive('lazyload', function() {
     return {
         restrict: 'A',
-        link: function($scope, $element, $attrs,$q) {
+        link: function($scope, $element, $attrs, $q) {
 
-            var opts = {
-                lines: 10, // The number of lines to draw
-                length: 3, // The length of each line
-                width: 2, // The line thickness
-                radius: 3, // The radius of the inner circle
-                color: '#000', // #rbg or #rrggbb
-                speed: 1, // Rounds per second
-                trail: 60, // Afterglow percentage
-                shadow: false // Whether to render a shadow
-            };
+            $element.bind('load', function() {
 
-            /*
-            $element.loadNicely({
-                preLoad: function (img) {
-                    //$(img).parent().spin(spinnerOptions);
+                // Remove the Spinner
+                $($element.parent()).removeClass("spinner");
 
-                    var spinner = new Spinner(opts).spin($(img));
-                },
-                onLoad: function (img) {
-                    $(img).fadeIn(200, function () {
-                        var spinner = $(this).parent().data("spinner");
-                        if (spinner)
-                            spinner.stop();
-                    });
-                }
+                // Fade in the Image
+                $($element).addClass("genre-image-show");
+
             });
-*/
         }
-    };
+    }
 })
-
 
 .directive('swipe', function() {
     return {
@@ -62,18 +45,18 @@ angular.module('gameboard.directives', [])
         link: function($scope, $element, $attrs) {
 
             // Register Masonary for our Directive.
-            if($scope.$last) {
-   
+            if ($scope.$last) {
+
                 // Create the Slider
                 this.swipe = new Swipe($element.parent().parent()[0], {
-                  startSlide: 0,
-                  speed: 400,
-                  auto: 3000,
-                  continuous: true,
-                  disableScroll: true,
-                  stopPropagation: false
+                    startSlide: 0,
+                    speed: 400,
+                    auto: 3000,
+                    continuous: true,
+                    disableScroll: true,
+                    stopPropagation: false
                 });
-            }    
+            }
 
         }
     };

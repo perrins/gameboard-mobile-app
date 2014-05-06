@@ -154,10 +154,10 @@ angular.module('gameboard.board.services', [])
             var def = $q.defer();
 
             // Check if we have retrieved and stored already
-            var games = cache.get('categories');
+            var cats = cache.get('categories');
 
-            if (games != undefined) {
-                def.resolve(games);
+            if (cats != undefined) {
+                def.resolve(cats);
             } else {
                 // Create a deffered
                 var def = $q.defer();
@@ -201,7 +201,54 @@ angular.module('gameboard.board.services', [])
         }
     }
 
+})
+
+/**
+ * A simple example service that returns some data.
+ */
+.factory('BoardService', function($q, $cacheFactory,$stateParams, URL) {
+
+    // Use an internal Cache for storing the List and map the operations to manage that from 
+    // MBaaS SDK Calls
+
+    return {
+
+        all: function(bid) {
+
+            console.log("BID:",bid);
+
+            // Create a deffered
+            var def = $q.defer();
+
+            // Lets Get a list of Genres
+            $.ajax({
+                type: "GET",
+                url: URL.BOARD,
+                dataType: "json",
+                contentType: "application/json",
+                success: function(result,status) {
+
+                    // Check if we were able to store it sucessfully
+                    if (status === "success") {
+
+                      // return the Cache
+                      def.resolve(result);
+
+
+                    } else {
+                        def.reject([]);
+                    }
+
+                },
+                error: function(err) {
+                    def.reject(err);
+                }
+            });
+            
+            // Get the Objects for a particular Type
+            return def.promise;
+
+        }
+    }
+
 });
-
-
-

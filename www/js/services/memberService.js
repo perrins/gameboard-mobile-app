@@ -3,6 +3,106 @@ angular.module('gameboard.member.services', [])
 /**
  * A simple example service that returns some data.
  */
+.factory('YourVidoesService', function($q, $cacheFactory,$stateParams, URL) {
+
+    // Use an internal Cache for storing the List and map the operations to manage that from 
+    // MBaaS SDK Calls
+    var cache = $cacheFactory('yourvideos');
+
+    return {
+
+        getYourVideos: function() {
+
+            // Create a deffered
+            var def = $q.defer();
+        
+            // Lets Get a list of Genres
+            $.ajax({
+                type: "GET",
+                url: URL.YOURVIDEOS,
+                dataType: "json",
+                contentType: "application/json",
+                success: function(result,status) {
+
+                    // Check if we were able to store it sucessfully
+                    if (status === "success") {
+
+                      // return the Cache
+                      def.resolve(result);
+
+
+                    } else {
+                        def.reject([]);
+                    }
+
+                },
+                error: function(err) {
+                    def.reject(err);
+                }
+            });
+        
+            // Get the Objects for a particular Type
+            return def.promise;
+
+        }
+    }
+
+})
+
+/**
+ * A simple example service that returns some data.
+ */
+.factory('MembersService', function($q, $cacheFactory,$stateParams, URL) {
+
+    // Use an internal Cache for storing the List and map the operations to manage that from 
+    // MBaaS SDK Calls
+    var cache = $cacheFactory('members');
+
+    return {
+
+        getMembers: function(muuid) {
+
+            console.log("muuid",muuid);
+
+            // Create a deffered
+            var def = $q.defer();
+        
+            // Lets Get a list of Genres
+            $.ajax({
+                type: "GET",
+                url: URL.MEMBERS,
+                dataType: "json",
+                contentType: "application/json",
+                success: function(result,status) {
+
+                    // Check if we were able to store it sucessfully
+                    if (status === "success") {
+
+                      // return the Cache
+                      def.resolve(result);
+
+
+                    } else {
+                        def.reject([]);
+                    }
+
+                },
+                error: function(err) {
+                    def.reject(err);
+                }
+            });
+        
+            // Get the Objects for a particular Type
+            return def.promise;
+
+        }
+    }
+
+})
+
+/**
+ * A simple example service that returns some data.
+ */
 .factory('MemberDetailService', function($q, $cacheFactory,$stateParams, URL) {
 
     // Use an internal Cache for storing the List and map the operations to manage that from 

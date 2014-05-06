@@ -21,7 +21,6 @@
     "swipe": "*",
     "fastclick": "*",
     "outlayer": "*",
-    "unveil": "*",
     "jquery": "~2.1.1",
     "angular-touch": "~1.2.16"
   }

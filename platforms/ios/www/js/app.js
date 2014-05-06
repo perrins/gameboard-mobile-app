@@ -6,18 +6,34 @@ angular.module('gameboard', [
     'gameboard.controllers',
     'gameboard.board.controllers',
     'gameboard.member.controllers',
+    'gameboard.search.controllers',
     'gameboard.board.services',
-    'gameboard.member.services'
+    'gameboard.member.services',
+    'gameboard.search.services'
 ])
 
 // Handle Status Bar Styling on Load
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
+
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
   });
+})
+
+.constant('URL', {
+    GENRES: "data/Genres.json",
+    GAMES: "data/Games.json",
+    CATEGORIES: "data/Categories.json",
+    BOARD: "data/Board.json",
+    YOUTUBE:"data/Youtube.json",
+    MEMBER: "data/Member.json",
+    FAVOURITES: "data/Favourites.json",
+    MEMBERS: "data/Members.json",
+    YOURVIDEOS: "data/YourVideos.json",
+    SEARCH: "data/Search.json"
 })
 
 // Configure the Angular Rules
@@ -28,54 +44,12 @@ angular.module('gameboard', [
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
 
-    $stateProvider .state('app', {
-      url: "/app",
-      abstract: true,
-      templateUrl: "templates/menu.html",
-      controller: 'AppCtrl'
-    })
-
-    .state('app.search', {
-      url: "/search",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/search.html"
-        }
-      }
-    })
-
-    .state('app.browse', {
-      url: "/browse",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/browse.html"
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
-
-    .state('app.single', {
-      url: "/playlists/:playlistId",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/playlist.html",
-          controller: 'PlaylistCtrl'
-        }
-      }
-    })
+    $stateProvider 
 
     .state('board', {
         url: "/board",
         abstract: true,
-        templateUrl: "templates/board.html",
+        templateUrl: "templates/menu.html",
         controller: 'MainCtrl'
     })
 
@@ -142,6 +116,16 @@ angular.module('gameboard', [
             }
         }
     })
+    .state('board.videos', {
+        url: "/videos",
+        views: {
+            'menuContent': {
+                templateUrl: "templates/videos.html",
+                controller: "YourVideosCtrl"
+            }
+        }
+    })
+
     .state('board.search', {
         url: "/search",
         views: {
@@ -167,14 +151,5 @@ angular.module('gameboard', [
     // Default to Home
     $urlRouterProvider.otherwise("/board/genres");
 
-})
-
-.constant('URL', {
-    GENRES: "data/Genres.json",
-    GAMES: "data/Games.json",
-    CATEGORIES: "data/Categories.json",
-    BOARD: "data/Board.json",
-    MEMBER: "data/Member.json",
-    FAVOURITES: "data/Favourites.json",
-    MEMBERS: "data/Games.json"
 });
+

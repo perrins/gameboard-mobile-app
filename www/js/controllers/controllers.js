@@ -20,6 +20,12 @@ angular.module('gameboard.controllers', [])
 
     }
 
+    $scope.logout = function()
+    {
+        console.log("logout");
+    }
+
+
 })
 
 .controller('AppCtrl', function($scope) {

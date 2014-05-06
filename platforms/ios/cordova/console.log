@@ -61,3 +61,106 @@
 2014-04-30 06:52:46.265 Game-board[80860:70b] GID 2
 2014-04-30 06:52:47.142 Game-board[80860:70b] CID: 1
 2014-04-30 06:52:50.981 Game-board[80860:70b] GID 2
+2014-05-02 10:59:46.571 Game-board[15824:70b] Multi-tasking -> Device: YES, App: YES
+2014-05-02 10:59:46.591 Game-board[15824:70b] Unlimited access to network resources
+2014-05-02 10:59:46.710 Game-board[15824:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-05-02 10:59:46.710 Game-board[15824:70b] [CDVTimer][statusbar] 0.331044ms
+2014-05-02 10:59:46.710 Game-board[15824:70b] [CDVTimer][TotalPluginStartup] 0.599980ms
+2014-05-02 10:59:46.806 Game-board[15824:70b] Resetting plugins due to page load.
+2014-05-02 10:59:48.557 Game-board[15824:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/94568E3A-E8DE-44AB-8BD6-433D3E74659C/Game-board.app/www/index.html#/board/genres
+2014-05-02 10:59:49.240 Game-board[15824:70b] GID 1
+2014-05-02 10:59:49.240 Game-board[15824:70b] GID: 1
+2014-05-02 10:59:50.547 Game-board[15824:70b] ACTIVATING
+2014-05-02 10:59:50.577 Game-board[15824:70b] CID: 1
+2014-05-02 10:59:51.840 Game-board[15824:70b] ACTIVATING
+2014-05-02 10:59:51.893 Game-board[15824:70b] GID 1
+2014-05-02 10:59:53.359 Game-board[15824:70b] CID: 1
+2014-05-02 11:00:07.128 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:08.578 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:08.649 Game-board[15824:70b] GID 1
+2014-05-02 11:00:41.540 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:43.519 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:43.582 Game-board[15824:70b] GID 2
+2014-05-02 11:00:44.568 Game-board[15824:70b] CID: 1
+2014-05-02 11:00:45.669 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:46.421 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:46.473 Game-board[15824:70b] GID 2
+2014-05-02 11:00:48.652 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:51.171 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:52.583 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:53.917 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:55.087 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:00:55.818 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:01:15.685 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:01:17.667 Game-board[15824:70b] ACTIVATING
+2014-05-02 11:01:20.937 Game-board[15824:70b] ACTIVATING
+Terminating in response to SpringBoard's termination.
+2014-05-04 05:31:15.164 Game-board[70167:70b] Multi-tasking -> Device: YES, App: YES
+2014-05-04 05:31:15.192 Game-board[70167:70b] Unlimited access to network resources
+2014-05-04 05:31:15.308 Game-board[70167:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-05-04 05:31:15.309 Game-board[70167:70b] [CDVTimer][statusbar] 0.464976ms
+2014-05-04 05:31:15.309 Game-board[70167:70b] [CDVTimer][TotalPluginStartup] 0.777006ms
+2014-05-04 05:31:15.416 Game-board[70167:70b] Resetting plugins due to page load.
+2014-05-04 05:31:16.843 Game-board[70167:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/94568E3A-E8DE-44AB-8BD6-433D3E74659C/Game-board.app/www/index.html#/board/genres
+2014-05-04 05:31:27.105 Game-board[70167:70b] ACTIVATING
+2014-05-04 05:31:28.152 Game-board[70167:70b] ACTIVATING
+2014-05-04 05:31:30.600 Game-board[70167:70b] ACTIVATING
+2014-05-04 05:31:40.867 Game-board[70167:70b] GID 1
+2014-05-04 05:31:40.867 Game-board[70167:70b] GID: 1
+2014-05-04 05:31:42.001 Game-board[70167:70b] CID: 1
+2014-05-04 05:31:44.634 Game-board[70167:70b] GID 1
+2014-05-04 05:32:02.713 Game-board[70167:70b] ACTIVATING
+2014-05-04 05:32:04.402 Game-board[70167:70b] ACTIVATING
+2014-05-04 05:32:45.936 Game-board[70167:70b] Received memory warning.
+2014-05-04 08:03:52.074 Game-board[9039:70b] Multi-tasking -> Device: YES, App: YES
+2014-05-04 08:03:52.084 Game-board[9039:70b] Unlimited access to network resources
+2014-05-04 08:03:52.103 Game-board[9039:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-05-04 08:03:52.103 Game-board[9039:70b] [CDVTimer][statusbar] 0.452995ms
+2014-05-04 08:03:52.104 Game-board[9039:70b] [CDVTimer][TotalPluginStartup] 0.803053ms
+2014-05-04 08:03:52.176 Game-board[9039:70b] Resetting plugins due to page load.
+2014-05-04 08:03:58.426 Game-board[9039:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/94568E3A-E8DE-44AB-8BD6-433D3E74659C/Game-board.app/www/index.html#/board/genres
+2014-05-05 07:11:58.861 Game-board[79680:70b] Multi-tasking -> Device: YES, App: YES
+2014-05-05 07:11:58.882 Game-board[79680:70b] Unlimited access to network resources
+2014-05-05 07:11:59.003 Game-board[79680:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-05-05 07:11:59.003 Game-board[79680:70b] [CDVTimer][statusbar] 0.388980ms
+2014-05-05 07:11:59.004 Game-board[79680:70b] [CDVTimer][TotalPluginStartup] 0.864983ms
+2014-05-05 07:11:59.117 Game-board[79680:70b] Resetting plugins due to page load.
+2014-05-05 07:11:59.358 Game-board[79680:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/94568E3A-E8DE-44AB-8BD6-433D3E74659C/Game-board.app/www/index.html#/board/genres
+2014-05-05 07:12:02.499 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:05.273 Game-board[79680:70b] GID 1
+2014-05-05 07:12:05.273 Game-board[79680:70b] GID: 1
+2014-05-05 07:12:07.274 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:10.137 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:11.101 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:12.592 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:13.740 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:14.823 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:16.356 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:17.427 Game-board[79680:70b] CID: 1
+2014-05-05 07:12:19.756 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:21.115 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:22.670 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:23.807 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:25.325 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:26.747 Game-board[79680:70b] GID 1
+2014-05-05 07:12:34.307 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:39.742 Game-board[79680:70b] muuid 
+2014-05-05 07:12:45.668 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:47.912 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:49.276 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:53.460 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:54.655 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:12:55.802 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:13:05.411 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:13:06.394 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:13:09.252 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:13:10.285 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:13:11.247 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:13:12.123 Game-board[79680:70b] GID 1
+2014-05-05 07:13:13.927 Game-board[79680:70b] CID: 1
+2014-05-05 07:13:16.377 Game-board[79680:70b] GID 1
+2014-05-05 07:13:26.589 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:13:42.599 Game-board[79680:70b] GID 1
+2014-05-05 07:13:43.965 Game-board[79680:70b] CID: 1
+2014-05-05 07:13:45.677 Game-board[79680:70b] ACTIVATING
+2014-05-05 07:13:45.859 Game-board[79680:70b] ACTIVATING

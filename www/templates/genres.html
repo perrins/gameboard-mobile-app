@@ -12,8 +12,9 @@
 
                 <a href="#/board/games/{{genre.gid}}">
 
-
-                    <img class="genre-image genre-loading" alt="{{genre.title}}" src="img/loading-icon.png" ng-src="{{genre.imageUrl}}">
+                    <div class="spinner">
+                        <img  class="genre-image genre-image-load" alt="{{genre.title}}"  ng-src="{{genre.imageUrl}}" lazyload>
+                    </div>    
 
                     <div class="summary">
                         <div class="title">{{genre.title}}</div>

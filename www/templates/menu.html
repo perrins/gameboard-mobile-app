@@ -1,94 +1,85 @@
 <ion-side-menus>
 
   <ion-pane ion-side-menu-content>
-    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-bar class="bar bar-header bar-dark nav-title-slide-ios7">
       <ion-nav-back-button class="button-clear"><i class="icon ion-chevron-left"></i>Back</ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
 
   <ion-side-menu side="left">
-    <header class="bar bar-header bar-stable">
+    <header class="bar bar-header bar-dark">
       <h1 class="title">game-board</h1>
     </header>
     <ion-content class="has-header">
       <ion-list>
-        <ion-item nav-clear menu-close href="#/app/search">
-          Search
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/playlists">
-          Playlists
-        </ion-item>
 
-                <a class="item item-icon-left" ng-click="select('board.genres')">
-                    <i class="icon ion-game-controller-b"></i>
-                    Genres
-                </a>
+            <a class="item item-icon-left" menu-close href="#/board/genres">
+                <i class="icon ion-game-controller-b"></i>
+                Genres
+            </a>
 
-                <a class="item item-icon-left" href="javascript:void(0);" data-dojo-attach-event="click:_prizes">
-                    <i class="icon ion-film-marker"></i>
-                    Prizes
-                    <span class="badge badge-royal">£12,500</span>
-                </a>
+            <!--a class="item item-icon-left" menu-close href="#/board/prizes">
+                <i class="icon ion-film-marker"></i>
+                Prizes
+                <span class="badge badge-royal">£12,500</span>
+            </a-->
 
-                <a class="item item-icon-left">
-                    <i class="icon ion-videocamera"></i>
-                    Videos
-                    <span class="badge badge-positive">4</span>
-                </a>
+            <a class="item item-icon-left" menu-close href="#/board/videos">
+                <i class="icon ion-videocamera"></i>
+                Your Videos
+                <span class="badge badge-positive">4</span>
+            </a>
 
-                <a class="item item-icon-left" ng-click="select('board.favourites')">
-                    <i class="icon ion-ios7-bookmarks"></i>
-                    Favourites
-                    <span class="badge badge-calm">8</span>
-                </a>
+            <a class="item item-icon-left" menu-close href="#/board/favourites">
+                <i class="icon ion-ios7-bookmarks"></i>
+                Favourites
+                <span class="badge badge-calm">8</span>
+            </a>
 
-                <a class="item item-icon-left" href="javascript:void(0);" data-dojo-attach-event="click:_search">
-                    <i class="icon ion-ios7-search-strong"></i>
-                    Search
-                    <span class="item-note">
-                        find videos
-                    </span>
-                </a>
+            <a class="item item-icon-left" menu-close href="#/board/search">
+                <i class="icon ion-ios7-search-strong"></i>
+                Search
+                <span class="item-note">
+                    find videos
+                </span>
+            </a>
 
-                <a class="item item-icon-left" href="javascript:void(0);" data-dojo-attach-event="click:_members">
-                    <i class="icon ion-person-stalker"></i>
-                    Members
-                    <span class="badge badge-balanced">12,342</span>
-                </a>
+            <a class="item item-icon-left" menu-close href="#/board/members">
+                <i class="icon ion-person-stalker"></i>
+                Members
+                <span class="badge badge-balanced">12,342</span>
+            </a>
 
-                <a class="item item-icon-left" href="#">
-                    <i class="icon ion-person"></i>
-                    Account
-                </a>
+            <div class="item item-divider">
+                Other
+            </div>
 
-                <div class="item item-divider">
-                    Other
-                </div>
+            <a class="item item-icon-left" menu-close href="#/board/account">
+                <i class="icon ion-person"></i>
+                Account
+            </a>
 
-                <a class="item item-icon-left" ng-click="select('board.settings')">
-                    <i class="icon ion-gear-a"></i>
-                    Settings
-                </a>
+            <a class="item item-icon-left" menu-close href="#/board/settings">
+                <i class="icon ion-gear-a"></i>
+                Settings
+            </a>
 
-                <a class="item item-icon-left" href="javascript:void(0);" data-dojo-attach-event="click:_help">
-                    <i class="icon ion-ios7-help-outline"></i>
-                    Help
-                    <span class="item-note">
-                        more information
-                    </span>
-                </a>
+            <a class="item item-icon-left" menu-close href="#/board/about">
+                <i class="icon ion-ios7-help-outline"></i>
+                About
+                <span class="item-note">
+                    who,what and when
+                </span>
+            </a>
 
-                <a class="item" href="javascript:void(0);" data-dojo-attach-event="click:_logout">
-                    <i class="icon ion-log-out"></i>
-                    Logout
-                </a>
+            <div class="item item-divider">
+            </div>
 
-
-
+            <a class="item" menu-close ng-click="logout();">
+                <i class="icon ion-log-out"></i>
+                Logout
+            </a>
 
       </ion-list>
     </ion-content>

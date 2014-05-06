@@ -1,39 +1,40 @@
-<ion-view title="'Games'" class="Games">
-    <ion-content has-header="true">
+<ion-view title="Games" class="Games">
+
+    <ion-content class="has-header">
 
         <div id="gamesSlider" class="swipe">
             <div class="swipe-wrap">
 
                 <div class="gameBanner ImageButton" ng-repeat="banner in banners" swipe>
-    
+
                     <a href="#/board/board/{{banner.id}}">
 
-                      <img alt="{{genre.title}}" ng-src="{{banner.imageUrl}}" lazyload>
+                        <div class="spinner">
+                            <img class="genre-image-load" ng-src="{{banner.imageUrl}}" lazyload>
+                        </div>
 
-                      <div class="summary">
-                          <div class="title">{{banner.title}}</div>
-                          <div class="subtitle">{{banner.subTitle}}</div>
-                      </div>
+                        <div class="summary">
+                            <div class="title">{{banner.title}}</div>
+                            <div class="subtitle">{{banner.subTitle}}</div>
+                        </div>
                     </a>
-                </div>                
+                </div>
 
             </div>
         </div>
 
         <div class="list">
 
-			<a ng-repeat="game in games" 
-               class="item item-thumbnail-left" 
-               href="#/board/categories/{{game.id}}" >
+            <a ng-repeat="game in games" class="item item-thumbnail-left" href="#/board/categories/{{game.id}}">
 
-				<img class="Video" ng-src="{{game.imageUrl}}" lazyload>
+                <img class="video genre-image-load" ng-src="{{game.imageUrl}}" lazyload>
 
-				<h2>{{game.title}}</h2>
-				<p>{{game.subtitle}}</p>
-				<p>{{game.note}}</p>
+                <h2>{{game.title}}</h2>
+                <p>{{game.subtitle}}</p>
+                <p>{{game.note}}</p>
 
-				<span class="badge badge-calm">{{game.count}}</span>
-			</a>
+                <span class="badge badge-calm">{{game.count}}</span>
+            </a>
 
         </div>
 

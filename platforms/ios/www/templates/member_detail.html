@@ -1,6 +1,6 @@
-<ion-view title="'MemberDetail'">
+<ion-view title="Member Detail">
 
-    <ion-content has-header="true" padding="true">
+    <ion-content class="has-header padding">
 
         <div data-dojo-attach-point="notfound" class="card hidden">
             <div class="item item-text-wrap">
@@ -10,20 +10,15 @@
 
         <div class="list card">
 
-            <div class="item">
+            <div class="item item-thumbnail-left">
+
+                <img ng-src="{{member.avatar}}">
+
                 <h1>{{member.gametag}}</h1>
                 <h2>{{member.name}}&nbsp{{member.surname}}</h2>
                 <p>{{member.memberSince}}</p>
                 <div class="bigPrize">{{member.prizes}}</div>
                 <div class="bigViews">{{member.views}}</div>
-
-            </div>
-
-            <div class="item item-body">
-
-                <div class="full-image AvatarDetail">
-                    <img ng-src="{{member.avatar}}" lazyload>
-                </div>
 
             </div>
             <div class="item">
