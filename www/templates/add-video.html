@@ -3,23 +3,29 @@
     <!-- Modal header bar -->
     <header class="bar bar-header bar-secondary">
         <h1 class="title">Add Video</h1>
-        <button class="button button-clear button-positive" ng-click="closeAddVideo()">Cancel</button>
+        <button class="button button-clear button-positive" ng-click="closeVideo()">Cancel</button>
     </header>
 
     <!-- Modal content area -->
     <ion-content class="has-header">
 
-        <form ng-submit="createItem(item)">
-            <div class="list">
-                <label class="item item-input">
-                    <input type="text" placeholder="What is your item?" ng-model="item.name">
-                </label>
-            </div>
-            <div class="padding">
-                <button type="submit" class="button button-block button-positive">Create Item</button>
-            </div>
-        </form>
+        <ion-nav-bar class="bar bar-header bar-dark nav-title-slide-ios7">
+            <ion-nav-back-button class="button-clear">
+                <i class="icon ion-chevron-left"></i>Back
+            </ion-nav-back-button>
+        </ion-nav-bar>
+        <ion-nav-view name="videoContent" animation="slide-left-right">
+
+
+
+
+        </ion-nav-view>
 
     </ion-content>
 
 </ion-pane>
+
+<script type="text/ng-template" id="video-list.html">
+  <h1>List of Videos
+</script>
+

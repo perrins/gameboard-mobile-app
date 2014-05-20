@@ -1,0 +1,23 @@
+
+# Android
+platforms/android/assets/www
+platforms/android/ant-build/
+platforms/android/CordovaLib/
+platforms/android/res/xml/config.xml
+
+# iOS
+platforms/ios/build/
+platforms/ios/CordovaLib/build/
+platforms/ios/www
+platforms/ios/BlueList/config.xml
+platforms/ios/.staging
+
+# Emulator logs
+platforms/ios/cordova/console.log
+
+# Bower
+www/components/**
+
+# Other
+**/.DS_store
+**/.DS_STORE

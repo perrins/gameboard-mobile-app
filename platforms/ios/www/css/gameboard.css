@@ -45,7 +45,12 @@ html, body {
 
 .gameBanner img {
 	width: 100%;
-    height: 200px;	
+    height: 160px;	
+}
+
+.Banner {
+	width:100%;
+	height:160px;
 }
 
 .ImageButton {
@@ -109,7 +114,7 @@ html, body {
   background-color: white;
 }
 
-.Categories div.prize {
+.Categories div.prizenew {
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -118,6 +123,14 @@ html, body {
   right: 0;
   top: 15px;
   margin-right: 11px;
+}
+
+.Categories div.prize {
+  font-size: 24px;
+  font-weight: bold;
+  color: green;
+  top: 15px;
+  margin-left: 10px;
 }
 
 
@@ -173,16 +186,6 @@ html, body {
 	height:250px;
 }
 
-.Categories div.prize {
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  color: green;
-  position: absolute;
-  right: 0;
-  top: 15px;
-  margin-right: 11px;
-}
 
 // FAVOURITES
 

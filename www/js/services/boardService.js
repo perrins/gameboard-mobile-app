@@ -208,9 +208,6 @@ angular.module('gameboard.board.services', [])
  */
 .factory('BoardService', function($q, $cacheFactory,$stateParams, URL) {
 
-    // Use an internal Cache for storing the List and map the operations to manage that from 
-    // MBaaS SDK Calls
-
     return {
 
         all: function(bid) {
@@ -233,7 +230,6 @@ angular.module('gameboard.board.services', [])
 
                       // return the Cache
                       def.resolve(result);
-
 
                     } else {
                         def.reject([]);

@@ -1,30 +1,27 @@
-<ion-view title="Categories" class="Categories">
+<ion-view title="Categories">
+
+
     <ion-content class="has-header">
 
         <div class="spinner">
             <img class="Banner genre-image-load" ng-src="{{banner}}" lazyload>
         </div>    
 
-        <div id="notfound" class="card hidden" ng-show="categories">
+        <div class="card" ng-show="!categories">
             <div class="item item-text-wrap">
-                No Categories have been found for this Genre
+                No Categories have been found for this Game
             </div>
         </div>
     
         <div class="list">
 
-			<a ng-repeat="cat in categories" class="item" href="#/board/board/{{cat.id}}">
-                <div class="item">
+			<a ng-repeat="cat in categories" class="item" href="#/board/board/{{cat.bid}}">
                     <h2>{{cat.title}}</h2>
                     <p>{{cat.subtitle}}</p>
                     <p>{{cat.description}}</p>
-                </div>
-                <div class="item">
                     <div class="prize">{{cat.prize}}</div>
                     <span class="badge badge-calm">{{cat.videos}}</span>
-                </div>    
             </a>
-
         </div>
 
     </ion-content>

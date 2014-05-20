@@ -72,11 +72,123 @@ angular.module('gameboard.board.controllers', [])
 
     $scope.selected = function(game) {
 
-        debugger;
         console.log(game);
 
     }
 
+})
+
+
+// A simple controller that shows a tapped item's data
+.controller('BoardCtrl', function($scope, $stateParams,$ionicModal, $ionicLoading,BoardService) {
+
+    // Load the Items
+    $scope.loadItems = function() {
+
+        // Clear the List before adding new items
+        // This needs to be improved
+        $scope.board = [];
+
+        // Refresh
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+
+        // Because we are retrieving all the items every time we do something
+        // We need to clear the list before loading in some new values
+        $ionicLoading.show({
+            template: 'Loading...'
+        });
+
+        // Because we are retrieving all the items every time we do something
+        // We need to clear the list before loading in some new values
+
+        // "List is " is a service returning data from the 
+        BoardService.all($stateParams.bid).then(function(board) {
+
+            // Update the model with a list of Items
+            $scope.board = board;
+
+            // Let Angular know we have some data because of the Async nature of IBMBaaS
+            // This is required to make sure the information is uptodate
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
+            $ionicLoading.hide();
+
+            // Trigger refresh complete on the pull to refresh action
+            $scope.$broadcast('scroll.refreshComplete');
+
+        }, function(err) {
+            console.log(err);
+            $ionicLoading.hide();
+
+            $scope.board = null;
+
+        });
+
+    }
+
+    // Load some items for the list to display
+    $scope.loadItems();
+
+    $scope.onRefresh = function() {
+        // Go back to the Cloud and load a new set of Objects as a hard refresh has been done
+        $scope.loadItems();
+    }
+
+    // Create our modal
+    $ionicModal.fromTemplateUrl('templates/add-video.html', function(modal) {
+        $scope.itemModal = modal;
+    }, {
+        scope: $scope,
+        animation: 'slide-in-up',
+        focusFirstInput: true
+    });
+
+    $scope.addVideo = function(video) {
+
+        // Add the Item and then hide the modal view
+        BoardService.add(video).then(
+            function(payload){
+
+                console.log("Video Added");
+
+            }, 
+            function(err) {
+
+                console.log(err);
+
+            }
+        );
+
+        // Hide the Modal View
+        $scope.closeItem();
+
+    };
+
+    $scope.newVideo = function() {
+        $scope.itemModal.show();
+    };
+
+    $scope.closeVideo = function() {
+        // Reverse the Paint Bug
+        $scope.itemModal.hide();
+
+    }
+    $scope.clearSearch = function() {
+        $scope.item.name = '';
+    };
+
+    $scope.itemButtons = [{
+        text: 'Share',
+        type: 'button-assertive',
+        onTap: function(item) {
+            $scope.onShare(item);
+        }
+    }];
 
 });
+
 
