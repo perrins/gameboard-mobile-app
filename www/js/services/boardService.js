@@ -247,4 +247,95 @@ angular.module('gameboard.board.services', [])
         }
     }
 
+})
+
+/**
+ * A simple example service that returns some data.
+ */
+.factory('YouTubeService', function($q, $cacheFactory,$stateParams, URL) {
+
+    return {
+
+        all: function() {
+
+            // Create a deffered
+            var def = $q.defer();
+
+            // Lets Get a list of Genres
+            $.ajax({
+                type: "GET",
+                url: URL.YOUTUBE,
+                dataType: "json",
+                contentType: "application/json",
+                success: function(result,status) {
+
+                    // Check if we were able to store it sucessfully
+                    if (status === "success") {
+
+                      // return the Cache
+                      def.resolve(result);
+
+                    } else {
+                        def.reject([]);
+                    }
+
+                },
+                error: function(err) {
+                    def.reject(err);
+                }
+            });
+            
+            // Get the Objects for a particular Type
+            return def.promise;
+
+        }
+    }
+
+})
+
+/**
+ * A simple example service that returns some data.
+ */
+.factory('VideoService', function($q, $cacheFactory,$stateParams, URL) {
+
+    return {
+
+        get: function(id) {
+
+            // Get the Base Video ID
+
+            // Create a deffereds
+            var def = $q.defer();
+
+            // Lets Get a list of Genres
+            $.ajax({
+                type: "GET",
+                url: URL.VIDEO,
+                dataType: "json",
+                contentType: "application/json",
+                success: function(result,status) {
+
+                    // Check if we were able to store it sucessfully
+                    if (status === "success") {
+
+                      // return the Cache
+                      def.resolve(result);
+
+                    } else {
+                        def.reject([]);
+                    }
+
+                },
+                error: function(err) {
+                    def.reject(err);
+                }
+            });
+            
+            // Get the Objects for a particular Type
+            return def.promise;
+
+        }
+    }
+
 });
+

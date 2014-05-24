@@ -1,7 +1,7 @@
 // Gameboard Mobile Angular App
 
 angular.module('gameboard', [
-    'ionic', 
+    'ionic',
     'gameboard.directives',
     'gameboard.controllers',
     'gameboard.board.controllers',
@@ -14,13 +14,13 @@ angular.module('gameboard', [
 
 // Handle Status Bar Styling on Load
 .run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function() {
 
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+    });
 })
 
 .constant('URL', {
@@ -28,12 +28,13 @@ angular.module('gameboard', [
     GAMES: "data/Games.json",
     CATEGORIES: "data/Categories.json",
     BOARD: "data/Board.json",
-    YOUTUBE:"data/Youtube.json",
+    YOUTUBE: "data/Youtube.json",
     MEMBER: "data/Member.json",
     FAVOURITES: "data/Favourites.json",
     MEMBERS: "data/Members.json",
-    YOURVIDEOS: "data/YourVideos.json",
-    SEARCH: "data/Search.json"
+    YOUTUBE: "data/YouTube.json",
+    SEARCH: "data/Search.json",
+    VIDEO: "data/Video.json"
 })
 
 // Configure the Angular Rules
@@ -44,7 +45,7 @@ angular.module('gameboard', [
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
 
-    $stateProvider 
+    $stateProvider
 
     .state('board', {
         url: "/board",
@@ -94,7 +95,7 @@ angular.module('gameboard', [
         url: "/video/:cid",
         views: {
             'menuContent': {
-                templateUrl: "templates/video.html",
+                templateUrl: "templates/video-detail.html",
                 controller: 'VideoCtrl'
             }
         }
@@ -141,7 +142,8 @@ angular.module('gameboard', [
         url: "/youtube",
         views: {
             'videoContent': {
-                templateUrl: "video-list.html"
+                templateUrl: "templates/video-list.html",
+                controller: "AddVideoCtrl"
             }
         }
     })
@@ -163,6 +165,14 @@ angular.module('gameboard', [
                 //controller: "SettingsCtrl"
             }
         }
+    })
+    .state('board.about', {
+        url: '/about',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/about.html'
+            }
+        }
     });
 
     // if none of the above states are matched, use this as the fallback
@@ -172,4 +182,3 @@ angular.module('gameboard', [
     $urlRouterProvider.otherwise("/board/genres");
 
 });
-
