@@ -268,3 +268,11 @@ div.bigViews {
   width:101%;
   height:100px;
 }
+
+.rank {
+	position: absolute;
+	left: 10px;
+	top: 30%;
+	font-size: 44px;
+	color: rgb(240, 142, 18);
+}

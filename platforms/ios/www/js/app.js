@@ -1,7 +1,7 @@
 // Gameboard Mobile Angular App
 
 angular.module('gameboard', [
-    'ionic', 
+    'ionic',
     'gameboard.directives',
     'gameboard.controllers',
     'gameboard.board.controllers',
@@ -9,18 +9,19 @@ angular.module('gameboard', [
     'gameboard.search.controllers',
     'gameboard.board.services',
     'gameboard.member.services',
-    'gameboard.search.services'
+    'gameboard.search.services',
+    'gameboard.settings'
 ])
 
 // Handle Status Bar Styling on Load
 .run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function() {
 
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+    });
 })
 
 .constant('URL', {
@@ -28,12 +29,13 @@ angular.module('gameboard', [
     GAMES: "data/Games.json",
     CATEGORIES: "data/Categories.json",
     BOARD: "data/Board.json",
-    YOUTUBE:"data/Youtube.json",
+    YOUTUBE: "data/Youtube.json",
     MEMBER: "data/Member.json",
     FAVOURITES: "data/Favourites.json",
     MEMBERS: "data/Members.json",
-    YOURVIDEOS: "data/YourVideos.json",
-    SEARCH: "data/Search.json"
+    YOUTUBE: "data/YouTube.json",
+    SEARCH: "data/Search.json",
+    VIDEO: "data/Video.json"
 })
 
 // Configure the Angular Rules
@@ -44,7 +46,24 @@ angular.module('gameboard', [
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
 
-    $stateProvider 
+    // Splash -> Intro -> Login -> Main
+    // Splash -> Login -> Main
+
+    // Looking to do Splash in Native, and keep call back all IOS/Android
+
+    $stateProvider
+
+    .state('splash', {
+        url: '/',
+        templateUrl: 'templates/splash.html',
+        controller: 'SplashCtrl'
+    })
+
+    .state('intro', {
+        url: '/intro',
+        templateUrl: 'templates/intro.html',
+        controller: 'IntroCtrl'
+    })
 
     .state('board', {
         url: "/board",
@@ -62,39 +81,39 @@ angular.module('gameboard', [
             }
         }
     })
-    .state('board.games', {
-        url: "/games/:gid",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/games.html",
-                controller: 'GamesCtrl'
+        .state('board.games', {
+            url: "/games/:gid",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/games.html",
+                    controller: 'GamesCtrl'
+                }
             }
-        }
-    })
-    .state('board.categories', {
-        url: "/categories/:cid",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/categories.html",
-                controller: 'CategoriesCtrl'
+        })
+        .state('board.categories', {
+            url: "/categories/:cid",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/categories.html",
+                    controller: 'CategoriesCtrl'
+                }
             }
-        }
-    })
-    .state('board.board', {
-        url: "/board/:bid",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/board.html",
-                controller: 'BoardCtrl'
+        })
+        .state('board.board', {
+            url: "/board/:bid",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/board.html",
+                    controller: 'BoardCtrl'
+                }
             }
-        }
-    })
+        })
 
     .state('board.video', {
         url: "/video/:cid",
         views: {
             'menuContent': {
-                templateUrl: "templates/video.html",
+                templateUrl: "templates/video-detail.html",
                 controller: 'VideoCtrl'
             }
         }
@@ -109,30 +128,40 @@ angular.module('gameboard', [
             }
         }
     })
-    .state('board.favourites', {
-        url: "/favourites",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/favourites.html",
-                controller: "FavouritesCtrl"
+        .state('board.favourites', {
+            url: "/favourites",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/favourites.html",
+                    controller: "FavouritesCtrl"
+                }
             }
-        }
-    })
-    .state('board.member', {
-        url: "/member/:muuid",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/member-detail.html",
-                controller: "MemberDetailCtrl"
+        })
+        .state('board.member', {
+            url: "/member/:muuid",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/member-detail.html",
+                    controller: "MemberDetailCtrl"
+                }
             }
-        }
-    })
-    .state('board.videos', {
-        url: "/videos",
+        })
+        .state('board.videos', {
+            url: "/videos",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/videos.html",
+                    controller: "YourVideosCtrl"
+                }
+            }
+        })
+
+    .state('board.youtube', {
+        url: "/youtube",
         views: {
-            'menuContent': {
-                templateUrl: "templates/videos.html",
-                controller: "YourVideosCtrl"
+            'videoContent': {
+                templateUrl: "templates/video-list.html",
+                controller: "AddVideoCtrl"
             }
         }
     })
@@ -146,21 +175,28 @@ angular.module('gameboard', [
             }
         }
     })
-    .state('board.settings', {
-        url: "/settings",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/settings.html"
-                //controller: "SettingsCtrl"
+        .state('board.settings', {
+            url: "/settings",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/settings.html"
+                    //controller: "SettingsCtrl"
+                }
             }
-        }
-    });
+        })
+        .state('board.about', {
+            url: '/about',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/about.html'
+                }
+            }
+        });
 
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/app/playlists')
 
     // Default to Home
-    $urlRouterProvider.otherwise("/board/genres");
+    $urlRouterProvider.otherwise("intro");
 
 });
-

@@ -80,7 +80,7 @@ angular.module('gameboard.board.controllers', [])
 
 
 // A simple controller that shows a tapped item's data
-.controller('BoardCtrl', function($scope, $stateParams,$ionicModal, $ionicLoading,BoardService) {
+.controller('BoardCtrl', function($scope, $stateParams,$ionicModal, $ionicLoading,BoardService,YouTubeService) {
 
     // Load the Items
     $scope.loadItems = function() {
@@ -141,6 +141,7 @@ angular.module('gameboard.board.controllers', [])
     // Create our modal
     $ionicModal.fromTemplateUrl('templates/add-video.html', function(modal) {
         $scope.itemModal = modal;
+
     }, {
         scope: $scope,
         animation: 'slide-in-up',
@@ -164,12 +165,31 @@ angular.module('gameboard.board.controllers', [])
         );
 
         // Hide the Modal View
-        $scope.closeItem();
+        $scope.closeVideo();
 
     };
 
     $scope.newVideo = function() {
-        $scope.itemModal.show();
+
+        $ionicLoading.show({
+            template: 'Getting Videos...'
+        });
+
+        // Load the Videos
+        YouTubeService.all().then(function(videos){
+
+            $scope.videos = videos;
+
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
+            $ionicLoading.hide();
+
+            $scope.itemModal.show();
+
+        });
+
     };
 
     $scope.closeVideo = function() {
@@ -189,6 +209,46 @@ angular.module('gameboard.board.controllers', [])
         }
     }];
 
+})
+// A simple controller that shows retrieves a list of You Tube Videos
+.controller('AddVideoCtrl', function($scope, $stateParams, YoutubeService) {
+
+    // Need to Check if we have got some already
+    YouTubeService.all().then(function(data) {
+
+        // Paint 
+        $scope.videos = data;
+
+        // This is required to make sure the information is uptodate
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+
+    });
+
+})
+
+
+// A simple controller that shows retrieves a list of You Tube Videos
+.controller('VideoCtrl', function($scope, $stateParams, VideoService) {
+
+    // Retrieve the Video content
+
+    // Need to Check if we have got some already
+    VideoService.get($stateParams.id).then(function(video) {
+
+        // Paint 
+        $scope.video = video;
+
+        // This is required to make sure the information is uptodate
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+
+    });
+
 });
+
+
 
 

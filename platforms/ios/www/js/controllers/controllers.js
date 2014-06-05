@@ -2,24 +2,6 @@ angular.module('gameboard.controllers', [])
 
 .controller('MainCtrl', function($scope, $location,$state,$ionicSideMenuDelegate) {
 
-	// Work out how to Hide the Back Arrow
-    $scope.leftButtons = [{
-        type: 'button-icon button-clear ion-navicon',
-        tap: function(e) {
-            $ionicSideMenuDelegate.toggleLeft($scope.$$childHead);
-        }
-    }];
-
-    // Open the Menu Item Selected
-    $scope.select = function(action) {
-
-    	// Hide Side Menu
-        $ionicSideMenuDelegate.toggleLeft($scope.$$childHead);
-        // View the Top Level Menu Item
-		$state.go(action);
-
-    }
-
     $scope.logout = function()
     {
         console.log("logout");
@@ -28,23 +10,60 @@ angular.module('gameboard.controllers', [])
 
 })
 
-.controller('AppCtrl', function($scope) {
+// A simple controller that shows a tapped item's data
+.controller('AboutCtrl', function($rootScope, $scope) {
+
+        $scope.name = "Screaming Foulup";
+        $scope.version = "0.1.0";
+
+})
+
+.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate,$ionicViewService,Settings) {
+ 
+
+  // Called to navigate to the main app
+  $scope.startApp = function() {
+
+    // Clear the Back stack
+    $ionicViewService.nextViewOptions({
+        disableAnimate: true,
+        disableBack: true
+    }); 
+
+    // Lets set that we have been through the Load Screen and Now no longer need to display it
+    Settings.set('LOADSCREEN',false);
+
+    // Havigate to the Board View
+    $state.go('board.genres');
+
     
+  };
+
+  // If we have displayed the screen before lets go to Main
+  if(Settings.get('LOADSCREEN')) {
+    $state.go('board.genres');
+  }
+
+  $scope.next = function() {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
+
+  // Called each time the slide changes
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+  };
 })
 
+.controller('MainCtrl', function($scope, $state) {
+  console.log('MainCtrl');
+  
+  $scope.toIntro = function(){
+    $state.go('intro');
+  }
+});
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-})
 
 

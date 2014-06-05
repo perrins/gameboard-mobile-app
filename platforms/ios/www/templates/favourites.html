@@ -22,7 +22,7 @@
 
         <ion-list id="fvideos" can-delete="true" can-swipe="true" on-delete="onVideoDelete(video)" show-delete="showDelete" delete-icon="ion-minus-circled" option-buttons="itemButtons">
 
-            <ion-item ng-repeat="video in videos | orderBy:'rank'" class="item" type="item-text-wrap" item="video" ng-click="selectVideo(video)">
+            <ion-item ng-repeat="video in videos | orderBy:'rank'" class="item" type="item-text-wrap" item="video" href="#/board/video/{{video.uuid}}">
 
                 <div class="Video">
                     <img ng-src="{{video.thumb}}" lazyvideo>

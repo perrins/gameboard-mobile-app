@@ -1,21 +1,11 @@
-angular.module('gameboard.services', ['ngResource'])
+angular.module('gameboard.settings', ['ngResource'])
 
 .constant('DEFAULT_SETTINGS', {
-    'tempUnits': 'f'
+    'units': 'dollars'
+    'LOADSCREEN', true
 })
 
 .factory('Settings', function($rootScope, DEFAULT_SETTINGS) {
-
-    $scope.actionButtons = [{
-        type: 'button-clear',
-        content: '<div class="buttons"><button class="button button-icon icon ion-ios7-minus-outline"></button></div>',
-        tap: function() {
-            // Set the Attribute
-            debugger;
-            $scope.showDelete = !$scope.showDelete;
-        }
-
-    }];
 
     var _settings = {};
     try {
@@ -46,11 +36,8 @@ angular.module('gameboard.services', ['ngResource'])
         set: function(k, v) {
             _settings[k] = v;
             this.save();
-        },
-
-        getTempUnits: function() {
-            return _settings['tempUnits'];
         }
+
     }
 
     // Save the settings to be safe
