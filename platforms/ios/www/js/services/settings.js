@@ -1,13 +1,15 @@
-angular.module('gameboard.settings', ['ngResource'])
+angular.module('gameboard.settings', [])
 
 .constant('DEFAULT_SETTINGS', {
-    'units': 'dollars'
-    'LOADSCREEN', true
+    'UNITS': 'dollars',
+    'LOADSCREEN' : true,
+    'AUTOREFRESH' : false
 })
 
 .factory('Settings', function($rootScope, DEFAULT_SETTINGS) {
 
     var _settings = {};
+
     try {
         _settings = JSON.parse(window.localStorage['settings']);
     } catch (e) {}
@@ -38,9 +40,10 @@ angular.module('gameboard.settings', ['ngResource'])
             this.save();
         }
 
-    }
+    };
 
     // Save the settings to be safe
     obj.save();
+
     return obj;
 });

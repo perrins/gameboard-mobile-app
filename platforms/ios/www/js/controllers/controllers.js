@@ -19,7 +19,6 @@ angular.module('gameboard.controllers', [])
 })
 
 .controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate,$ionicViewService,Settings) {
- 
 
   // Called to navigate to the main app
   $scope.startApp = function() {
@@ -35,7 +34,6 @@ angular.module('gameboard.controllers', [])
 
     // Havigate to the Board View
     $state.go('board.genres');
-
     
   };
 

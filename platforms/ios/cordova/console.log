@@ -29,3 +29,36 @@ objc[39246]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.a
 2014-05-31 18:43:16.634 game board[39246:70b] [CDVTimer][TotalPluginStartup] 0.626981ms
 2014-05-31 18:43:16.731 game board[39246:70b] Resetting plugins due to page load.
 2014-05-31 18:43:16.886 game board[39246:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/08A64782-FA49-4642-A565-E1998A4F92D5/game%20board.app/www/index.html
+objc[976]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-06-08 10:48:53.608 game board[976:70b] Cannot find executable for CFBundle 0xb57a270 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/MusicLibrary.axbundle> (not loaded)
+2014-06-08 10:48:53.615 game board[976:70b] Cannot find executable for CFBundle 0xb26aff0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-06-08 10:48:53.618 game board[976:70b] Cannot find executable for CFBundle 0xb27b010 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-06-08 10:48:53.676 game board[976:70b] Multi-tasking -> Device: YES, App: YES
+2014-06-08 10:48:53.697 game board[976:70b] Unlimited access to network resources
+2014-06-08 10:48:53.805 game board[976:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-06-08 10:48:53.805 game board[976:70b] [CDVTimer][statusbar] 0.436008ms
+2014-06-08 10:48:53.806 game board[976:70b] [CDVTimer][TotalPluginStartup] 0.814021ms
+2014-06-08 10:48:53.924 game board[976:70b] Resetting plugins due to page load.
+2014-06-08 10:48:54.109 game board[976:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/08A64782-FA49-4642-A565-E1998A4F92D5/game%20board.app/www/index.html
+objc[1288]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-06-08 11:09:09.708 game board[1288:70b] Cannot find executable for CFBundle 0xc881860 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/MusicLibrary.axbundle> (not loaded)
+2014-06-08 11:09:09.711 game board[1288:70b] Cannot find executable for CFBundle 0xb476c10 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-06-08 11:09:09.714 game board[1288:70b] Cannot find executable for CFBundle 0xb3ae980 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-06-08 11:09:09.731 game board[1288:70b] Multi-tasking -> Device: YES, App: YES
+2014-06-08 11:09:09.737 game board[1288:70b] Unlimited access to network resources
+2014-06-08 11:09:09.749 game board[1288:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-06-08 11:09:09.749 game board[1288:70b] [CDVTimer][statusbar] 0.315011ms
+2014-06-08 11:09:09.749 game board[1288:70b] [CDVTimer][TotalPluginStartup] 0.591993ms
+2014-06-08 11:09:09.767 game board[1288:70b] Resetting plugins due to page load.
+2014-06-08 11:09:10.021 game board[1288:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/08A64782-FA49-4642-A565-E1998A4F92D5/game%20board.app/www/index.html#/board/genres
+2014-06-08 11:09:54.457 game board[1288:70b] ACTIVATING
+2014-06-08 11:10:39.599 game board[1288:70b] MainCtrl
+2014-06-08 11:31:46.836 game board[1288:70b] GID 1
+2014-06-08 11:31:46.839 game board[1288:70b] GID: 1
+2014-06-08 11:31:48.086 game board[1288:70b] CID: 1
+2014-06-08 11:31:49.103 game board[1288:70b] BID: 1
+2014-06-08 11:31:51.481 game board[1288:70b] ACTIVATING
+2014-06-08 11:31:51.513 game board[1288:70b] BID: 1
+2014-06-08 11:31:52.127 game board[1288:70b] CID: 1
+2014-06-08 11:31:53.574 game board[1288:70b] ACTIVATING
+2014-06-08 11:31:53.607 game board[1288:70b] BID: 1

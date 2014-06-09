@@ -35,6 +35,7 @@ angular.module('gameboard', [
     MEMBERS: "data/Members.json",
     YOUTUBE: "data/YouTube.json",
     SEARCH: "data/Search.json",
+    YOURVIDEOS : "data/YourVideos.json",
     VIDEO: "data/Video.json"
 })
 
@@ -179,8 +180,8 @@ angular.module('gameboard', [
             url: "/settings",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/settings.html"
-                    //controller: "SettingsCtrl"
+                    templateUrl: "templates/settings.html",
+                    controller: "SettingsCtrl"
                 }
             }
         })
