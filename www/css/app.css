@@ -9,6 +9,18 @@
 .hidden {
     display:none
 }
+
+#Backdrop
+
+.signin-backdrop {
+
+  background-image: url('img/signonbd.jpg');
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+
+}
+
+
 .spinner {
   opacity: 0.7;
 }

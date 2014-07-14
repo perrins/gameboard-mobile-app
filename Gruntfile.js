@@ -77,7 +77,10 @@ module.exports = function(grunt) {
                     'vendor/swipe/swipe.js',
                     'vendor/sizzle/sizzle.js',
                     'vendor/spin/spin.min.js',
-                    'vendor/fastclick/lib/fastclick.js'
+                    'vendor/ibmbluemix/js/IBMBluemix.js',
+                    'vendor/ibmcloudcode/js/IBMCloudCode.js',
+                    'vendor/ibmdata/js/IBMData.js'
+
                 ],
                 dest: 'tmp/js/<%= pkg.name%>.vendor.js'
             }

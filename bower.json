@@ -22,6 +22,9 @@
     "fastclick": "*",
     "outlayer": "*",
     "jquery": "~2.1.1",
-    "angular-touch": "~1.2.16"
+    "angular-touch": "~1.2.16",
+    "ibmbluemix": "https://hub.jazz.net/git/bluemixmobilesdk/ibmbluemix-javascript/.git",
+    "ibmcloudcode": "https://hub.jazz.net/git/bluemixmobilesdk/ibmcloudcode-javascript/.git",
+    "ibmdata": "https://hub.jazz.net/git/bluemixmobilesdk/ibmdata-javascript/.git"
   }
 }
