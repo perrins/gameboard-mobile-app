@@ -81,7 +81,7 @@ angular.module('gameboard.controllers', [])
   $scope.toIntro = function(){
     $state.go('intro');
   }
-});
+})
 
 
 /**
@@ -112,7 +112,7 @@ angular.module('gameboard.controllers', [])
                     if (window.location.origin.indexOf('local') > 0) {
 
                         // Set the Origin to Local 
-                        cc.setBaseurl(config.localhost);
+                        cc.setBaseUrl(window.location.origin);
 
                     }
 
