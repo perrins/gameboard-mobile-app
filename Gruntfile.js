@@ -49,6 +49,9 @@ module.exports = function(grunt) {
                 },{
                     src: "vendor/angular-touch/angular-touch.min.js",
                     dest: "www/lib/angular/angular-touch.min.js"
+                },{
+                    src: "vendor/oauth-js/dist/oauth.js",
+                    dest: "www/lib/oauth.js"
                 }]
             }
         },
@@ -80,6 +83,7 @@ module.exports = function(grunt) {
                     'vendor/ibmbluemix/js/IBMBluemix.js',
                     'vendor/ibmcloudcode/js/IBMCloudCode.js',
                     'vendor/ibmdata/js/IBMData.js'
+
 
                 ],
                 dest: 'tmp/js/<%= pkg.name%>.vendor.js'

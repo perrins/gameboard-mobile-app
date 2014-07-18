@@ -1,64 +1,393 @@
-objc[1821]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
-2014-05-25 06:25:56.159 Game-board[1821:70b] Cannot find executable for CFBundle 0xa4657b0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
-2014-05-25 06:25:56.163 Game-board[1821:70b] Cannot find executable for CFBundle 0xa86c2c0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
-2014-05-25 06:25:56.202 Game-board[1821:70b] Multi-tasking -> Device: YES, App: YES
-2014-05-25 06:25:56.216 Game-board[1821:70b] Unlimited access to network resources
-2014-05-25 06:25:56.307 Game-board[1821:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
-2014-05-25 06:25:56.307 Game-board[1821:70b] [CDVTimer][statusbar] 0.438035ms
-2014-05-25 06:25:56.308 Game-board[1821:70b] [CDVTimer][TotalPluginStartup] 0.788987ms
-2014-05-25 06:25:56.415 Game-board[1821:70b] Resetting plugins due to page load.
-2014-05-25 06:25:56.677 Game-board[1821:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/BC18841E-A699-4606-A928-A64105080F8B/Game-board.app/www/index.html#/intro
-2014-05-25 06:26:05.360 Game-board[1821:70b] MainCtrl
-2014-05-25 06:26:14.502 Game-board[1821:70b] MainCtrl
-2014-05-25 06:26:25.805 Game-board[1821:70b] MainCtrl
-2014-05-25 06:26:34.790 Game-board[1821:70b] GID 1
-2014-05-25 06:26:34.790 Game-board[1821:70b] GID: 1
-2014-05-25 06:26:36.930 Game-board[1821:70b] CID: 1
-2014-05-25 06:26:38.475 Game-board[1821:70b] BID: 1
-2014-05-25 06:26:40.552 Game-board[1821:70b] ACTIVATING
-2014-05-25 06:26:41.970 Game-board[1821:70b] BID: 1
-objc[39246]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
-2014-05-31 18:43:16.397 game board[39246:70b] Cannot find executable for CFBundle 0xb530c50 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/MusicLibrary.axbundle> (not loaded)
-2014-05-31 18:43:16.405 game board[39246:70b] Cannot find executable for CFBundle 0xc558230 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
-2014-05-31 18:43:16.408 game board[39246:70b] Cannot find executable for CFBundle 0xc567680 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
-2014-05-31 18:43:16.460 game board[39246:70b] Multi-tasking -> Device: YES, App: YES
-2014-05-31 18:43:16.480 game board[39246:70b] Unlimited access to network resources
-2014-05-31 18:43:16.483 game board[39246:70b] Fix applied for database locations?: YES
-2014-05-31 18:43:16.633 game board[39246:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
-2014-05-31 18:43:16.633 game board[39246:70b] [CDVTimer][statusbar] 0.311017ms
-2014-05-31 18:43:16.634 game board[39246:70b] [CDVTimer][TotalPluginStartup] 0.626981ms
-2014-05-31 18:43:16.731 game board[39246:70b] Resetting plugins due to page load.
-2014-05-31 18:43:16.886 game board[39246:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/08A64782-FA49-4642-A565-E1998A4F92D5/game%20board.app/www/index.html
-objc[976]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
-2014-06-08 10:48:53.608 game board[976:70b] Cannot find executable for CFBundle 0xb57a270 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/MusicLibrary.axbundle> (not loaded)
-2014-06-08 10:48:53.615 game board[976:70b] Cannot find executable for CFBundle 0xb26aff0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
-2014-06-08 10:48:53.618 game board[976:70b] Cannot find executable for CFBundle 0xb27b010 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
-2014-06-08 10:48:53.676 game board[976:70b] Multi-tasking -> Device: YES, App: YES
-2014-06-08 10:48:53.697 game board[976:70b] Unlimited access to network resources
-2014-06-08 10:48:53.805 game board[976:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
-2014-06-08 10:48:53.805 game board[976:70b] [CDVTimer][statusbar] 0.436008ms
-2014-06-08 10:48:53.806 game board[976:70b] [CDVTimer][TotalPluginStartup] 0.814021ms
-2014-06-08 10:48:53.924 game board[976:70b] Resetting plugins due to page load.
-2014-06-08 10:48:54.109 game board[976:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/08A64782-FA49-4642-A565-E1998A4F92D5/game%20board.app/www/index.html
-objc[1288]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
-2014-06-08 11:09:09.708 game board[1288:70b] Cannot find executable for CFBundle 0xc881860 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/MusicLibrary.axbundle> (not loaded)
-2014-06-08 11:09:09.711 game board[1288:70b] Cannot find executable for CFBundle 0xb476c10 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
-2014-06-08 11:09:09.714 game board[1288:70b] Cannot find executable for CFBundle 0xb3ae980 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
-2014-06-08 11:09:09.731 game board[1288:70b] Multi-tasking -> Device: YES, App: YES
-2014-06-08 11:09:09.737 game board[1288:70b] Unlimited access to network resources
-2014-06-08 11:09:09.749 game board[1288:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
-2014-06-08 11:09:09.749 game board[1288:70b] [CDVTimer][statusbar] 0.315011ms
-2014-06-08 11:09:09.749 game board[1288:70b] [CDVTimer][TotalPluginStartup] 0.591993ms
-2014-06-08 11:09:09.767 game board[1288:70b] Resetting plugins due to page load.
-2014-06-08 11:09:10.021 game board[1288:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/08A64782-FA49-4642-A565-E1998A4F92D5/game%20board.app/www/index.html#/board/genres
-2014-06-08 11:09:54.457 game board[1288:70b] ACTIVATING
-2014-06-08 11:10:39.599 game board[1288:70b] MainCtrl
-2014-06-08 11:31:46.836 game board[1288:70b] GID 1
-2014-06-08 11:31:46.839 game board[1288:70b] GID: 1
-2014-06-08 11:31:48.086 game board[1288:70b] CID: 1
-2014-06-08 11:31:49.103 game board[1288:70b] BID: 1
-2014-06-08 11:31:51.481 game board[1288:70b] ACTIVATING
-2014-06-08 11:31:51.513 game board[1288:70b] BID: 1
-2014-06-08 11:31:52.127 game board[1288:70b] CID: 1
-2014-06-08 11:31:53.574 game board[1288:70b] ACTIVATING
-2014-06-08 11:31:53.607 game board[1288:70b] BID: 1
+objc[29517]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-17 22:32:56.387 game board[29517:70b] Cannot find executable for CFBundle 0xa704cf0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-17 22:32:56.390 game board[29517:70b] Cannot find executable for CFBundle 0xa25f080 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-17 22:32:56.422 game board[29517:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-17 22:32:56.489 game board[29517:70b] Unlimited access to network resources
+2014-07-17 22:32:56.493 game board[29517:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-17 22:32:56.621 game board[29517:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-17 22:32:56.622 game board[29517:70b] [CDVTimer][statusbar] 0.337005ms
+2014-07-17 22:32:56.622 game board[29517:70b] [CDVTimer][TotalPluginStartup] 0.595033ms
+2014-07-17 22:32:56.735 game board[29517:70b] Resetting plugins due to page load.
+2014-07-17 22:32:57.007 game board[29517:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-17 22:32:57.304 game board[29517:70b] Sucessful initialisation with Application : ac90a830-2f26-4935-8d29-bb1a32c4a9a9
+2014-07-17 22:32:57.305 game board[29517:70b] Sucessful initialisation Services ...
+2014-07-17 22:33:10.422 game board[29517:70b] Signon to the application
+2014-07-17 22:33:10.473 game board[29517:70b] Setting the WebView's frame to {{0, 0}, {320, 459}}
+2014-07-17 22:33:10.489 game board[29517:70b] THREAD WARNING: ['InAppBrowser'] took '66.367188' ms. Plugin should use a background thread.
+2014-07-17 22:33:10.588 game board[29517:70b] ACTIVATING
+objc[29864]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-17 22:38:32.000 game board[29864:70b] Cannot find executable for CFBundle 0xa59ad20 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-17 22:38:32.004 game board[29864:70b] Cannot find executable for CFBundle 0xa45cba0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-17 22:38:32.050 game board[29864:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-17 22:38:32.055 game board[29864:70b] Unlimited access to network resources
+2014-07-17 22:38:32.057 game board[29864:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-17 22:38:32.072 game board[29864:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-17 22:38:32.072 game board[29864:70b] [CDVTimer][statusbar] 0.409007ms
+2014-07-17 22:38:32.073 game board[29864:70b] [CDVTimer][TotalPluginStartup] 0.743985ms
+2014-07-17 22:38:32.172 game board[29864:70b] Resetting plugins due to page load.
+2014-07-17 22:38:32.344 game board[29864:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-17 22:38:32.592 game board[29864:70b] Sucessful initialisation with Application : ac90a830-2f26-4935-8d29-bb1a32c4a9a9
+2014-07-17 22:38:32.592 game board[29864:70b] Sucessful initialisation Services ...
+2014-07-17 22:38:34.008 game board[29864:70b] Signon to the application
+2014-07-17 22:38:34.026 game board[29864:70b] Setting the WebView's frame to {{0, 0}, {320, 459}}
+2014-07-17 22:38:34.029 game board[29864:70b] THREAD WARNING: ['InAppBrowser'] took '20.978760' ms. Plugin should use a background thread.
+2014-07-17 22:38:34.136 game board[29864:70b] ACTIVATING
+objc[30124]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-17 22:38:54.940 game board[30124:70b] Cannot find executable for CFBundle 0xa25b1c0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-17 22:38:54.945 game board[30124:70b] Cannot find executable for CFBundle 0xac97c80 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-17 22:38:54.993 game board[30124:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-17 22:38:54.998 game board[30124:70b] Unlimited access to network resources
+2014-07-17 22:38:55.000 game board[30124:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-17 22:38:55.013 game board[30124:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-17 22:38:55.013 game board[30124:70b] [CDVTimer][statusbar] 0.410974ms
+2014-07-17 22:38:55.014 game board[30124:70b] [CDVTimer][TotalPluginStartup] 0.714004ms
+2014-07-17 22:38:55.104 game board[30124:70b] Resetting plugins due to page load.
+2014-07-17 22:38:55.329 game board[30124:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-17 22:38:57.160 game board[30124:70b] Signon to the application
+2014-07-17 22:38:57.175 game board[30124:70b] Setting the WebView's frame to {{0, 0}, {320, 459}}
+2014-07-17 22:38:57.178 game board[30124:70b] THREAD WARNING: ['InAppBrowser'] took '17.387939' ms. Plugin should use a background thread.
+2014-07-17 22:38:57.273 game board[30124:70b] ACTIVATING
+objc[30871]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-18 06:28:48.947 game board[30871:70b] Cannot find executable for CFBundle 0xa7af5a0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-18 06:28:48.960 game board[30871:70b] Cannot find executable for CFBundle 0xa7b96b0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-18 06:28:49.031 game board[30871:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-18 06:28:49.071 game board[30871:70b] Unlimited access to network resources
+2014-07-18 06:28:49.079 game board[30871:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-18 06:28:49.208 game board[30871:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-18 06:28:49.209 game board[30871:70b] [CDVTimer][statusbar] 0.490010ms
+2014-07-18 06:28:49.209 game board[30871:70b] [CDVTimer][TotalPluginStartup] 0.809968ms
+2014-07-18 06:28:49.441 game board[30871:70b] Resetting plugins due to page load.
+2014-07-18 06:28:49.738 game board[30871:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-18 06:28:57.811 game board[30871:70b] Signon to the application
+2014-07-18 06:28:57.895 game board[30871:70b] ACTIVATING
+2014-07-18 06:28:59.996 game board[30871:70b] ACTIVATING
+2014-07-18 06:29:00.095 game board[30871:70b] Signon to the application
+2014-07-18 06:29:05.866 game board[30871:70b] ACTIVATING
+2014-07-18 06:29:05.953 game board[30871:70b] Signon to the application
+2014-07-18 06:29:06.505 game board[30871:70b] ACTIVATING
+2014-07-18 06:29:06.589 game board[30871:70b] Signon to the application
+2014-07-18 06:29:07.086 game board[30871:70b] ACTIVATING
+2014-07-18 06:29:07.179 game board[30871:70b] Signon to the application
+2014-07-18 06:29:07.715 game board[30871:70b] ACTIVATING
+2014-07-18 06:29:07.791 game board[30871:70b] Signon to the application
+2014-07-18 06:30:13.451 game board[30871:70b] Signon to the application
+objc[31180]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-18 06:34:20.803 game board[31180:70b] Cannot find executable for CFBundle 0xc2a5480 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-18 06:34:20.807 game board[31180:70b] Cannot find executable for CFBundle 0xa29f200 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-18 06:34:20.824 game board[31180:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-18 06:34:20.829 game board[31180:70b] Unlimited access to network resources
+2014-07-18 06:34:20.830 game board[31180:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-18 06:34:20.840 game board[31180:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-18 06:34:20.841 game board[31180:70b] [CDVTimer][statusbar] 0.284970ms
+2014-07-18 06:34:20.841 game board[31180:70b] [CDVTimer][TotalPluginStartup] 0.602007ms
+2014-07-18 06:34:20.873 game board[31180:70b] Resetting plugins due to page load.
+2014-07-18 06:34:20.990 game board[31180:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-18 06:34:21.158 game board[31180:70b] Sucessful initialisation with Application : ac90a830-2f26-4935-8d29-bb1a32c4a9a9
+2014-07-18 06:34:21.158 game board[31180:70b] Sucessful initialisation Services ...
+2014-07-18 06:35:10.948 game board[31180:70b] Signon to the application
+2014-07-18 06:35:10.999 game board[31180:70b] Setting the WebView's frame to {{0, 0}, {320, 436}}
+2014-07-18 06:35:10.999 game board[31180:70b] Setting the WebView's frame to {{0, 0}, {320, 480}}
+2014-07-18 06:35:11.011 game board[31180:70b] THREAD WARNING: ['InAppBrowser'] took '61.571289' ms. Plugin should use a background thread.
+2014-07-18 06:35:11.144 game board[31180:70b] ACTIVATING
+2014-07-18 06:35:42.483 game board[31180:3f07] bool _WebTryThreadLock(bool), 0xc279c30: Multiple locks on web thread not allowed! Please file a bug. Crashing now...
+1   0x4c1ae78 WebRunLoopLock(__CFRunLoopObserver*, unsigned long, void*)
+2   0xae36e __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__
+3   0xae2bf __CFRunLoopDoObservers
+4   0x8c17e __CFRunLoopRun
+5   0x8b9d3 CFRunLoopRunSpecific
+6   0x8b7eb CFRunLoopRunInMode
+7   0x4c1ae40 RunWebThread(void*)
+8   0x261d5fb _pthread_body
+9   0x261d485 _pthread_struct_init
+10  0x2622cf2 thread_start
+objc[32073]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-18 06:49:21.058 game board[32073:70b] Cannot find executable for CFBundle 0xa564c20 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-18 06:49:21.064 game board[32073:70b] Cannot find executable for CFBundle 0xa57dbf0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-18 06:49:21.116 game board[32073:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-18 06:49:21.124 game board[32073:70b] Unlimited access to network resources
+2014-07-18 06:49:21.128 game board[32073:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-18 06:49:21.145 game board[32073:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-18 06:49:21.146 game board[32073:70b] [CDVTimer][statusbar] 0.488997ms
+2014-07-18 06:49:21.146 game board[32073:70b] [CDVTimer][TotalPluginStartup] 0.930011ms
+2014-07-18 06:49:21.276 game board[32073:70b] Resetting plugins due to page load.
+2014-07-18 06:49:21.546 game board[32073:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-18 06:49:36.401 game board[32073:70b] Signon to the application
+2014-07-18 06:49:36.415 game board[32073:70b] Setting the WebView's frame to {{0, 0}, {320, 436}}
+2014-07-18 06:49:36.415 game board[32073:70b] Setting the WebView's frame to {{0, 0}, {320, 480}}
+2014-07-18 06:49:36.418 game board[32073:70b] THREAD WARNING: ['InAppBrowser'] took '15.653076' ms. Plugin should use a background thread.
+2014-07-18 06:49:36.513 game board[32073:70b] ACTIVATING
+2014-07-18 06:49:55.223 game board[32073:70b] Firstname:  Matthew
+2014-07-18 06:49:55.224 game board[32073:70b] Lastname:  Perrins
+2014-07-18 06:50:28.133 game board[32073:70b] Signon to the application
+2014-07-18 06:50:28.136 game board[32073:70b] Setting the WebView's frame to {{0, 0}, {320, 436}}
+2014-07-18 06:50:28.136 game board[32073:70b] Setting the WebView's frame to {{0, 0}, {320, 480}}
+2014-07-18 06:50:28.139 game board[32073:70b] Signon to the application
+2014-07-18 06:50:28.139 game board[32073:70b] Tried to show IAB while already shown
+2014-07-18 06:50:28.157 game board[32073:70b] webView:didFailLoadWithError - -999: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2014-07-18 06:50:28.229 game board[32073:70b] ACTIVATING
+2014-07-18 06:50:28.229 game board[32073:70b] ACTIVATING
+2014-07-18 06:50:29.834 game board[32073:4007] bool _WebTryThreadLock(bool), 0xa696d40: Multiple locks on web thread not allowed! Please file a bug. Crashing now...
+1   0x4c1ae78 WebRunLoopLock(__CFRunLoopObserver*, unsigned long, void*)
+2   0xae36e __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__
+3   0xae2bf __CFRunLoopDoObservers
+4   0x8c17e __CFRunLoopRun
+5   0x8b9d3 CFRunLoopRunSpecific
+6   0x8b7eb CFRunLoopRunInMode
+7   0x4c1ae40 RunWebThread(void*)
+8   0x261d5fb _pthread_body
+9   0x261d485 _pthread_struct_init
+10  0x2622cf2 thread_start
+objc[32408]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-18 06:55:19.362 game board[32408:70b] Cannot find executable for CFBundle 0xa307200 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-18 06:55:19.365 game board[32408:70b] Cannot find executable for CFBundle 0xb235fb0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-18 06:55:19.397 game board[32408:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-18 06:55:19.402 game board[32408:70b] Unlimited access to network resources
+2014-07-18 06:55:19.403 game board[32408:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-18 06:55:19.415 game board[32408:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-18 06:55:19.415 game board[32408:70b] [CDVTimer][statusbar] 0.470996ms
+2014-07-18 06:55:19.416 game board[32408:70b] [CDVTimer][TotalPluginStartup] 0.872016ms
+2014-07-18 06:55:19.471 game board[32408:70b] Resetting plugins due to page load.
+2014-07-18 06:55:19.617 game board[32408:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-18 06:55:19.854 game board[32408:70b] Sucessful initialisation with Application : ac90a830-2f26-4935-8d29-bb1a32c4a9a9
+2014-07-18 06:55:19.855 game board[32408:70b] Sucessful initialisation Services ...
+2014-07-18 06:55:22.155 game board[32408:70b] Signon to the application
+2014-07-18 06:55:22.177 game board[32408:70b] Setting the WebView's frame to {{0, 0}, {320, 436}}
+2014-07-18 06:55:22.177 game board[32408:70b] Setting the WebView's frame to {{0, 0}, {320, 480}}
+2014-07-18 06:55:22.181 game board[32408:70b] THREAD WARNING: ['InAppBrowser'] took '25.180908' ms. Plugin should use a background thread.
+2014-07-18 06:55:22.285 game board[32408:70b] ACTIVATING
+2014-07-18 06:55:24.332 game board[32408:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 06:55:24.333 game board[32408:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 06:55:24.716 game board[32408:70b] Firstname:  Matthew
+2014-07-18 06:55:24.716 game board[32408:70b] Lastname:  Perrins
+2014-07-18 06:55:26.982 game board[32408:70b] Signon to the application
+2014-07-18 06:55:26.982 game board[32408:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 06:55:26.982 game board[32408:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 06:55:27.215 game board[32408:70b] Firstname:  Matthew
+2014-07-18 06:55:27.215 game board[32408:70b] Lastname:  Perrins
+2014-07-18 06:55:28.577 game board[32408:70b] ACTIVATING
+2014-07-18 06:55:28.653 game board[32408:70b] Signon to the application
+2014-07-18 06:55:28.654 game board[32408:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 06:55:28.654 game board[32408:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 06:55:28.947 game board[32408:70b] Firstname:  Matthew
+2014-07-18 06:55:28.948 game board[32408:70b] Lastname:  Perrins
+2014-07-18 06:55:30.430 game board[32408:70b] ACTIVATING
+2014-07-18 06:55:30.519 game board[32408:70b] Signon to the application
+2014-07-18 06:55:30.520 game board[32408:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 06:55:30.520 game board[32408:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 06:55:30.787 game board[32408:70b] Firstname:  Matthew
+2014-07-18 06:55:30.787 game board[32408:70b] Lastname:  Perrins
+2014-07-18 06:55:32.346 game board[32408:70b] ACTIVATING
+2014-07-18 06:55:32.412 game board[32408:70b] Signon to the application
+2014-07-18 06:55:32.413 game board[32408:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 06:55:32.413 game board[32408:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 06:55:32.681 game board[32408:70b] Firstname:  Matthew
+2014-07-18 06:55:32.682 game board[32408:70b] Lastname:  Perrins
+2014-07-18 06:55:45.877 game board[32408:70b] Signon to the application
+2014-07-18 06:55:45.877 game board[32408:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 06:55:45.877 game board[32408:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 06:55:45.960 game board[32408:70b] ACTIVATING
+2014-07-18 06:55:46.107 game board[32408:70b] Firstname:  Matthew
+2014-07-18 06:55:46.107 game board[32408:70b] Lastname:  Perrins
+objc[32673]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-18 06:57:04.840 game board[32673:70b] Cannot find executable for CFBundle 0xa2aad60 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-18 06:57:04.843 game board[32673:70b] Cannot find executable for CFBundle 0xa853b50 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-18 06:57:04.871 game board[32673:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-18 06:57:04.876 game board[32673:70b] Unlimited access to network resources
+2014-07-18 06:57:04.877 game board[32673:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-18 06:57:04.890 game board[32673:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-18 06:57:04.890 game board[32673:70b] [CDVTimer][statusbar] 0.398040ms
+2014-07-18 06:57:04.890 game board[32673:70b] [CDVTimer][TotalPluginStartup] 0.696957ms
+2014-07-18 06:57:04.942 game board[32673:70b] Resetting plugins due to page load.
+2014-07-18 06:57:05.064 game board[32673:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-18 06:57:05.275 game board[32673:70b] Sucessful initialisation with Application : ac90a830-2f26-4935-8d29-bb1a32c4a9a9
+2014-07-18 06:57:05.275 game board[32673:70b] Sucessful initialisation Services ...
+2014-07-18 06:57:07.730 game board[32673:70b] Signon to the application
+2014-07-18 06:57:07.732 game board[32673:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 06:57:07.732 game board[32673:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 06:57:07.813 game board[32673:70b] ACTIVATING
+2014-07-18 06:57:08.554 game board[32673:70b] Firstname:  Matthew
+2014-07-18 06:57:08.554 game board[32673:70b] Lastname:  Perrins
+2014-07-18 06:57:08.755 game board[32673:70b] MainCtrl
+2014-07-18 06:57:09.807 game board[32673:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+2014-07-18 06:57:13.859 game board[32673:70b] MainCtrl
+2014-07-18 06:57:14.469 game board[32673:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+2014-07-18 06:57:16.900 game board[32673:70b] MainCtrl
+2014-07-18 06:57:17.081 game board[32673:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+2014-07-18 06:57:19.783 game board[32673:70b] MainCtrl
+2014-07-18 06:57:19.965 game board[32673:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+2014-07-18 06:57:32.151 game board[32673:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+2014-07-18 06:57:44.322 game board[32673:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+2014-07-18 06:57:48.000 game board[32673:70b] ACTIVATING
+2014-07-18 06:57:49.071 game board[32673:70b] ACTIVATING
+2014-07-18 06:57:50.619 game board[32673:70b] ACTIVATING
+objc[33023]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-18 07:05:12.912 game board[33023:70b] Cannot find executable for CFBundle 0xa290750 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-18 07:05:12.916 game board[33023:70b] Cannot find executable for CFBundle 0xb88cfb0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-18 07:05:12.935 game board[33023:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-18 07:05:12.939 game board[33023:70b] Unlimited access to network resources
+2014-07-18 07:05:12.941 game board[33023:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-18 07:05:12.952 game board[33023:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-18 07:05:12.952 game board[33023:70b] [CDVTimer][statusbar] 0.437975ms
+2014-07-18 07:05:12.953 game board[33023:70b] [CDVTimer][TotalPluginStartup] 0.794053ms
+2014-07-18 07:05:12.985 game board[33023:70b] Resetting plugins due to page load.
+2014-07-18 07:05:13.102 game board[33023:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-18 07:05:13.275 game board[33023:70b] Sucessful initialisation with Application : ac90a830-2f26-4935-8d29-bb1a32c4a9a9
+2014-07-18 07:05:13.275 game board[33023:70b] Sucessful initialisation Services ...
+2014-07-18 07:05:24.879 game board[33023:70b] Signon to the application
+2014-07-18 07:05:24.880 game board[33023:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 07:05:24.881 game board[33023:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 07:05:24.963 game board[33023:70b] ACTIVATING
+2014-07-18 07:05:25.533 game board[33023:70b] Firstname:  Matthew
+2014-07-18 07:05:25.534 game board[33023:70b] Lastname:  Perrins
+2014-07-18 07:05:25.617 game board[33023:70b] MainCtrl
+2014-07-18 07:05:26.465 game board[33023:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+objc[33257]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-18 07:05:46.393 game board[33257:70b] Cannot find executable for CFBundle 0xa35c2f0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-18 07:05:46.396 game board[33257:70b] Cannot find executable for CFBundle 0xa3869d0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-18 07:05:46.429 game board[33257:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-18 07:05:46.433 game board[33257:70b] Unlimited access to network resources
+2014-07-18 07:05:46.435 game board[33257:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-18 07:05:46.447 game board[33257:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-18 07:05:46.447 game board[33257:70b] [CDVTimer][statusbar] 0.373006ms
+2014-07-18 07:05:46.447 game board[33257:70b] [CDVTimer][TotalPluginStartup] 0.644982ms
+2014-07-18 07:05:46.497 game board[33257:70b] Resetting plugins due to page load.
+2014-07-18 07:05:46.616 game board[33257:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-18 07:05:46.799 game board[33257:70b] Sucessful initialisation with Application : ac90a830-2f26-4935-8d29-bb1a32c4a9a9
+2014-07-18 07:05:46.800 game board[33257:70b] Sucessful initialisation Services ...
+2014-07-18 07:05:50.120 game board[33257:70b] Signon to the application
+2014-07-18 07:05:50.120 game board[33257:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 07:05:50.121 game board[33257:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 07:05:50.712 game board[33257:70b] Firstname:  Matthew
+2014-07-18 07:05:50.712 game board[33257:70b] Lastname:  Perrins
+2014-07-18 07:05:50.908 game board[33257:70b] MainCtrl
+2014-07-18 07:05:51.828 game board[33257:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+objc[33605]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-18 07:12:16.448 game board[33605:70b] Cannot find executable for CFBundle 0xa43fe40 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-18 07:12:16.456 game board[33605:70b] Cannot find executable for CFBundle 0xa76cfe0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-18 07:12:16.486 game board[33605:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-18 07:12:16.494 game board[33605:70b] Unlimited access to network resources
+2014-07-18 07:12:16.496 game board[33605:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-18 07:12:16.513 game board[33605:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-18 07:12:16.514 game board[33605:70b] [CDVTimer][statusbar] 0.523031ms
+2014-07-18 07:12:16.514 game board[33605:70b] [CDVTimer][TotalPluginStartup] 0.977993ms
+2014-07-18 07:12:16.625 game board[33605:70b] Resetting plugins due to page load.
+2014-07-18 07:12:16.836 game board[33605:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-18 07:12:18.464 game board[33605:70b] Signon to the application
+2014-07-18 07:12:18.466 game board[33605:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 07:12:18.466 game board[33605:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 07:12:18.547 game board[33605:70b] ACTIVATING
+2014-07-18 07:12:19.107 game board[33605:70b] Firstname:  Matthew
+2014-07-18 07:12:19.107 game board[33605:70b] Lastname:  Perrins
+2014-07-18 07:12:19.280 game board[33605:70b] MainCtrl
+2014-07-18 07:12:20.402 game board[33605:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+2014-07-18 07:12:45.129 game board[33605:70b] Signon to the application
+2014-07-18 07:12:45.129 game board[33605:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 07:12:45.129 game board[33605:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 07:12:45.361 game board[33605:70b] Firstname:  Matthew
+2014-07-18 07:12:45.361 game board[33605:70b] Lastname:  Perrins
+2014-07-18 07:12:45.417 game board[33605:70b] MainCtrl
+2014-07-18 07:12:46.281 game board[33605:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+2014-07-18 07:12:54.121 game board[33605:70b] ACTIVATING
+2014-07-18 07:13:05.082 game board[33605:70b] ACTIVATING
+2014-07-18 07:13:05.903 game board[33605:70b] ACTIVATING
+2014-07-18 07:13:07.286 game board[33605:70b] ACTIVATING
+2014-07-18 07:13:09.420 game board[33605:70b] ACTIVATING
+2014-07-18 07:13:26.190 game board[33605:70b] ACTIVATING
+2014-07-18 07:13:33.676 game board[33605:70b] Signon to the application
+2014-07-18 07:13:33.676 game board[33605:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 07:13:33.676 game board[33605:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 07:13:34.250 game board[33605:70b] Firstname:  Matthew
+2014-07-18 07:13:34.250 game board[33605:70b] Lastname:  Perrins
+2014-07-18 07:13:34.291 game board[33605:70b] MainCtrl
+2014-07-18 07:13:35.210 game board[33605:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}
+objc[33966]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-07-18 07:20:35.800 game board[33966:70b] Cannot find executable for CFBundle 0xa75e250 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-07-18 07:20:35.806 game board[33966:70b] Cannot find executable for CFBundle 0xa775b50 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-07-18 07:20:35.834 game board[33966:70b] Multi-tasking -> Device: YES, App: YES
+2014-07-18 07:20:35.842 game board[33966:70b] Unlimited access to network resources
+2014-07-18 07:20:35.846 game board[33966:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-07-18 07:20:35.866 game board[33966:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-07-18 07:20:35.867 game board[33966:70b] [CDVTimer][statusbar] 1.641035ms
+2014-07-18 07:20:35.868 game board[33966:70b] [CDVTimer][TotalPluginStartup] 2.170980ms
+2014-07-18 07:20:35.988 game board[33966:70b] Resetting plugins due to page load.
+2014-07-18 07:20:36.189 game board[33966:70b] Finished load of: file:///Users/MatthewPerrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/A1D423DF-974D-40EC-9C93-FBAD47F84FAE/game%20board.app/www/index.html#/signin
+2014-07-18 07:20:37.729 game board[33966:70b] Signon to the application
+2014-07-18 07:20:37.731 game board[33966:70b] ERROR: [ERROR] setSecurityToken - onFailure
+2014-07-18 07:20:37.732 game board[33966:70b] ERROR: [ERROR] "Provider and token must be set."
+2014-07-18 07:20:37.812 game board[33966:70b] ACTIVATING
+2014-07-18 07:20:38.361 game board[33966:70b] Firstname:  Matthew
+2014-07-18 07:20:38.361 game board[33966:70b] Lastname:  Perrins
+2014-07-18 07:20:38.496 game board[33966:70b] MainCtrl
+2014-07-18 07:20:39.418 game board[33966:70b] {"status":"success","bookmark":"end","object":[],"deleted":[]}

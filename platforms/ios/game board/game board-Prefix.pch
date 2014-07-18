@@ -17,7 +17,7 @@
  under the License.
  */
 //
-// Prefix header for all source files of the 'Game-board' target in the 'Game-board' project
+// Prefix header for all source files of the 'game board' target in the 'game board' project
 //
 
 #ifdef __OBJC__

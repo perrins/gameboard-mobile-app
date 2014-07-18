@@ -1,84 +1,86 @@
 /* Your app's CSS, go crazy, make it your own */
- .ionic-logo {
+
+.ionic-logo {
     display: block;
     margin: 15px auto;
     width: 96px;
     height: 96px;
 }
-
 .hidden {
-    display:none
+    display: none
 }
+
 .spinner {
-  opacity: 0.7;
+    opacity: 0.7;
 }
 .spinner:before {
-  content: "...";
-  text-align: center;
-  line-height: 50px;
-  font-size: 60px;
-  color: #EEEEEE;
-  top: 10px;
-  left: 10px;
-  z-index: 1;
-  position: absolute;
-  display: block;
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
-  background: rgba(0,0,0,1);
+    content: "...";
+    text-align: center;
+    line-height: 50px;
+    font-size: 60px;
+    color: #EEEEEE;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    position: absolute;
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 1);
 }
-
 .spinner:after {
-  content: "";
-  display: block;
-  z-index: 0;
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  background: linear-gradient( 420deg, transparent 50%, #CECECE 50%), linear-gradient(90deg, #CECECE 50%, transparent 50% );
-  -webkit-animation: spinner 2s infinite linear;
-  animation: spinner 2s infinite linear;
+    content: "";
+    display: block;
+    z-index: 0;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background: linear-gradient(420deg, transparent 50%, #CECECE 50%), linear-gradient(90deg, #CECECE 50%, transparent 50%);
+    -webkit-animation: spinner 2s infinite linear;
+    animation: spinner 2s infinite linear;
 }
 @-webkit-keyframes spinner {
-  from {-webkit-transform:rotate(0deg);}
-  to {-webkit-transform:rotate(360deg);}
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
 @keyframes spinner {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(360deg);}
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
-
 .slider {
-  height: 100%;
+    height: 100%;
 }
 .slider-slide {
-  padding-top: 80px;
-  color: #000;
-  background-color: #fff;
-  text-align: center;
-
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-  font-weight: 300;
+    padding-top: 80px;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
 }
-
 #logo {
-  margin: 30px 0px;
+    margin: 30px 0px;
 }
-
 #list {
-  width: 170px;
-  margin: 30px auto;
-  font-size: 20px;
+    width: 170px;
+    margin: 30px auto;
+    font-size: 20px;
 }
 #list ol {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 #list ol li {
-  text-align: left;
-  list-style: decimal;
-  margin: 10px 0px;
+    text-align: left;
+    list-style: decimal;
+    margin: 10px 0px;
 }
-
-

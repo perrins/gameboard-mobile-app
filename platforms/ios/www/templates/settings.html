@@ -6,7 +6,36 @@
 
     <ion-content has-header="true" padding="true">
 
-        <ul class="list card">
+
+        <div class="list">
+
+            <div class="item item-divider">
+                Settings
+            </div>
+
+            <ion-toggle ng-repeat="item in settingsList" ng-model="item.checked" ng-checked="item.checked">
+                {{ item.text }}
+            </ion-toggle>
+
+            <div class="item">
+                <pre ng-bind="settingsList | json"></pre> 
+            </div>
+
+            <div class="item item-divider">
+                Notifications
+            </div>
+
+            <ion-toggle ng-model="pushNotification.checked" ng-change="pushNotificationChange()">
+                Push Notifications
+            </ion-toggle>
+
+            <div class="item">
+                <pre ng-bind="pushNotification | json"></pre> 
+            </div>
+
+
+
+
 
             <div class="item item-divider">
                 Search
@@ -57,88 +86,88 @@
             </li>
 
 
-        </ul>
+            </ul>
 
-        <ul class="list card">
+            <ul class="list card">
 
-            <div class="item item-divider">
-                Notifications
-            </div>
+                <div class="item item-divider">
+                    Notifications
+                </div>
 
-            <li class="item item-icon-left item-toggle">
-                <i class="icon ion-social-facebook"></i>
-                Facebook
+                <li class="item item-icon-left item-toggle">
+                    <i class="icon ion-social-facebook"></i>
+                    Facebook
 
-                <span class="item-note">
-                    update your facebook wall
-                </span>
-                <label class="toggle">
+                    <span class="item-note">
+                        update your facebook wall
+                    </span>
+                    <label class="toggle">
 
-                    <input id="facebook" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+                        <input id="facebook" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
 
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
 
-            </li>
+                </li>
 
-            <li class="item item-icon-left item-toggle">
-                <i class="icon ion-social-twitter"></i>
-                Twitter
+                <li class="item item-icon-left item-toggle">
+                    <i class="icon ion-social-twitter"></i>
+                    Twitter
 
-                <span class="item-note">
-                    tweet your progress
-                </span>
-                <label class="toggle">
+                    <span class="item-note">
+                        tweet your progress
+                    </span>
+                    <label class="toggle">
 
-                    <input id="twitter" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+                        <input id="twitter" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
 
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
 
-            </li>
+                </li>
 
-            <li class="item item-icon-left  item-toggle">
-                <i class="icon ion-social-googleplus"></i>
-                Google+
+                <li class="item item-icon-left  item-toggle">
+                    <i class="icon ion-social-googleplus"></i>
+                    Google+
 
-                <span class="item-note">
-                    update your Google+ wall
-                </span>
-                <label class="toggle">
+                    <span class="item-note">
+                        update your Google+ wall
+                    </span>
+                    <label class="toggle">
 
-                    <input id="googleplus" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+                        <input id="googleplus" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
 
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
 
-            </li>
+                </li>
 
 
-            <li class="item item-icon-left item-toggle">
-                <i class="icon ion-email"></i>
-                eMail
+                <li class="item item-icon-left item-toggle">
+                    <i class="icon ion-email"></i>
+                    eMail
 
-                <span class="item-note">
-                    email your progress
-                </span>
-                <label class="toggle">
+                    <span class="item-note">
+                        email your progress
+                    </span>
+                    <label class="toggle">
 
-                    <input id="email" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
+                        <input id="email" data-dojo-type="dojox/mobile/CheckBox" type="checkbox">
 
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
 
-            </li>
+                </li>
 
-        </ul>
+            </ul>
 
 
     </ion-content>

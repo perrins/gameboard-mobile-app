@@ -16,6 +16,14 @@
         <ion-content class="has-header">
             <ion-list>
 
+                <div class="item item-avatar">
+                    <img  class="genre-image genre-image-load" alt="{{user.avatar}}"  ng-src="{{user.avatar}}" lazyload>
+                    <h2>{{user.firstname}}</h2>                    
+                    <h2>{{user.lastname}}</h2>
+                    <p>{{user.gametag}}</p>
+                </div>
+
+
                 <a class="item item-icon-left" nav-clear menu-close href="#/board/genres">
                     <i class="icon ion-game-controller-b"></i>
                     Genres
