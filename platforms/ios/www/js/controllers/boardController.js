@@ -6,6 +6,8 @@ angular.module('gameboard.board.controllers', [])
     // Need to Check if we have got some already
     GenresService.all().then(function(genres) {
 
+        debugger;
+
         // Paint 
         $scope.genres = genres;
 
@@ -26,14 +28,19 @@ angular.module('gameboard.board.controllers', [])
 // A simple controller that shows a tapped item's data
 .controller('GamesCtrl', function($scope, $stateParams, GamesService) {
 
-    // Need to Check if we have got some already
-    GamesService.all($stateParams.gid).then(function(data) {
+    debugger;
 
-        // Paint 
-        $scope.games = data.games;
-        $scope.banners = data.banners;
-        $scope.gid = data.gid;
-        $scope.id = data.id;
+    var gid = $stateParams.genre.attributes.gid;
+    $scope.title = $stateParams.genre.attributes.title;
+
+    // Need to Check if we have got some already
+    GamesService.all(gid).then(function(data) {
+
+        // Layout the Games and the Banners
+        $scope.games = data.get('games');
+        $scope.banners = data.get('banners');
+        $scope.gid = data.get('gid');
+        $scope.gmid = data.get('gmid');
 
         // Let Angular know we have some data because of the Async nature of IBMBaaS
         // This is required to make sure the information is uptodate
@@ -42,13 +49,6 @@ angular.module('gameboard.board.controllers', [])
         }
 
     });
-
-    $scope.selected = function(game) {
-
-        console.log(game);
-
-    }
-
 
 })
 

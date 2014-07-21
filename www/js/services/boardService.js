@@ -3,7 +3,7 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('GenresService', function($q, $cacheFactory, URL) {
+.factory('GenresService', function($q, $cacheFactory, ACCESS) {
 
      // Use an internal Cache for storing the List and map the operations to manage that from
     // Mobile Cloud SDK Calls
@@ -17,7 +17,7 @@ angular.module('gameboard.board.services', [])
             // Create a Defer as this is an async operation
             defer = $q.defer();
 
-            var items = cache.get(URL.GB_GENRES);
+            var items = cache.get(ACCESS.GENRES);
 
             if(!_.isUndefined(items)) {
                 defer.resolve(items);
@@ -27,13 +27,14 @@ angular.module('gameboard.board.services', [])
                 var data = IBMData.getService();
 
                 // Clear the Cache with a new set
-                cache.remove(URL.GENRES);
+                cache.remove(ACCESS.GENRES);
 
-                var query = data.Query.ofType(URL.GENRES);
+                // Get the Genres
+                var query = data.Query.ofType(ACCESS.GENRES);
                 query.find().done(function(list) {
 
                     // Place the Items in the Cache
-                    cache.put(URL.GENRES, list);
+                    cache.put(ACCESS.GENRES, list);
 
                     // return the Cache
                     defer.resolve(list);
@@ -56,7 +57,7 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('GamesService', function($q, $cacheFactory,$stateParams, URL) {
+.factory('GamesService', function($q, $cacheFactory,$stateParams, ACCESS) {
 
      // Use an internal Cache for storing the List and map the operations to manage that from
     // Mobile Cloud SDK Calls
@@ -67,9 +68,6 @@ angular.module('gameboard.board.services', [])
         // Return all the Objects for a Given Class
         allCloud: function(cid) {
 
-
-
-
             // get the Data Service
             var data = IBMData.getService();
 
@@ -77,13 +75,13 @@ angular.module('gameboard.board.services', [])
             defer = $q.defer();
 
             // Clear the Cache with a new set
-            cache.remove(URL.GAMES);
+            cache.remove(ACCESS.GAMES+cid);
 
-            var query = data.Query.ofType(URL.GAMES);
+            var query = data.Query.ofType(ACCESS.GAMES);
             query.find({cid:cid}).done(function(list) {
 
                 // Place the Items in the Cache
-                cache.put(URL.GAMES, list);
+                cache.put(ACCESS.GAMES+cid, list);
 
                 // return the Cache
                 defer.resolve(cache.get(URL.GAMES+cid));
@@ -104,11 +102,9 @@ angular.module('gameboard.board.services', [])
             // Create a Defer as this is an async operation
             defer = $q.defer();
 
-            var items = cache.get(URL.GB_GENRES+cid);
+            var items = cache.get(ACCESS.GAME+cid);
 
-            debugger;
-            // Check we have some data
-            
+            // Check we have some data            
             if (_.isNull(items)) {
                 items = this.allCloud(cid);
             }
@@ -125,65 +121,62 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('CategoriesService', function($q, $cacheFactory,$stateParams, URL) {
+.factory('CategoriesService', function($q, $cacheFactory,$stateParams, ACCESS) {
 
-    // Use an internal Cache for storing the List and map the operations to manage that from 
-    // MBaaS SDK Calls
-    var cache = $cacheFactory('categories');
+    // Use an internal Cache for storing the List and map the operations to manage that from
+    // Mobile Cloud SDK Calls
+    var cache = $cacheFactory('');
 
     return {
 
-        all: function(cid) {
+        // Return all the Objects for a Given Class
+        allCloud: function(cid) {
 
-            console.log("CID:",cid);
+            // get the Data Service
+            var data = IBMData.getService();
 
-            // Create a deffered
-            var def = $q.defer();
+            // Create a Defer as this is an async operation
+            defer = $q.defer();
 
-            // Check if we have retrieved and stored already
-            var cats = cache.get('categories');
+            // Clear the Cache with a new set
+            cache.remove(ACCESS.CATEGORIES+cid);
 
-            if (cats != undefined) {
-                def.resolve(cats);
-            } else {
-                // Create a deffered
-                var def = $q.defer();
+            var query = data.Query.ofType(ACCESS.CATEGORIES);
+            query.find({cid:cid}).done(function(list) {
 
-                // Clear the Cache with a new set
-                cache.remove('categories');
+                // Place the Items in the Cache
+                cache.put(ACCESS.CATEGORIES+cid, list);
 
-                // Lets Get a list of Genres
-                $.ajax({
-                    type: "GET",
-                    url: URL.CATEGORIES,
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function(result,status) {
+                // return the Cache
+                defer.resolve(cache.get(URL.CATEGORIES+cid));
 
-                        // Check if we were able to store it sucessfully
-                        if (status === "success") {
-
-                          // Place the Items in the Cache
-                          cache.put('categories', result);
-
-                          // return the Cache
-                          def.resolve(cache.get('categories'));
-
-
-                        } else {
-                            def.reject([]);
-                        }
-
-                    },
-                    error: function(err) {
-                        def.reject(err);
-                    }
-                });
-                
-            }
+            },function(err){
+                console.log(err);
+                defer.reject(err);
+            });
 
             // Get the Objects for a particular Type
-            return def.promise;
+            return defer.promise;
+
+        },
+
+        // Return the Cached List
+        allCache: function(cid) {
+
+            // Create a Defer as this is an async operation
+            defer = $q.defer();
+
+            var items = cache.get(ACCESS.CATEGORIES+cid);
+
+            // Check we have some data            
+            if (_.isNull(items)) {
+                items = this.allCloud(cid);
+            }
+            // Return the Items
+            defer.resolve(items);
+
+            // Return the Cached Items
+            return defer.promise;
 
         }
     }
@@ -239,39 +232,25 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('YouTubeService', function($q, $cacheFactory,$stateParams, URL) {
+.factory('YouTubeService', function($q, $cacheFactory,$stateParams, ACCESS) {
 
     return {
 
-        all: function() {
+        getYourVideos: function() {
 
             // Create a deffered
             var def = $q.defer();
 
-            // Lets Get a list of Genres
-            $.ajax({
-                type: "GET",
-                url: URL.YOUTUBE,
-                dataType: "json",
-                contentType: "application/json",
-                success: function(result,status) {
+            // Get Cloud Code
+            var cc = IBMCloudCode.getService();
 
-                    // Check if we were able to store it sucessfully
-                    if (status === "success") {
+            cc.get(ACCESS.YOUR_VIDEOS,{"handleAs":"json"}).then(function(videos){
+                def.resolve(videos);
+            }).catch(function(err){
+                console.log(err);
+                def.reject(err);
+            })
 
-                      // return the Cache
-                      def.resolve(result);
-
-                    } else {
-                        def.reject([]);
-                    }
-
-                },
-                error: function(err) {
-                    def.reject(err);
-                }
-            });
-            
             // Get the Objects for a particular Type
             return def.promise;
 
@@ -279,53 +258,6 @@ angular.module('gameboard.board.services', [])
     }
 
 })
-
-/**
- * A simple example service that returns some data.
- */
-.factory('VideoService', function($q, $cacheFactory,$stateParams, URL) {
-
-    return {
-
-        get: function(id) {
-
-            // Get the Base Video ID
-
-            // Create a deffereds
-            var def = $q.defer();
-
-            // Lets Get a list of Genres
-            $.ajax({
-                type: "GET",
-                url: URL.VIDEO,
-                dataType: "json",
-                contentType: "application/json",
-                success: function(result,status) {
-
-                    // Check if we were able to store it sucessfully
-                    if (status === "success") {
-
-                      // return the Cache
-                      def.resolve(result);
-
-                    } else {
-                        def.reject([]);
-                    }
-
-                },
-                error: function(err) {
-                    def.reject(err);
-                }
-            });
-            
-            // Get the Objects for a particular Type
-            return def.promise;
-
-        }
-    }
-
-})
-
 
 /**
  * A simple example service that returns some data.
@@ -341,78 +273,29 @@ angular.module('gameboard.board.services', [])
 
     return {
 
-        // Return all the Objects for a Given Class
-        allCloud: function() {
-
-            // get the Data Service
-            var data = IBMData.getService();
-
-            // Create a Defer as this is an async operation
-            defer = $q.defer();
-
-            // Clear the Cache with a new set
-            cache.remove('items');
-
-            // Retreive a Query instance of type "Item" and issue a find() action on it
-            // to retreive all the items (NO PAGING)
-            var query = data.Query.ofType("Item");
-            query.find().done(function(list) {
-
-                // Place the Items in the Cache
-                cache.put('items', list);
-
-                // return the Cache
-                defer.resolve(cache.get('items'));
-
-            },function(err){
-                console.log(err);
-                defer.reject(err);
-            });
-
-            // Get the Objects for a particular Type
-            return defer.promise;
-
-        },
-
-        // Return the Cached List
-        allCache: function() {
-
-            // Return the Cached Items
-            return cache.get('items');
-
-        },
-
-        add: function(name) {
+        // Add a Video to Game Board
+        add: function(video) {
 
             // Manage Defer on the Save
             var defer = $q.defer();
 
             // get the Data Service
-            var data = IBMData.getService();
+            var data = IBMCloudCode.getService();
 
-            // Create a new Item instance and then save it to the cloud
-            var item = data.Object.ofType("Item", {"name":name});
+            // Validate Contents of Video Object
+            // Key Data
+            // Link the three pieces of information, the board the user and the video
+            // boardId. 
+            // youtubeid
+            // userid 
 
-            // add the Item to the Cache but we need to replace it when we
-            // get a saved copy back
-            var items = cache.get('items');
-
-            // Check we have some items
-            if (items) {
-                cache.get('items').push(item);
-            } else {
-                defer.reject('no items defined');
-            }
-
-            // Save the Class in the Bluemix Cloud
-            item.save().then(function(saved) {
-
-                // Replace the Item
-                items.forEach(function(item, i) { if (item.get('name') == saved.get('name')) items[i] = saved;});
-                defer.resolve(saved);
-
-            },function(err) {
-                defer.reject(err);
+            // Send the Video request to the Bluemix to be added into the Cloudant Database
+            cc.post("/board/video",video,options).done(function(video){
+                // Was added successfully
+                def.resolve(video);
+            }).catch(function(err){
+                console.log(err)
+                def.reject(err);
             });
 
             // Return a promise for the async operation of save

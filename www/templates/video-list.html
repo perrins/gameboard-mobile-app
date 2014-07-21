@@ -1,0 +1,22 @@
+
+    <div class="list">
+
+        <a ng-repeat="video in videos" class="item item-thumbnail-left item-icon-right" href="#/board/youtube/video/{{video}}">
+
+            <img class="video" ng-src="{{video.snippet.thumbnails.default.url}}" lazyload>
+
+            <h2>{{video.snippet.title}}</h2>
+            <p>{{video.snippet.description}}</p>
+
+            <span class="badge badge-calm">{{game.count}}</span>
+
+             <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+
+    </div>
+
+    <div id="notfound" class="card hidden">
+        <div class="item item-text-wrap">
+            No Games have been found for this Genre
+        </div>
+    </div>

@@ -24,19 +24,17 @@ angular.module('gameboard', [
     });
 })
 
-.constant('URL', {
-    GENRES: "GB_GENRES",
-    GAMES: "data/Games.json",
-    CATEGORIES: "data/Categories.json",
-    BOARD: "data/Board.json",
-    YOUTUBE: "data/Youtube.json",
-    MEMBER: "data/Member.json",
-    FAVOURITES: "data/Favourites.json",
-    MEMBERS: "data/Members.json",
-    YOUTUBE: "data/YouTube.json",
-    SEARCH: "data/Search.json",
-    YOURVIDEOS : "data/YourVideos.json",
-    VIDEO: "data/Video.json"
+.constant('ACCESS', {
+    GENRES: "gb_genres",                //IBM Data
+    GAMES: "gb_games",                  //IBM Data
+    GCATEGORIES: "gb_categories",       //IBM Data
+    BOARD: "data/Board.json",           // IBM CloudCode with Cloudant
+    YOUR_VIDEOS: "/youtube/videos",     // IBM CloudCode with YouTube API
+    MEMBER: "data/Member.json",         // IBM Data
+    FAVOURITES: "data/Favourites.json", // IBM Data
+    MEMBERS: "data/Members.json",       // IBM Data
+    SEARCH: "data/Search.json",         // IBM CloudCode with Cloudant
+    VIDEO: "data/Video.json"            // IBM CloudCode with Cloudant
 })
 
 // Configure the Angular Rules
@@ -160,7 +158,7 @@ angular.module('gameboard', [
     .state('board.youtube', {
         url: "/youtube",
         views: {
-            'videoContent': {
+            'menuContent': {
                 templateUrl: "templates/video-list.html",
                 controller: "AddVideoCtrl"
             }

@@ -3,7 +3,7 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('GenresService', function($q, $cacheFactory, URL) {
+.factory('GenresService', function($q, $cacheFactory, ACCESS) {
 
      // Use an internal Cache for storing the List and map the operations to manage that from
     // Mobile Cloud SDK Calls
@@ -17,7 +17,7 @@ angular.module('gameboard.board.services', [])
             // Create a Defer as this is an async operation
             defer = $q.defer();
 
-            var items = cache.get(URL.GB_GENRES);
+            var items = cache.get(ACCESS.GENRES);
 
             if(!_.isUndefined(items)) {
                 defer.resolve(items);
@@ -27,13 +27,14 @@ angular.module('gameboard.board.services', [])
                 var data = IBMData.getService();
 
                 // Clear the Cache with a new set
-                cache.remove(URL.GENRES);
+                cache.remove(ACCESS.GENRES);
 
-                var query = data.Query.ofType(URL.GENRES);
+                // Get the Genres
+                var query = data.Query.ofType(ACCESS.GENRES);
                 query.find().done(function(list) {
 
                     // Place the Items in the Cache
-                    cache.put(URL.GENRES, list);
+                    cache.put(ACCESS.GENRES, list);
 
                     // return the Cache
                     defer.resolve(list);

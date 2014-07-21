@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>game board</name>
+<widget id="co.gamboard.mobile" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Gameboard</name>
     <description>
         Add Videos and track the best.
     </description>
-    <author email="info@gameboard.com" href="http://gameb-board.com/">
+    <author email="info@gameboard.com" href="http://game-board.co/">
       Game-board Ltd
     </author>
     <content src="index.html" />
@@ -17,6 +17,7 @@
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
+
     <feature name="StatusBar">
       <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>

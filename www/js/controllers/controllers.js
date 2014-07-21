@@ -123,7 +123,8 @@ angular.module('gameboard.controllers', [])
         Settings.set('LOADSCREEN', false);
 
         // Havigate to the Board View
-        $state.go('board.genres');
+//        $state.go('board.genres');
+        $state.go('board.youtube');
 
     };
 
@@ -135,7 +136,8 @@ angular.module('gameboard.controllers', [])
             disableBack: true
         });
 
-        $state.go('board.genres');
+        //$state.go('board.genres');
+        $state.go('board.youtube');
     }
 
     $scope.next = function() {
@@ -179,9 +181,9 @@ angular.module('gameboard.controllers', [])
                     var cc = IBMCloudCode.initializeService();
 
                     // Make it handle Local serving
-                    if (window.location.origin.indexOf('local') > 0) {
-                        // Set the Origin to Local 
-                        cc.setBaseUrl(window.location.origin);
+                    if (_.has(config,"local")) {
+                        // Set the Origin to Local Server for testing
+                        cc.setBaseUrl(config.local);
                     }
 
                     // Let the user no they have logged in and can do some stuff if they require

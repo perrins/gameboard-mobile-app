@@ -1,6 +1,6 @@
 angular.module('gameboard.controllers', [])
 
-.controller('MainCtrl', function($scope, $location, $state, $ionicSideMenuDelegate) {
+.controller('MainCtrl', function($rootScope,$scope, $location, $state, $ionicSideMenuDelegate,$ionicViewService,InitBluemix) {
 
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
@@ -8,6 +8,29 @@ angular.module('gameboard.controllers', [])
         InitBluemix.init().then(function() {
             $rootScope.IBMBluemix = IBMBluemix;
         });
+    }
+
+    // Prepare User for Display
+    if($rootScope.user) {
+      $scope.user = $rootScope.user;
+      $scope.user.gametag = "AmissScientist";
+
+        // Clear the Back stack
+        $ionicViewService.nextViewOptions({
+            disableBack: true,
+        });
+
+    } else {
+
+        // Clear the Back stack
+        $ionicViewService.nextViewOptions({
+            disableBack: true,
+            disableAnimate: true
+        });
+
+        // If we dont have a user then lets signon
+        $state.go('signin');
+
     }
 
     $scope.logout = function() {
@@ -45,7 +68,7 @@ angular.module('gameboard.controllers', [])
                 $rootScope.google = google;
 
                 // Set the Security Token on IBM Bluemix
-                IBMBluemix.setSecurityToken(google.request_token,"GOOGLE");
+                IBMBluemix.setSecurityToken(google.access_token,"GOOGLE");
 
                 // Lets get some information about the User
                 google.me()
@@ -126,14 +149,6 @@ angular.module('gameboard.controllers', [])
     $scope.slideChanged = function(index) {
         $scope.slideIndex = index;
     };
-})
-
-.controller('MainCtrl', function($scope, $state) {
-    console.log('MainCtrl');
-
-    $scope.toIntro = function() {
-        $state.go('intro');
-    }
 })
 
 

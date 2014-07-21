@@ -1,4 +1,4 @@
-<ion-view title="Games">
+<ion-view title="{{title}}">
 
     <ion-content class="has-header">
 
@@ -25,7 +25,7 @@
 
         <div class="list">
 
-            <a ng-repeat="game in games" class="item item-thumbnail-left" href="#/board/categories/{{game.id}}">
+            <a ng-repeat="game in games" class="item item-thumbnail-left" href="#/board/categories/{{game}}">
 
                 <img class="video genre-image-load" ng-src="{{game.imageUrl}}" lazyload>
 
@@ -48,7 +48,7 @@
     </ion-content>
 
     <div class="bar bar-footer bar-balanced">
-        <div class="title" id="numberNode">{{games.length}} Games</div>
+        <div class="title">Advertising...</div>
     </div>
 
 </ion-view>
