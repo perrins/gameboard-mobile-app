@@ -25,13 +25,15 @@
 
         <div class="list">
 
-            <a ng-repeat="game in games" class="item item-thumbnail-left" href="#/board/categories/{{game}}">
+            <a ng-repeat="game in games" class="item item-thumbnail-left item-icon-right" href="#/board/categories/{{gid}}/{{game.gmid}}">
 
                 <img class="video genre-image-load" ng-src="{{game.imageUrl}}" lazyload>
 
                 <h2>{{game.title}}</h2>
                 <p>{{game.subtitle}}</p>
                 <p>{{game.note}}</p>
+
+                <i class="icon ion-chevron-right icon-accessory"></i>
 
                 <span class="badge badge-calm">{{game.count}}</span>
             </a>
@@ -44,7 +46,6 @@
             </div>
         </div>
 
-        </div>
     </ion-content>
 
     <div class="bar bar-footer bar-balanced">

@@ -29,6 +29,7 @@ angular.module('gameboard.controllers', [])
         });
 
         // If we dont have a user then lets signon
+        // TODO : REMOVE AFTER DEBUGGING
         $state.go('signin');
 
     }
@@ -76,9 +77,6 @@ angular.module('gameboard.controllers', [])
 
                         $rootScope.user = user;
 
-                        console.log('Firstname: ', user.firstname);
-                        console.log('Lastname: ', user.lastname);
-
                         // Havigate to the Board View
                         $state.go('intro');
 
@@ -124,6 +122,7 @@ angular.module('gameboard.controllers', [])
 
         // Havigate to the Board View
         $state.go('board.genres');
+        //$state.go('board.board',{bid:1001});
 
     };
 
@@ -136,6 +135,7 @@ angular.module('gameboard.controllers', [])
         });
 
         $state.go('board.genres');
+        //$state.go('board.board',{bid:1001});
     }
 
     $scope.next = function() {
@@ -179,9 +179,9 @@ angular.module('gameboard.controllers', [])
                     var cc = IBMCloudCode.initializeService();
 
                     // Make it handle Local serving
-                    if (window.location.origin.indexOf('local') > 0) {
-                        // Set the Origin to Local 
-                        cc.setBaseUrl(window.location.origin);
+                    if (_.has(config,"local")) {
+                        // Set the Origin to Local Server for testing
+                        cc.setBaseUrl(config.local);
                     }
 
                     // Let the user no they have logged in and can do some stuff if they require

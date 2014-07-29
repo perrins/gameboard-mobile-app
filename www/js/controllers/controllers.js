@@ -29,6 +29,7 @@ angular.module('gameboard.controllers', [])
         });
 
         // If we dont have a user then lets signon
+        // TODO : REMOVE AFTER DEBUGGING
         $state.go('signin');
 
     }
@@ -76,9 +77,6 @@ angular.module('gameboard.controllers', [])
 
                         $rootScope.user = user;
 
-                        console.log('Firstname: ', user.firstname);
-                        console.log('Lastname: ', user.lastname);
-
                         // Havigate to the Board View
                         $state.go('intro');
 
@@ -101,10 +99,19 @@ angular.module('gameboard.controllers', [])
 })
 
 // A simple controller that shows a tapped item's data
-.controller('AboutCtrl', function($rootScope, $scope) {
+.controller('AboutCtrl', function($rootScope, $scope,Settings) {
 
     $scope.name = "Screaming Foulup";
-    $scope.version = "0.1.0";
+    $scope.version = "0.0.1";
+
+    /*
+    $scope.introChange = function(change){
+        Settings.set('LOADSCREEN',change);
+    }
+    */
+
+    // Check
+    $scope.intro = Settings.get('LOADSCREEN');
 
 })
 
@@ -123,8 +130,8 @@ angular.module('gameboard.controllers', [])
         Settings.set('LOADSCREEN', false);
 
         // Havigate to the Board View
-//        $state.go('board.genres');
-        $state.go('board.youtube');
+        //$state.go('board.genres');
+        $state.go('board.board',{bid:1001});
 
     };
 
@@ -137,7 +144,7 @@ angular.module('gameboard.controllers', [])
         });
 
         //$state.go('board.genres');
-        $state.go('board.youtube');
+        $state.go('board.board',{bid:1001});
     }
 
     $scope.next = function() {

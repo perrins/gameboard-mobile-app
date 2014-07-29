@@ -50,6 +50,14 @@ module.exports = function(grunt) {
                     src: "vendor/angular-touch/angular-touch.min.js",
                     dest: "www/lib/angular/angular-touch.min.js"
                 },{
+                    src: "vendor/angular-wizard/dist/angular-wizard.min.js",
+                    dest: "www/lib/angular/angular-wizard.min.js"
+                },
+                {
+                    src: "vendor/angular-wizard/dist/angular-wizard.min.css",
+                    dest: "www/lib/angular/angular-wizard.min.css"
+                },
+                {
                     src: "vendor/oauth-js/dist/oauth.js",
                     dest: "www/lib/oauth.js"
                 }]

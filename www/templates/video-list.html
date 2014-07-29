@@ -1,7 +1,7 @@
 
     <div class="list">
 
-        <a ng-repeat="video in videos" class="item item-thumbnail-left item-icon-right" href="#/board/youtube/video/{{video}}">
+        <a ng-repeat="video in videos" class="item item-thumbnail-left item-icon-right" href="#/board/ytdetail/{{video.id}}">
 
             <img class="video" ng-src="{{video.snippet.thumbnails.default.url}}" lazyload>
 

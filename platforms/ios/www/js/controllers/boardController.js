@@ -6,8 +6,6 @@ angular.module('gameboard.board.controllers', [])
     // Need to Check if we have got some already
     GenresService.all().then(function(genres) {
 
-        debugger;
-
         // Paint 
         $scope.genres = genres;
 
@@ -19,49 +17,68 @@ angular.module('gameboard.board.controllers', [])
 
     });
 
-    $scope.selected = function(genre) {
-        debugger;
-    }
-
 })
 
 // A simple controller that shows a tapped item's data
-.controller('GamesCtrl', function($scope, $stateParams, GamesService) {
+.controller('GamesCtrl', function($scope, $stateParams, $ionicPopup, GenresService, GamesService) {
 
-    debugger;
+    // Lets check we have a 
+    var genid = $stateParams.genid;
 
-    var gid = $stateParams.genre.attributes.gid;
-    $scope.title = $stateParams.genre.attributes.title;
+    // Access the Genres and get the Title and other information we need
+    var genre = GenresService.getGenre(genid);
+
+    // Display The Title
+    $scope.title = genre.get('title');
 
     // Need to Check if we have got some already
-    GamesService.all(gid).then(function(data) {
+    GamesService.all(genid).then(function(data) {
 
-        // Layout the Games and the Banners
-        $scope.games = data.get('games');
-        $scope.banners = data.get('banners');
-        $scope.gid = data.get('gid');
-        $scope.gmid = data.get('gmid');
+        // Check we have some Games for this Genre
+        if (_.isNull(data)) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Games',
+                template: 'It seems we dont have a Games list defined for this Genre'
+            });
+        } else {
 
-        // Let Angular know we have some data because of the Async nature of IBMBaaS
-        // This is required to make sure the information is uptodate
-        if (!$scope.$$phase) {
-            $scope.$apply();
-        }
+            // Layout the Games and the Banners
+            $scope.games = data.get('games');
+            $scope.banners = data.get('banners');
+            $scope.gid = data.get('gid');
+            $scope.genid = data.get('genid');
+
+            // Let Angular know we have some data because of the Async nature of IBMBaaS
+            // This is required to make sure the information is uptodate
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+       } 
 
     });
 
 })
 
 // A simple controller that shows a tapped item's data
-.controller('CategoriesCtrl', function($scope, $stateParams, CategoriesService) {
+.controller('CategoriesCtrl', function($scope, $stateParams, CategoriesService,GamesService) {
+
+    // Lets check we have a 
+    var gmid = $stateParams.gmid;
+    var genid = $stateParams.genid;
+
+    // Access the Genres and get the Title and other information we need
+    var game = GamesService.getGame(genid,gmid);
+
+    // Display The Title
+    $scope.title = game.title;
 
     // Need to Check if we have got some already
-    CategoriesService.all($stateParams.cid).then(function(data) {
+    CategoriesService.all($stateParams.gmid).then(function(data) {
 
         // Paint 
-        $scope.banner = data.banner;
-        $scope.categories = data.categories;
-        $scope.cid = data.cid;
+        $scope.banner = data.get('banner');
+        $scope.categories = data.get('categories');
+        $scope.gmid = data.get('gmid');
 
         // This is required to make sure the information is uptodate
         if (!$scope.$$phase) {
@@ -70,17 +87,10 @@ angular.module('gameboard.board.controllers', [])
 
     });
 
-    $scope.selected = function(game) {
-
-        console.log(game);
-
-    }
-
 })
 
-
 // A simple controller that shows a tapped item's data
-.controller('BoardCtrl', function($scope, $stateParams,$ionicModal, $ionicLoading,BoardService,YouTubeService) {
+.controller('BoardCtrl', function($rootScope,$scope, $state, $stateParams, $ionicModal, $ionicLoading, BoardService, YouTubeService) {
 
     // Load the Items
     $scope.loadItems = function() {
@@ -104,7 +114,19 @@ angular.module('gameboard.board.controllers', [])
         // We need to clear the list before loading in some new values
 
         // "List is " is a service returning data from the 
-        BoardService.all($stateParams.bid).then(function(board) {
+        BoardService.all($stateParams.bid).then(function(videos) {
+
+            // Need to add the other information to the Board,
+            // That information has come in from the Request
+            // Temp until we get add working
+            var board = { "bid":$stateParams.bid,
+                    "title"         : "Golden Gun",
+                    "subtitle"      : "Best golden gun moments",
+                    "description"   :"Imagine all the best golden gun moments in one organised leader board and watch the best of the best",
+                    "number"        : 1234,
+                    "prizes"        : "£3,500",
+                    "date"          : "01/05/2014",
+                    "videos" : videos };
 
             // Update the model with a list of Items
             $scope.board = board;
@@ -115,6 +137,7 @@ angular.module('gameboard.board.controllers', [])
                 $scope.$apply();
             }
 
+            // Hide the loading icons
             $ionicLoading.hide();
 
             // Trigger refresh complete on the pull to refresh action
@@ -140,8 +163,7 @@ angular.module('gameboard.board.controllers', [])
 
     // Create our modal
     $ionicModal.fromTemplateUrl('templates/add-video.html', function(modal) {
-        $scope.itemModal = modal;
-
+        $scope.videoModal = modal;
     }, {
         scope: $scope,
         animation: 'slide-in-up',
@@ -150,17 +172,14 @@ angular.module('gameboard.board.controllers', [])
 
     $scope.addVideo = function(video) {
 
+
         // Add the Item and then hide the modal view
         BoardService.add(video).then(
-            function(payload){
-
+            function(payload) {
                 console.log("Video Added");
-
-            }, 
+            },
             function(err) {
-
                 console.log(err);
-
             }
         );
 
@@ -171,71 +190,140 @@ angular.module('gameboard.board.controllers', [])
 
     $scope.newVideo = function() {
 
+        // Associate the User
+        $scope.user = $rootScope.user;
+
+        // Lets load the Videos for the Youtube Channel
         $ionicLoading.show({
-            template: 'Getting Videos...'
+            template: 'Accessing Youtube ...'
         });
 
-        // Load the Videos
-        YouTubeService.all().then(function(videos){
+        // Need to Check if we have got some already
+        YouTubeService.getYourVideos().then(function(data) {
 
-            $scope.videos = videos;
+            // Paint the List of Youtube Videos
+            $scope.videos = data.items;
 
+            // This is required to make sure the information is uptodate
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
 
             $ionicLoading.hide();
 
-            $scope.itemModal.show();
-
+        },function(err){
+            console.log(err)
+            $ionicLoading.hide();
         });
 
+        // Reverse the Paint Bug
+        $scope.videoModal.show();
+
     };
+
+    $scope.$on('videoModal.show', function() {
+
+        // Lets open it up in a new State
+        $state.go('board.youtube', 1);
+
+    });
 
     $scope.closeVideo = function() {
         // Reverse the Paint Bug
-        $scope.itemModal.hide();
+        $scope.videoModal.hide();
 
-    }
-    $scope.clearSearch = function() {
-        $scope.item.name = '';
     };
 
-    $scope.itemButtons = [{
-        text: 'Share',
-        type: 'button-assertive',
-        onTap: function(item) {
-            $scope.onShare(item);
-        }
-    }];
+    $scope.selectVideo = function(video){
+
+        debugger;
+
+
+
+
+    }
+
 
 })
 // A simple controller that shows retrieves a list of You Tube Videos
-.controller('AddVideoCtrl', function($scope, $stateParams, YoutubeService) {
+.controller('SelectVideoCtrl', function($scope, $stateParams, YouTubeService, $ionicLoading) {
+
+    // Lets load the Videos for the Youtube Channel
+    $ionicLoading.show({
+        template: 'Loading ...'
+    });
+
+    $scope.videos = [{
+        title: "Test One"
+    }, {
+        title: "Test Two"
+    }];
+
+    if (!$scope.$$phase) {
+        $scope.$apply();
+    }
+
+    /*
 
     // Need to Check if we have got some already
-    YouTubeService.all().then(function(data) {
+    YouTubeService.getYourVideos().then(function(data) {
 
-        // Paint 
-        $scope.videos = data;
+        // Paint the List of Youtube Videos
+        $scope.videos = data.items;
 
         // This is required to make sure the information is uptodate
         if (!$scope.$$phase) {
             $scope.$apply();
         }
 
+        $ionicLoading.hide();
+    },function(err){
+        console.log(err)
+        $ionicLoading.hide();
+    });
+
+*/
+
+})
+
+// A simple controller that shows retrieves a list of You Tube Videos
+.controller('YTVideoDetailCtrl', function($scope, $stateParams, YouTubeService, $ionicLoading) {
+
+    // Lets load the Videos for the Youtube Channel
+    $ionicLoading.show({
+        template: 'Loading ...'
+    });
+
+    // Need to Check if we have got some already
+    YouTubeService.getVideo($stateParams.id).then(function(data) {
+
+        // Paint the List of Youtube Videos
+        $scope.video = data;
+
+        // This is required to make sure the information is uptodate
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+
+        $ionicLoading.hide();
+    }, function(err) {
+        console.log(err)
+        $ionicLoading.hide();
     });
 
 })
 
-
 // A simple controller that shows retrieves a list of You Tube Videos
-.controller('VideoCtrl', function($scope, $stateParams, VideoService) {
+.controller('VideoCtrl', function($scope, $stateParams, VideoService,$ionicLoading) {
 
     // Retrieve the Video content
+    // Lets load the Videos for the Youtube Channel
+    $ionicLoading.show({
+        template: 'Loading ...'
+    });
 
     // Need to Check if we have got some already
-    VideoService.get($stateParams.id).then(function(video) {
+    VideoService.get($stateParams.uuid).then(function(video) {
 
         // Paint 
         $scope.video = video;
@@ -244,12 +332,20 @@ angular.module('gameboard.board.controllers', [])
         if (!$scope.$$phase) {
             $scope.$apply();
         }
+        $ionicLoading.hide();
 
+    }, function(err) {
+        console.log(err)
+        $ionicLoading.hide();
     });
 
+    // Add Sharing
+
+    // Social information 
+
+    // Likes helps etc etc 
+
+    // Comments
+
+
 });
-
-
-
-
-

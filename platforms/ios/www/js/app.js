@@ -25,16 +25,17 @@ angular.module('gameboard', [
 })
 
 .constant('ACCESS', {
-    GENRES: "gb_genres",                //IBM Data
-    GAMES: "gb_games",                  //IBM Data
-    GCATEGORIES: "gb_categories",        //IBM Data
-    BOARD: "data/Board.json",           // IBM CloudCode with Cloudant
-    YOUTUBE: "data/Youtube.json",       // IBM CloudCode with YouTube API
-    MEMBER: "data/Member.json",         // IBM Data
+    GENRES: "gb_genres", //IBM Data
+    GAMES: "gb_games", //IBM Data
+    CATEGORIES: "gb_categories", //IBM Data
+    BOARD: "/videos/board", // IBM CloudCode with Cloudant
+    YOUR_VIDEOS: "/youtube/videos", // IBM CloudCode with YouTube API
+    YT_VIDEO_DETAIL: "/youtube/video", // IBM CloudCode with YouTube API
+    MEMBER: "data/Member.json", // IBM Data
     FAVOURITES: "data/Favourites.json", // IBM Data
-    MEMBERS: "data/Members.json",       // IBM Data
-    SEARCH: "data/Search.json",         // IBM CloudCode with Cloudant
-    VIDEO: "data/Video.json"            // IBM CloudCode with Cloudant
+    MEMBERS: "data/Members.json", // IBM Data
+    SEARCH: "data/Search.json", // IBM CloudCode with Cloudant
+    VIDEO: "/videos" // IBM CloudCode with Cloudant
 })
 
 // Configure the Angular Rules
@@ -80,36 +81,36 @@ angular.module('gameboard', [
             }
         }
     })
-    .state('board.games', {
-        url: "/games/:gid",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/games.html",
-                controller: 'GamesCtrl'
+        .state('board.games', {
+            url: "/games/:genid",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/games.html",
+                    controller: 'GamesCtrl'
+                }
             }
-        }
-    })
-    .state('board.categories', {
-        url: "/categories/:cid",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/categories.html",
-                controller: 'CategoriesCtrl'
+        })
+        .state('board.categories', {
+            url: "/categories/:genid/:gmid",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/categories.html",
+                    controller: 'CategoriesCtrl'
+                }
             }
-        }
-    })
-    .state('board.board', {
-        url: "/board/:bid",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/board.html",
-                controller: 'BoardCtrl'
+        })
+        .state('board.board', {
+            url: "/board/:bid",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/board.html",
+                    controller: 'BoardCtrl'
+                }
             }
-        }
-    })
+        })
 
     .state('board.video', {
-        url: "/video/:cid",
+        url: "/video/:uuid",
         views: {
             'menuContent': {
                 templateUrl: "templates/video-detail.html",
@@ -160,37 +161,45 @@ angular.module('gameboard', [
         views: {
             'videoContent': {
                 templateUrl: "templates/video-list.html",
-                controller: "AddVideoCtrl"
+                controller: "SelectVideoCtrl"
             }
         }
     })
-
-    .state('board.search', {
-        url: "/search",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/search.html",
-                controller: "SearchCtrl"
+        .state('board.ytdetail', {
+            url: "/ytdetail/:id",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/yt-video-detail.html",
+                    controller: "YTVideoDetailCtrl"
+                }
             }
-        }
-    })
-    .state('board.settings', {
-        url: "/settings",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/settings.html",
-                controller: "SettingsCtrl"
+        })
+        .state('board.search', {
+            url: "/search",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/search.html",
+                    controller: "SearchCtrl"
+                }
             }
-        }
-    })
-    .state('board.about', {
-        url: '/about',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/about.html'
+        })
+        .state('board.settings', {
+            url: "/settings",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/settings.html",
+                    controller: "SettingsCtrl"
+                }
             }
-        }
-    });
+        })
+        .state('board.about', {
+            url: '/about',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/about.html'
+                }
+            }
+        });
 
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/app/playlists')

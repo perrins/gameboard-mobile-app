@@ -10,7 +10,7 @@
 
             <div class="genreItem ImageButton" ng-repeat="genre in genres" masonary>
 
-                <a href="#/board/games/{{genre}}">
+                <a href="#/board/games/{{genre.get('gid')}}">
 
                     <div class="spinner">
                         <img  class="genre-image genre-image-load" alt="{{genre.get('title')}}"  ng-src="{{genre.get('imageUrl')}}" lazyload>

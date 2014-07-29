@@ -3,6 +3,7 @@ angular.module('gameboard.settings', [])
 .constant('DEFAULT_SETTINGS', {
     'UNITS': 'dollars',
     'LOADSCREEN' : true,
+    'INTRO' : true,
     'AUTOREFRESH' : false
 })
 

@@ -7,7 +7,7 @@ angular.module('gameboard.board.services', [])
 
      // Use an internal Cache for storing the List and map the operations to manage that from
     // Mobile Cloud SDK Calls
-    var cache = $cacheFactory('');
+    var cache = $cacheFactory('Genres');
 
     return {
 
@@ -16,7 +16,6 @@ angular.module('gameboard.board.services', [])
 
             // Create a Defer as this is an async operation
             defer = $q.defer();
-
             var items = cache.get(ACCESS.GENRES);
 
             if(!_.isUndefined(items)) {
@@ -48,6 +47,21 @@ angular.module('gameboard.board.services', [])
             // Get the Objects for a particular Type
             return defer.promise;
 
+        },
+        getGenre: function(gid){
+
+            // Resolve the Cache
+            var genres = cache.get(ACCESS.GENRES);
+
+            var _genre = null;
+            genres.forEach(function(genre){
+                if(genre.get('gid') == gid) {
+                    _genre = genre;
+                }
+            })
+
+            return _genre;
+
         }
 
     }
@@ -61,59 +75,82 @@ angular.module('gameboard.board.services', [])
 
      // Use an internal Cache for storing the List and map the operations to manage that from
     // Mobile Cloud SDK Calls
-    var cache = $cacheFactory('');
+    var cache = $cacheFactory('Games');
 
     return {
 
         // Return all the Objects for a Given Class
-        allCloud: function(cid) {
+        all: function(genid) {
 
-            // get the Data Service
-            var data = IBMData.getService();
+            var _genid = null
+            try{
+                var _genid = parseInt(genid);
+            } catch(err) {
+                console.log("GID supplied is not valid",err);
+            
+            }
+            // Check the GID
+            if( _.isNull(_genid)) {
+                console.log("GID could not be used");
+            }
 
             // Create a Defer as this is an async operation
             defer = $q.defer();
+            var items = cache.get(genid+"_"+ACCESS.GAMES);
 
-            // Clear the Cache with a new set
-            cache.remove(ACCESS.GAMES+cid);
+            if(!_.isUndefined(items)) {
+                defer.resolve(items);
+            } else {
 
-            var query = data.Query.ofType(ACCESS.GAMES);
-            query.find({cid:cid}).done(function(list) {
+                // get the Data Service
+                var data = IBMData.getService();
 
-                // Place the Items in the Cache
-                cache.put(ACCESS.GAMES+cid, list);
+                // Clear the Cache with a new set
+                cache.remove(genid+"_"+ACCESS.GAMES);
 
-                // return the Cache
-                defer.resolve(cache.get(URL.GAMES+cid));
+                // Get the Games for a Specific Genre
+                var query = data.Query.ofType(ACCESS.GAMES);
+                query.find({genid:_genid}).done(function(list) {
 
-            },function(err){
-                console.log(err);
-                defer.reject(err);
-            });
+                    // Check if this is a list and array
+                    if(_.isArray(list) && list.length >0) {
+
+                        // Place the Items in the Cache
+                        cache.put(genid+"_"+ACCESS.GAMES, list[0]);
+
+                        // return the Cache
+                        defer.resolve(cache.get(genid+"_"+ACCESS.GAMES));
+
+                    } else {
+
+                        // Send empty array back, its not an error to get empty data
+                        // return the Cache
+                        defer.resolve(null);
+
+                    }
+
+                },function(err){
+                    console.log(err);
+                    defer.reject(err);
+                });
+            }    
 
             // Get the Objects for a particular Type
             return defer.promise;
 
         },
+        getGame: function(genid,gmid){
 
-        // Return the Cached List
-        allCache: function(cid) {
-
-            // Create a Defer as this is an async operation
-            defer = $q.defer();
-
-            var items = cache.get(ACCESS.GAME+cid);
-
-            // Check we have some data            
-            if (_.isNull(items)) {
-                items = this.allCloud(cid);
-            }
-            // Return the Items
-            defer.resolve(items);
-
-            // Return the Cached Items
-            return defer.promise;
-
+            // Resolve the Cache
+            var item = cache.get(genid+"_"+ACCESS.GAMES);
+            var _game = null;
+            var games = item.get('games')
+            games.forEach(function(game){
+                if(game.gmid == gmid) {
+                    _game = game;
+                }
+            })
+            return _game;
         }
     }
 })
@@ -125,58 +162,76 @@ angular.module('gameboard.board.services', [])
 
     // Use an internal Cache for storing the List and map the operations to manage that from
     // Mobile Cloud SDK Calls
-    var cache = $cacheFactory('');
+    var cache = $cacheFactory('Categories');
 
     return {
 
-        // Return all the Objects for a Given Class
-        allCloud: function(cid) {
+           // Return all the Objects for a Given Class
+        all: function(gmid) {
 
-            // get the Data Service
-            var data = IBMData.getService();
+            var _gmid = null
+            try{
+                var _gmid = parseInt(gmid);
+            } catch(err) {
+                console.log("GMID supplied is not valid",err);
+            
+            }
+            // Check the GID
+            if( _.isNull(_gmid)) {
+                console.log("GMID could not be used");
+            }
 
             // Create a Defer as this is an async operation
             defer = $q.defer();
+            var items = cache.get(gmid+"_"+ACCESS.CATEGORIES);
 
-            // Clear the Cache with a new set
-            cache.remove(ACCESS.CATEGORIES+cid);
+            if(!_.isUndefined(items)) {
+                defer.resolve(items);
+            } else {
 
-            var query = data.Query.ofType(ACCESS.CATEGORIES);
-            query.find({cid:cid}).done(function(list) {
+                // get the Data Service
+                var data = IBMData.getService();
 
-                // Place the Items in the Cache
-                cache.put(ACCESS.CATEGORIES+cid, list);
+                // Clear the Cache with a new set
+                cache.remove(gmid+"_"+ACCESS.CATEGORIES);
 
-                // return the Cache
-                defer.resolve(cache.get(URL.CATEGORIES+cid));
+                // Get the Genres
+                var query = data.Query.ofType(ACCESS.CATEGORIES);
+                query.find({"gmid":_gmid}).done(function(list) {
 
-            },function(err){
-                console.log(err);
-                defer.reject(err);
-            });
+                    // Check if this is a list and array
+                    if(_.isArray(list) && list.length >0) {
+                        // Place the Items in the Cache
+                        cache.put(gmid+"_"+ACCESS.CATEGORIES, list[0]);
+                        // return the Cache
+                        defer.resolve(list[0]);
+
+                     } else {
+                        defer.resolve(null);
+                     }   
+
+                },function(err){
+                    console.log(err);
+                    defer.reject(err);
+                });
+            }    
 
             // Get the Objects for a particular Type
             return defer.promise;
 
         },
+        getCategory: function(cid){
 
-        // Return the Cached List
-        allCache: function(cid) {
+            // Resolve the Cache
+            var cats = cache.get(ACCESS.CATEGORIES);
+            var _cat = null;
+            cats.forEach(function(cat){
+                if(cat.get('cid') == cid) {
+                    _cat = cat;
+                }
+            })
 
-            // Create a Defer as this is an async operation
-            defer = $q.defer();
-
-            var items = cache.get(ACCESS.CATEGORIES+cid);
-
-            // Check we have some data            
-            if (_.isNull(items)) {
-                items = this.allCloud(cid);
-            }
-            // Return the Items
-            defer.resolve(items);
-
-            // Return the Cached Items
-            return defer.promise;
+            return _cat;
 
         }
     }
@@ -186,41 +241,38 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('BoardService', function($q, $cacheFactory,$stateParams, URL) {
+.factory('BoardService', function($q, $cacheFactory,$stateParams, ACCESS) {
 
     return {
 
         all: function(bid) {
 
-            console.log("BID:",bid);
+            // USE THE CloudCode to Call the Board Services
+            // This will integrate with Cloudant to retrieve a list of videos for a Board
+            // Need to manage the Paging for this and sort it by ranking
+            // Lets build a 
+            var uri = new IBMUriBuilder().append(ACCESS.BOARD).append(bid).toString();
+            var cc = IBMCloudCode.getService();
+
+            // Get the Videos for my Board
+            cc.get(uri,{"handleAs":"json"}).then(function(videos){
+
+                // Lets resolve these
+                var _videos = new Array();
+                // Loop through the videos
+                videos.forEach(function(video){
+                    _videos.push(video.fields);
+                });
+                def.resolve(_videos);
+
+            }).catch(function(err){
+                console.log(err);
+                def.reject(err);
+            })
 
             // Create a deffered
             var def = $q.defer();
 
-            // Lets Get a list of Genres
-            $.ajax({
-                type: "GET",
-                url: URL.BOARD,
-                dataType: "json",
-                contentType: "application/json",
-                success: function(result,status) {
-
-                    // Check if we were able to store it sucessfully
-                    if (status === "success") {
-
-                      // return the Cache
-                      def.resolve(result);
-
-                    } else {
-                        def.reject([]);
-                    }
-
-                },
-                error: function(err) {
-                    def.reject(err);
-                }
-            });
-            
             // Get the Objects for a particular Type
             return def.promise;
 
@@ -245,6 +297,7 @@ angular.module('gameboard.board.services', [])
             var cc = IBMCloudCode.getService();
 
             cc.get(ACCESS.YOUR_VIDEOS,{"handleAs":"json"}).then(function(videos){
+
                 def.resolve(videos);
             }).catch(function(err){
                 console.log(err);
@@ -254,6 +307,30 @@ angular.module('gameboard.board.services', [])
             // Get the Objects for a particular Type
             return def.promise;
 
+        },
+        getVideo: function(id) {
+
+            // Create a deffered
+            var def = $q.defer();
+
+            // Get Cloud Code
+            var cc = IBMCloudCode.getService();
+
+            // Build out a new URI builder
+            var _uri = new IBMUriBuilder().slash().append(ACCESS.YT_VIDEO_DETAIL).append(id).toString();
+
+            // Get the Details of the Video
+            cc.get(_uri,{"handleAs":"json"}).then(function(video){
+                def.resolve(video);
+            }).catch(function(err){
+                console.log(err);
+                def.reject(err);
+            })
+
+            // Get the Objects for a particular Type
+            return def.promise;
+
+
         }
     }
 
@@ -262,16 +339,39 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('VideoService', function($rootScope, $q, $cacheFactory) {
-
-    // Use an internal Cache for storing the List and map the operations to manage that from
-    // Mobile Cloud SDK Calls
-    var cache = $cacheFactory('');
-    var options = {
-        handleAs: 'JSON'
-    };
+.factory('VideoService', function($rootScope, $q, $cacheFactory,ACCESS) {
 
     return {
+
+        get : function(uuid) {
+
+            // Create a deffered
+            var def = $q.defer();
+
+            // Get Cloud Code
+            var cc = IBMCloudCode.getService();
+
+            // Get the Video and its Detail
+            var uri = new IBMUriBuilder().append(ACCESS.VIDEO).append(uuid).toString();
+            cc.get(uri,{"handleAs":"json"}).then(function(video){
+
+                // Return the Video 
+                var _video = null;
+                if(video.length > 0 && _.has(video[0],"doc")) {
+                    _video = video[0].doc;
+                }
+                // Resolve Promise
+                def.resolve(_video);
+
+            }).catch(function(err){
+                console.log(err);
+                def.reject(err);
+            })
+
+            // Get the Objects for a particular Type
+            return def.promise;
+
+        },
 
         // Add a Video to Game Board
         add: function(video) {

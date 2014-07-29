@@ -2,23 +2,94 @@
 
     <!-- Modal header bar -->
     <header class="bar bar-header bar-secondary">
+        <button class="button button-clear button-assertive" ng-click="wizardBack()" ng-show="back">Back</button>
+
         <h1 class="title">Add Video</h1>
-        <button class="button button-clear button-positive" ng-click="closeVideo()">Cancel</button>
+        <button class="button button-clear button-assertive" ng-click="closeVideo()">Cancel</button>
     </header>
 
     <!-- Modal content area -->
     <ion-content class="has-header">
 
-        <ion-nav-bar class="bar bar-header bar-dark nav-title-slide-ios7">
-            <ion-nav-back-button class="button-clear">
-                <i class="icon ion-chevron-left"></i>Back
-            </ion-nav-back-button>
-        </ion-nav-bar>
         <ion-nav-view name="videoContent" animation="slide-left-right">
 
+                <wizard on-finish="addVideo()" current-step="currentStep" hide-indicators="true"> 
+                    <wz-step title="VideoList">
+                        <div class="item item-divider">
+                            Member
+                        </div>
 
+                        <div class="item item-avatar item-icon-right">
+                            <img  class="genre-image genre-image-load" alt="{{user.avatar}}"  ng-src="{{user.avatar}}" lazyload>
+                            <h2>{{user.firstname}}</h2>                    
+                            <h2>{{user.lastname}}</h2>
+                            <p>{{user.gametag}}</p>
+                        
+                        </div>
 
+                         <div class="item item-divider">
+                            Your Youtube Videos
+                         </div>
+                         <div class="list" ng-show="videos">
 
+                            <a ng-repeat="video in videos" class="item item-thumbnail-left item-icon-right" item="video" ng-click="selectVideo(video)">
+
+                                <img class="video" ng-src="{{video.snippet.thumbnails.default.url}}" lazyload>
+
+                                <h2>{{video.snippet.title}}</h2>
+                                <p>{{video.snippet.description}}</p>
+
+                                <span class="badge badge-calm">{{game.count}}</span>
+
+                                 <i class="icon ion-chevron-right icon-accessory"></i>
+                            </a>
+
+                        </div>
+                    </wz-step>
+                    <wz-step title="VideoDetail">
+
+                        <div class="list card">
+
+                            <div class="item item-thumbnail-left item-avatar">
+
+                                <img ng-src="{{video.avatar}}">
+
+                                <h1>{{video.gametag}}</h1>
+                                <h2>{{video.name}}&nbsp{{video.surname}}</h2>
+                                <p>{{video.videoSince}}</p>
+                                <div class="bigPrize">{{video.prizes}}</div>
+                                <div class="bigViews">{{video.views}}</div>
+
+                            </div>
+
+                            <div class="item item-body">
+                                <h1>{{video.title}}</h1>
+                                <img ng-src="{{video.ytimage}}">
+                                <p>{{video.description}}</p>
+                            </div>
+
+                        </div>
+
+                        <button class="button button-block button-energized" bg-click="videoInformation()">
+                            Video Information
+                        </button>
+
+                    </wz-step>
+                    <wz-step title="More steps">
+
+                        <button class="button button-block button-positive" wz-next>
+                          Add Video
+                        </button>
+
+                    </wz-step>
+                </wizard>
+
+                <div class="card hidden" ng-show="!videos" >
+                    <div class="item item-text-wrap">
+                        You do not have any videos registered in Youtube, please upload a video to Youtube and try and add it again
+                    </div>
+                </div>
+            <div>    
         </ion-nav-view>
 
     </ion-content>
