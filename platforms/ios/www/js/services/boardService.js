@@ -297,7 +297,6 @@ angular.module('gameboard.board.services', [])
             var cc = IBMCloudCode.getService();
 
             cc.get(ACCESS.YOUR_VIDEOS,{"handleAs":"json"}).then(function(videos){
-
                 def.resolve(videos);
             }).catch(function(err){
                 console.log(err);
@@ -321,7 +320,11 @@ angular.module('gameboard.board.services', [])
 
             // Get the Details of the Video
             cc.get(_uri,{"handleAs":"json"}).then(function(video){
-                def.resolve(video);
+                var _video = null;
+                if(video.items.length>0) {
+                    _video = video.items[0];
+                }
+                def.resolve(_video);
             }).catch(function(err){
                 console.log(err);
                 def.reject(err);

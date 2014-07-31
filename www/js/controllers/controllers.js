@@ -130,8 +130,8 @@ angular.module('gameboard.controllers', [])
         Settings.set('LOADSCREEN', false);
 
         // Havigate to the Board View
-        //$state.go('board.genres');
-        $state.go('board.board',{bid:1001});
+        $state.go('board.genres');
+        //$state.go('board.board',{bid:1001});
 
     };
 
@@ -143,8 +143,8 @@ angular.module('gameboard.controllers', [])
             disableBack: true
         });
 
-        //$state.go('board.genres');
-        $state.go('board.board',{bid:1001});
+        $state.go('board.genres');
+        //$state.go('board.board',{bid:1001});
     }
 
     $scope.next = function() {

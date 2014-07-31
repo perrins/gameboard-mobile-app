@@ -99,10 +99,19 @@ angular.module('gameboard.controllers', [])
 })
 
 // A simple controller that shows a tapped item's data
-.controller('AboutCtrl', function($rootScope, $scope) {
+.controller('AboutCtrl', function($rootScope, $scope,Settings) {
 
     $scope.name = "Screaming Foulup";
-    $scope.version = "0.1.0";
+    $scope.version = "0.0.1";
+
+    /*
+    $scope.introChange = function(change){
+        Settings.set('LOADSCREEN',change);
+    }
+    */
+
+    // Check
+    $scope.intro = Settings.get('LOADSCREEN');
 
 })
 

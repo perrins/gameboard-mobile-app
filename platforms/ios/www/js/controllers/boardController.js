@@ -90,7 +90,7 @@ angular.module('gameboard.board.controllers', [])
 })
 
 // A simple controller that shows a tapped item's data
-.controller('BoardCtrl', function($rootScope,$scope, $state, $stateParams, $ionicModal, $ionicLoading, BoardService, YouTubeService) {
+.controller('BoardCtrl', function($rootScope,$scope, $state, $stateParams, $ionicModal, $ionicLoading, BoardService, YouTubeService,WizardHandler) {
 
     // Load the Items
     $scope.loadItems = function() {
@@ -171,8 +171,6 @@ angular.module('gameboard.board.controllers', [])
     });
 
     $scope.addVideo = function(video) {
-
-
         // Add the Item and then hide the modal view
         BoardService.add(video).then(
             function(payload) {
@@ -192,6 +190,12 @@ angular.module('gameboard.board.controllers', [])
 
         // Associate the User
         $scope.user = $rootScope.user;
+
+        // Hide Back button
+        $scope.back = false;
+
+        // Start The Wizard from the Beginning
+        WizardHandler.wizard().goTo(0);
 
         // Lets load the Videos for the Youtube Channel
         $ionicLoading.show({
@@ -221,68 +225,111 @@ angular.module('gameboard.board.controllers', [])
 
     };
 
-    $scope.$on('videoModal.show', function() {
-
-        // Lets open it up in a new State
-        $state.go('board.youtube', 1);
-
-    });
-
     $scope.closeVideo = function() {
         // Reverse the Paint Bug
         $scope.videoModal.hide();
-
     };
 
-    $scope.selectVideo = function(video){
+    $scope.wizardBack = function(){
 
         debugger;
 
-
-
-
-    }
-
-
-})
-// A simple controller that shows retrieves a list of You Tube Videos
-.controller('SelectVideoCtrl', function($scope, $stateParams, YouTubeService, $ionicLoading) {
-
-    // Lets load the Videos for the Youtube Channel
-    $ionicLoading.show({
-        template: 'Loading ...'
-    });
-
-    $scope.videos = [{
-        title: "Test One"
-    }, {
-        title: "Test Two"
-    }];
-
-    if (!$scope.$$phase) {
-        $scope.$apply();
-    }
-
-    /*
-
-    // Need to Check if we have got some already
-    YouTubeService.getYourVideos().then(function(data) {
-
-        // Paint the List of Youtube Videos
-        $scope.videos = data.items;
-
-        // This is required to make sure the information is uptodate
-        if (!$scope.$$phase) {
-            $scope.$apply();
+        if($scope.currentStep=="Videos") {
+            $scope.back =false;
         }
+        WizardHandler.wizard().previous();
+    };
 
-        $ionicLoading.hide();
-    },function(err){
-        console.log(err)
-        $ionicLoading.hide();
-    });
+    $scope.selectVideo = function(_video){
 
-*/
+        debugger;
+
+        $scope.video = null;
+
+        // Get the Video Details
+        $scope.back = true;
+
+        $ionicLoading.show({
+            template: 'Loading Video...'
+        });
+
+        // Lets get the Information we need
+        var _id = null;
+        if( _.has(_video,"snippet")) {
+            var _id = _video.snippet.resourceId.videoId
+        } else {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Youtube',
+                template: 'The video item does not seem to be valid'
+            });
+            return;            
+        }    
+
+        // Get the Video Details
+        YouTubeService.getVideo(_id).then(function(data) {
+
+            // Paint the List of Youtube Videos
+            $scope.video = data;
+
+            // This is required to make sure the information is uptodate
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
+            $ionicLoading.hide();
+
+        }, function(err) {
+            console.log(err)
+            $ionicLoading.hide();
+        });
+
+        // Initialize the Video Display
+        WizardHandler.wizard().next();
+
+    };
+
+    $scope.viewVideo = function(video) {
+
+       debugger;
+
+       /*
+       // Check we have something to display
+       if (video && _.isUndefined(StreamingMedia)) { 
+
+            var alertPopup = $ionicPopup.alert({
+                title: 'Youtube',
+                template: 'The video item does not seem to be valid'
+            });
+            return;
+       } */
+
+       var videoUrl = "http://www.youtube.com/embed/FUKiPNXW5f8";
+
+       // Play a video with callbacks
+       var options = {
+        successCallback: function() {
+          console.log("Video was closed without error.");
+        },
+        errorCallback: function(errMsg) {
+          console.log("Error! " + errMsg);
+        }
+       };
+       window.plugins.streamingMedia.playVideo(videoUrl, options);
+
+    }    
+
+    $scope.useVideo = function(video){
+
+        debugger;
+
+        // Initialize the Video Display
+        WizardHandler.wizard().next();
+
+    };
+
+    $scope.addVideo = function(){
+        consolelog("Add Video");
+    }
 
 })
 
@@ -294,22 +341,6 @@ angular.module('gameboard.board.controllers', [])
         template: 'Loading ...'
     });
 
-    // Need to Check if we have got some already
-    YouTubeService.getVideo($stateParams.id).then(function(data) {
-
-        // Paint the List of Youtube Videos
-        $scope.video = data;
-
-        // This is required to make sure the information is uptodate
-        if (!$scope.$$phase) {
-            $scope.$apply();
-        }
-
-        $ionicLoading.hide();
-    }, function(err) {
-        console.log(err)
-        $ionicLoading.hide();
-    });
 
 })
 
@@ -346,6 +377,5 @@ angular.module('gameboard.board.controllers', [])
     // Likes helps etc etc 
 
     // Comments
-
 
 });

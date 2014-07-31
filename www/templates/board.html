@@ -28,7 +28,7 @@
                 <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();" ng-show="board">
                 </ion-refresher>
 
-                <div class="item">
+                <div class="item" ng-show="board">
                     <h1>{{board.title}}</h1>
                     <h2>{{board.subtitle}}</h2>
                     <p>{{board.description}}</p>
@@ -41,7 +41,7 @@
                     {{board.title}}&nbspBoard
                 </div>
 
-                <ion-item can-swipe="true" ng-repeat="video in board.videos | orderBy:'rank'" class="item item-thumbnail-left" type="item-text-wrap" item="video" href="#/board/video/{{video.uuid}}">
+                <ion-item ng-show="board.videos" can-swipe="true" ng-repeat="video in board.videos | orderBy:'rank'" class="item item-thumbnail-left" type="item-text-wrap" item="video" href="#/board/video/{{video.uuid}}">
 
                     <div class="rank">
                         {{video.rank}}

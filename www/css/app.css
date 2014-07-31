@@ -1,4 +1,3 @@
-/* Your app's CSS, go crazy, make it your own */
 
 .ionic-logo {
     display: block;
@@ -10,9 +9,44 @@
     display: none
 }
 
-.spinner {
-    opacity: 0.7;
+
+
+.spinner:before {
+  border: 8px solid green;
+  border-radius: 30px 0 0 0;
+  -webkit-animation: 2s waiting 0s infinite;
+  transition: border-radius;
+    content: "...";
+    text-align: center;
+    line-height: 50px;
+    font-size: 60px;
+    color: #EEEEEE;
+    top: 40px;
+    left: 40px;
+    z-index: 1;
+    position: absolute;
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 1);
 }
+
+@-webkit-keyframes waiting {
+  0% {
+    border-radius: 40px 0 0 0;
+  }
+  25% {
+    border-radius: 0 40px 0 0;
+  }
+  50% {
+    border-radius: 0 0 40px 0;
+  }
+  75% {
+    border-radius: 0 0 0 40px;
+  }
+}
+/*
 .spinner:before {
     content: "...";
     text-align: center;
@@ -57,6 +91,8 @@
         transform: rotate(360deg);
     }
 }
+
+*/
 .slider {
     height: 100%;
 }

@@ -2,6 +2,7 @@
 
 angular.module('gameboard', [
     'ionic',
+    'mgo-angular-wizard',
     'gameboard.directives',
     'gameboard.controllers',
     'gameboard.board.controllers',
@@ -196,7 +197,8 @@ angular.module('gameboard', [
             url: '/about',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/about.html'
+                    templateUrl: 'templates/about.html',
+                    controller:'AboutCtrl'
                 }
             }
         });

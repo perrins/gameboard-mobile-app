@@ -12,6 +12,12 @@
                             "xml": "false",
                             "count": 1
                         }
+                    ],
+                    "MediaPlayer.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -33,6 +39,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StreamingMedia\"><param name=\"ios-package\" value=\"StreamingMedia\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -47,6 +57,9 @@
             "PACKAGE_NAME": "co.gamboard.mobile"
         },
         "org.apache.cordova.device": {
+            "PACKAGE_NAME": "co.gamboard.mobile"
+        },
+        "com.hutchind.cordova.plugins.streamingmedia": {
             "PACKAGE_NAME": "co.gamboard.mobile"
         }
     },

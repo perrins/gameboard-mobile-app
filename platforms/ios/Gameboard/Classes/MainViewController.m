@@ -27,7 +27,12 @@
 
 #import "MainViewController.h"
 
+#define MY_BANNER_UNIT_ID @"ca-app-pub-2283171672459446/6963593212"
+#define GAD_SIMULATOR_ID @"Simulator"
+
 @implementation MainViewController
+
+    GADBannerView *bannerView_;
 
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil
 {
@@ -75,13 +80,57 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    /*
+    // Initialize the banner at the bottom of the screen.
+    CGPoint origin = CGPointMake(0.0,
+                                 self.view.frame.size.height -
+                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height);
+    
+    // Use predefined GADAdSize constants to define the GADBannerView.
+    bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner
+                                                 origin:origin];
+
+    */
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    CGFloat screenXPos = (screenWidth/2);
+    CGFloat screenYPos = screenHeight - kGADAdSizeBanner.size.height;
+    [bannerView_ setCenter:CGPointMake(screenXPos, screenYPos)];
+    bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    
+    bannerView_.frame = CGRectMake(screenWidth/2.0 - bannerView_.frame.size.width/2.0, screenHeight - bannerView_.frame.size.height,
+                                   bannerView_.frame.size.width,bannerView_.frame.size.height);
+    
+    
+    // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
+    bannerView_.adUnitID = MY_BANNER_UNIT_ID;
+    // Let the runtime know which UIViewController to restore after taking
+    // the user wherever the ad goes and add it to the view hierarchy.
+    bannerView_.rootViewController = self;
+    [self.view addSubview:bannerView_];
+    
+    // Initiate a generic request to load it with an ad.
+    GADRequest *request = [GADRequest request];
+    
+    // remove this line when you are ready to deploy for real
+    request.testDevices = [NSArray arrayWithObjects:GAD_SIMULATOR_ID, nil];
+
+    
+    [bannerView_ loadRequest:request];
+    
 }
 
 - (void)viewDidUnload
 {
+    
+    //[bannerView_ release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

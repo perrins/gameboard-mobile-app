@@ -240,7 +240,9 @@ angular.module('gameboard.board.controllers', [])
         WizardHandler.wizard().previous();
     };
 
-    $scope.selectVideo = function(video){
+    $scope.selectVideo = function(_video){
+
+        $scope.video = null;
 
         // Get the Video Details
         $scope.back = true;
@@ -249,8 +251,20 @@ angular.module('gameboard.board.controllers', [])
             template: 'Loading Video...'
         });
 
-        // Need to Check if we have got some already
-        YouTubeService.getVideo($stateParams.id).then(function(data) {
+        // Lets get the Information we need
+        var _id = null;
+        if( _.has(_video,"snippet")) {
+            var _id = _video.snippet.resourceId.videoId
+        } else {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Youtube',
+                template: 'The video item does not seem to be valid'
+            });
+            return;            
+        }    
+
+        // Get the Video Details
+        YouTubeService.getVideo(_id).then(function(data) {
 
             // Paint the List of Youtube Videos
             $scope.video = data;
@@ -266,6 +280,56 @@ angular.module('gameboard.board.controllers', [])
             console.log(err)
             $ionicLoading.hide();
         });
+
+        // Initialize the Video Display
+        WizardHandler.wizard().next();
+
+    };
+
+    $scope.viewVideo = function(video) {
+
+        debugger;
+
+        // Check we have a video to watch and then build URL for the display of it
+       
+       // Check we have something to display
+       if (video && _.isUndefined(StreamingMedia)) { 
+
+            var alertPopup = $ionicPopup.alert({
+                title: 'Youtube',
+                template: 'The video item does not seem to be valid'
+            });
+            return;
+       }
+
+       var videoUrl = ACCESS.EMBED+"FUKiPNXW5f8";
+
+       // Play a video with callbacks
+       var options = {
+        successCallback: function() {
+          console.log("Video was closed without error.");
+        },
+        errorCallback: function(errMsg) {
+          console.log("Error! " + errMsg);
+        }
+       };
+
+       // Open the Media Player
+       window.plugins.streamingMedia.playVideo(videoUrl, options);
+
+    }    
+
+    $scope.useVideo = function(video){
+
+        debugger;
+
+        // Flesh out the Video model from what we have let the user add the rest
+        $scope.add = {
+
+            title: $scope.video.title,
+            description : $scope.video.description,
+            gametag : $scope.user.gametag
+        };
 
         // Initialize the Video Display
         WizardHandler.wizard().next();
