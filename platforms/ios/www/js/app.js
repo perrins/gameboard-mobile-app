@@ -36,7 +36,7 @@ angular.module('gameboard', [
     FAVOURITES: "data/Favourites.json", // IBM Data
     MEMBERS: "data/Members.json", // IBM Data
     SEARCH: "data/Search.json", // IBM CloudCode with Cloudant
-    VIDEO: "/videos" // IBM CloudCode with Cloudant
+    VIDEOS: "/videos" // IBM CloudCode with Cloudant
 })
 
 // Configure the Angular Rules

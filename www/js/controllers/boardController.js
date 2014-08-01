@@ -112,9 +112,10 @@ angular.module('gameboard.board.controllers', [])
 
         // Because we are retrieving all the items every time we do something
         // We need to clear the list before loading in some new values
+        $scope.bid = $stateParams.bid;
 
         // "List is " is a service returning data from the 
-        BoardService.all($stateParams.bid).then(function(videos) {
+        BoardService.all($scope.bid).then(function(videos) {
 
             // Need to add the other information to the Board,
             // That information has come in from the Request
@@ -248,7 +249,7 @@ angular.module('gameboard.board.controllers', [])
         $scope.back = true;
 
         $ionicLoading.show({
-            template: 'Loading Video...'
+            template: 'Fetching Video...'
         });
 
         // Lets get the Information we need
@@ -276,21 +277,19 @@ angular.module('gameboard.board.controllers', [])
 
             $ionicLoading.hide();
 
+
         }, function(err) {
             console.log(err)
             $ionicLoading.hide();
         });
 
+        // Could make it display before, lets see how this works
         // Initialize the Video Display
         WizardHandler.wizard().next();
 
     };
 
     $scope.viewVideo = function(video) {
-
-        debugger;
-
-        // Check we have a video to watch and then build URL for the display of it
        
        // Check we have something to display
        if (video && _.isUndefined(StreamingMedia)) { 
@@ -317,27 +316,80 @@ angular.module('gameboard.board.controllers', [])
        // Open the Media Player
        window.plugins.streamingMedia.playVideo(videoUrl, options);
 
-    }    
+    };    
 
     $scope.useVideo = function(video){
 
-        debugger;
-
         // Flesh out the Video model from what we have let the user add the rest
-        $scope.add = {
+        // Lets build up an Object model for the gamer to edit
+        var bid = $scope.bid;
+        var views = $scope.video.statistics.viewCount;
+        try {
+            bid = parseInt(bid);
+            views = parseInt(views);
+            rank = views;
+        } catch (e){
+            console.log(e);
+        }
 
-            title: $scope.video.title,
-            description : $scope.video.description,
-            gametag : $scope.user.gametag
-        };
+        // Build Model Object from known data and ask for a few more details
+        // This composite model will be used by 
+        $scope.add = {
+            title: $scope.video.snippet.title,
+            description : $scope.video.snippet.description,
+            gametag : $scope.user.gametag,
+            ytid : $scope.video.id,
+            ytimage : $scope.video.snippet.thumbnails.default.url,
+            bid : bid,
+            muuid : $scope.user.raw.id,
+            location : $scope.user.location,
+            views : views,
+            rank : views,
+            recorddate : $scope.video.snippet.publishedAt,
+            platform : "PS"
+
+        };        
 
         // Initialize the Video Display
         WizardHandler.wizard().next();
 
     };
 
-    $scope.addVideo = function(){
-        consolelog("Add Video");
+    $scope.addVideo = function(add){
+
+        console.log("Add Video");
+        if(!_.isObject(add)){
+            console.log("Video to add is not an object");
+        }
+
+        // Add the Video to the Board
+        BoardService.registerVideo(add).then(function(success){
+
+            // Move to the Finish Wizard Page
+            // Initialize the Video Display
+            WizardHandler.wizard().next();
+
+        }).catch(function(err) {
+
+            var alertPopup = $ionicPopup.alert({
+                title: 'Register',
+                template: 'Failed to register video'
+            });
+            return;
+        })
+
+    }
+
+    // Finish the Wizard 
+    $scope.finish = function()
+    {
+
+        // Refresh the View 
+        $scope.onRefresh();
+        
+        // Hide The dialog
+        $scope.videoModal.hide();
+
     }
 
 })

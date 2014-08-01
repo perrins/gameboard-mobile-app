@@ -1,11 +1,29 @@
 angular.module('gameboard.board.services', [])
 
+/*
+
+function(doc){
+ index('uuid', doc._id, { 'facet': true ,'store':true});
+ index('bid', doc.bid, { 'facet': true ,'store':true});
+ index('title', doc.title, { 'facet': true ,'store':true});
+ index('description', doc.description, { 'facet': true ,'store':true});
+ index('rank', doc.rank, { 'facet': true ,'store':true});
+ index('ytimage', doc.ytimage, { 'facet': true ,'store':true});
+ index('yttd', doc.ytid, { 'facet': true ,'store':true});
+ index('views', doc.views, { 'facet': true ,'store':true});
+ index('gametag', doc.gametag, { 'facet': true ,'store':true});
+ index('muuid', doc.muuid, { 'facet': true ,'store':true});
+}
+
+*/
+
+
 /**
  * A simple example service that returns some data.
  */
 .factory('GenresService', function($q, $cacheFactory, ACCESS) {
 
-     // Use an internal Cache for storing the List and map the operations to manage that from
+    // Use an internal Cache for storing the List and map the operations to manage that from
     // Mobile Cloud SDK Calls
     var cache = $cacheFactory('Genres');
 
@@ -18,7 +36,7 @@ angular.module('gameboard.board.services', [])
             defer = $q.defer();
             var items = cache.get(ACCESS.GENRES);
 
-            if(!_.isUndefined(items)) {
+            if (!_.isUndefined(items)) {
                 defer.resolve(items);
             } else {
 
@@ -38,24 +56,24 @@ angular.module('gameboard.board.services', [])
                     // return the Cache
                     defer.resolve(list);
 
-                },function(err){
+                }, function(err) {
                     console.log(err);
                     defer.reject(err);
                 });
-            }    
+            }
 
             // Get the Objects for a particular Type
             return defer.promise;
 
         },
-        getGenre: function(gid){
+        getGenre: function(gid) {
 
             // Resolve the Cache
             var genres = cache.get(ACCESS.GENRES);
 
             var _genre = null;
-            genres.forEach(function(genre){
-                if(genre.get('gid') == gid) {
+            genres.forEach(function(genre) {
+                if (genre.get('gid') == gid) {
                     _genre = genre;
                 }
             })
@@ -71,9 +89,9 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('GamesService', function($q, $cacheFactory,$stateParams, ACCESS) {
+.factory('GamesService', function($q, $cacheFactory, $stateParams, ACCESS) {
 
-     // Use an internal Cache for storing the List and map the operations to manage that from
+    // Use an internal Cache for storing the List and map the operations to manage that from
     // Mobile Cloud SDK Calls
     var cache = $cacheFactory('Games');
 
@@ -83,22 +101,22 @@ angular.module('gameboard.board.services', [])
         all: function(genid) {
 
             var _genid = null
-            try{
+            try {
                 var _genid = parseInt(genid);
-            } catch(err) {
-                console.log("GID supplied is not valid",err);
-            
+            } catch (err) {
+                console.log("GID supplied is not valid", err);
+
             }
             // Check the GID
-            if( _.isNull(_genid)) {
+            if (_.isNull(_genid)) {
                 console.log("GID could not be used");
             }
 
             // Create a Defer as this is an async operation
             defer = $q.defer();
-            var items = cache.get(genid+"_"+ACCESS.GAMES);
+            var items = cache.get(genid + "_" + ACCESS.GAMES);
 
-            if(!_.isUndefined(items)) {
+            if (!_.isUndefined(items)) {
                 defer.resolve(items);
             } else {
 
@@ -106,20 +124,22 @@ angular.module('gameboard.board.services', [])
                 var data = IBMData.getService();
 
                 // Clear the Cache with a new set
-                cache.remove(genid+"_"+ACCESS.GAMES);
+                cache.remove(genid + "_" + ACCESS.GAMES);
 
                 // Get the Games for a Specific Genre
                 var query = data.Query.ofType(ACCESS.GAMES);
-                query.find({genid:_genid}).done(function(list) {
+                query.find({
+                    genid: _genid
+                }).done(function(list) {
 
                     // Check if this is a list and array
-                    if(_.isArray(list) && list.length >0) {
+                    if (_.isArray(list) && list.length > 0) {
 
                         // Place the Items in the Cache
-                        cache.put(genid+"_"+ACCESS.GAMES, list[0]);
+                        cache.put(genid + "_" + ACCESS.GAMES, list[0]);
 
                         // return the Cache
-                        defer.resolve(cache.get(genid+"_"+ACCESS.GAMES));
+                        defer.resolve(cache.get(genid + "_" + ACCESS.GAMES));
 
                     } else {
 
@@ -129,24 +149,24 @@ angular.module('gameboard.board.services', [])
 
                     }
 
-                },function(err){
+                }, function(err) {
                     console.log(err);
                     defer.reject(err);
                 });
-            }    
+            }
 
             // Get the Objects for a particular Type
             return defer.promise;
 
         },
-        getGame: function(genid,gmid){
+        getGame: function(genid, gmid) {
 
             // Resolve the Cache
-            var item = cache.get(genid+"_"+ACCESS.GAMES);
+            var item = cache.get(genid + "_" + ACCESS.GAMES);
             var _game = null;
             var games = item.get('games')
-            games.forEach(function(game){
-                if(game.gmid == gmid) {
+            games.forEach(function(game) {
+                if (game.gmid == gmid) {
                     _game = game;
                 }
             })
@@ -158,7 +178,7 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('CategoriesService', function($q, $cacheFactory,$stateParams, ACCESS) {
+.factory('CategoriesService', function($q, $cacheFactory, $stateParams, ACCESS) {
 
     // Use an internal Cache for storing the List and map the operations to manage that from
     // Mobile Cloud SDK Calls
@@ -166,26 +186,26 @@ angular.module('gameboard.board.services', [])
 
     return {
 
-           // Return all the Objects for a Given Class
+        // Return all the Objects for a Given Class
         all: function(gmid) {
 
             var _gmid = null
-            try{
+            try {
                 var _gmid = parseInt(gmid);
-            } catch(err) {
-                console.log("GMID supplied is not valid",err);
-            
+            } catch (err) {
+                console.log("GMID supplied is not valid", err);
+
             }
             // Check the GID
-            if( _.isNull(_gmid)) {
+            if (_.isNull(_gmid)) {
                 console.log("GMID could not be used");
             }
 
             // Create a Defer as this is an async operation
             defer = $q.defer();
-            var items = cache.get(gmid+"_"+ACCESS.CATEGORIES);
+            var items = cache.get(gmid + "_" + ACCESS.CATEGORIES);
 
-            if(!_.isUndefined(items)) {
+            if (!_.isUndefined(items)) {
                 defer.resolve(items);
             } else {
 
@@ -193,40 +213,42 @@ angular.module('gameboard.board.services', [])
                 var data = IBMData.getService();
 
                 // Clear the Cache with a new set
-                cache.remove(gmid+"_"+ACCESS.CATEGORIES);
+                cache.remove(gmid + "_" + ACCESS.CATEGORIES);
 
                 // Get the Genres
                 var query = data.Query.ofType(ACCESS.CATEGORIES);
-                query.find({"gmid":_gmid}).done(function(list) {
+                query.find({
+                    "gmid": _gmid
+                }).done(function(list) {
 
                     // Check if this is a list and array
-                    if(_.isArray(list) && list.length >0) {
+                    if (_.isArray(list) && list.length > 0) {
                         // Place the Items in the Cache
-                        cache.put(gmid+"_"+ACCESS.CATEGORIES, list[0]);
+                        cache.put(gmid + "_" + ACCESS.CATEGORIES, list[0]);
                         // return the Cache
                         defer.resolve(list[0]);
 
-                     } else {
+                    } else {
                         defer.resolve(null);
-                     }   
+                    }
 
-                },function(err){
+                }, function(err) {
                     console.log(err);
                     defer.reject(err);
                 });
-            }    
+            }
 
             // Get the Objects for a particular Type
             return defer.promise;
 
         },
-        getCategory: function(cid){
+        getCategory: function(cid) {
 
             // Resolve the Cache
             var cats = cache.get(ACCESS.CATEGORIES);
             var _cat = null;
-            cats.forEach(function(cat){
-                if(cat.get('cid') == cid) {
+            cats.forEach(function(cat) {
+                if (cat.get('cid') == cid) {
                     _cat = cat;
                 }
             })
@@ -241,11 +263,14 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('BoardService', function($q, $cacheFactory,$stateParams, ACCESS) {
+.factory('BoardService', function($q, $cacheFactory, $stateParams, ACCESS) {
 
     return {
 
         all: function(bid) {
+
+            // Create a deffered
+            var def = $q.defer();
 
             // USE THE CloudCode to Call the Board Services
             // This will integrate with Cloudant to retrieve a list of videos for a Board
@@ -255,25 +280,48 @@ angular.module('gameboard.board.services', [])
             var cc = IBMCloudCode.getService();
 
             // Get the Videos for my Board
-            cc.get(uri,{"handleAs":"json"}).then(function(videos){
+            cc.get(uri, {
+                "handleAs": "json"
+            }).then(function(videos) {
 
                 // Lets resolve these
                 var _videos = new Array();
                 // Loop through the videos
-                videos.forEach(function(video){
+                videos.forEach(function(video) {
                     _videos.push(video.fields);
                 });
                 def.resolve(_videos);
 
-            }).catch(function(err){
+            }).catch(function(err) {
                 console.log(err);
                 def.reject(err);
             })
 
-            // Create a deffered
-            var def = $q.defer();
 
             // Get the Objects for a particular Type
+            return def.promise;
+
+        },
+        registerVideo: function(video) {
+
+            // Process a Defer
+            var def = $q.defer();
+
+            // Get the Cloud Code Service
+            var cc = IBMCloudCode.getService();
+
+            // Add the Video to the Board
+            cc.post(ACCESS.VIDEOS, video, {
+                "handleAs": "json"
+            }).then(function(success) {
+
+                def.resolve(true);
+
+            }).catch(function(err) {
+
+                def.reject(err);
+            });
+
             return def.promise;
 
         }
@@ -284,7 +332,7 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('YouTubeService', function($q, $cacheFactory,$stateParams, ACCESS) {
+.factory('YouTubeService', function($q, $cacheFactory, $stateParams, ACCESS) {
 
     return {
 
@@ -296,9 +344,11 @@ angular.module('gameboard.board.services', [])
             // Get Cloud Code
             var cc = IBMCloudCode.getService();
 
-            cc.get(ACCESS.YOUR_VIDEOS,{"handleAs":"json"}).then(function(videos){
+            cc.get(ACCESS.YOUR_VIDEOS, {
+                "handleAs": "json"
+            }).then(function(videos) {
                 def.resolve(videos);
-            }).catch(function(err){
+            }).catch(function(err) {
                 console.log(err);
                 def.reject(err);
             })
@@ -319,13 +369,15 @@ angular.module('gameboard.board.services', [])
             var _uri = new IBMUriBuilder().slash().append(ACCESS.YT_VIDEO_DETAIL).append(id).toString();
 
             // Get the Details of the Video
-            cc.get(_uri,{"handleAs":"json"}).then(function(video){
+            cc.get(_uri, {
+                "handleAs": "json"
+            }).then(function(video) {
                 var _video = null;
-                if(video.items.length>0) {
+                if (video.items.length > 0) {
                     _video = video.items[0];
                 }
                 def.resolve(_video);
-            }).catch(function(err){
+            }).catch(function(err) {
                 console.log(err);
                 def.reject(err);
             })
@@ -342,11 +394,11 @@ angular.module('gameboard.board.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('VideoService', function($rootScope, $q, $cacheFactory,ACCESS) {
+.factory('VideoService', function($rootScope, $q, $cacheFactory, ACCESS) {
 
     return {
 
-        get : function(uuid) {
+        get: function(uuid) {
 
             // Create a deffered
             var def = $q.defer();
@@ -356,17 +408,19 @@ angular.module('gameboard.board.services', [])
 
             // Get the Video and its Detail
             var uri = new IBMUriBuilder().append(ACCESS.VIDEO).append(uuid).toString();
-            cc.get(uri,{"handleAs":"json"}).then(function(video){
+            cc.get(uri, {
+                "handleAs": "json"
+            }).then(function(video) {
 
                 // Return the Video 
                 var _video = null;
-                if(video.length > 0 && _.has(video[0],"doc")) {
+                if (video.length > 0 && _.has(video[0], "doc")) {
                     _video = video[0].doc;
                 }
                 // Resolve Promise
                 def.resolve(_video);
 
-            }).catch(function(err){
+            }).catch(function(err) {
                 console.log(err);
                 def.reject(err);
             })
@@ -393,10 +447,10 @@ angular.module('gameboard.board.services', [])
             // userid 
 
             // Send the Video request to the Bluemix to be added into the Cloudant Database
-            cc.post("/board/video",video,options).done(function(video){
+            cc.post("/board/video", video, options).done(function(video) {
                 // Was added successfully
                 def.resolve(video);
-            }).catch(function(err){
+            }).catch(function(err) {
                 console.log(err)
                 def.reject(err);
             });
@@ -433,9 +487,9 @@ angular.module('gameboard.board.services', [])
 
 
                 defer.resolve(saved);
-            },function(err){
+            }, function(err) {
                 defer.reject(err);
-            });        
+            });
 
             // Return a promise for the async operation of save
             return defer.promise;
@@ -474,8 +528,3 @@ angular.module('gameboard.board.services', [])
     }
 
 });
-
-
-
-
-
