@@ -397,3 +397,107 @@ You could find it at the following address https://developer.apple.com/icloud/do
 2014-08-01 01:36:35.654 Gameboard[63821:7216748] Add Video
 2014-08-01 01:36:35.654 Gameboard[63821:7216748] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos
 2014-08-01 01:36:40.026 Gameboard[63821:7216748] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001
+2014-08-02 15:13:10.001 Gameboard[41211:1303083] Multi-tasking -> Device: YES, App: YES
+2014-08-02 15:13:10.054 Gameboard[41211:1303083] Unlimited access to network resources
+2014-08-02 15:13:10.066 Gameboard[41211:1303083] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-08-02 15:13:11.382 Gameboard[41211:1303083] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-08-02 15:13:11.383 Gameboard[41211:1303083] [CDVTimer][statusbar] 0.730991ms
+2014-08-02 15:13:11.383 Gameboard[41211:1303083] [CDVTimer][TotalPluginStartup] 1.416981ms
+2014-08-02 15:13:11.849 Gameboard[41211:1303083] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-08-02 15:13:12.479 Gameboard[41211:1303083] Resetting plugins due to page load.
+2014-08-02 15:13:15.291 Gameboard[41211:1303083] Finished load of: file:///Users/MatthewPerrins/Library/Developer/CoreSimulator/Devices/80527E5F-6D38-44F1-81C8-B16027AA3F46/data/Containers/Bundle/Application/AF7DAA8E-4E4B-4CDB-AD84-A0206C2EBA7B/Gameboard.app/www/index.html#/signin
+2014-08-02 15:13:17.428 Gameboard[41211:1303083] THREAD WARNING: ['Device'] took '13.180908' ms. Plugin should use a background thread.
+2014-08-02 15:13:45.808 Gameboard[41211:1303083] Signon to the application
+2014-08-02 15:13:46.189 Gameboard[41211:1303083] Setting the WebView's frame to {{0, 0}, {320, 524}}
+2014-08-02 15:13:46.189 Gameboard[41211:1303083] Setting the WebView's frame to {{0, 0}, {320, 568}}
+2014-08-02 15:13:46.205 Gameboard[41211:1303083] THREAD WARNING: ['InAppBrowser'] took '395.594971' ms. Plugin should use a background thread.
+2014-08-02 15:13:47.161 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:13:49.194 Gameboard[41211:1303083] webView:didFailLoadWithError - 102: Frame load interrupted
+2014-08-02 15:13:51.912 Gameboard[41211:1303083] {"status":"success","bookmark":"{\"startkey\":\"gb_genres\",\"startkey_docid\":\"e87629e23d94c38f284d5165fd4fb928d96259b6\"}","object":[{"className":"gb_genres","attributes":{"subTitle":"Simulation games","title":"Simulation","count":4,"imageUrl":"http://www.prlog.org/11873543-flying-simulator-games.jpg","gid":4,"endDate":"2013-12-31"},"objectId":"4dbecbd74158edcde2d470c7b8205fbc925c4b52","createdAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"modifiedAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"version":"1-aff9d86b99c6716eb9eab1547c23ac92"},{"className":"gb_genres","attributes":{"subTitle":"Games involving action","title":"Action","count":4,"imageUrl":"http://images.forwallpaper.com/files/thumbs/preview/38/383000__action-game-wallpaper_p.jpg","gid":1,"endDate":"2013-12-31"},"objectId":"91291f3250f0e22b79eb94e84bdb435395a7d05b","createdAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"modifiedAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"version":"1-fc8c45c73f807ade0f0274f4b65ef2f5"},{"className":"gb_genres","attributes":{"subTitle":"Music games","title":"Music","count":4,"imageUrl":"http://transitionculture.org/wp-content/uploads/guitar-hero-3.jpg","gid":6,"endDate":"2013-12-31"},"objectId":"acc5c93ae8a49ee905bd66cf14edaadca9c40f4e","createdAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"modifiedAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"version":"1-c9716b0953bee58b2da4bb191de4970c"},{"className":"gb_genres","attributes":{"subTitle":"Role Playing & RPGs","title":"Role playing","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","gid":3,"endDate":"2013-12-31"},"objectId":"b9a4ba1ed2a7ff684bd950dde4005e2a9e0bb6cb","createdAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"modifiedAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"version":"1-b923c177a60e5f2e84cdde2af4c04587"},{"className":"gb_genres","attributes":{"subTitle":"First person shooter games","title":"Shooter","count":4,"imageUrl":"http://www.pcgamewatch.net/wp-content/uploads/2010/07/shooter.jpg","gid":2,"endDate":"2013-12-31"},"objectId":"bfbbb145afc3e8227bf9ab5e6553833a6d4757cd","createdAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"modifiedAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"version":"1-355993daf2048254940bdc209706588c"},{"className":"gb_genres","attributes":{"subTitle":"Racing games","title":"Racing","count":4,"imageUrl":"http://images.techhive.com/images/article/2013/06/forza4-100042575-orig.jpg","gid":7,"endDate":"2013-12-31"},"objectId":"db583cada6dd4c559c6306cdfdcb709bc7a7707b","createdAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"modifiedAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"version":"1-da6ce7cbd6b3a0ae566bdd26500712b8"},{"className":"gb_genres","attributes":{"subTitle":"Strategy games","title":"Strategy","count":4,"imageUrl":"http://allods.wcgame.ru/data/2011-10-22/strategy-games-multiplayer.jpg","gid":5,"endDate":"2013-12-31"},"objectId":"e87629e23d94c38f284d5165fd4fb928d96259b6","createdAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"modifiedAt":{"__type":"Date","iso":"2014-07-26T07:31:00.303Z"},"version":"1-c1915032e080a9c83bbaaf9fe7da569c"}],"deleted":[]}
+2014-08-02 15:13:58.397 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:03.696 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:05.040 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:06.811 Gameboard[41211:1303083] {"status":"success","bookmark":"{\"startkey\":\"gb_games\",\"startkey_docid\":\"bcaece5366da8ad3743bcf6ad95c5e85fcf98ba4\"}","object":[{"className":"gb_games","attributes":{"games":[{"title":"Call of Duty Ghosts","count":8,"imageUrl":"http://www.pcgamewatch.net/wp-content/uploads/2010/07/shooter.jpg","subtitle":"The ultimate combat first person action games","gmid":101,"rating":"18","note":"A note describing the game"},{"title":"Battle Field 4","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","subtitle":"Role Playing & RPGs","gmid":102,"rating":"18","note":"A note describing the game"},{"title":"Craigs Game","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","subtitle":"Role Playing & RPGs","gmid":103,"rating":"18","note":"A note describing the game"},{"title":"Another game","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","subtitle":"Role Playing & RPGs","gmid":104,"rating":"18","note":"A note describing the game"},{"title":"Another game","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","subtitle":"Role Playing & RPGs","gmid":105,"rating":"18","note":"A note describing the game"},{"title":"Another game","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","subtitle":"Role Playing & RPGs","gmid":106,"rating":"18","note":"A note describing the game"},{"title":"Another game","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","subtitle":"Role Playing & RPGs","gmid":107,"rating":"18","note":"A note describing the game"},{"title":"Another game","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","subtitle":"Role Playing & RPGs","gmid":108,"rating":"18","note":"A note describing the game"},{"title":"Another game","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","subtitle":"Role Playing & RPGs","gmid":109,"rating":"18","note":"A note describing the game"},{"title":"Another game","count":4,"imageUrl":"http://i.telegraph.co.uk/multimedia/archive/01401/world-of-warcraft_1401366c.jpg","subtitle":"Role Playing & RPGs","gmid":110,"rating":"18","note":"A note describing the game"}],"genid":1,"gid":1,"banners":[{"subTitle":"Amazing first person action","title":"Call of Duty","imageUrl":"http://terminalgamer.com/wp-content/uploads/2013/10/Call-Of-Duty-Ghosts-Background-515x290.jpg"},{"subTitle":"You will never see game action like this","title":"Battle Field 4","imageUrl":"http://gamingbolt.com/wp-content/uploads/2013/03/battlefield-4-cover-image.jpg"},{"subTitle":"You will never see game action like this","title":"Another Game","imageUrl":"http://images.forwallpaper.com/files/thumbs/preview/38/383000__action-game-wallpaper_p.jpg"}]},"objectId":"bcaece5366da8ad3743bcf6ad95c5e85fcf98ba4","createdAt":{"__type":"Date","iso":"2014-07-26T07:31:14.935Z"},"modifiedAt":{"__type":"Date","iso":"2014-07-26T07:31:14.935Z"},"version":"1-8310d4e0c85e2996e717824c73d1200a"}],"deleted":[]}
+2014-08-02 15:14:16.908 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:17.447 Gameboard[41211:1303083] {"status":"success","bookmark":"{\"startkey\":\"gb_categories\",\"startkey_docid\":\"d018ed278e6f5a9a1d0ff929a068e54eded9fcd2\"}","object":[{"className":"gb_categories","attributes":{"categories":[{"title":"Golden Gun","views":"1,2345,000","description":"Imagine all the best golden gun moments in one organised leader board and watch the best of the best","videos":1234,"subtitle":"Best golden gun moments","bid":1001},{"title":"Head shots","views":"5,000","description":"Imagine all the best golden gun moments in one organised leader board and watch the best of the best","videos":1234,"subtitle":"Quickest headshots","bid":1002},{"title":"Team Game","views":"2,500","description":"Imagine all the best golden gun moments in one organised leader board and watch the best of the best","videos":11234,"subtitle":"Best team games","bid":1003}],"gmid":101,"banner":"http://terminalgamer.com/wp-content/uploads/2013/10/Call-Of-Duty-Ghosts-Background-515x290.jpg"},"objectId":"d018ed278e6f5a9a1d0ff929a068e54eded9fcd2","createdAt":{"__type":"Date","iso":"2014-07-29T06:54:09.575Z"},"modifiedAt":{"__type":"Date","iso":"2014-07-29T06:54:09.575Z"},"version":"1-3edcbd1dfa6812600540bfd2956c88b6"}],"deleted":[]}
+2014-08-02 15:14:27.503 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001
+2014-08-02 15:14:37.780 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
+2014-08-02 15:14:42.948 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/JrzXiHtg3ac
+2014-08-02 15:14:45.279 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:48.210 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:49.697 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:50.785 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:50.851 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/FUKiPNXW5f8
+2014-08-02 15:14:52.272 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:53.035 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:14:53.489 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:07.468 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:08.300 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:09.479 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:10.708 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:12.544 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/RAGKDAp5HtI
+2014-08-02 15:15:15.087 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:16.160 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:17.916 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:18.003 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/YBwPgCpGmLg
+2014-08-02 15:15:19.845 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:20.476 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/rfzZeE7J5DE
+2014-08-02 15:15:20.563 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:22.163 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:22.837 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/YBwPgCpGmLg
+2014-08-02 15:15:24.158 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:24.987 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/YYgkhVygRIc
+2014-08-02 15:15:25.077 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:27.623 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:30.367 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/FUKiPNXW5f8
+2014-08-02 15:15:36.002 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:48.795 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:48.841 Gameboard[41211:1303083] Add Video
+2014-08-02 15:15:48.842 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos
+2014-08-02 15:15:52.226 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:52.289 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001
+2014-08-02 15:15:53.552 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:54.717 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:15:58.234 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/4d61867ef431256e8876bd70e2af11b3
+2014-08-02 15:16:01.395 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:01.612 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001
+2014-08-02 15:16:03.308 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/74e54b63e2f084d557a6fef6814089b2
+2014-08-02 15:16:04.928 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001
+2014-08-02 15:16:05.742 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:07.007 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1002
+2014-08-02 15:16:09.920 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
+2014-08-02 15:16:10.117 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:13.384 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/JrzXiHtg3ac
+2014-08-02 15:16:15.532 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:16.529 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:20.391 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:20.459 Gameboard[41211:1303083] Add Video
+2014-08-02 15:16:20.460 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos
+2014-08-02 15:16:22.081 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:22.146 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1002
+2014-08-02 15:16:40.052 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:47.076 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:47.873 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:49.113 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:50.092 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:50.092 Gameboard[41211:1303083] CloudCode URL:http://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001
+2014-08-02 15:16:51.544 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:55.637 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:56.719 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:58.858 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:16:59.824 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:17:00.690 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:17:01.637 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:17:03.204 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:17:04.294 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:17:22.571 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:17:24.153 Gameboard[41211:1303083] ACTIVATING
+2014-08-02 15:17:28.990 Gameboard[41211:1303083] ACTIVATING
+2014-08-03 10:13:49.819 Gameboard[41211:1303083] ACTIVATING
+2014-08-03 10:14:05.365 Gameboard[41211:1303083] ACTIVATING

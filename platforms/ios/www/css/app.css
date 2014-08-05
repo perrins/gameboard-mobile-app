@@ -18,7 +18,7 @@
   transition: border-radius;
     content: "...";
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
     font-size: 60px;
     color: #EEEEEE;
     top: 40px;
@@ -29,7 +29,6 @@
     width: 80px;
     height: 80px;
     border-radius: 100%;
-    background: rgba(0, 0, 0, 1);
 }
 
 @-webkit-keyframes waiting {

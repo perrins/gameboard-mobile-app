@@ -407,7 +407,7 @@ function(doc){
             var cc = IBMCloudCode.getService();
 
             // Get the Video and its Detail
-            var uri = new IBMUriBuilder().append(ACCESS.VIDEO).append(uuid).toString();
+            var uri = new IBMUriBuilder().append(ACCESS.VIDEOS).append(uuid).toString();
             cc.get(uri, {
                 "handleAs": "json"
             }).then(function(video) {

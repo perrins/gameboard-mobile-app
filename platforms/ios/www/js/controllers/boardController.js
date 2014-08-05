@@ -233,8 +233,6 @@ angular.module('gameboard.board.controllers', [])
 
     $scope.wizardBack = function(){
 
-        debugger;
-
         if($scope.currentStep=="Videos") {
             $scope.back =false;
         }

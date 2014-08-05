@@ -41,7 +41,7 @@ angular.module('gameboard.controllers', [])
 })
 
 // Sign In Controller, navigate to Intro 
-.controller('SignInCtrl', function($rootScope, $state, $scope, InitBluemix) {
+.controller('SignInCtrl', function($rootScope, $state, $scope, InitBluemix,MembersService,$ionicLoading) {
 
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
@@ -54,6 +54,11 @@ angular.module('gameboard.controllers', [])
     // Signon to the App
     $scope.signon = function() {
         console.log("Signon to the application");
+
+        // Lets load the Videos for the Youtube Channel
+        $ionicLoading.show({
+            template: 'Authenticating...'
+        });
 
         // Initialize Security
         // Initialize the OAuth settings
@@ -77,12 +82,28 @@ angular.module('gameboard.controllers', [])
 
                         $rootScope.user = user;
 
-                        // Havigate to the Board View
-                        $state.go('intro');
+                        // Get a Member
+                        MembersService.getMember(user.raw.id).then(function(member){
+
+                            $ionicLoading.hide();
+                            $rootScope.user.registered = true;
+                            $rootScope.member = member;
+                            // Havigate to the Board View
+                            $state.go('intro');
+
+                        },function(err){
+
+                            $ionicLoading.hide();
+
+                            $rootScope.user.registered = false;
+                            $state.go('intro');                            
+                        });
+
+
 
                     })
                     .fail(function(err) {
-                        //handle error with err
+                        $ionicLoading.hide();
                     });
                 //use result.access_token in your API request 
                 //or use result.get|post|put|del|patch|me methods (see below)
@@ -92,11 +113,45 @@ angular.module('gameboard.controllers', [])
             })
             .fail(function(err) {
                 //handle error with err
+                $ionicLoading.hide();
             });
 
     }
 
 })
+
+// A simple controller that shows a tapped item's data
+.controller('RegisterCtrl', function($ionicScrollDelegate,$rootScope, $state, $scope,MembersService,WizardHandler) {
+
+    // Manage the Registration Process
+    $scope.use = $rootScope.user;
+
+    $scope.member = {};
+
+    // Move the Name section
+    $scope.next = function() {
+
+        $ionicScrollDelegate.scrollTop();
+        WizardHandler.wizard().next();
+
+    };
+
+    // Move the Name section
+    $scope.back = function() {
+
+        $ionicScrollDelegate.scrollTop();
+        WizardHandler.wizard().previous();
+
+    };
+
+
+    // Handle the the cancel
+    $scope.cancel = function() {
+        $state.go('intro');                            
+    }
+
+})
+
 
 // A simple controller that shows a tapped item's data
 .controller('AboutCtrl', function($rootScope, $scope,Settings) {

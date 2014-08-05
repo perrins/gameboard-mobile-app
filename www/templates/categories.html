@@ -13,16 +13,17 @@
             </div>
         </div>
     
-        <div class="list">
+        <div class="list" ng-show="categories">
 
-			<a ng-repeat="cat in categories" class="item item-icon-right" href="#/board/board/{{cat.bid}}">
-                    <h2>{{cat.title}}</h2>
-                    <p>{{cat.subtitle}}</p>
-                    <p>{{cat.description}}</p>
-                    <div class="prize">{{cat.views}}</div>
-                    <span class="badge badge-calm">{{cat.videos}}</span>
+			<a ng-repeat="cat in categories" class="item item-avatar item-icon-right" href="#/board/board/{{cat.bid}}">
 
-            <i class="icon ion-chevron-right icon-accessory"></i>   
+                <h2>{{cat.title}}</h2>
+                <p>{{cat.subtitle}}</p>
+                <p>{{cat.description}}</p>
+                <div class="prize">{{cat.views}}</div>
+                <span class="badge badge-calm">{{cat.videos}}</span>
+
+                <i class="icon ion-chevron-right icon-accessory"></i>   
 
             </a>
         </div>

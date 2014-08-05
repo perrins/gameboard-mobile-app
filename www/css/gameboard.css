@@ -129,6 +129,12 @@ only screen and (min-device-pixel-ratio : 1.5) {
     top: -100px;
 }
 
+.unregistered {
+    color:red;
+    font-weight: 600;
+    font-size: 16px;
+}
+
 .banner {
     height:100px;
 }
