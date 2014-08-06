@@ -606,9 +606,14 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 
+    [super viewDidUnload];
+    
     self.webView.delegate = nil;
     self.webView = nil;
     [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
+    
+
+    
 }
 
 #pragma mark UIWebViewDelegate
