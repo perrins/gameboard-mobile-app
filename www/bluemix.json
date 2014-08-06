@@ -3,5 +3,5 @@
     "applicationSecret": "f3801e5e2461e1327e9184564b211be5fd29906e",
     "applicationRoute": "gameboard-cloud.mybluemix.net",
     "security" : "P7Y2L-QgGFNW4XKgBOnQTB6xd3I",
-    "local" : "http://localhost:61100"
+    "local" : "gameboard-cloud.mybluemix.net"
 }

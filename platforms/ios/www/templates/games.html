@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="list">
+        <div class="list" ng-show="games">
 
             <a ng-repeat="game in games" class="item item-thumbnail-left item-icon-right" href="#/board/categories/{{gid}}/{{game.gmid}}">
 
@@ -40,7 +40,7 @@
 
         </div>
 
-        <div id="notfound" class="card hidden">
+        <div class="card hidden" ng-show="!games">
             <div class="item item-text-wrap">
                 No Games have been found for this Genre
             </div>

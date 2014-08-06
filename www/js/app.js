@@ -32,7 +32,8 @@ angular.module('gameboard', [
     BOARD: "/videos/board", // IBM CloudCode with Cloudant
     YOUR_VIDEOS: "/youtube/videos", // IBM CloudCode with YouTube API
     YT_VIDEO_DETAIL: "/youtube/video", // IBM CloudCode with YouTube API
-    MEMBERS: "members", // IBM Data
+    MEMBERS: "/members", // IBM Data
+    REGISTER : "/members/register",
     FAVOURITES: "data/Favourites.json", // IBM Data
     SEARCH: "data/Search.json", // IBM CloudCode with Cloudant
     VIDEOS: "/videos" // IBM CloudCode with Cloudant
@@ -69,6 +70,12 @@ angular.module('gameboard', [
         url: '/register',
         templateUrl: 'templates/register.html',
         controller: 'RegisterCtrl'
+    })
+
+    .state('account', {
+        url: '/account',
+        templateUrl: 'templates/account.html',
+        controller: 'AccountCtrl'
     })
 
     .state('board', {

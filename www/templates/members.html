@@ -25,7 +25,6 @@
                 <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="loadMore()" distance="2%">
                 </ion-infinite-scroll>
 
-
                 <a ng-repeat="member in members | orderBy:'rank'" class="item item-thumbnail-left" item="member" href="#/board/member/{{member.muuid}}">
 
                     <img ng-src="{{member.avatar}}">

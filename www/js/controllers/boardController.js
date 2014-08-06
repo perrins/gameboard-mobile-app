@@ -129,6 +129,9 @@ angular.module('gameboard.board.controllers', [])
                     "date"          : "01/05/2014",
                     "videos" : videos };
 
+            // Set the Title
+            $scope.title = board.title;
+                    
             // Update the model with a list of Items
             $scope.board = board;
 
@@ -172,6 +175,12 @@ angular.module('gameboard.board.controllers', [])
     });
 
     $scope.addVideo = function(video) {
+
+        // If they are not registered then you need to register
+        if(!$scope.user.registered) {
+            $state.go('register');
+        }
+
         // Add the Item and then hide the modal view
         BoardService.add(video).then(
             function(payload) {

@@ -3,50 +3,71 @@ angular.module('gameboard.member.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('MembersService', function($q, $cacheFactory,$stateParams, URL) {
-
-    // Use an internal Cache for storing the List and map the operations to manage that from 
-    // MBaaS SDK Calls
-    var cache = $cacheFactory('members');
+.factory('MembersService', function($q, $rootScope,ACCESS) {
 
     return {
 
-        getMembers: function(muuid) {
+        getMember: function(muuid) {
 
             console.log("muuid",muuid);
 
-            // Create a deffered
+            // Get a Defered
             var def = $q.defer();
-        
-            // Lets Get a list of Genres
-            $.ajax({
-                type: "GET",
-                url: URL.MEMBERS,
-                dataType: "json",
-                contentType: "application/json",
-                success: function(result,status) {
 
-                    // Check if we were able to store it sucessfully
-                    if (status === "success") {
+            // Get the Cloud Code 
+            var cc = IBMCloudCode.getService();
+            var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).append(muuid).toString();
+            cc.get(uri,{handleAs:"json"}).done(function(member) {
 
-                      // return the Cache
-                      def.resolve(result);
+                debugger;
 
-
+                // Check we have a member we can work with 
+                if (member) {
+                    var _member = member.doc;
+                    if( _.has(_member,"error") && _member.error == "not_found" ) {
+                        def.reject(null);
                     } else {
-                        def.reject([]);
-                    }
+                        def.resolve(_member);
+                    }    
+                } else {
+                    def.reject(null);
+                }                
 
-                },
-                error: function(err) {
-                    def.reject(err);
-                }
+            },function(err){
+                def.reject(null);
             });
-        
+
             // Get the Objects for a particular Type
             return def.promise;
 
+        },
+
+        registerMember : function (member) {
+
+            // Manage Defer on the Save
+            var def = $q.defer();
+
+            // get the Data Service
+            var cc = IBMCloudCode.getService();
+
+            // Send the Video request to the Bluemix to be added into the Cloudant Database
+            cc.post(ACCESS.REGISTER, member,{
+                "handleAs": "json"
+            }).then(function(member) {
+
+                // Was added successfully
+                def.resolve(true);
+
+            }).catch(function(err) {
+                console.log(err)
+                def.reject(err);
+            });
+
+            // Return a promise for the async operation of save
+            return def.promise;
+
         }
+
     }
 
 })

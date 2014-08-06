@@ -1,7 +1,7 @@
 <ion-pane>
 
     <header class="bar bar-header bar-dark">
-        <button class="button button-clear button-assertive" ng-click="wizardBack()" ng-show="back">Back</button>
+        <button class="button button-clear button-assertive" ng-click="back()" ng-show="back">Back</button>
 
         <h1 class="title">Register</h1>
         <button class="button button-clear button-assertive" ng-click="cancel()">Cancel</button>
@@ -9,7 +9,7 @@
 
     <ion-content class="has-header" padding="false" >
 
-        <wizard current-step="currentStep" hide-indicators="true">
+        <wizard current-step="step" hide-indicators="true">
 
             <wz-step title="start">
 
@@ -75,7 +75,6 @@
                         <input ng-model="member.age" type="text" placeholder="age">
                     </label>
 
-
                     <div class="item item-divider">
                         Main Platform
                     </div>
@@ -119,7 +118,7 @@
                     <li class="item  item-toggle">
                        <h2>Over 18 ?</h2>
                        <label class="toggle toggle-dark">
-                         <input ng-model="member.over18" type="checkbox" checked="">
+                         <input ng-model="member.over18" type="checkbox" checked="true">
                          <div class="track">
                            <div class="handle"></div>
                          </div>
@@ -145,141 +144,95 @@
 
                 <div class="list card">
 
-                    <div class="item">
-                        <h1>{{video.snippet.title}}</h1>
-                        <h3>{{user.gametag}}</h3>
-                        <p>{{video.snippet.description}}</p>
+                    <div class="item item-divider">
+                        Member
                     </div>
 
-                    <div class="item item-image">
-                        <img class="genre-image genre-image-load" ng-src="{{video.snippet.thumbnails.standard.url}}" lazyload>
-                    </div>
-
-                </div>
-
-                <div class="list card" ng-show="video">
-
-                    <div class="row">
-
-                        <div class="col col-25"></div>
-
-                        <div class="col col-50">
-                            <h1>Social</h1>
-
-                        </div>
-
-                        <div class="col col-25"></div>
+                    <div class="item item-avatar item-icon-right">
+                        <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
+                        <h2>{{user.firstname}}</h2>
+                        <h2>{{user.lastname}}</h2>
 
                     </div>
 
-                    <div class="list">
-
-                        <a class="item item-avatar" href="#">
-                          <img src="img/twitter.png">
-                          <h2>Twitter</h2>
-                          <p>Notify with Twitter</p>
-                        </a>
-
-                        <a class="item item-avatar" href="#">
-                          <img src="img/facebook.png">
-                          <h2>Facebook</h2>
-                          <p>Notify with Facebook</p>
-                        </a>
-
-                        <li class="item item-avatar item-toggle">
-                          <img src="img/facebook.png">
-                           <h2>Facebook</h2>
-                           <label class="toggle toggle-dark">
-                             <input type="checkbox" checked="">
-                             <div class="track">
-                               <div class="handle"></div>
-                             </div>
-                           </label>
-                        </li>
-
+                    <div class="item item-divider">
+                        Social Notifications
                     </div>
+
+                    <li class="item item-avatar item-toggle">
+                       <img src="img/email.png">
+                       <h2>eMail</h2>
+                       <p>{{user.email}}</p>
+                       <label class="toggle toggle-dark">
+                         <input ng-model="member.email" type="checkbox" checked="">
+                         <div class="track">
+                           <div class="handle"></div>
+                         </div>
+                       </label>
+                    </li>
+
+                    <li class="item item-avatar item-toggle">
+                      <img src="img/twitter.png">
+                       <h2>Twitter</h2>
+                       <label ng-model="member.twitter" class="toggle toggle-dark">
+                         <input type="checkbox" checked="" ng-click="twitter()">
+                         <div class="track">
+                           <div class="handle"></div>
+                         </div>
+                       </label>
+                    </li>
+
+                    <li class="item item-avatar item-toggle">
+                      <img src="img/facebook.png">
+                       <h2>Facebook</h2>
+                       <label class="toggle toggle-dark" ng-click="facebook()">
+                         <input ng-model="member.facebook" type="checkbox" checked="">
+                         <div class="track">
+                           <div class="handle"></div>
+                         </div>
+                       </label>
+                    </li>
+
+                    <li class="item item-avatar item-toggle">
+                      <img src="img/googleplus.png">
+                       <h2>Google+</h2>
+                       <label class="toggle toggle-dark">
+                         <input ng-model="member.googleplus" type="checkbox" checked="">
+                         <div class="track">
+                           <div class="handle"></div>
+                         </div>
+                       </label>
+                    </li>
                 
                     <div class="row">
                         <div class="col col-50">
-                            <button class="button button-block button-energized" item="video" ng-click="useVideo(video)">
-                                Select Video
+                            <button class="button button-block button-balanced" ng-click="back()">
+                                Back
                             </button>
                         </div>
                         <div class="col col-50">
-                            <button class="button button-block button-royal" item="video" ng-click="viewVideo(video)">
-                                View Video
+                            <button class="button button-block button-royal" item="member" ng-click="register(member)">
+                                Register
                             </button>
                         </div>
-
-                    </div>
-
-
-                </div>
-
-            </wz-step>
-            <wz-step title="videoInformation">
-
-                <div class="list">
-
-                    <div class="item item-divider">
-                        Video Information
-                    </div>
-
-                    <label class="item item-input">
-                        <input ng-model="add.title" type="text" placeholder="title">
-                    </label>
-                    <label class="item item-input">
-                        <textarea ng-model="add.description" placeholder="description"></textarea>
-                    </label>
-
-                    <label class="item item-input">
-                        <input ng-model="add.country" type="text" placeholder="country">
-                    </label>
-                    <label class="item item-input">
-                        <input ng-model="add.gametag" type="text" placeholder="gametag">
-                    </label>
-
-                    <label class="item item-input">
-                        <input ng-model="add.recorddate" type="text" placeholder="date">
-                    </label>
-
-                    <div class="item item-divider">
-                        Platform
-                    </div>
-
-                    <ion-radio ng-model="add.platform" ng-value="'PS'">Playstation</ion-radio>
-                    <ion-radio ng-model="add.platform" ng-value="'XBox'">XBox</ion-radio>
-                    <ion-radio ng-model="add.platform" ng-value="'PC'">PC</ion-radio>
-                    <ion-radio ng-model="add.platform" ng-value="'Tablet'">Tablet</ion-radio>
-
-                    <div class="row" ng- show="video">
-                        <div class="col col-10"></div>
-
-                        <div class="col col-80">
-                            <button item="add" class="button button-block button-positive" ng-click="addVideo(add)">
-                                Register Video
-                            </button>
-                        </div>
-
-                        <div class="col col-10"></div>
 
                     </div>
 
                 </div>
 
             </wz-step>
-
-            <wz-step title="videoFinish">
+  
+          <wz-step title="videoFinish">
 
                 <div class="card">
 
                     <div class="item item-text-wrap">
-                        The video has been registered with this board, share it with friends and improve your ranking !
+                        You have been registered !
                     </div>
 
                     <div class="item item-thumbnail-left">
                         <img src="img/finish.png">
-                        <h2>{{video.snippet.title}}</h2>
+                        <h2>{{membervideo.snippet.title}}</h2>
                         <p>{{user.gametag}}</p>
                     </div>
 

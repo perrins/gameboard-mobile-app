@@ -3,7 +3,7 @@ angular.module('gameboard.member.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('MembersService', function($q, ACCESS) {
+.factory('MembersService', function($q, $rootScope,ACCESS) {
 
     return {
 
@@ -19,9 +19,11 @@ angular.module('gameboard.member.services', [])
             var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).append(muuid).toString();
             cc.get(uri,{handleAs:"json"}).done(function(member) {
 
+                debugger;
+
                 // Check we have a member we can work with 
-                if (member.length>0) {
-                    var _member = member[0];
+                if (member) {
+                    var _member = member.doc;
                     if( _.has(_member,"error") && _member.error == "not_found" ) {
                         def.reject(null);
                     } else {
@@ -43,24 +45,26 @@ angular.module('gameboard.member.services', [])
         registerMember : function (member) {
 
             // Manage Defer on the Save
-            var defer = $q.defer();
+            var def = $q.defer();
 
             // get the Data Service
-            var data = IBMCloudCode.getService();
+            var cc = IBMCloudCode.getService();
 
             // Send the Video request to the Bluemix to be added into the Cloudant Database
-            cc.post(ACCESS.MEMBERS, member,{
+            cc.post(ACCESS.REGISTER, member,{
                 "handleAs": "json"
             }).then(function(member) {
+
                 // Was added successfully
                 def.resolve(true);
+
             }).catch(function(err) {
                 console.log(err)
                 def.reject(err);
             });
 
             // Return a promise for the async operation of save
-            return defer.promise;
+            return def.promise;
 
         }
 

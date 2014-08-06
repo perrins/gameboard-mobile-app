@@ -1,4 +1,4 @@
-<ion-view title="Board">
+<ion-view title="{{title}}">
 
     <ion-nav-buttons side="right">
         <button class="button button-clear button-positive" ng-click="newVideo()">
@@ -28,7 +28,8 @@
                 <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();" ng-show="board">
                 </ion-refresher>
 
-                <div class="item" ng-show="board">
+                <div class="item item-avatar" ng-show="board">
+                    
                     <h1>{{board.title}}</h1>
                     <h2>{{board.subtitle}}</h2>
                     <p>{{board.description}}</p>
