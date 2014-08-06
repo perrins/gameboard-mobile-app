@@ -36,7 +36,8 @@ angular.module('gameboard', [
     REGISTER : "/members/register",
     FAVOURITES: "data/Favourites.json", // IBM Data
     SEARCH: "data/Search.json", // IBM CloudCode with Cloudant
-    VIDEOS: "/videos" // IBM CloudCode with Cloudant
+    VIDEOS: "/videos", // IBM CloudCode with Cloudant
+    EMBED : "http://www.youtube.com/embed/"
 })
 
 // Configure the Angular Rules

@@ -299,7 +299,7 @@ angular.module('gameboard.board.controllers', [])
     $scope.viewVideo = function(video) {
        
        // Check we have something to display
-       if (video && _.isUndefined(StreamingMedia)) { 
+       if (!video) { 
 
             var alertPopup = $ionicPopup.alert({
                 title: 'Youtube',
@@ -308,7 +308,8 @@ angular.module('gameboard.board.controllers', [])
             return;
        }
 
-       var videoUrl = ACCESS.EMBED+"FUKiPNXW5f8";
+       // Prepare Video URL
+       var videoUrl = ACCESS.EMBED+video.id;
 
        // Play a video with callbacks
        var options = {

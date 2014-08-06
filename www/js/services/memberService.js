@@ -19,8 +19,6 @@ angular.module('gameboard.member.services', [])
             var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).append(muuid).toString();
             cc.get(uri,{handleAs:"json"}).done(function(member) {
 
-                debugger;
-
                 // Check we have a member we can work with 
                 if (member) {
                     var _member = member.doc;

@@ -1,10 +1,41 @@
 
-.ionic-logo {
-    display: block;
-    margin: 15px auto;
-    width: 96px;
-    height: 96px;
+/* IPHONE IPAD DEVICE MEDIA QUERIES */
+
+/* IPHONE 3 ONLY */
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1) {
+
+/* YOUR CUSTOM STYLE */
+
 }
+
+/* IPHONE 4 ONLY */
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2) {
+
+/* YOUR CUSTOM STYLE */
+
+}
+
+
+/* IPAD 1, 2, Mini – Non Retina */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio: 1) {
+
+/* YOUR CUSTOM STYLE */
+
+}
+
+/* IPAD 3, 4, AIR Retina */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio: 2) {
+
+/* YOUR CUSTOM STYLE */
+
+}
+
+// DEFAULT iPHone 5
+@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) {
+
+
+}
+
 .hidden {
     display: none
 }

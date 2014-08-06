@@ -72,33 +72,27 @@
 {
     // View defaults to full size.  If you want to customize the view's size, or its subviews (e.g. webView),
     // you can do so here.
-
+    
     [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-
-    /*
-    // Initialize the banner at the bottom of the screen.
-    CGPoint origin = CGPointMake(0.0,
-                                 self.view.frame.size.height -
-                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height);
     
-    // Use predefined GADAdSize constants to define the GADBannerView.
-    bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner
-                                                 origin:origin];
-
-    */
+    /*add admob*/
+    CGSize sizeOfScreen = [[UIScreen mainScreen] bounds].size;
+    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     CGFloat screenXPos = (screenWidth/2);
     CGFloat screenYPos = screenHeight - kGADAdSizeBanner.size.height;
+    
     [bannerView_ setCenter:CGPointMake(screenXPos, screenYPos)];
+    
     bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     
     bannerView_.frame = CGRectMake(screenWidth/2.0 - bannerView_.frame.size.width/2.0, screenHeight - bannerView_.frame.size.height,
@@ -117,9 +111,26 @@
     
     // remove this line when you are ready to deploy for real
     request.testDevices = [NSArray arrayWithObjects:GAD_SIMULATOR_ID, nil];
-
     
     [bannerView_ loadRequest:request];
+    
+    /*resize webview*/
+    CGRect webViewFrame = [ [ UIScreen mainScreen ] applicationFrame ];
+    CGRect windowFrame = [ [ UIScreen mainScreen ] bounds ];
+    
+    webViewFrame.origin = windowFrame.origin;
+    
+    // Keep Banner at the bottom
+    if  (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
+        webViewFrame.size.height = sizeOfScreen.width-CGSizeFromGADAdSize(kGADAdSizeSmartBannerLandscape).height-statusBarFrame.size.width+20;
+        webViewFrame.size.width = sizeOfScreen.height;
+        
+    }else{
+        webViewFrame.size.height = windowFrame.size.height-CGSizeFromGADAdSize(kGADAdSizeSmartBannerPortrait).height-statusBarFrame.size.height+20;
+        webViewFrame.size.width = sizeOfScreen.width;
+    }
+    
+    self.webView.frame = webViewFrame;
     
 }
 
