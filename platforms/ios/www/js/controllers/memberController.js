@@ -147,7 +147,6 @@ angular.module('gameboard.member.controllers', [])
 
     $scope.selectVideo = function(item) {
         // Shows/hides the delete button on hover
-        debugger;
         $location.path("#/board/list")
     };
 

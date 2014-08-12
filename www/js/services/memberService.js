@@ -54,7 +54,7 @@ angular.module('gameboard.member.services', [])
             }).then(function(member) {
 
                 // Was added successfully
-                def.resolve(true);
+                def.resolve(member);
 
             }).catch(function(err) {
                 console.log(err)

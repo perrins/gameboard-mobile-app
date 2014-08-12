@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html style="background-color:black;">
+
+<head>
     <meta charset="utf-8">
-    
+
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0,user-scalable=0, target-densityDpi=device-dpi" />
 
     <title>Gameboard</title>
@@ -33,7 +34,7 @@
     <script src="lib/angular/angular-touch.min.js"></script>
     <script src="lib/angular/angular-wizard.min.js"></script>
 
-    <!-- Load the Vendor Elements -->    
+    <!-- Load the Vendor Elements -->
     <script src="lib/gameboard-mobile-app.vendor.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
@@ -71,17 +72,18 @@
     <!-- Directives -->
     <script src="js/directives/directives.js"></script>
 
-  </head>
+    <style>
+        .pane, .view {
+            height:517px;
+        }
+    </style>
 
-  <!--body ng-app="starter">
+</head>
+
+<body id="main" ng-app="gameboard" animation="slide-left-right-ios7" class="hidden fadeSignin">
+
     <ion-nav-view></ion-nav-view>
-  </body-->
 
-<body ng-app="gameboard" animation="slide-left-right-ios7">
+</body>
 
-
-
-    <ion-nav-view></ion-nav-view>
-
-</body>  
 </html>

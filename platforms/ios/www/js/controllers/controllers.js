@@ -48,7 +48,10 @@ angular.module('gameboard.controllers', [])
     // Once complete keep a reference to it so we can talk to it later
     if (!$rootScope.IBMBluemix) {
         InitBluemix.init().then(function() {
+            // Init the Main 
             $rootScope.IBMBluemix = IBMBluemix;
+            // Make the World visible
+            angular.element("#main").removeClass("hidden");
         });
     }
 
@@ -131,18 +134,7 @@ angular.module('gameboard.controllers', [])
     $scope.member = {
 
         muuid: $scope.user.raw.id,
-        user: $scope.user,
-        gametag: "AmissScientist",
-        country: "UK",
-        location: "NN110NZ",
-        age: "46",
-        address1: "27 The Haystack",
-        address2: "Lang Farm",
-        towncity: "Daventry",
-        postcode: "NN110NZ",
-        telephone: "07718149239",
-        platform: 'PS',
-        registered : true
+        user: $scope.user
 
     };
 
@@ -177,23 +169,19 @@ angular.module('gameboard.controllers', [])
 
     };
 
-    debugger;
-
-    var self = this;
-    self["rootScope"] = $rootScope;
-
     // Finish the Wizard 
     $scope.register = function(member) {
 
-        // Validate Member object before sending it off to be stored
-
-        debugger;
         // Lets Validate and Add any other meta data we need
-        MembersService.registerMember(member).then(function(success) {
+        MembersService.registerMember(member).then(function(member) {
 
-            debugger;
+            // Get the Global Scope
+            var appscope = angular.element('body').injector().get('$rootScope')
+            appscope.user.registered = true;
+
             // Go to the Final Wizard Page
             WizardHandler.wizard().next();
+
 
         }, function(err) {
             var alertPopup = $ionicPopup.alert({
@@ -203,7 +191,6 @@ angular.module('gameboard.controllers', [])
         });
 
     };
-
 
     // Finish the Wizard 
     $scope.finish = function() {
@@ -218,16 +205,51 @@ angular.module('gameboard.controllers', [])
 })
 
 // A simple controller that shows a tapped item's data
-.controller('AccountCtrl', function($ionicScrollDelegate, $rootScope, $state, $scope, MembersService, WizardHandler) {
+.controller('AccountCtrl', function($ionicScrollDelegate,$ionicLoading, $rootScope, $state, $scope, MembersService, WizardHandler) {
 
     // Manage the Registration Process
-    $scope.user = $rootScope.user;
-    $scope.member = $rootScope.member;
+    var user = $rootScope.user;
 
     // If they are not registered then take them to registration
-    if (!$scope.registered) {
+    if (!$scope.user.registered) {
         $state.go('register');
+        return;
     }
+
+    // No User lets navigate
+    if(!user) {
+        $state.go('intro')
+        return;
+    }
+
+    // Lets load the Videos for the Youtube Channel
+    $ionicLoading.show({
+        template: 'Getting your membership...'
+    });
+
+    // Lets Get the Member information
+    MembersService.getMember(user.raw.id).then(function(member) {
+
+        $ionicLoading.hide();
+        $rootScope.user.registered = true;
+        $rootScope.member = member;
+        $scope.member = member;
+
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+
+    },function(err) {
+
+      // 
+      var alertPopup = $ionicPopup.alert({
+                title: 'Loading Register',
+                template: 'Failed to register your details, please try again later'
+      });
+
+      return;
+
+    }); 
 
     // Move the Name section
     $scope.save = function() {
@@ -236,7 +258,7 @@ angular.module('gameboard.controllers', [])
     };
 
     // Handle the the cancel
-    $scope.back = function() {
+    $scope.cancel = function() {
         $state.go('intro');
     }
 

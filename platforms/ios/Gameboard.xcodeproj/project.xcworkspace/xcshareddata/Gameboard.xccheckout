@@ -10,29 +10,29 @@
 	<string>Gameboard</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7C248311-5EB7-41CD-8174-23A32DF717E4</key>
+		<key>003D32561965B9CFF53C301CD4C51FAA79620641</key>
 		<string>https://github.com/perrins/gameboard-mobile-app.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>platforms/ios/Gameboard.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7C248311-5EB7-41CD-8174-23A32DF717E4</key>
+		<key>003D32561965B9CFF53C301CD4C51FAA79620641</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/perrins/gameboard-mobile-app.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7C248311-5EB7-41CD-8174-23A32DF717E4</string>
+	<string>003D32561965B9CFF53C301CD4C51FAA79620641</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7C248311-5EB7-41CD-8174-23A32DF717E4</string>
+			<string>003D32561965B9CFF53C301CD4C51FAA79620641</string>
 			<key>IDESourceControlWCCName</key>
 			<string>gameboard-mobile</string>
 		</dict>

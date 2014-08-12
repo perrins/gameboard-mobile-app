@@ -18,15 +18,12 @@
                     <div class="row">
                         <div class="col col-80">
 
-                            <h3>Thank you for using Gameboard!</h3>
-                            <div id="logo">
-                                <img src="http://code.ionicframework.com/assets/img/app_icon.png">
-                            </div>
+                            <h3>Thank you for registing with Gameboard!</h3>
                             <p>
                                 To add videos to the various boards, you need to register. This will enable a whole range of features to be made available to you.
                             </p>
                             <p>
-                                Regisering enables you to improve the ranking through social media.
+                                Registering enables you to improve the ranking through social media.
                             </p>
                         </div>
 
@@ -39,7 +36,6 @@
                             </button>
                         </div>
                     </div>
-
                 </div>
 
             </wz-step>
@@ -127,12 +123,6 @@
 
                     <div class="row">
                         <div class="col col-50">
-                            <button class="button button-block button-balanced" item="video" ng-click="back()">
-                                Back
-                            </button>
-                        </div>
-
-                        <div class="col col-50">
                             <button class="button button-block button-energized" item="video" ng-click="next()">
                                 Continue
                             </button>
@@ -142,7 +132,7 @@
             </wz-step>
             <wz-step title="Social">
 
-                <div class="list card">
+                <div class="list">
 
                     <div class="item item-divider">
                         Member
@@ -203,21 +193,16 @@
                          </div>
                        </label>
                     </li>
-                
+
+
                     <div class="row">
-                        <div class="col col-50">
-                            <button class="button button-block button-balanced" ng-click="back()">
-                                Back
-                            </button>
-                        </div>
                         <div class="col col-50">
                             <button class="button button-block button-royal" item="member" ng-click="register(member)">
                                 Register
                             </button>
                         </div>
-
                     </div>
-
+                
                 </div>
 
             </wz-step>
@@ -226,16 +211,16 @@
 
                 <div class="card">
 
-                    <div class="item item-text-wrap">
-                        You have been registered !
-                    </div>
-
                     <div class="item item-thumbnail-left">
                         <img src="img/finish.png">
                         <h2>{{membervideo.snippet.title}}</h2>
                         <p>{{user.gametag}}</p>
                     </div>
 
+                    <div class="item item-text-wrap">
+                        You have been registered !
+                    </div>
+                
                 </div>
 
                 <div class="row" ng- show="video">
@@ -246,8 +231,6 @@
                             Finish
                         </button>
                     </div>
-
-                    <div class="col col-10"></div>
 
                 </div>
 

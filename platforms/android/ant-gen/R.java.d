@@ -1,4 +1,4 @@
-/IBM/workspace/Gameboard/gameboard-mobile/platforms/android/ant-gen/co/gameboard/mobile/R.java \
+/IBM/workspace/Gameboard/gameboard-mobile/platforms/android/ant-gen/co/gameboard/mobile/gb/R.java \
  : /IBM/workspace/Gameboard/gameboard-mobile/platforms/android/res/drawable/icon.png \
 /IBM/workspace/Gameboard/gameboard-mobile/platforms/android/res/drawable-hdpi/ic_action_next_item.png \
 /IBM/workspace/Gameboard/gameboard-mobile/platforms/android/res/drawable-hdpi/ic_action_previous_item.png \
