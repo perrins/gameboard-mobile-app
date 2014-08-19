@@ -140,19 +140,7 @@ angular.module('gameboard.board.controllers', [])
         $scope.bid = $stateParams.bid;
 
         // "List is " is a service returning data from the 
-        BoardService.all($scope.bid).then(function(videos) {
-
-            // Need to add the other information to the Board,
-            // That information has come in from the Request
-            // Temp until we get add working
-            var board = { "bid":$stateParams.bid,
-                    "title"         : "Golden Gun",
-                    "subtitle"      : "Best golden gun moments",
-                    "description"   :"Imagine all the best golden gun moments in one organised leader board and watch the best of the best",
-                    "number"        : 1234,
-                    "prizes"        : "£3,500",
-                    "date"          : "01/05/2014",
-                    "videos" : videos };
+        BoardService.all($scope.bid).then(function(board) {
 
             // Set the Title
             $scope.title = board.title;
