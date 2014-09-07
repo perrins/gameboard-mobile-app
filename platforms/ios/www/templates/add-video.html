@@ -1,0 +1,191 @@
+<ion-pane class="modal">
+
+    <!-- Modal header bar -->
+    <header class="bar bar-header bar-secondary">
+        <button class="button button-clear button-assertive" ng-click="wizardBack()" ng-show="back">Back</button>
+
+        <h1 class="title">Add Video</h1>
+        <button class="button button-clear button-assertive" ng-click="closeVideo()">Cancel</button>
+    </header>
+
+    <!-- Modal content area -->
+    <ion-content class="has-header">
+
+        <ion-nav-view name="videoContent" animation="slide-left-right">
+
+            <wizard current-step="currentStep" hide-indicators="true">
+                <wz-step title="VideoList">
+                    <div class="item item-divider">
+                        Member
+                    </div>
+
+                    <div class="item item-avatar item-icon-right">
+                        <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
+                        <h2>{{user.firstname}}</h2>
+                        <h2>{{user.lastname}}</h2>
+                        <p>{{user.gametag}}</p>
+
+                    </div>
+
+                    <div class="item item-divider">
+                        Your Youtube Videos
+                    </div>
+                    <div class="list" ng-show="videos">
+
+                        <a ng-repeat="video in videos" class="item item-thumbnail-left item-icon-right" item="video" ng-click="selectVideo(video)">
+
+                            <img class="video" ng-src="{{video.snippet.thumbnails.default.url}}" lazyload>
+
+                            <h2>{{video.snippet.title}}</h2>
+                            <p>{{video.snippet.description}}</p>
+
+                            <span class="badge badge-calm">{{game.count}}</span>
+
+                            <i class="icon ion-chevron-right icon-accessory"></i>
+                        </a>
+
+                    </div>
+                </wz-step>
+                <wz-step title="VideoDetail">
+
+
+                    <div class="list card">
+
+                        <div class="item">
+                            <h1>{{video.snippet.title}}</h1>
+                            <h3>{{user.gametag}}</h3>
+                            <p>{{video.snippet.description}}</p>
+                        </div>
+
+                        <div class="item item-image">
+                            <img class="genre-image genre-image-load" ng-src="{{video.snippet.thumbnails.standard.url}}" lazyload>
+                        </div>
+
+                    </div>
+
+                    <div class="list card" ng-show="video">
+
+                        <div class="item item-thumbnail-left item-avatar">
+
+                            <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
+
+                            <h2>{{user.name}}&nbsp{{user.surname}}</h2>
+                            <p>{{video.snippet.publishedAt}}</p>
+                            <div class="bigPrize">{{video.contentDetails.definition}}</div>
+                            <div class="bigViews">{{video.statistics.viewCount}}</div>
+
+                        </div>
+                        <div class="row" ng- show="video">
+                            <div class="col col-50">
+                                <button class="button button-block button-energized" item="video" ng-click="useVideo(video)">
+                                    Select Video
+                                </button>
+                            </div>
+                            <div class="col col-50">
+                                <button class="button button-block button-royal" item="video" ng-click="viewVideo(video)">
+                                    View Video
+                                </button>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </wz-step>
+                <wz-step title="videoInformation">
+
+                    <div class="list">
+
+                        <div class="item item-divider">
+                            Video Information
+                        </div>
+
+                        <label class="item item-input">
+                            <input ng-model="add.title" type="text" placeholder="title">
+                        </label>
+                        <label class="item item-input">
+                            <textarea ng-model="add.description" placeholder="description"></textarea>
+                        </label>
+
+                        <label class="item item-input">
+                            <input ng-model="add.country" type="text" placeholder="country">
+                        </label>
+                        <label class="item item-input">
+                            <input ng-model="add.gametag" type="text" placeholder="gametag">
+                        </label>
+
+                        <label class="item item-input">
+                            <input ng-model="add.recorddate" type="text" placeholder="date">
+                        </label>
+
+                        <div class="item item-divider">
+                            Platform
+                        </div>
+
+                        <ion-radio ng-model="add.platform" ng-value="'PS'">Playstation</ion-radio>
+                        <ion-radio ng-model="add.platform" ng-value="'XBox'">XBox</ion-radio>
+                        <ion-radio ng-model="add.platform" ng-value="'PC'">PC</ion-radio>
+                        <ion-radio ng-model="add.platform" ng-value="'Tablet'">Tablet</ion-radio>
+
+                        <div class="row" ng- show="video">
+                            <div class="col col-10"></div>
+
+                            <div class="col col-80">
+                                <button item="add" class="button button-block button-positive" ng-click="addVideo(add)">
+                                    Register Video
+                                </button>
+                            </div>
+
+                            <div class="col col-10"></div>
+
+                        </div>
+
+                    </div>
+
+                </wz-step>
+
+                <wz-step title="videoFinish">
+
+                    <div class="card">
+
+                        <div class="item item-text-wrap">
+                            The video has been registered with this board, share it with friends and improve your ranking !
+                        </div>
+
+                        <div class="item item-thumbnail-left">
+                            <img src="img/finish.png">
+                            <h2>{{video.snippet.title}}</h2>
+                            <p>{{user.gametag}}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row" ng- show="video">
+                        <div class="col col-10"></div>
+
+                        <div class="col col-80">
+                            <button class="button button-block button-balanced" ng-click="finish()">
+                                Finish
+                            </button>
+                        </div>
+
+                        <div class="col col-10"></div>
+
+                    </div>
+
+                </wz-step>
+
+            </wizard>
+
+            <div class="card hidden" ng-show="!videos">
+                <div class="item item-text-wrap">
+                    You do not have any videos registered in Youtube, please upload a video to Youtube and try and add it again
+                </div>
+            </div>
+            <div>
+        </ion-nav-view>
+
+    </ion-content>
+
+</ion-pane>
