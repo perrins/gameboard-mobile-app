@@ -26,6 +26,8 @@
     "ibmbluemix": "https://hub.jazz.net/git/bluemixmobilesdk/ibmbluemix-javascript/.git",
     "ibmcloudcode": "https://hub.jazz.net/git/bluemixmobilesdk/ibmcloudcode-javascript/.git",
     "ibmdata": "https://hub.jazz.net/git/bluemixmobilesdk/ibmdata-javascript/.git",
-    "oauth-js": "~0.2.2"
+    "oauth-js": "~0.2.2",
+    "angular-wizard": "~0.4.0",
+    "collide": "~0.0.4"
   }
 }

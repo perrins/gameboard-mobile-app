@@ -863,3 +863,49 @@ You could find it at the following address https://developer.apple.com/icloud/do
 2014-08-06 08:40:35.966 Gameboard[11719:70b] ACTIVATING
 2014-08-06 08:40:36.027 Gameboard[11719:70b] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
 2014-08-06 08:40:40.109 Gameboard[11719:70b] ACTIVATING
+2014-09-02 13:01:41.237 Gameboard[2803:70b] Multi-tasking -> Device: YES, App: YES
+2014-09-02 13:01:41.301 Gameboard[2803:70b] Unlimited access to network resources
+2014-09-02 13:01:41.306 Gameboard[2803:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-02 13:01:43.127 Gameboard[2803:70b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-09-02 13:01:43.127 Gameboard[2803:70b] [CDVTimer][statusbar] 0.653982ms
+2014-09-02 13:01:43.128 Gameboard[2803:70b] [CDVTimer][TotalPluginStartup] 1.139998ms
+2014-09-02 13:01:43.687 Gameboard[2803:70b] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-09-02 13:01:43.835 Gameboard[2803:70b] Resetting plugins due to page load.
+2014-09-02 13:01:44.352 Gameboard[2803:70b] Finished load of: file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/index.html#/signin
+2014-09-02 13:01:47.800 Gameboard[2803:70b] <Google:HTML> Google Mobile Ads SDK: You are currently using 6.10.0 of the SDK. A new version, 6.11.1, is available at http://goo.gl/Zc0BYt . Please consider updating your SDK to get the latest features and bug fixes
+2014-09-02 13:01:48.961 Gameboard[2803:70b] Signon to the application
+2014-09-02 13:01:48.986 Gameboard[2803:70b] Setting the WebView's frame to {{0, 0}, {320, 436}}
+2014-09-02 13:01:48.987 Gameboard[2803:70b] Setting the WebView's frame to {{0, 0}, {320, 480}}
+2014-09-02 13:01:48.991 Gameboard[2803:70b] THREAD WARNING: ['InAppBrowser'] took '29.355957' ms. Plugin should use a background thread.
+2014-09-02 13:02:05.649 Gameboard[2803:70b] webView:didFailLoadWithError - -1004: Could not connect to the server.
+2014-09-02 13:02:06.085 Gameboard[2803:70b] muuid 116314656208718221198
+2014-09-02 13:02:06.085 Gameboard[2803:70b] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/members/116314656208718221198
+2014-09-02 13:02:13.918 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:15.085 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:16.202 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:17.195 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:18.588 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:20.568 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:21.879 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:21.980 Gameboard[2803:70b] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001
+2014-09-02 13:02:22.642 Gameboard[2803:70b] {"line":290,"sourceURL":"file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/js/services/boardService.js","stack":"file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/js/services/boardService.js:290:31\nd@file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:44462\nfile:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:70935\npromiseDispatch@file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:59584\nfile:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:37801\na@file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:42189"}
+2014-09-02 13:02:22.659 Gameboard[2803:70b] {"line":290,"sourceURL":"file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/js/services/boardService.js","stack":"file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/js/services/boardService.js:290:31\nd@file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:44462\nfile:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:70935\npromiseDispatch@file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:59584\nfile:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:37801\na@file:///Users/matthewperrins/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/F2B9C0B6-F2AF-494C-A615-0E95100D3A43/Gameboard.app/www/lib/gameboard-mobile-app.vendor.min.js:78:42189"}
+2014-09-02 13:02:24.403 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:24.438 Gameboard[2803:70b] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
+2014-09-02 13:02:27.723 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:27.774 Gameboard[2803:70b] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/FUKiPNXW5f8
+2014-09-02 13:02:32.224 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:33.513 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:34.383 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:35.092 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:36.341 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:02:37.535 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:03:08.994 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:03:10.645 Gameboard[2803:70b] ACTIVATING
+2014-09-02 13:03:13.102 Gameboard[2803:70b] ACTIVATING

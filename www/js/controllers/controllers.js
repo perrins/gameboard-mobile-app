@@ -31,7 +31,7 @@ angular.module('gameboard.controllers', [])
 
         // If we dont have a user then lets signon
         // TODO : REMOVE AFTER DEBUGGING
-        $state.go('signin');
+        //$state.go('signin');
 
     }
 
@@ -63,6 +63,10 @@ angular.module('gameboard.controllers', [])
         $ionicLoading.show({
             template: 'Authenticating...'
         });
+
+        // Just Jump Over Security if 
+        $state.go('intro');
+        return;
 
         // Initialize Security
         // Initialize the OAuth settings

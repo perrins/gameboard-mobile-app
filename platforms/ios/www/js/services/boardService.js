@@ -386,7 +386,41 @@ function(doc){
             return def.promise;
 
 
+        },
+
+        getVideoByYTID: function(ytid) {
+
+            // Create a deffered
+            var def = $q.defer();
+
+            // Get Cloud Code
+            var cc = IBMCloudCode.getService();
+
+            // Build out a new URI builder
+            var _uri = new IBMUriBuilder().slash().append(ACCESS.BYYTID).append(ytid).toString();
+
+            // Get the Details of the Video
+            cc.get(_uri, {
+                "handleAs": "json"
+            }).then(function(video) {
+
+                debugger;
+                var _video = null;
+                if (video.items.length > 0) {
+                    _video = video.items[0];
+                }
+                def.resolve(_video);
+
+            }).catch(function(err) {
+                console.log(err);
+                def.reject(err);
+            })
+
+            // Get the Objects for a particular Type
+            return def.promise;
+
         }
+        
     }
 
 })

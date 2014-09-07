@@ -58,6 +58,11 @@ module.exports = function(grunt) {
                     dest: "www/lib/angular/angular-wizard.min.css"
                 },
                 {
+                    src: "vendor/collide/collide.js",
+                    dest: "www/lib/collide/collide.js"
+                },
+
+                {
                     src: "vendor/oauth-js/dist/oauth.js",
                     dest: "www/lib/oauth.js"
                 }]

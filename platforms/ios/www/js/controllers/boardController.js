@@ -1,7 +1,10 @@
 angular.module('gameboard.board.controllers', [])
 
 
-.controller('GenresCtrl', function($scope, GenresService) {
+.controller('GenresCtrl', function($scope,$ionicLoading, GenresService) {
+
+
+    $ionicLoading.show({template:'Loading Genres...'});
 
     // Need to Check if we have got some already
     GenresService.all().then(function(genres) {
@@ -9,18 +12,23 @@ angular.module('gameboard.board.controllers', [])
         // Paint 
         $scope.genres = genres;
 
+        // Hide the Loading Message
+        $ionicLoading.hide();
+
         // Let Angular know we have some data because of the Async nature of IBMBaaS
         // This is required to make sure the information is uptodate
         if (!$scope.$$phase) {
             $scope.$apply();
         }
 
+    },function(err){
+        $ionicLoading.hide();
     });
 
 })
 
 // A simple controller that shows a tapped item's data
-.controller('GamesCtrl', function($scope, $stateParams, $ionicPopup, GenresService, GamesService) {
+.controller('GamesCtrl', function($scope, $stateParams,$ionicLoading, $ionicPopup, GenresService, GamesService) {
 
     // Lets check we have a 
     var genid = $stateParams.genid;
@@ -30,6 +38,11 @@ angular.module('gameboard.board.controllers', [])
 
     // Display The Title
     $scope.title = genre.get('title');
+
+    // Lets load the Videos for the Youtube Channel
+    $ionicLoading.show({
+        template: 'Loading Games...'
+    });
 
     // Need to Check if we have got some already
     GamesService.all(genid).then(function(data) {
@@ -48,6 +61,8 @@ angular.module('gameboard.board.controllers', [])
             $scope.gid = data.get('gid');
             $scope.genid = data.get('genid');
 
+
+            $ionicLoading.hide();
             // Let Angular know we have some data because of the Async nature of IBMBaaS
             // This is required to make sure the information is uptodate
             if (!$scope.$$phase) {
@@ -55,12 +70,15 @@ angular.module('gameboard.board.controllers', [])
             }
        } 
 
+    },function(err){
+        console.log(err);
+        $ionicLoading.hide();
     });
 
 })
 
 // A simple controller that shows a tapped item's data
-.controller('CategoriesCtrl', function($scope, $stateParams, CategoriesService,GamesService) {
+.controller('CategoriesCtrl', function($scope, $stateParams,$ionicLoading, CategoriesService,GamesService) {
 
     // Lets check we have a 
     var gmid = $stateParams.gmid;
@@ -72,6 +90,8 @@ angular.module('gameboard.board.controllers', [])
     // Display The Title
     $scope.title = game.title;
 
+    $ionicLoading.show({template:'Loading Categories...'});
+
     // Need to Check if we have got some already
     CategoriesService.all($stateParams.gmid).then(function(data) {
 
@@ -80,11 +100,16 @@ angular.module('gameboard.board.controllers', [])
         $scope.categories = data.get('categories');
         $scope.gmid = data.get('gmid');
 
+        $ionicLoading.hide();
+
         // This is required to make sure the information is uptodate
         if (!$scope.$$phase) {
             $scope.$apply();
         }
 
+    },function(err){
+        console.log(err);
+        $ionicLoading.hide();
     });
 
 })
@@ -107,7 +132,7 @@ angular.module('gameboard.board.controllers', [])
         // Because we are retrieving all the items every time we do something
         // We need to clear the list before loading in some new values
         $ionicLoading.show({
-            template: 'Loading...'
+            template: 'Loading Board...'
         });
 
         // Because we are retrieving all the items every time we do something
@@ -115,19 +140,7 @@ angular.module('gameboard.board.controllers', [])
         $scope.bid = $stateParams.bid;
 
         // "List is " is a service returning data from the 
-        BoardService.all($scope.bid).then(function(videos) {
-
-            // Need to add the other information to the Board,
-            // That information has come in from the Request
-            // Temp until we get add working
-            var board = { "bid":$stateParams.bid,
-                    "title"         : "Golden Gun",
-                    "subtitle"      : "Best golden gun moments",
-                    "description"   :"Imagine all the best golden gun moments in one organised leader board and watch the best of the best",
-                    "number"        : 1234,
-                    "prizes"        : "£3,500",
-                    "date"          : "01/05/2014",
-                    "videos" : videos };
+        BoardService.all($scope.bid).then(function(board) {
 
             // Set the Title
             $scope.title = board.title;

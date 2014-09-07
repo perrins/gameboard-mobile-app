@@ -163,7 +163,7 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 .ImageButton .summary {
 	background-color: rgba(0,0,0,0.5);
 	position: absolute;
-	bottom: 0;
+	bottom: 5px;
 	width: 100%;
 	height: auto;
 	padding: 10px 5px 10px;

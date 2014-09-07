@@ -1,6 +1,6 @@
 {
   "name": "gameboard-mobile-app",
-  "version": "0.0.31",
+  "version": "0.0.35",
   "codename": "Joe Release",
   "author": {
     "name": [
@@ -35,5 +35,8 @@
       "type": "Game-board License"
     }
   ],
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "load-grunt-tasks": "^0.6.0"
+  }
 }
