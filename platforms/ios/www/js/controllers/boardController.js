@@ -4,6 +4,7 @@ angular.module('gameboard.board.controllers', [])
 .controller('GenresCtrl', function($scope,$ionicLoading, GenresService) {
 
 
+    // Show what we are doing
     $ionicLoading.show({template:'Loading Genres...'});
 
     // Need to Check if we have got some already
@@ -22,6 +23,11 @@ angular.module('gameboard.board.controllers', [])
         }
 
     },function(err){
+
+        // Handle Display of No Data and No Connection
+
+
+
         $ionicLoading.hide();
     });
 

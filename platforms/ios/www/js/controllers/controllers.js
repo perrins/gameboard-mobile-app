@@ -13,6 +13,8 @@ angular.module('gameboard.controllers', [])
     // Prepare User for Display
     if ($rootScope.user) {
 
+
+
         $scope.user = $rootScope.user;
         $scope.member = $rootScope.member;
 
@@ -31,7 +33,7 @@ angular.module('gameboard.controllers', [])
 
         // If we dont have a user then lets signon
         // TODO : REMOVE AFTER DEBUGGING
-        $state.go('signin');
+        //$state.go('signin');
 
     }
 
@@ -63,6 +65,10 @@ angular.module('gameboard.controllers', [])
         $ionicLoading.show({
             template: 'Authenticating...'
         });
+
+        // Just Jump Over Security if 
+        $state.go('intro');
+        return;
 
         // Initialize Security
         // Initialize the OAuth settings
@@ -100,6 +106,7 @@ angular.module('gameboard.controllers', [])
 
                             $ionicLoading.hide();
                             $rootScope.user.registered = false;
+                            $rootScope.user.avatar = "img/avatar.png";
                             $state.go('intro');
                         });
 
@@ -127,16 +134,13 @@ angular.module('gameboard.controllers', [])
 // A simple controller that shows a tapped item's data
 .controller('RegisterCtrl', function($ionicScrollDelegate, $rootScope, $state, $scope, MembersService, WizardHandler,$ionicPopup) {
 
+    // Check if user is defined
+    if (!rootScope.user){
+        $state.go("signin");
+    }
+
     // Manage the Registration Process
     $scope.user = $rootScope.user;
-
-    // Test Data
-    $scope.member = {
-
-        muuid: $scope.user.raw.id,
-        user: $scope.user
-
-    };
 
     // Move the Name section
     $scope.next = function() {
@@ -210,15 +214,17 @@ angular.module('gameboard.controllers', [])
     // Manage the Registration Process
     var user = $rootScope.user;
 
-    // If they are not registered then take them to registration
-    if (!$scope.user.registered) {
-        $state.go('register');
-        return;
-    }
+    debugger;
 
     // No User lets navigate
     if(!user) {
-        $state.go('intro')
+        $state.go('signin');
+        return;
+    }
+
+    // If they are not registered then take them to registration
+    if (!user.registered) {
+        $state.go('register');
         return;
     }
 
