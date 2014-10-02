@@ -43,14 +43,14 @@ angular.module('gameboard.controllers', [])
 
 })
 
-// Sign In Controller, navigate to Intro 
+// Sign In Controller, navigate to Intro
 .controller('SignInCtrl', function($rootScope, $state, $scope, InitBluemix, MembersService, $ionicLoading) {
 
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
     if (!$rootScope.IBMBluemix) {
         InitBluemix.init().then(function() {
-            // Init the Main 
+            // Init the Main
             $rootScope.IBMBluemix = IBMBluemix;
             // Make the World visible
             angular.element("#main").removeClass("hidden");
@@ -66,7 +66,7 @@ angular.module('gameboard.controllers', [])
             template: 'Authenticating...'
         });
 
-        // Just Jump Over Security if 
+        // Just Jump Over Security if
         $state.go('intro');
         return;
 
@@ -80,7 +80,7 @@ angular.module('gameboard.controllers', [])
         })
             .done(function(google) {
 
-                // Save the context so we can 
+                // Save the context so we can
                 $rootScope.google = google;
 
                 // Set the Security Token on IBM Bluemix
@@ -116,7 +116,7 @@ angular.module('gameboard.controllers', [])
                     .fail(function(err) {
                         $ionicLoading.hide();
                     });
-                //use result.access_token in your API request 
+                //use result.access_token in your API request
                 //or use result.get|post|put|del|patch|me methods (see below)
 
                 // Navigate to the Home page
@@ -161,7 +161,7 @@ angular.module('gameboard.controllers', [])
 
     };
 
-    // Handle Social Integration, need the FB, Twitter details to be able to 
+    // Handle Social Integration, need the FB, Twitter details to be able to
     // Post information of videos that have been added.
     $scope.facebook = function() {
 
@@ -173,7 +173,7 @@ angular.module('gameboard.controllers', [])
 
     };
 
-    // Finish the Wizard 
+    // Finish the Wizard
     $scope.register = function(member) {
 
         // Lets Validate and Add any other meta data we need
@@ -196,7 +196,7 @@ angular.module('gameboard.controllers', [])
 
     };
 
-    // Finish the Wizard 
+    // Finish the Wizard
     $scope.finish = function() {
         $state.go('intro');
     };
@@ -247,7 +247,7 @@ angular.module('gameboard.controllers', [])
 
     },function(err) {
 
-      // 
+      //
       var alertPopup = $ionicPopup.alert({
                 title: 'Loading Register',
                 template: 'Failed to register your details, please try again later'
@@ -255,7 +255,7 @@ angular.module('gameboard.controllers', [])
 
       return;
 
-    }); 
+    });
 
     // Move the Name section
     $scope.save = function() {
