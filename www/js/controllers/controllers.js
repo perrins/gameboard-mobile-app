@@ -5,15 +5,14 @@ angular.module("gameboard.controllers", [])
 	// Init Mobile Cloud SDK and wait for it to configure itself
 	// Once complete keep a reference to it so we can talk to it later
 	if (!$rootScope.IBMBluemix) {
-		InitBluemix.init().then(function() {
+		InitBluemix.init().then(function () {
+			// TMD: IBMBluemix not defined?
 			$rootScope.IBMBluemix = IBMBluemix;
 		});
 	}
 
 	// Prepare User for Display
 	if ($rootScope.user) {
-
-
 
 		$scope.user = $rootScope.user;
 		$scope.member = $rootScope.member;
@@ -34,12 +33,11 @@ angular.module("gameboard.controllers", [])
 		// If we dont have a user then lets signon
 		// TODO : REMOVE AFTER DEBUGGING
 		//$state.go("signin");
-
 	}
 
-	$scope.logout = function() {
+	$scope.logout = function () {
 		console.log("logout");
-	}
+	};
 
 })
 
@@ -58,7 +56,7 @@ angular.module("gameboard.controllers", [])
 	}
 
 	// Signon to the App
-	$scope.signon = function() {
+	$scope.signon = function () {
 		console.log("Signon to the application");
 
 		// Lets load the Videos for the Youtube Channel
@@ -68,7 +66,7 @@ angular.module("gameboard.controllers", [])
 
 		// Just Jump Over Security if
 		$state.go("intro");
-		return;
+		return; // TMD: I assume this is for the bypassing of OAuth? Because code below will never be called.
 
 		// Initialize Security
 		// Initialize the OAuth settings
@@ -77,57 +75,45 @@ angular.module("gameboard.controllers", [])
 		// Handle the Cordova OAuth experience
 		OAuth.popup("google", {
 			cache: true
-		})
-			.done(function(google) {
+		}).done(function (google) {
+			// Save the context so we can
+			$rootScope.google = google;
 
-				// Save the context so we can
-				$rootScope.google = google;
+			// Set the Security Token on IBM Bluemix
+			IBMBluemix.setSecurityToken(google.access_token, "GOOGLE");
 
-				// Set the Security Token on IBM Bluemix
-				IBMBluemix.setSecurityToken(google.access_token, "GOOGLE");
+			// Lets get some information about the User
+			google.me().done(function (user) {
+				$rootScope.user = user;
 
-				// Lets get some information about the User
-				google.me()
-					.done(function(user) {
+				// Get a Member
+				MembersService.getMember(user.raw.id).then(function (member) {
+					$ionicLoading.hide();
+					$rootScope.user.registered = true;
+					$rootScope.member = member;
 
-						$rootScope.user = user;
-
-						// Get a Member
-						MembersService.getMember(user.raw.id).then(function(member) {
-
-							$ionicLoading.hide();
-							$rootScope.user.registered = true;
-							$rootScope.member = member;
-
-							// Havigate to the Board View
-							$state.go("intro");
-
-						}, function(err) {
-
-							$ionicLoading.hide();
-							$rootScope.user.registered = false;
-							$rootScope.user.avatar = "img/avatar.png";
-							$state.go("intro");
-						});
-
-
-
-					})
-					.fail(function(err) {
-						$ionicLoading.hide();
-					});
-				//use result.access_token in your API request
-				//or use result.get|post|put|del|patch|me methods (see below)
-
-				// Navigate to the Home page
-
-			})
-			.fail(function(err) {
-				//handle error with err
+					// Havigate to the Board View
+					$state.go("intro");
+				}, function (err) {
+					$ionicLoading.hide();
+					$rootScope.user.registered = false;
+					$rootScope.user.avatar = "img/avatar.png";
+					$state.go("intro");
+				});
+			}).fail(function(err) {
+				// TMD: isn't this covered by the second arg to 'then' ?
 				$ionicLoading.hide();
 			});
+			//use result.access_token in your API request
+			//or use result.get|post|put|del|patch|me methods (see below)
 
-	}
+			// Navigate to the Home page
+
+		}).fail(function(err) {
+			//handle error with err
+			$ionicLoading.hide();
+		});
+	};
 
 })
 
