@@ -1,6 +1,6 @@
 angular.module("gameboard.controllers", [])
 
-.controller("MainCtrl", function($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicViewService, InitBluemix) {
+.controller("MainCtrl", function ($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicViewService, InitBluemix) {
 
 	// Init Mobile Cloud SDK and wait for it to configure itself
 	// Once complete keep a reference to it so we can talk to it later
@@ -42,7 +42,7 @@ angular.module("gameboard.controllers", [])
 })
 
 // Sign In Controller, navigate to Intro
-.controller("SignInCtrl", function($rootScope, $state, $scope, InitBluemix, MembersService, $ionicLoading) {
+.controller("SignInCtrl", function ($rootScope, $state, $scope, InitBluemix, MembersService, $ionicLoading) {
 
 	// Init Mobile Cloud SDK and wait for it to configure itself
 	// Once complete keep a reference to it so we can talk to it later
@@ -72,6 +72,11 @@ angular.module("gameboard.controllers", [])
 		// Initialize the OAuth settings
 		OAuth.initialize($rootScope.config.security);
 
+		var failFunc = function (err) {
+			// TMD: isn't this covered by the second arg to 'then' ?
+			$ionicLoading.hide();
+		};
+
 		// Handle the Cordova OAuth experience
 		OAuth.popup("google", {
 			cache: true
@@ -100,25 +105,14 @@ angular.module("gameboard.controllers", [])
 					$rootScope.user.avatar = "img/avatar.png";
 					$state.go("intro");
 				});
-			}).fail(function(err) {
-				// TMD: isn't this covered by the second arg to 'then' ?
-				$ionicLoading.hide();
-			});
-			//use result.access_token in your API request
-			//or use result.get|post|put|del|patch|me methods (see below)
-
-			// Navigate to the Home page
-
-		}).fail(function(err) {
-			//handle error with err
-			$ionicLoading.hide();
-		});
+			}).fail(failFunc);
+		}).fail(failFunc);
 	};
 
 })
 
 // A simple controller that shows a tapped item"s data
-.controller("RegisterCtrl", function($ionicScrollDelegate, $rootScope, $state, $scope, MembersService, WizardHandler,$ionicPopup) {
+.controller("RegisterCtrl", function ($ionicScrollDelegate, $rootScope, $state, $scope, MembersService, WizardHandler, $ionicPopup) {
 
 	// Check if user is defined
 	if (!rootScope.user){
@@ -129,51 +123,38 @@ angular.module("gameboard.controllers", [])
 	$scope.user = $rootScope.user;
 
 	// Move the Name section
-	$scope.next = function() {
-
+	$scope.next = function () {
 		// VALIDATE THE FORM
-
 		$ionicScrollDelegate.scrollTop();
 		WizardHandler.wizard().next();
-
 	};
 
-
 	// Move the Name section
-	$scope.back = function() {
-
+	$scope.back = function () {
 		$ionicScrollDelegate.scrollTop();
 		WizardHandler.wizard().previous();
-
 	};
 
 	// Handle Social Integration, need the FB, Twitter details to be able to
 	// Post information of videos that have been added.
-	$scope.facebook = function() {
-
+	$scope.facebook = function () {
 		// ADD CODE TO AUTHENTICATE Gameboard app with Facebook
-
 	};
 
-	$scope.twitter = function() {
-
-	};
+	$scope.twitter = function () {};
 
 	// Finish the Wizard
-	$scope.register = function(member) {
-
+	$scope.register = function (member) {
 		// Lets Validate and Add any other meta data we need
-		MembersService.registerMember(member).then(function(member) {
-
+		MembersService.registerMember(member).then(function (member) {
 			// Get the Global Scope
-			var appscope = angular.element("body").injector().get("$rootScope")
+			var appscope = angular.element("body").injector().get("$rootScope");
 			appscope.user.registered = true;
 
 			// Go to the Final Wizard Page
 			WizardHandler.wizard().next();
 
-
-		}, function(err) {
+		}, function (err) {
 			var alertPopup = $ionicPopup.alert({
 				title: "Register",
 				template: "Failed to register your details, please try again later"
@@ -183,24 +164,21 @@ angular.module("gameboard.controllers", [])
 	};
 
 	// Finish the Wizard
-	$scope.finish = function() {
+	$scope.finish = function () {
 		$state.go("intro");
 	};
 
 	// Handle the the cancel
-	$scope.cancel = function() {
+	$scope.cancel = function () {
 		$state.go("intro");
-	}
-
+	};
 })
 
 // A simple controller that shows a tapped item"s data
-.controller("AccountCtrl", function($ionicScrollDelegate,$ionicLoading, $rootScope, $state, $scope, MembersService, WizardHandler) {
+.controller("AccountCtrl", function ($ionicScrollDelegate, $ionicLoading, $rootScope, $state, $scope, MembersService, WizardHandler) {
 
 	// Manage the Registration Process
 	var user = $rootScope.user;
-
-	debugger;
 
 	// No User lets navigate
 	if(!user) {
@@ -220,8 +198,7 @@ angular.module("gameboard.controllers", [])
 	});
 
 	// Lets Get the Member information
-	MembersService.getMember(user.raw.id).then(function(member) {
-
+	MembersService.getMember(user.raw.id).then(function (member) {
 		$ionicLoading.hide();
 		$rootScope.user.registered = true;
 		$rootScope.member = member;
@@ -230,17 +207,13 @@ angular.module("gameboard.controllers", [])
 		if (!$scope.$$phase) {
 			$scope.$apply();
 		}
-
-	},function(err) {
-
-	  //
+	}, function (err) {
 	  var alertPopup = $ionicPopup.alert({
-				title: "Loading Register",
-				template: "Failed to register your details, please try again later"
-	  });
+			title: "Loading Register",
+			template: "Failed to register your details, please try again later"
+		});
 
-	  return;
-
+		return;
 	});
 
 	// Move the Name section
@@ -252,13 +225,12 @@ angular.module("gameboard.controllers", [])
 	// Handle the the cancel
 	$scope.cancel = function() {
 		$state.go("intro");
-	}
-
+	};
 })
 
 
 // A simple controller that shows a tapped item"s data
-.controller("AboutCtrl", function($rootScope, $scope, Settings) {
+.controller("AboutCtrl", function ($rootScope, $scope, Settings) {
 
 	$scope.name = "Screaming Foulup";
 	$scope.version = "0.0.1";
@@ -274,11 +246,10 @@ angular.module("gameboard.controllers", [])
 
 })
 
-.controller("IntroCtrl", function($scope, $state, $ionicSlideBoxDelegate, $ionicViewService, Settings) {
+.controller("IntroCtrl", function ($scope, $state, $ionicSlideBoxDelegate, $ionicViewService, Settings) {
 
 	// Called to navigate to the main app
-	$scope.startApp = function() {
-
+	$scope.startApp = function () {
 		// Clear the Back stack
 		$ionicViewService.nextViewOptions({
 			disableAnimate: true,
@@ -291,12 +262,10 @@ angular.module("gameboard.controllers", [])
 		// Havigate to the Board View
 		$state.go("board.genres");
 		//$state.go("board.board",{bid:1001});
-
 	};
 
 	// If we have displayed the screen before lets go to Main
 	if (Settings.get("LOADSCREEN")) {
-
 		// Clear the Back stack
 		$ionicViewService.nextViewOptions({
 			disableBack: true
@@ -324,27 +293,25 @@ angular.module("gameboard.controllers", [])
  * A Service that intialises MBaaS
  */
 .factory("InitBluemix",
-	function($rootScope, $http, $q) {
-
+	function ($rootScope, $http, $q) {
 		function init() {
-
 			// Create a defer
 			var defer = $q.defer();
 
 			// Lets load the Configuration from the bluelist.json file
-			$http.get("./bluemix.json").success(function(config) {
-
+			$http.get("./bluemix.json").success(function (config) {
 				$rootScope.config = config;
 
 				// Initialise the SDK
-				IBMBluemix.initialize(config).done(function() {
+				// TMD: Does this initialize function not return a proper promise?
+				IBMBluemix.initialize(config).done(function () {
 
 					// Let the user no they have logged in and can do some stuff if they require
 					console.log("Sucessful initialisation with Application : " + IBMBluemix.getConfig().getApplicationId());
 
 					// Initialize the Service
-					var data = IBMData.initializeService();
-					var cc = IBMCloudCode.initializeService();
+					var data = IBMData.initializeService(),
+						cc = IBMCloudCode.initializeService();
 
 					// Make it handle Local serving
 					if (_.has(config, "local")) {
@@ -358,23 +325,21 @@ angular.module("gameboard.controllers", [])
 					// Return the Data
 					defer.resolve();
 
-				}, function(response) {
+				}, function (response) {
 					// Error
 					console.log("Error:", response);
 					defer.reject(response);
 				});
 
-				$rootScope.config = config;;
+				$rootScope.config = config;
 			});
 
 			return defer.promise;
-
-		};
+		}
 
 		return {
 			init: function() {
 				return init();
 			}
-		}
-
+		};
 	});

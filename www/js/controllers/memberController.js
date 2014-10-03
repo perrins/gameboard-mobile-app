@@ -147,18 +147,16 @@ angular.module("gameboard.member.controllers", [])
 		$scope.loadItems();
 	};
 
-	$scope.onDelete = function(video) {
-
+	$scope.onDelete = function (video) {
 		// Work out what is being deleted
 		debugger;
 
 		// Delete the Item
-		FavouritesService.delVideo(video).then(null, function(err) {
+		FavouritesService.delVideo(video).then(null, function (err) {
 			console.log(err);
 		});
 
 		$scope.list = FavouritesService.allCache();
-
 	};
 
 	$scope.itemButtons = [{
@@ -168,5 +166,4 @@ angular.module("gameboard.member.controllers", [])
 			$scope.onDelete(item);
 		}
 	}];
-
 });

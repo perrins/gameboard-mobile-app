@@ -1,210 +1,182 @@
-angular.module('gameboard.member.services', [])
+angular.module("gameboard.member.services", [])
 
 /**
  * A simple example service that returns some data.
  */
-.factory('MembersService', function($q, $rootScope,ACCESS) {
+.factory("MembersService", function ($q, $rootScope, ACCESS) {
 
-    return {
+	return {
+		getMember: function (muuid) {
+			console.log("muuid",muuid);
 
-        getMember: function(muuid) {
+			// Get a Defered
+			var def = $q.defer();
 
-            console.log("muuid",muuid);
+			// Get the Cloud Code
+			var cc = IBMCloudCode.getService();
+			var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).append(muuid).toString();
 
-            // Get a Defered
-            var def = $q.defer();
+			// TMD: When 'done' somethimes and 'then' other?
+			cc.get(uri,{
+				handleAs:"json"
+			}).done(function (member) {
 
-            // Get the Cloud Code 
-            var cc = IBMCloudCode.getService();
-            var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).append(muuid).toString();
-            cc.get(uri,{handleAs:"json"}).done(function(member) {
+				// Check we have a member we can work with
+				if (member) {
+					var _member = member.doc;
+					if( _.has(_member,"error") && _member.error === "not_found" ) {
+						def.reject(null);
+					} else {
+						def.resolve(_member);
+					}
+				} else {
+					def.reject(null);
+				}
+			}, function (err){
+				def.reject(null);
+			});
 
-                // Check we have a member we can work with 
-                if (member) {
-                    var _member = member.doc;
-                    if( _.has(_member,"error") && _member.error == "not_found" ) {
-                        def.reject(null);
-                    } else {
-                        def.resolve(_member);
-                    }    
-                } else {
-                    def.reject(null);
-                }                
+			// Get the Objects for a particular Type
+			return def.promise;
+		},
 
-            },function(err){
-                def.reject(null);
-            });
+		registerMember : function (member) {
+			// Manage Defer on the Save
+			var def = $q.defer();
 
-            // Get the Objects for a particular Type
-            return def.promise;
+			// get the Data Service
+			var cc = IBMCloudCode.getService();
 
-        },
+			// Send the Video request to the Bluemix to be added into the Cloudant Database
+			cc.post(ACCESS.REGISTER, member,{
+				"handleAs": "json"
+			}).then(function (member) {
+				// Was added successfully
+				def.resolve(member);
 
-        registerMember : function (member) {
+			}).catch(function (err) {
+				console.log(err);
+				def.reject(err);
+			});
 
-            // Manage Defer on the Save
-            var def = $q.defer();
-
-            // get the Data Service
-            var cc = IBMCloudCode.getService();
-
-            // Send the Video request to the Bluemix to be added into the Cloudant Database
-            cc.post(ACCESS.REGISTER, member,{
-                "handleAs": "json"
-            }).then(function(member) {
-
-                // Was added successfully
-                def.resolve(member);
-
-            }).catch(function(err) {
-                console.log(err)
-                def.reject(err);
-            });
-
-            // Return a promise for the async operation of save
-            return def.promise;
-
-        }
-
-    }
+			// Return a promise for the async operation of save
+			return def.promise;
+		}
+	};
 
 })
 
 /**
  * A simple example service that returns some data.
  */
-.factory('MemberDetailService', function($q, $cacheFactory,$stateParams, URL) {
+.factory("MemberDetailService", function ($q, $cacheFactory, $stateParams, URL) {
 
-    // Use an internal Cache for storing the List and map the operations to manage that from 
-    // MBaaS SDK Calls
-    var cache = $cacheFactory('member');
+	// Use an internal Cache for storing the List and map the operations to manage that from
+	// MBaaS SDK Calls
 
-    return {
+	// TMD: cache never used
+	var cache = $cacheFactory("member");
 
-        getMember: function(muuid) {
+	return {
+		getMember: function (muuid) {
 
-            console.log("muuid",muuid);
+			console.log("muuid",muuid);
 
-            // Create a deffered
-            var def = $q.defer();
-        
-            // Lets Get a list of Genres
-            $.ajax({
-                type: "GET",
-                url: URL.MEMBER,
-                dataType: "json",
-                contentType: "application/json",
-                success: function(result,status) {
+			// Create a deffered
+			var def = $q.defer();
 
-                    // Check if we were able to store it sucessfully
-                    if (status === "success") {
+			// Lets Get a list of Genres
+			$.ajax({
+				type: "GET",
+				url: URL.MEMBER,
+				dataType: "json",
+				contentType: "application/json",
+				success: function (result,status) {
+					// Check if we were able to store it sucessfully
+					if (status === "success") {
+						// return the Cache
+						def.resolve(result);
+					} else {
+						def.reject([]);
+					}
+				},
+				error: function (err) {
+					def.reject(err);
+				}
+			});
 
-                      // return the Cache
-                      def.resolve(result);
+			// Get the Objects for a particular Type
+			return def.promise;
 
-
-                    } else {
-                        def.reject([]);
-                    }
-
-                },
-                error: function(err) {
-                    def.reject(err);
-                }
-            });
-        
-            // Get the Objects for a particular Type
-            return def.promise;
-
-        }
-    }
-
+		}
+	};
 })
 
 /**
  * A simple example service that returns some data.
  */
-.factory('FavouritesService', function($rootScope, $q,$cacheFactory,URL) {
+.factory("FavouritesService", function ($rootScope, $q, $cacheFactory, URL) {
 
-    // Use an internal Cache for storing the List and map the operations to manage that from 
-    // MBaaS SDK Calls
-    var cache = $cacheFactory('favourites');
+	// Use an internal Cache for storing the List and map the operations to manage that from
+	// MBaaS SDK Calls
+	var cache = $cacheFactory("favourites");
 
-    return {
+	return {
+		// Return all the Objects for a Given Class
+		allCloud: function () {
+			// Create a Defer as this is an async operation
+			var def = $q.defer();
 
-        // Return all the Objects for a Given Class
-        allCloud: function() {
+			// Clear the Cache with a new set
+			cache.remove("favourites");
 
-            // Create a Defer as this is an async operation
-            defer = $q.defer();
+			// Lets Get a list of Genres
+			$.ajax({
+				type: "GET",
+				url: URL.FAVOURITES,
+				dataType: "json",
+				contentType: "application/json",
+				success: function (result,status) {
+					// Check if we were able to store it sucessfully
+					if (status === "success") {
+						// Place the Items in the Cache
+						cache.put("favourites",result);
+						// return the Cache
+						def.resolve(cache.get("favourites"));
+					} else {
+						def.reject([]);
+					}
+				},
+				error: function (err) {
+					def.reject(err);
+				}
+			});
 
-            // Clear the Cache with a new set
-            cache.remove('favourites');
+			// Get the Objects for a particular Type
+			return def.promise;
+		},
 
-            // Lets Get a list of Genres
-            $.ajax({
-                type: "GET",
-                url: URL.FAVOURITES,
-                dataType: "json",
-                contentType: "application/json",
-                success: function(result,status) {
+		// Return the Cached List
+		allCache: function () {
+			// Return the Cached Items
+			return cache.get("favourites");
+		},
 
-                    // Check if we were able to store it sucessfully
-                    if (status === "success") {
+		add: function (data) { },
 
-                        // Place the Items in the Cache
-                        cache.put('favourites',result);
+		del: function (video) {
+			var def = $q.defer();
 
-                        // return the Cache
-                        defer.resolve(cache.get('favourites'));
+			// Remove the Item from the Cache
+			var videos = cache.get("favorites").videos;
+			videos.splice(videos.indexOf(video),1);
 
-                    } else {
-                        def.reject([]);
-                    }
+			// AJAX DELETE
+			def.resolve("status");
 
-                },
-                error: function(err) {
-                    def.reject(err);
-                }
-            });
-
-            // Get the Objects for a particular Type
-            return defer.promise;
-
-        },
-
-        // Return the Cached List
-        allCache: function() {
-
-            // Return the Cached Items
-            return cache.get('favourites');
-
-        },
-
-        add: function(data) {
-
-        
-        },
-
-        del: function(video) {
-
-            var defer = $q.defer();
-
-            // Remove the Item from the Cache
-            var videos = cache.get('favorites').videos;
-            videos.splice(videos.indexOf(video),1)
-
-            // AJAX DELETE
-
-            defer.resolve("status");        
-
-            // Remove it
-            return defer.promise;
-
-        }
-    }
-
+			// Remove it
+			// TMD: When a ASYNC defer when this is a sync process?
+			return def.promise;
+		}
+	};
 });
-
-
-
