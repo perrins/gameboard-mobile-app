@@ -13,8 +13,6 @@ angular.module('gameboard.controllers', [])
     // Prepare User for Display
     if ($rootScope.user) {
 
-
-
         $scope.user = $rootScope.user;
         $scope.member = $rootScope.member;
 
@@ -135,7 +133,7 @@ angular.module('gameboard.controllers', [])
 .controller('RegisterCtrl', function($ionicScrollDelegate, $rootScope, $state, $scope, MembersService, WizardHandler,$ionicPopup) {
 
     // Check if user is defined
-    if (!rootScope.user){
+    if (!$rootScope.user){
         $state.go("signin");
     }
 

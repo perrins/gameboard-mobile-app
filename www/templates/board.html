@@ -20,8 +20,6 @@
 
         <ion-scroll zooming="false">
 
-            <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="loadMore()" distance="2%">
-            </ion-infinite-scroll>
 
             <ion-list class="list">
 
@@ -42,7 +40,14 @@
                     {{board.title}}&nbspBoard
                 </div>
 
-                <ion-item ng-show="board.videos" can-swipe="true" ng-repeat="video in board.videos | orderBy:'rank'" class="item item-thumbnail-left" type="item-text-wrap" item="video" href="#/board/video/{{video.uuid}}">
+                <ion-item ng-show="boardlist" 
+                    can-swipe="true" 
+                    class="item item-thumbnail-left item-icon-right my-item" 
+                    type="item-text-wrap" item="video" 
+                    href="#/board/video/{{video.uuid}}"
+                    collection-repeat="video in board"
+                    collection-item-width="'100%'"
+                    collection-item-height="100">
 
                     <div class="rank">
                         {{video.rank}}
@@ -64,6 +69,8 @@
                     <ion-option-button class="button-royal" ng-click="addToFavourite(item)">
                         <i class="icon ion-ios7-plus-empty"></i>
                     </ion-option-button>
+
+                    <i class="icon ion-chevron-right icon-accessory"></i>
 
                 </ion-item>
 

@@ -123,12 +123,19 @@ angular.module('gameboard.board.controllers', [])
 // A simple controller that shows a tapped item's data
 .controller('BoardCtrl', function($rootScope,$scope, $state, $stateParams, $ionicModal, $ionicLoading, BoardService, YouTubeService,WizardHandler) {
 
+    var board = new Array();
+
+    $scope.page = 1;
+    $scope.pageSize = 20;
+    $scope.total = 0;
+    $scope.position = 0;
+
     // Load the Items
-    $scope.loadItems = function() {
+    $scope.loadItems = function(query, page, size) {
 
         // Clear the List before adding new items
         // This needs to be improved
-        $scope.board = [];
+        $scope.boardlist = [];
 
         // Refresh
         if (!$scope.$$phase) {
@@ -138,7 +145,7 @@ angular.module('gameboard.board.controllers', [])
         // Because we are retrieving all the items every time we do something
         // We need to clear the list before loading in some new values
         $ionicLoading.show({
-            template: 'Loading Board...'
+            template: $scope.message
         });
 
         // Because we are retrieving all the items every time we do something
@@ -146,13 +153,25 @@ angular.module('gameboard.board.controllers', [])
         $scope.bid = $stateParams.bid;
 
         // "List is " is a service returning data from the 
-        BoardService.all($scope.bid).then(function(board) {
+        BoardService.all($scope.bid,page,size).then(function(board) {
+
+            // Reset the Array if we are on Page 1
+            if($scope.page === 1) {
+                // Prepare for the Query
+                boardlist = new Array();
+            }
 
             // Set the Title
             $scope.title = board.title;
-                    
+
+
+            // Check what has been returned versus side of what we are returning
+            angular.forEach(board.videos, function(value, key) {
+                boardlist.push(value);
+            });
+
             // Update the model with a list of Items
-            $scope.board = board;
+            $scope.board = boardlist;
 
             // Let Angular know we have some data because of the Async nature of IBMBaaS
             // This is required to make sure the information is uptodate
@@ -163,8 +182,23 @@ angular.module('gameboard.board.controllers', [])
             // Hide the loading icons
             $ionicLoading.hide();
 
+            // Lets Make a Call to the Service and then update the infinite scroll
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+
             // Trigger refresh complete on the pull to refresh action
             $scope.$broadcast('scroll.refreshComplete');
+
+            $scope.total = results.search.attr.pageCount;
+            $scope.position = results.search.attr.position;
+            $scope.count = results.search.attr.totalResults;
+
+            // Check we can move forward.
+            if ($scope.page && $scope.page <= parseInt(results.search.attr.pageCount)) {
+                $scope.page++;
+            } else {
+                // No More Data
+                return;
+            }
 
         }, function(err) {
             console.log(err);
@@ -176,8 +210,31 @@ angular.module('gameboard.board.controllers', [])
 
     }
 
-    // Load some items for the list to display
-    $scope.loadItems();
+    // If we get close to the end of the list and we have more 
+    $scope.loadMore = function() {
+
+        if(!$scope.message) {
+            $scope.message = 'Loading videos...';
+        } else {    
+            $scope.message = 'More videos...';
+        }    
+
+        // Check we can move one more page
+        // Add Some More
+        if($scope.page != $scope.total) {
+            $scope.loadItems(query, $scope.page, $scope.pageSize);
+        }    
+    };
+
+    // Handle a Refresh to the Beginning 
+    $scope.onRefresh = function() {
+        $scope.page = 1;
+        $scope.message = null;
+
+        $scope.loadMore();
+    };
+
+
 
     $scope.onRefresh = function() {
         // Go back to the Cloud and load a new set of Objects as a hard refresh has been done
