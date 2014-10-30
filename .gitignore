@@ -21,3 +21,9 @@ www/components/**
 # Other
 **/.DS_store
 **/.DS_STORE
+
+# NPM modules
+node_modules
+
+# Bower modules
+vendor
