@@ -267,36 +267,34 @@ function(doc){
 
     return {
 
-        all: function(bid) {
+        all: function(bid,page,size) {
 
             // Create a deffered
             var def = $q.defer();
+
+            // Get handle to the CloudCode service
+            var cc = IBMCloudCode.getService();
 
             // USE THE CloudCode to Call the Board Services
             // This will integrate with Cloudant to retrieve a list of videos for a Board
             // Need to manage the Paging for this and sort it by ranking
             // Lets build a 
             var uri = new IBMUriBuilder().append(ACCESS.BOARD).append(bid).toString();
-            var cc = IBMCloudCode.getService();
+
+            // Add the Paging to the BoardList and Get back what we have
+            uri += "?skip="+page+"&limit="+size;
 
             // Get the Videos for my Board
             cc.get(uri, {
                 "handleAs": "json"
             }).then(function(videos) {
 
-                // Lets resolve these
-                var _videos = new Array();
-                // Loop through the videos
-                videos.forEach(function(video) {
-                    _videos.push(video.fields);
-                });
-                def.resolve(_videos);
+                def.resolve(videos);
 
             }).catch(function(err) {
                 console.log(err);
                 def.reject(err);
             })
-
 
             // Get the Objects for a particular Type
             return def.promise;

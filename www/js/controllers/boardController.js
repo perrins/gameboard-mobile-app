@@ -34,7 +34,7 @@ angular.module('gameboard.board.controllers', [])
 })
 
 // A simple controller that shows a tapped item's data
-.controller('GamesCtrl', function($scope, $stateParams,$ionicLoading, $ionicPopup, GenresService, GamesService) {
+.controller('GamesCtrl', function($state,$scope, $stateParams,$ionicLoading, $ionicPopup, GenresService, GamesService) {
 
     // Lets check we have a 
     var genid = $stateParams.genid;
@@ -55,10 +55,20 @@ angular.module('gameboard.board.controllers', [])
 
         // Check we have some Games for this Genre
         if (_.isNull(data)) {
+
+            $ionicLoading.hide();
+
             var alertPopup = $ionicPopup.alert({
                 title: 'Games',
                 template: 'It seems we dont have a Games list defined for this Genre'
             });
+
+			alertPopup.then(function(res) {
+	            // Go Back to the Main Genres Screen
+	            $state.go("board.genres");
+		    });
+
+
         } else {
 
             // Layout the Games and the Banners
@@ -66,7 +76,6 @@ angular.module('gameboard.board.controllers', [])
             $scope.banners = data.get('banners');
             $scope.gid = data.get('gid');
             $scope.genid = data.get('genid');
-
 
             $ionicLoading.hide();
             // Let Angular know we have some data because of the Async nature of IBMBaaS
@@ -125,13 +134,13 @@ angular.module('gameboard.board.controllers', [])
 
     var board = new Array();
 
-    $scope.page = 1;
+    $scope.page = 0;
     $scope.pageSize = 20;
     $scope.total = 0;
     $scope.position = 0;
 
     // Load the Items
-    $scope.loadItems = function(query, page, size) {
+    $scope.loadItems = function(page, size) {
 
         // Clear the List before adding new items
         // This needs to be improved
@@ -156,7 +165,7 @@ angular.module('gameboard.board.controllers', [])
         BoardService.all($scope.bid,page,size).then(function(board) {
 
             // Reset the Array if we are on Page 1
-            if($scope.page === 1) {
+            if($scope.page === 0) {
                 // Prepare for the Query
                 boardlist = new Array();
             }
@@ -164,14 +173,25 @@ angular.module('gameboard.board.controllers', [])
             // Set the Title
             $scope.title = board.title;
 
-
             // Check what has been returned versus side of what we are returning
-            angular.forEach(board.videos, function(value, key) {
-                boardlist.push(value);
+            angular.forEach(board.videos.rows, function(value, key) {
+                boardlist.push(value.doc);
             });
 
             // Update the model with a list of Items
-            $scope.board = boardlist;
+            $scope.videos = boardlist;
+
+            // Take the details from the content
+            // Use the Calcualtion
+            $scope.total = board.videos.total_rows;
+            $scope.position = board.videos.offset;
+            $scope.coint
+
+            // Delete Video List
+            delete board.videos
+
+            // Add Board to Scope
+            $scope.board = board;
 
             // Let Angular know we have some data because of the Async nature of IBMBaaS
             // This is required to make sure the information is uptodate
@@ -185,15 +205,8 @@ angular.module('gameboard.board.controllers', [])
             // Lets Make a Call to the Service and then update the infinite scroll
             $scope.$broadcast('scroll.infiniteScrollComplete');
 
-            // Trigger refresh complete on the pull to refresh action
-            $scope.$broadcast('scroll.refreshComplete');
-
-            $scope.total = results.search.attr.pageCount;
-            $scope.position = results.search.attr.position;
-            $scope.count = results.search.attr.totalResults;
-
             // Check we can move forward.
-            if ($scope.page && $scope.page <= parseInt(results.search.attr.pageCount)) {
+            if ($scope.page && $scope.page <= parseInt(board.videos.offset)) {
                 $scope.page++;
             } else {
                 // No More Data
@@ -203,7 +216,6 @@ angular.module('gameboard.board.controllers', [])
         }, function(err) {
             console.log(err);
             $ionicLoading.hide();
-
             $scope.board = null;
 
         });
@@ -221,20 +233,17 @@ angular.module('gameboard.board.controllers', [])
 
         // Check we can move one more page
         // Add Some More
-        if($scope.page != $scope.total) {
-            $scope.loadItems(query, $scope.page, $scope.pageSize);
+        if($scope.page <= $scope.total) {
+            $scope.loadItems($scope.page, $scope.pageSize);
         }    
     };
 
     // Handle a Refresh to the Beginning 
     $scope.onRefresh = function() {
-        $scope.page = 1;
+        $scope.page = 0;
         $scope.message = null;
-
         $scope.loadMore();
     };
-
-
 
     $scope.onRefresh = function() {
         // Go back to the Cloud and load a new set of Objects as a hard refresh has been done
