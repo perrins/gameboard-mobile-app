@@ -1,7 +1,16 @@
+/*
+ *  Licensed Materials - Property of Gameboard Ltd
+ *  2014 (C) Copyright Gameboard Ltd. 2011,2014. All Rights Reserved.
+ *  UK Government Users Restricted Rights - Use, duplication or
+ *  disclosure restricted by GSA ADP Schedule Contract with Gameboard Ltd.
+ *
+ *  Board Services
+ * 
+ */
+ 
 angular.module('gameboard.board.services', [])
 
 /*
-
 function(doc){
  index('uuid', doc._id, { 'facet': true ,'store':true});
  index('bid', doc.bid, { 'facet': true ,'store':true});
@@ -14,7 +23,6 @@ function(doc){
  index('gametag', doc.gametag, { 'facet': true ,'store':true});
  index('muuid', doc.muuid, { 'facet': true ,'store':true});
 }
-
 */
 
 
@@ -34,32 +42,39 @@ function(doc){
 
             // Create a Defer as this is an async operation
             defer = $q.defer();
+
             var items = cache.get(ACCESS.GENRES);
 
             if (!_.isUndefined(items)) {
                 defer.resolve(items);
             } else {
 
-                // get the Data Service
-                var data = IBMData.getService();
-
                 // Clear the Cache with a new set
                 cache.remove(ACCESS.GENRES);
 
-                // Get the Genres
-                var query = data.Query.ofType(ACCESS.GENRES);
-                query.find().done(function(list) {
+                // Get handle to the CloudCode service
+                var cc = IBMCloudCode.getService();
+
+                // USE THE CloudCode to Call the Board Services
+                // This will integrate with Cloudant to retrieve a list of videos for a Board
+                // Need to manage the Paging for this and sort it by ranking
+                // Lets build a 
+                var uri = new IBMUriBuilder().append(ACCESS.GENRES).toString();
+
+                // Get the Videos for my Board
+                cc.get(uri, {
+                    "handleAs": "json"
+                }).then(function(list) {
 
                     // Place the Items in the Cache
-                    cache.put(ACCESS.GENRES, list);
-
+                    cache.put(ACCESS.GENRES, list.docs);
                     // return the Cache
-                    defer.resolve(list);
-
-                }, function(err) {
+                    defer.resolve(list.docs);
+                }).catch(function(err) {
                     console.log(err);
                     defer.reject(err);
-                });
+                })
+
             }
 
             // Get the Objects for a particular Type
@@ -73,7 +88,7 @@ function(doc){
 
             var _genre = null;
             genres.forEach(function(genre) {
-                if (genre.get('gid') == gid) {
+                if (genre.gid == gid) {
                     _genre = genre;
                 }
             })
@@ -114,29 +129,36 @@ function(doc){
 
             // Create a Defer as this is an async operation
             defer = $q.defer();
+
             var items = cache.get(genid + "_" + ACCESS.GAMES);
 
             if (!_.isUndefined(items)) {
                 defer.resolve(items);
             } else {
 
-                // get the Data Service
-                var data = IBMData.getService();
+                // Get handle to the CloudCode service
+                var cc = IBMCloudCode.getService();
+
+                // USE THE CloudCode to Call the Board Services
+                // This will integrate with Cloudant to retrieve a list of videos for a Board
+                // Need to manage the Paging for this and sort it by ranking
+                // Lets build a 
+                var uri = new IBMUriBuilder().append(ACCESS.GAMES).toString();
 
                 // Clear the Cache with a new set
                 cache.remove(genid + "_" + ACCESS.GAMES);
 
-                // Get the Games for a Specific Genre
-                var query = data.Query.ofType(ACCESS.GAMES);
-                query.find({
-                    genid: _genid
+                // Get the Genres
+                // Get the Videos for my Board
+                cc.get(uri, {
+                    "handleAs": "json"
                 }).done(function(list) {
 
                     // Check if this is a list and array
                     if (_.isArray(list) && list.length > 0) {
 
                         // Place the Items in the Cache
-                        cache.put(genid + "_" + ACCESS.GAMES, list[0]);
+                        cache.put(genid + "_" + ACCESS.GAMES, list.docs);
 
                         // return the Cache
                         defer.resolve(cache.get(genid + "_" + ACCESS.GAMES));
@@ -209,30 +231,35 @@ function(doc){
                 defer.resolve(items);
             } else {
 
-                // get the Data Service
-                var data = IBMData.getService();
+                // Get handle to the CloudCode service
+                var cc = IBMCloudCode.getService();
+
+                // USE THE CloudCode to Call the Board Services
+                // This will integrate with Cloudant to retrieve a list of videos for a Board
+                // Need to manage the Paging for this and sort it by ranking
+                // Lets build a 
+                var uri = new IBMUriBuilder().append(ACCESS.CATEGORIES).toString();
 
                 // Clear the Cache with a new set
                 cache.remove(gmid + "_" + ACCESS.CATEGORIES);
 
                 // Get the Genres
-                var query = data.Query.ofType(ACCESS.CATEGORIES);
-                query.find({
-                    "gmid": _gmid
+                // Get the Videos for my Board
+                cc.get(uri, {
+                    "handleAs": "json"
                 }).done(function(list) {
-
                     // Check if this is a list and array
-                    if (_.isArray(list) && list.length > 0) {
+                    if (_.isArray(list) && list.docs.length > 0) {
                         // Place the Items in the Cache
-                        cache.put(gmid + "_" + ACCESS.CATEGORIES, list[0]);
+                        cache.put(gmid + "_" + ACCESS.CATEGORIES, list.docs);
                         // return the Cache
-                        defer.resolve(list[0]);
+                        defer.resolve(list.docs);
 
                     } else {
                         defer.resolve(null);
                     }
 
-                }, function(err) {
+                }).catch(function(err) {
                     console.log(err);
                     defer.reject(err);
                 });
@@ -248,7 +275,7 @@ function(doc){
             var cats = cache.get(ACCESS.CATEGORIES);
             var _cat = null;
             cats.forEach(function(cat) {
-                if (cat.get('cid') == cid) {
+                if (cat.cid == cid) {
                     _cat = cat;
                 }
             })
@@ -287,7 +314,7 @@ function(doc){
             // Get the Videos for my Board
             cc.get(uri, {
                 "handleAs": "json"
-            }).then(function(videos) {
+            }).done(function(videos) {
 
                 def.resolve(videos);
 
@@ -344,7 +371,7 @@ function(doc){
 
             cc.get(ACCESS.YOUR_VIDEOS, {
                 "handleAs": "json"
-            }).then(function(videos) {
+            }).done(function(videos) {
                 def.resolve(videos);
             }).catch(function(err) {
                 console.log(err);

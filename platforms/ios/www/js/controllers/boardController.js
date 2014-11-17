@@ -1,8 +1,7 @@
 angular.module('gameboard.board.controllers', [])
 
 
-.controller('GenresCtrl', function($scope,$ionicLoading, GenresService) {
-
+.controller('GenresCtrl', function($scope,$ionicLoading, GenresService,InitBluemix) {
 
     // Show what we are doing
     $ionicLoading.show({template:'Loading Genres...'});
@@ -220,7 +219,7 @@ angular.module('gameboard.board.controllers', [])
 
         });
 
-    }
+    };
 
     // If we get close to the end of the list and we have more 
     $scope.loadMore = function() {
@@ -245,10 +244,7 @@ angular.module('gameboard.board.controllers', [])
         $scope.loadMore();
     };
 
-    $scope.onRefresh = function() {
-        // Go back to the Cloud and load a new set of Objects as a hard refresh has been done
-        $scope.loadItems();
-    }
+ 
 
     // Create our modal
     $ionicModal.fromTemplateUrl('templates/add-video.html', function(modal) {

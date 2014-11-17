@@ -10,17 +10,17 @@
 
             <div class="genreItem ImageButton" ng-repeat="genre in genres" masonary>
 
-                <a href="#/board/games/{{genre.get('gid')}}">
+                <a href="#/board/games/{{genre.gid}}">
 
                     <div class="spinner">
-                        <img  class="genre-image genre-image-load" alt="{{genre.get('title')}}"  ng-src="{{genre.get('imageUrl')}}" lazyload>
+                        <img  class="genre-image genre-image-load" alt="{{genre.title}}"  ng-src="{{genre.imageUrl}}" lazyload>
                     </div>    
 
                     <div class="summary">
-                        <div class="title">{{genre.get('title')}}</div>
-                        <div class="subtitle">{{genre.get('subTitle')}}</div>
-                        <div class="count">{{genre.get('count')}}</div>
-                        <div class="enddate">{{genre.get('endDate')}}</div>
+                        <div class="title">{{genre.title}}</div>
+                        <div class="subtitle">{{genre.subTitle}}</div>
+                        <div class="count">{{genre.count}}</div>
+                        <div class="enddate">{{genre.endDate}}</div>
                     </div>
                 </a>
             </div>

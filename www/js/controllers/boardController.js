@@ -1,8 +1,7 @@
 angular.module('gameboard.board.controllers', [])
 
 
-.controller('GenresCtrl', function($scope,$ionicLoading, GenresService) {
-
+.controller('GenresCtrl', function($scope,$ionicPopup,$ionicLoading, GenresService,InitBluemix) {
 
     // Show what we are doing
     $ionicLoading.show({template:'Loading Genres...'});
@@ -10,24 +9,39 @@ angular.module('gameboard.board.controllers', [])
     // Need to Check if we have got some already
     GenresService.all().then(function(genres) {
 
-        // Paint 
-        $scope.genres = genres;
+        // Check we have some Games for this Genre
+        if (_.isNull(genres)) {
 
-        // Hide the Loading Message
-        $ionicLoading.hide();
+            $ionicLoading.hide();
 
-        // Let Angular know we have some data because of the Async nature of IBMBaaS
-        // This is required to make sure the information is uptodate
-        if (!$scope.$$phase) {
-            $scope.$apply();
+            var alertPopup = $ionicPopup.alert({
+                title: 'Games',
+                template: 'It seems we dont have any Genres to list'
+            });
+
+            alertPopup.then(function(res) {
+                // Handle the Next step
+            });
+
+        } else {
+
+
+            // Paint 
+            $scope.genres = genres;
+
+            // Hide the Loading Message
+            $ionicLoading.hide();
+
+            // Let Angular know we have some data because of the Async nature of IBMBaaS
+            // This is required to make sure the information is uptodate
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
         }
 
     },function(err){
 
         // Handle Display of No Data and No Connection
-
-
-
         $ionicLoading.hide();
     });
 
@@ -43,7 +57,7 @@ angular.module('gameboard.board.controllers', [])
     var genre = GenresService.getGenre(genid);
 
     // Display The Title
-    $scope.title = genre.get('title');
+    $scope.title = genre.title;
 
     // Lets load the Videos for the Youtube Channel
     $ionicLoading.show({
@@ -67,7 +81,6 @@ angular.module('gameboard.board.controllers', [])
 	            // Go Back to the Main Genres Screen
 	            $state.go("board.genres");
 		    });
-
 
         } else {
 
@@ -220,7 +233,7 @@ angular.module('gameboard.board.controllers', [])
 
         });
 
-    }
+    };
 
     // If we get close to the end of the list and we have more 
     $scope.loadMore = function() {
@@ -245,10 +258,7 @@ angular.module('gameboard.board.controllers', [])
         $scope.loadMore();
     };
 
-    $scope.onRefresh = function() {
-        // Go back to the Cloud and load a new set of Objects as a hard refresh has been done
-        $scope.loadItems();
-    }
+ 
 
     // Create our modal
     $ionicModal.fromTemplateUrl('templates/add-video.html', function(modal) {

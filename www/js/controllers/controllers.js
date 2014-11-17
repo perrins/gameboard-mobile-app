@@ -4,12 +4,11 @@ angular.module("gameboard.controllers", [])
 
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
-    if (!$rootScope.IBMBluemix) {
-        InitBluemix.init().then(function() {
-            // TMD: IBMBluemix not defined?
-            $rootScope.IBMBluemix = IBMBluemix;
-        });
-    }
+    InitBluemix.init().then(function() {
+        // TMD: IBMBluemix not defined?
+        // MJP: IBMBluemix is a global name space 
+        $rootScope.IBMBluemix = IBMBluemix;
+    });
 
     // Prepare User for Display
     if ($rootScope.user) {
@@ -46,14 +45,12 @@ angular.module("gameboard.controllers", [])
 
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
-    if (!$rootScope.IBMBluemix) {
-        InitBluemix.init().then(function() {
-            // Init the Main
-            $rootScope.IBMBluemix = IBMBluemix;
-            // Make the World visible
-            angular.element("#main").removeClass("hidden");
-        });
-    }
+    InitBluemix.init().then(function() {
+        // Init the Main
+        $rootScope.IBMBluemix = IBMBluemix;
+        // Make the World visible
+        angular.element("#main").removeClass("hidden");
+    });
 
     // Signon to the App
     $scope.signon = function() {
@@ -63,6 +60,36 @@ angular.module("gameboard.controllers", [])
         $ionicLoading.show({
             template: "Authenticating..."
         });
+
+        // Check if we are in local testing mode and then fake a user 
+        // and go to the Intro Views.
+        if ($rootScope.config.localsecurity) {
+
+            $rootScope.user = {   
+                                "gametag" : "lolperrins123",
+                                "firstname"    : "Joe",
+                                "lastname" : "Perrins",
+                                "registered":true
+                              };
+            $rootScope.member = {
+
+                "muuid"   : 282992902,
+                "gametag" : "lolperrins123",
+                "name"    : "Joe",
+                "surname" : "Perrins",
+                "memberSince" : "01/01/2014",
+                "avatar"  : "https://lh6.googleusercontent.com/-49qVzjcgbpA/AAAAAAAAAAI/AAAAAAAAAAA/dZVfNGJEZqY/s96-c/photo.jpg",
+                "bio"     : "The best minecraft player on the planet",
+                "prizes"  : "£23,456",
+                "views"   : "4,343",
+
+            };
+
+            // Havigate to the Board View
+            $state.go("intro");         
+
+            return;
+        }
 
         // Initialize Security
         // Initialize the OAuth settings
@@ -292,44 +319,53 @@ angular.module("gameboard.controllers", [])
 .factory("InitBluemix",
     function($rootScope, $http, $q) {
         function init() {
+
             // Create a defer
             var defer = $q.defer();
 
-            // Lets load the Configuration from the bluelist.json file
-            $http.get("./bluemix.json").success(function(config) {
-                $rootScope.config = config;
+            // Check if we have been
+            if($rootScope.initialized === true) {
+                defer.resolve();
+            } else {
 
-                // Initialise the SDK
-                // TMD: Does this initialize function not return a proper promise?
-                IBMBluemix.initialize(config).done(function() {
+                // Lets load the Configuration from the bluelist.json file
+                $http.get("./bluemix.json").success(function(config) {
+                    $rootScope.config = config;
 
-                    // Let the user no they have logged in and can do some stuff if they require
-                    console.log("Sucessful initialisation with Application : " + IBMBluemix.getConfig().getApplicationId());
+                    // Initialise the SDK
+                    // TMD: Does this initialize function not return a proper promise?
+                    IBMBluemix.initialize(config).done(function() {
 
-                    // Initialize the Service
-                    var data = IBMData.initializeService(),
-                        cc = IBMCloudCode.initializeService();
+                        // Let the user no they have logged in and can do some stuff if they require
+                        console.log("Sucessful initialisation with Application : " + IBMBluemix.getConfig().getApplicationId());
 
-                    // Make it handle Local serving
-                    if (_.has(config, "local")) {
-                        // Set the Origin to Local Server for testing
-                        cc.setBaseUrl(config.local);
-                    }
+                        // Initialize the Service
+                        var data = IBMData.initializeService(),
+                            cc = IBMCloudCode.initializeService();
 
-                    // Let the user no they have logged in and can do some stuff if they require
-                    console.log("Sucessful initialisation Services ...");
+                        // Make it handle Local serving
+                        if (_.has(config, "local")) {
+                            // Set the Origin to Local Server for testing
+                            cc.setBaseUrl(config.local);
+                        }
 
-                    // Return the Data
-                    defer.resolve();
+                        // Let the user no they have logged in and can do some stuff if they require
+                        console.log("Sucessful initialisation Services ...");
 
-                }, function(response) {
-                    // Error
-                    console.log("Error:", response);
-                    defer.reject(response);
+                        $rootScope.initialized = true;
+
+                        // Return the Data
+                        defer.resolve();
+
+                    }, function(response) {
+                        // Error
+                        console.log("Error:", response);
+                        defer.reject(response);
+                    });
+
+                    $rootScope.config = config;
                 });
-
-                $rootScope.config = config;
-            });
+                }
 
             return defer.promise;
         }

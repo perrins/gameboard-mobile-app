@@ -15,12 +15,20 @@ angular.module("gameboard", [
 ])
 
 // Handle Status Bar Styling on Load
-.run(function ($ionicPlatform) {
-	$ionicPlatform.ready(function () {
+.run(function ($ionicPlatform, $rootScope) {
 
+	// Handle Loading of the Runtime
+	$ionicPlatform.ready(function () {
 		if (window.StatusBar) {
 			// org.apache.cordova.statusbar required
 			window.StatusBar.styleDefault();
+
+		    // Init Mobile Cloud SDK and wait for it to configure itself
+		    // Once complete keep a reference to it so we can talk to it later
+		    InitBluemix.init().then(function() {
+		    	$rootScope.IBMBluemix = IBMBluemix;
+		    });	
+
 		}
 	});
 })
@@ -32,10 +40,11 @@ angular.module("gameboard", [
 	BOARD: "/videos/board", // IBM CloudCode with Cloudant
 	YOUR_VIDEOS: "/youtube/videos", // IBM CloudCode with YouTube API
 	YT_VIDEO_DETAIL: "/youtube/video", // IBM CloudCode with YouTube API
-	MEMBERS: "/members", // IBM Data
+	MEMBERS: "/members", // IBM CloudCode and Cloudant
+	SEARCH_MEMBERS : "/members/search",
 	REGISTER : "/members/register",
-	FAVOURITES: "data/Favourites.json", // IBM Data
-	SEARCH: "data/Search.json", // IBM CloudCode with Cloudant
+	FAVOURITES: "/favourites", // IBM Data
+	SEARCH: "/search", // IBM CloudCode with Cloudant
 	VIDEOS: "/videos", // IBM CloudCode with Cloudant
 	BYYTID : "/videos/youtube",
 	EMBED : "http://www.youtube.com/embed/"

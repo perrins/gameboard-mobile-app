@@ -8,34 +8,46 @@
         <button class="button button-clear button-positive" ng-click="findMembers()">Find</button>
     </ion-nav-buttons>
 
-    <ion-content class="has-header">
+    <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search for members">
+    </label>
 
-        <div class="list">
-            <label class="item item-input">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" placeholder="Search for members">
-            </label>
-            <div class="item item-divider" ng-show="members">
-                Members found
-            </div>
+    <div class="item item-divider" ng-show="members">
+        Members found
+    </div>
 
+    <ion-content class="has-header" style="top:130px;">
 
-            <ion-scroll zooming="false">
+        <ion-list class="list">
 
-                <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="loadMore()" distance="2%">
-                </ion-infinite-scroll>
+            <ion-item 
+                ng-show="members"
+                class="item item-thumbnail-left item-icon-right board-item" 
+                item="member" 
+                ng-href="#/board/member/{{member.muuid}}"
+                can-swipe="true" 
+                collection-repeat="member in members" 
+                collection-item-width="'100%'"
+                collection-item-height="100">
 
-                <a ng-repeat="member in members | orderBy:'rank'" class="item item-thumbnail-left" item="member" href="#/board/member/{{member.muuid}}">
+                    <img class="video genre-image-load"   
+                        ng-src="{{member.avatar}}" lazyload>
 
-                    <img ng-src="{{member.avatar}}">
                     <h2>{{member.gameTag}}</h2>
                     <p>{{member.name}}</p>
                     <span class="badge badge-assertive">{{member.prizes}}</span>
                     <span class="badge badge-calm">{{member.videos}}</span>
                 </a>
 
-            </ion-scroll>
-        </div>
+            </ion-item>
+            <ion-infinite-scroll 
+                class="progress"
+                icon="ion-loading-c"
+                on-infinite="loadMore()"
+                distance="30%">
+            </ion-infinite-scroll>
+        </ion-list>
 
     </ion-content>
 

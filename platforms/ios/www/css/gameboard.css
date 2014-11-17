@@ -37,15 +37,6 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
     z-index: 0;
 }
 
-.fadein , .signon {
-    position:absolute;
-    top:0px;
-    margin:auto;
-    width:100%;
-    height:100%;
-    z-index: -99;
-}
-
 .unregistered {
     color:red;
     font-weight: 600;
@@ -78,15 +69,31 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 
 }
 
-.strap h2 {
+.container > h2 {
     font-size: 18px;
     color: yellow;
     margin-top: 15px;
     margin-bottom: 30px;
+    left:2000px;
+    opacity: 1;
     position:relative;
-    left:30px;
 
+    -webkit-animation: strapslidin 3s;
+    -webkit-animation-delay: 1s;
 }
+
+@-webkit-keyframes strapslidin {
+
+    from {
+        left:2000px;
+        opacity: 0;
+    }
+    to {
+        left: 30px;
+        opacity: 1;
+    }
+}
+
 
 .release h3 {
     font-size: 12px;
@@ -121,8 +128,6 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 
 .genre-image {
 	width: 160px;
-
-
     height: 160px;
 }
 
@@ -369,7 +374,6 @@ div.bigViews {
 	color: rgb(240, 142, 18);
 }
 
-
 .cb-slideshow,
 .cb-slideshow:after {
     position: fixed;
@@ -378,6 +382,7 @@ div.bigViews {
     top: 0px;
     left: 0px;
     z-index: 0;
+    background-color: black;
 }
 .cb-slideshow:after {
     content: '';
@@ -415,6 +420,12 @@ div.bigViews {
     -ms-animation: titleAnimation 36s linear infinite 0s;
     animation: titleAnimation 36s linear infinite 0s;
 }
+.signInAnimate div {
+    z-index: 1500;
+    -webkit-animation: fadein 3s;
+    -webkit-animation-delay: 2s;
+}
+
 .cb-slideshow li div h3 {
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     font-size: 240px;
@@ -498,6 +509,13 @@ div.bigViews {
     -ms-animation-delay: 30s;
     animation-delay: 30s;
 }
+
+@-webkit-keyframes fadein {
+
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 /* Animation for the slideshow images */
 @-webkit-keyframes imageAnimation { 
     0% {
