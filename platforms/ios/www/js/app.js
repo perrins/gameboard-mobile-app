@@ -34,9 +34,9 @@ angular.module("gameboard", [
 })
 
 .constant("ACCESS", {
-	GENRES: "gb_genres", //IBM Data
-	GAMES: "gb_games", //IBM Data
-	CATEGORIES: "gb_categories", //IBM Data
+	GENRES: "/genres", //IBM Data
+	GAMES: "/games", //IBM Data
+	CATEGORIES: "/categories", //IBM Data
 	BOARD: "/videos/board", // IBM CloudCode with Cloudant
 	YOUR_VIDEOS: "/youtube/videos", // IBM CloudCode with YouTube API
 	YT_VIDEO_DETAIL: "/youtube/video", // IBM CloudCode with YouTube API

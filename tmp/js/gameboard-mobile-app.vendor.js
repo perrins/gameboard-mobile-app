@@ -12424,7 +12424,7 @@ if ( window.jQuery || window.Zepto ) {
  *  US Government Users Restricted Rights - Use, duplication or
  *  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
  *
- *  IBM Mobile Cloud Services JavaScript SDK, v1.0.0.20141029-0847
+ *  IBM Mobile Cloud Services JavaScript SDK, v1.0.0.20141107-1613
  *
  */
 
@@ -19628,7 +19628,7 @@ define('ibm/mobile/_IBMBluemix', ['require', 'exports', 'module', './lib/IBMUnde
 
 var logger = ibmLogger.getLogger();
   var _IBMBluemix = {
-    VERSION: "1.0.0.20141029-0847",
+    VERSION: "1.0.0.20141107-1613",
     config: {},
     initialize: function (config) {
       logger.debug("IBMBluemix: initializing version: " + this.getVersion());
@@ -20206,7 +20206,7 @@ if (__isAMD) {
  *  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
  *
  *  IBM Mobile Cloud Services, 
- *  CloudCode Service JavaScript SDK v1.0.0.20141029-0847
+ *  CloudCode Service JavaScript SDK v1.0.0.20141107-1613
  *
  */
 
@@ -20716,7 +20716,7 @@ define('ibm/mobile/service/_IBMCloudCode', ['require', 'exports', 'module', './c
   
 
 var _IBMCloudCode = {
-      VERSION: "1.0.0.20141029-0847",
+      VERSION: "1.0.0.20141107-1613",
       _cc: null,
       logger: null,
       initializeService: function () {
@@ -20874,7 +20874,7 @@ if (__isAMD) {
  *  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
  *
  *  IBM Mobile Cloud Services, 
- *  IBMData Service JavaScript SDK v1.0.0.20141029-0847
+ *  IBMData Service JavaScript SDK v1.0.0.20141107-1613
  *
  */
 
@@ -21328,7 +21328,7 @@ define('ibm/mobile/service/_IBMData', ['require','exports','module'],function (r
   
 
 var _IBMData = {
-    VERSION: "1.0.0.20141029-0847",
+    VERSION: "1.0.0.20141107-1613",
     service: null,
     logger: null,
     initializeService: function (req) {

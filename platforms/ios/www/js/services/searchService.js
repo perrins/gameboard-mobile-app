@@ -1,3 +1,13 @@
+/*
+ *  Licensed Materials - Property of Gameboard Ltd
+ *  2014 (C) Copyright Gameboard Ltd. 2011,2014. All Rights Reserved.
+ *  UK Government Users Restricted Rights - Use, duplication or
+ *  disclosure restricted by GSA ADP Schedule Contract with Gameboard Ltd.
+ *
+ *  Search Services
+ * 
+ */
+
 angular.module("gameboard.search.services", [])
 
 /**
