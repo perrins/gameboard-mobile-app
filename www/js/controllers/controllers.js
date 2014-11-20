@@ -41,7 +41,7 @@ angular.module("gameboard.controllers", [])
 })
 
 // Sign In Controller, navigate to Intro
-.controller("SignInCtrl", function($rootScope, $state, $scope, InitBluemix, MembersService, $ionicLoading) {
+.controller("SignInCtrl", function($rootScope, $state, $scope, $http,InitBluemix, MembersService, $ionicLoading) {
 
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
@@ -66,13 +66,13 @@ angular.module("gameboard.controllers", [])
         if ($rootScope.config.localsecurity) {
 
             $rootScope.user = {   
+                                "id"      : "1292030202022",
                                 "gametag" : "lolperrins123",
                                 "firstname"    : "Joe",
                                 "lastname" : "Perrins",
                                 "registered":true
                               };
             $rootScope.member = {
-
                 "muuid"   : 282992902,
                 "gametag" : "lolperrins123",
                 "name"    : "Joe",
@@ -84,6 +84,8 @@ angular.module("gameboard.controllers", [])
                 "views"   : "4,343",
 
             };
+
+            $http.defaults.headers.common["X-GB-ID"] = $rootScope.user.id;
 
             // Havigate to the Board View
             $state.go("intro");         
@@ -114,15 +116,19 @@ angular.module("gameboard.controllers", [])
             google.me().done(function(user) {
                 $rootScope.user = user;
 
+                // Default the Header to the ID of the authenicated user
+                $http.defaults.headers.common["X-GB-ID"] = $rootScope.user.raw.id;
+
                 // Get a Member
                 MembersService.getMember(user.raw.id).then(function(member) {
                     $ionicLoading.hide();
                     $rootScope.user.registered = true;
                     $rootScope.member = member;
-
                     // Havigate to the Board View
                     $state.go("intro");
+
                 }, function(err) {
+
                     $ionicLoading.hide();
                     $rootScope.user.registered = false;
                     $rootScope.user.avatar = "img/avatar.png";
