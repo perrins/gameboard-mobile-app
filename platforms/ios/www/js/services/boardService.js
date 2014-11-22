@@ -61,7 +61,7 @@ function(doc){
                 // Lets build a 
                 var uri = new IBMUriBuilder().append(ACCESS.GENRES).toString();
 
-                // Get the Videos for my Board
+                // Get the Genres
                 cc.get(uri, {
                     "handleAs": "json"
                 }).then(function(list) {
@@ -155,10 +155,10 @@ function(doc){
                 }).done(function(list) {
 
                     // Check if this is a list and array
-                    if (_.isArray(list) && list.length > 0) {
+                    if (_.isObject(list) && _.isArray(list.docs) && list.docs.length > 0) {
 
                         // Place the Items in the Cache
-                        cache.put(genid + "_" + ACCESS.GAMES, list.docs);
+                        cache.put(genid + "_" + ACCESS.GAMES, list.docs[0]);
 
                         // return the Cache
                         defer.resolve(cache.get(genid + "_" + ACCESS.GAMES));
@@ -186,7 +186,7 @@ function(doc){
             // Resolve the Cache
             var item = cache.get(genid + "_" + ACCESS.GAMES);
             var _game = null;
-            var games = item.get('games')
+            var games = item.games
             games.forEach(function(game) {
                 if (game.gmid == gmid) {
                     _game = game;
@@ -249,17 +249,19 @@ function(doc){
                     "handleAs": "json"
                 }).done(function(list) {
                     // Check if this is a list and array
-                    if (_.isArray(list) && list.docs.length > 0) {
+                    if (_.isObject(list) && _.isArray(list.docs) && list.docs.length > 0) {
+
                         // Place the Items in the Cache
-                        cache.put(gmid + "_" + ACCESS.CATEGORIES, list.docs);
+                        cache.put(gmid + "_" + ACCESS.CATEGORIES, list.docs[0]);
+
                         // return the Cache
-                        defer.resolve(list.docs);
+                        defer.resolve(cache.get(gmid + "_" + ACCESS.CATEGORIES));
 
                     } else {
                         defer.resolve(null);
                     }
 
-                }).catch(function(err) {
+                }, function(err) {
                     console.log(err);
                     defer.reject(err);
                 });
@@ -429,7 +431,6 @@ function(doc){
                 "handleAs": "json"
             }).then(function(video) {
 
-                debugger;
                 var _video = null;
                 if (video.items.length > 0) {
                     _video = video.items[0];
@@ -470,6 +471,8 @@ function(doc){
             cc.get(uri, {
                 "handleAs": "json"
             }).then(function(video) {
+
+                debugger;
 
                 // Return the Video 
                 var _video = null;

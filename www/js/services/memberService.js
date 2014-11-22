@@ -103,11 +103,10 @@ angular.module("gameboard.member.services", [])
 
 				// Check we have a member we can work with
 				if (member) {
-					var _member = member.doc;
-					if( _.has(_member,"error") && _member.error === "not_found" ) {
+					if( member.error && _member.error === "not_found" ) {
 						def.reject(null);
 					} else {
-						def.resolve(_member);
+						def.resolve(member);
 					}
 				} else {
 					def.reject(null);

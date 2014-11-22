@@ -85,10 +85,10 @@ angular.module('gameboard.board.controllers', [])
         } else {
 
             // Layout the Games and the Banners
-            $scope.games = data.get('games');
-            $scope.banners = data.get('banners');
-            $scope.gid = data.get('gid');
-            $scope.genid = data.get('genid');
+            $scope.games = data.games;
+            $scope.banners = data.banners;
+            $scope.gid = data.gid;
+            $scope.genid = data.genid;
 
             $ionicLoading.hide();
             // Let Angular know we have some data because of the Async nature of IBMBaaS
@@ -124,9 +124,9 @@ angular.module('gameboard.board.controllers', [])
     CategoriesService.all($stateParams.gmid).then(function(data) {
 
         // Paint 
-        $scope.banner = data.get('banner');
-        $scope.categories = data.get('categories');
-        $scope.gmid = data.get('gmid');
+        $scope.banner = data.banner;
+        $scope.categories = data.categories;
+        $scope.gmid = data.gmid;
 
         $ionicLoading.hide();
 
