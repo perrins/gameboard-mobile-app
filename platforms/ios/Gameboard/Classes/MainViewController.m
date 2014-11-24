@@ -27,7 +27,12 @@
 
 #import "MainViewController.h"
 
+#define MY_BANNER_UNIT_ID @"ca-app-pub-2283171672459446/6963593212"
+#define GAD_SIMULATOR_ID @"Simulator"
+
 @implementation MainViewController
+
+    GADBannerView *bannerView_;
 
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil
 {
@@ -67,21 +72,76 @@
 {
     // View defaults to full size.  If you want to customize the view's size, or its subviews (e.g. webView),
     // you can do so here.
-
+    
     [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    /*add admob*/
+    CGSize sizeOfScreen = [[UIScreen mainScreen] bounds].size;
+    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    CGFloat screenXPos = (screenWidth/2);
+    CGFloat screenYPos = screenHeight - kGADAdSizeBanner.size.height;
+    
+    [bannerView_ setCenter:CGPointMake(screenXPos, screenYPos)];
+    
+    bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    
+    bannerView_.frame = CGRectMake(screenWidth/2.0 - bannerView_.frame.size.width/2.0, screenHeight - bannerView_.frame.size.height,
+                                   bannerView_.frame.size.width,bannerView_.frame.size.height);
+    
+    
+    // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
+    bannerView_.adUnitID = MY_BANNER_UNIT_ID;
+    // Let the runtime know which UIViewController to restore after taking
+    // the user wherever the ad goes and add it to the view hierarchy.
+    bannerView_.rootViewController = self;
+    [self.view addSubview:bannerView_];
+    
+    // Initiate a generic request to load it with an ad.
+    GADRequest *request = [GADRequest request];
+    
+    // remove this line when you are ready to deploy for real
+    request.testDevices = [NSArray arrayWithObjects:GAD_SIMULATOR_ID, nil];
+    
+    [bannerView_ loadRequest:request];
+    
+    /*resize webview*/
+    CGRect webViewFrame = [ [ UIScreen mainScreen ] applicationFrame ];
+    CGRect windowFrame = [ [ UIScreen mainScreen ] bounds ];
+    
+    webViewFrame.origin = windowFrame.origin;
+    
+    // Keep Banner at the bottom
+    if  (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
+        webViewFrame.size.height = sizeOfScreen.width-CGSizeFromGADAdSize(kGADAdSizeSmartBannerLandscape).height-statusBarFrame.size.width+20;
+        webViewFrame.size.width = sizeOfScreen.height;
+        
+    }else{
+        webViewFrame.size.height = windowFrame.size.height-CGSizeFromGADAdSize(kGADAdSizeSmartBannerPortrait).height-statusBarFrame.size.height+20;
+        webViewFrame.size.width = sizeOfScreen.width;
+    }
+    
+    self.webView.frame = webViewFrame;
+    
 }
 
 - (void)viewDidUnload
 {
+    
+    //[bannerView_ release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -144,7 +204,17 @@
     return [super getCommandInstance:className];
 }
 
-- (NSString*)pathForResource:(NSString*)resourcepath
+/*
+   NOTE: this will only inspect execute calls coming explicitly from native plugins,
+   not the commandQueue (from JavaScript). To see execute calls from JavaScript, see
+   MainCommandQueue below
+*/
+- (BOOL)execute:(CDVInvokedUrlCommand*)command
+{
+    return [super execute:command];
+}
+
+- (NSString*)pathForResource:(NSString*)resourcepath;
 {
     return [super pathForResource:resourcepath];
 }

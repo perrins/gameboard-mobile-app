@@ -1,4 +1,5 @@
 #import "StreamingMedia.h"
+#import "HCYoutubeParser.h"
 #import <Cordova/CDV.h>
 
 @interface StreamingMedia()
@@ -23,6 +24,7 @@
 NSString * const TYPE_VIDEO = @"VIDEO";
 NSString * const TYPE_AUDIO = @"AUDIO";
 NSString * const DEFAULT_IMAGE_SCALE = @"center";
+NSURL *_urlToLoad;
 
 - (CDVPlugin*) initWithWebView:(UIWebView*)theWebView {
 	NSLog(@"-------------------------------------------------");
@@ -158,38 +160,72 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 }
 
 -(void)startPlayer:(NSString*)uri {
-	NSURL *url = [NSURL URLWithString:uri];
+    
 
-	moviePlayer =  [[MPMoviePlayerController alloc] initWithContentURL:url];
+    NSURL *url = [NSURL URLWithString:uri];
+    
+    [HCYoutubeParser thumbnailForYoutubeURL:url thumbnailSize:YouTubeThumbnailDefaultHighQuality completeBlock:^(UIImage *image, NSError *error) {
+        
+        if (!error) {
+            
+            [HCYoutubeParser h264videosWithYoutubeURL:url completeBlock:^(NSDictionary *videoDictionary, NSError *error) {
+                
+                NSDictionary *qualities = videoDictionary;
+                
+                NSString *URLString = nil;
+                if ([qualities objectForKey:@"small"] != nil) {
+                    URLString = [qualities objectForKey:@"small"];
+                }
+                else if ([qualities objectForKey:@"live"] != nil) {
+                    URLString = [qualities objectForKey:@"live"];
+                }
+                else {
+                    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Couldn't find youtube video" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] show];
+                    return;
+                }
+                _urlToLoad = [NSURL URLWithString:URLString];
 
-	// Listen for playback finishing
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(moviePlayBackDidFinish:)
-												 name:MPMoviePlayerPlaybackDidFinishNotification
-											   object:moviePlayer];
-	// Listen for click on the "Done" button
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(doneButtonClick:)
-												 name:MPMoviePlayerWillExitFullscreenNotification
-											   object:nil];
-	// Listen for orientation change
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(orientationChanged:)
-												 name:UIDeviceOrientationDidChangeNotification
-											   object:nil];
+                moviePlayer =  [[MPMoviePlayerController alloc] initWithContentURL:_urlToLoad];
+                
+                // Listen for playback finishing
+                [[NSNotificationCenter defaultCenter] addObserver:self
+                                                         selector:@selector(moviePlayBackDidFinish:)
+                                                             name:MPMoviePlayerPlaybackDidFinishNotification
+                                                           object:moviePlayer];
+                // Listen for click on the "Done" button
+                [[NSNotificationCenter defaultCenter] addObserver:self
+                                                         selector:@selector(doneButtonClick:)
+                                                             name:MPMoviePlayerWillExitFullscreenNotification
+                                                           object:nil];
+                // Listen for orientation change
+                [[NSNotificationCenter defaultCenter] addObserver:self
+                                                         selector:@selector(orientationChanged:)
+                                                             name:UIDeviceOrientationDidChangeNotification
+                                                           object:nil];
+                
+                moviePlayer.controlStyle = MPMovieControlStyleDefault;
+                
+                moviePlayer.shouldAutoplay = YES;
+                if (imageView != nil) {
+                    [moviePlayer.backgroundView setAutoresizesSubviews:YES];
+                    [moviePlayer.backgroundView addSubview:imageView];
+                }
+                moviePlayer.backgroundView.backgroundColor = backgroundColor;
+                
+                [self.viewController.view addSubview:moviePlayer.view];
+                
+                // Note: animating does a fade to black, which may not match background color
+                [moviePlayer setFullscreen:YES animated:NO];
 
-	moviePlayer.controlStyle = MPMovieControlStyleDefault;
-
-	moviePlayer.shouldAutoplay = YES;
-	if (imageView != nil) {
-		[moviePlayer.backgroundView setAutoresizesSubviews:YES];
-		[moviePlayer.backgroundView addSubview:imageView];
-	}
-	moviePlayer.backgroundView.backgroundColor = backgroundColor;
-	[self.viewController.view addSubview:moviePlayer.view];
-
-	// Note: animating does a fade to black, which may not match background color
-	[moviePlayer setFullscreen:YES animated:NO];
+                
+            }];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
+    
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {

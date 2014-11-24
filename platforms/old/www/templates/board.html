@@ -1,0 +1,88 @@
+<ion-view title="{{title}}">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-positive" ng-click="newVideo()">
+            <i class="icon ion-ios7-plus-empty"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="has-header">
+
+        <!--div class="spinner">
+            <img class="Banner genre-image-load" ng-src="{{banner}}" lazyload>
+        </div-->
+
+        <div class="list-error card assertive-bg" ng-show="!board && shownone">
+            <div class="item item-text-wrap">
+                Cannot retrieve the items at this time
+            </div>
+        </div>
+
+        <ion-list class="list">
+
+            <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();" ng-show="board">
+            </ion-refresher>
+
+            <div class="item item-avatar" ng-show="board">
+                
+                <h1>{{board.title}}</h1>
+                <h2>{{board.subtitle}}</h2>
+                <p>{{board.description}}</p>
+                <div class="bigPrize">{{board.prizes}}</div>
+                <div class="bigViews">{{board.number}}</div>
+
+            </div>
+
+        </ion-list>
+
+        <ion-list class="list">
+            <div class="item item-divider" ng-show="videos">
+                {{board.title}}&nbspBoard
+            </div>
+
+            <ion-item 
+                ng-show="videos"
+                class="item item-thumbnail-left item-icon-right board-item" 
+                ng-href="#/board/video/{{video.uuid}}"
+                can-swipe="true" 
+                item="video" 
+                collection-repeat="video in videos" 
+                collection-item-width="'100%'"
+                collection-item-height="100">
+
+                <div class="rank">
+                    {{video.rank}}
+                </div>
+
+                <div class="Video">
+                    <img ng-src="{{video.thumb}}" lazyvideo>
+                </div>
+
+                <h2>{{video.title}}</h2>
+                <h3>{{video.gameTag}}</h3>
+                <p>{{video.description}}</p>
+
+                <span class="badge badge-balanced">{{video.views}}</span>
+                <span class="badge badge-royal">{{video.prize}}</span>
+
+                <ion-option-button class="button-assertive" ng-click="onShare(item)">Share
+                </ion-option-button>
+                <ion-option-button class="button-royal" ng-click="addToFavourite(item)">
+                    <i class="icon ion-ios7-plus-empty"></i>
+                </ion-option-button>
+
+                <i class="icon ion-chevron-right icon-accessory"></i>
+
+            </ion-item>
+
+        </ion-list>
+
+        <ion-infinite-scroll class="progress"
+            icon="ion-loading-c"
+            on-infinite="loadMore()"
+            distance="30%">
+        </ion-infinite-scroll>
+
+    </ion-content>
+
+</ion-view>
