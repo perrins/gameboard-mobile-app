@@ -117,7 +117,7 @@ angular.module("gameboard.controllers", [])
                 $rootScope.user = user;
 
                 // Default the Header to the ID of the authenicated user
-                $http.defaults.headers.common["X-GB-ID"] = $rootScope.user.raw.id;
+                //$http.defaults.headers.common["X-GB-ID"] = $rootScope.user.raw.id;
 
                 // Get a Member
                 MembersService.getMember(user.raw.id).then(function(member) {
@@ -144,7 +144,7 @@ angular.module("gameboard.controllers", [])
 .controller("RegisterCtrl", function($ionicScrollDelegate, $rootScope, $state, $scope, MembersService, WizardHandler, $ionicPopup) {
 
     // Check if user is defined
-    if (!rootScope.user) {
+    if (!$rootScope.user) {
         $state.go("signin");
     }
 
@@ -349,8 +349,8 @@ angular.module("gameboard.controllers", [])
                         var data = IBMData.initializeService(),
                             cc = IBMCloudCode.initializeService();
 
-                        // Make it handle Local serving
-                        if (_.has(config, "local")) {
+                        // Make it handle Local serving if set to try and local url set
+                        if (config.local && _.has(config, "local")) {
                             // Set the Origin to Local Server for testing
                             cc.setBaseUrl(config.local);
                         }

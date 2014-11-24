@@ -1,6 +1,6 @@
 {
   "name": "gameboard-mobile-app",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "codename": "Joe Release",
   "author": {
     "name": [
@@ -17,6 +17,7 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-cssmin": "~0.7.0",
     "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-less": "^0.12.0",
     "grunt-contrib-uglify": "~0.3.2",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-conventional-changelog": "~1.1.0",

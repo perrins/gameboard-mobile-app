@@ -67,9 +67,10 @@ function(doc){
                 }).then(function(list) {
 
                     // Place the Items in the Cache
-                    cache.put(ACCESS.GENRES, list.docs);
+                    cache.put(ACCESS.GENRES, list);
                     // return the Cache
-                    defer.resolve(list.docs);
+                    defer.resolve(cache.get(ACCESS.GENRES));
+
                 }).catch(function(err) {
                     console.log(err);
                     defer.reject(err);
@@ -155,10 +156,10 @@ function(doc){
                 }).done(function(list) {
 
                     // Check if this is a list and array
-                    if (_.isObject(list) && _.isArray(list.docs) && list.docs.length > 0) {
+                    if (_.isObject(list) && list.length > 0) {
 
                         // Place the Items in the Cache
-                        cache.put(genid + "_" + ACCESS.GAMES, list.docs[0]);
+                        cache.put(genid + "_" + ACCESS.GAMES, list[0]);
 
                         // return the Cache
                         defer.resolve(cache.get(genid + "_" + ACCESS.GAMES));
@@ -248,11 +249,12 @@ function(doc){
                 cc.get(uri, {
                     "handleAs": "json"
                 }).done(function(list) {
+
                     // Check if this is a list and array
-                    if (_.isObject(list) && _.isArray(list.docs) && list.docs.length > 0) {
+                    if (_.isObject(list) && list.length > 0) {
 
                         // Place the Items in the Cache
-                        cache.put(gmid + "_" + ACCESS.CATEGORIES, list.docs[0]);
+                        cache.put(gmid + "_" + ACCESS.CATEGORIES, list[0]);
 
                         // return the Cache
                         defer.resolve(cache.get(gmid + "_" + ACCESS.CATEGORIES));
@@ -262,6 +264,8 @@ function(doc){
                     }
 
                 }, function(err) {
+
+                    debugger;
                     console.log(err);
                     defer.reject(err);
                 });
@@ -316,7 +320,7 @@ function(doc){
             // Get the Videos for my Board
             cc.get(uri, {
                 "handleAs": "json"
-            }).done(function(videos) {
+            }).then(function(videos) {
 
                 def.resolve(videos);
 
@@ -373,7 +377,7 @@ function(doc){
 
             cc.get(ACCESS.YOUR_VIDEOS, {
                 "handleAs": "json"
-            }).done(function(videos) {
+            }).then(function(videos) {
                 def.resolve(videos);
             }).catch(function(err) {
                 console.log(err);
