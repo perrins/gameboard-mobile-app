@@ -143,7 +143,7 @@ angular.module('gameboard.board.controllers', [])
 })
 
 // A simple controller that shows a tapped item's data
-.controller('BoardCtrl', function($rootScope,$scope, $state, $stateParams, $ionicModal, $ionicLoading, BoardService, YouTubeService,WizardHandler) {
+.controller('BoardCtrl', function($rootScope,$scope, $state, $stateParams, $ionicModal, $ionicLoading, BoardService, YouTubeService,WizardHandler,ACCESS) {
 
     var board = new Array();
 
