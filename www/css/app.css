@@ -150,3 +150,8 @@
     list-style: decimal;
     margin: 10px 0px;
 }
+
+.nobuttonmargins {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

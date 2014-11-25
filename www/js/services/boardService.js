@@ -156,10 +156,10 @@ function(doc){
                 }).done(function(list) {
 
                     // Check if this is a list and array
-                    if (_.isObject(list) && list.length > 0) {
+                    if (_.isObject(list) ) {
 
                         // Place the Items in the Cache
-                        cache.put(genid + "_" + ACCESS.GAMES, list[0]);
+                        cache.put(genid + "_" + ACCESS.GAMES, list);
 
                         // return the Cache
                         defer.resolve(cache.get(genid + "_" + ACCESS.GAMES));
@@ -251,10 +251,10 @@ function(doc){
                 }).done(function(list) {
 
                     // Check if this is a list and array
-                    if (_.isObject(list) && list.length > 0) {
+                    if (_.isObject(list) ) {
 
                         // Place the Items in the Cache
-                        cache.put(gmid + "_" + ACCESS.CATEGORIES, list[0]);
+                        cache.put(gmid + "_" + ACCESS.CATEGORIES, list);
 
                         // return the Cache
                         defer.resolve(cache.get(gmid + "_" + ACCESS.CATEGORIES));
@@ -265,7 +265,6 @@ function(doc){
 
                 }, function(err) {
 
-                    debugger;
                     console.log(err);
                     defer.reject(err);
                 });

@@ -43,7 +43,8 @@ angular.module("gameboard", [
 	MEMBERS: "/members", // IBM CloudCode and Cloudant
 	SEARCH_MEMBERS : "/members/search",
 	REGISTER : "/members/register",
-	FAVOURITES: "/favourites", // IBM Data
+	FAVOURITES: "/favourites", // IBM Cloudant
+	BOOKMARKS : "/bookmarks",
 	SEARCH: "/search", // IBM CloudCode with Cloudant
 	VIDEOS: "/videos", // IBM CloudCode with Cloudant
 	BYYTID : "/videos/youtube",
@@ -161,6 +162,17 @@ angular.module("gameboard", [
 				}
 			}
 		})
+
+		.state("board.bookmarks", {
+			url: "/boardmarks",
+			views: {
+				"menuContent": {
+					templateUrl: "templates/bookmarks.html",
+					controller: "BookmarksCtrl"
+				}
+			}
+		})
+
 		.state("board.member", {
 			url: "/member/:muuid",
 			views: {
