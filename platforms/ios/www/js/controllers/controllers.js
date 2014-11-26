@@ -35,7 +35,15 @@ angular.module("gameboard.controllers", [])
     }
 
     $scope.logout = function() {
-        console.log("logout");
+
+        // Remove the User State
+        $rootScope.user = null;
+        $rootScope.member = null;
+
+        // Do an OAuth Logout Here
+
+        $state.go("signin");
+
     };
 
 })
@@ -68,9 +76,10 @@ angular.module("gameboard.controllers", [])
             $rootScope.user = {   
                                 "id"      : "1292030202022",
                                 "gametag" : "lolperrins123",
+                                "avatar"  : "img/avatar.png",
                                 "firstname"    : "Joe",
                                 "lastname" : "Perrins",
-                                "registered":true
+                                "registered":false
                               };
             $rootScope.member = {
                 "muuid"   : 282992902,
@@ -78,14 +87,12 @@ angular.module("gameboard.controllers", [])
                 "name"    : "Joe",
                 "surname" : "Perrins",
                 "memberSince" : "01/01/2014",
-                "avatar"  : "https://lh6.googleusercontent.com/-49qVzjcgbpA/AAAAAAAAAAI/AAAAAAAAAAA/dZVfNGJEZqY/s96-c/photo.jpg",
+                "avatar"  : "img/avatar.png",
                 "bio"     : "The best minecraft player on the planet",
                 "prizes"  : "£23,456",
                 "views"   : "4,343",
 
             };
-
-            $http.defaults.headers.common["X-GB-ID"] = $rootScope.user.id;
 
             // Havigate to the Board View
             $state.go("intro");         
@@ -335,7 +342,7 @@ angular.module("gameboard.controllers", [])
             } else {
 
                 // Lets load the Configuration from the bluelist.json file
-                $http.get("./bluemix.json").success(function(config) {
+                $http.get("./config.json").success(function(config) {
                     $rootScope.config = config;
 
                     // Initialise the SDK

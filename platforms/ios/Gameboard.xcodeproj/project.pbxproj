@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -42,6 +43,9 @@
 		D28ECEADDD4945019AAE8A49 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A8E344A534E239BCAB052 /* CDVDevice.m */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		DB4B1FB03DDB4D5585E75F6B /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = A790D3F77C81417AA5C5AA24 /* CDVInAppBrowser.m */; };
+		DE5C39FE1A2617EC00103523 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE5C39FD1A2617EC00103523 /* GameKit.framework */; };
+		DE5C3A001A26193100103523 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE5C39FF1A26193100103523 /* iAd.framework */; };
+		DE5C3A021A26193900103523 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE5C3A011A26193900103523 /* StoreKit.framework */; };
 		DEC3A4AC19936B9800003805 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC3A4AB19936B9800003805 /* Images.xcassets */; };
 		DEE92ACC198765DA00A576F2 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE92ACB198765DA00A576F2 /* HCYoutubeParser.m */; };
 		DEE92AE5198829E900A576F2 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE92AE2198829E900A576F2 /* libGoogleAdMobAds.a */; };
@@ -53,7 +57,6 @@
 		DEE92AEF19882E4900A576F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE92AEE19882E4900A576F2 /* CoreData.framework */; };
 		DEE92AF119882E5300A576F2 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE92AF019882E5300A576F2 /* AdSupport.framework */; };
 		DEE92AF319882E5F00A576F2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE92AF219882E5F00A576F2 /* CoreTelephony.framework */; };
-		DEE92AF519882E9D00A576F2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE92AF419882E9D00A576F2 /* StoreKit.framework */; };
 		E0D57983870F4129861D5AE8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9446D2DAE427FB1CD594F /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +127,9 @@
 		BA74E2EDA35D41B1B10C7574 /* StreamingMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamingMedia.h; path = com.hutchind.cordova.plugins.streamingmedia/StreamingMedia.h; sourceTree = "<group>"; };
 		C89513725A34459B9C10122D /* CDVInAppBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVInAppBrowser.h; path = org.apache.cordova.inappbrowser/CDVInAppBrowser.h; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		DE5C39FD1A2617EC00103523 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		DE5C39FF1A26193100103523 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		DE5C3A011A26193900103523 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		DEC3A4AB19936B9800003805 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Gameboard/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		DEE92ACA198765DA00A576F2 /* HCYoutubeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCYoutubeParser.h; sourceTree = "<group>"; };
 		DEE92ACB198765DA00A576F2 /* HCYoutubeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCYoutubeParser.m; sourceTree = "<group>"; };
@@ -148,7 +154,6 @@
 		DEE92AEE19882E4900A576F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		DEE92AF019882E5300A576F2 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		DEE92AF219882E5F00A576F2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		DEE92AF419882E9D00A576F2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		EB87FDF21871DA7A0020F90C /* merges */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merges; path = ../../merges; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
@@ -160,7 +165,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEE92AF519882E9D00A576F2 /* StoreKit.framework in Frameworks */,
+				DE5C3A021A26193900103523 /* StoreKit.framework in Frameworks */,
+				DE5C3A001A26193100103523 /* iAd.framework in Frameworks */,
 				DEE92AF319882E5F00A576F2 /* CoreTelephony.framework in Frameworks */,
 				DEE92AF119882E5300A576F2 /* AdSupport.framework in Frameworks */,
 				DEE92AEF19882E4900A576F2 /* CoreData.framework in Frameworks */,
@@ -170,6 +176,7 @@
 				DEE92AE919882A9200A576F2 /* AudioToolbox.framework in Frameworks */,
 				5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */,
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
+				DE5C39FE1A2617EC00103523 /* GameKit.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				DEE92AE5198829E900A576F2 /* libGoogleAdMobAds.a in Frameworks */,
 				5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */,
@@ -281,7 +288,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DEE92AF419882E9D00A576F2 /* StoreKit.framework */,
+				DE5C3A011A26193900103523 /* StoreKit.framework */,
+				DE5C39FF1A26193100103523 /* iAd.framework */,
+				DE5C39FD1A2617EC00103523 /* GameKit.framework */,
 				DEE92AF219882E5F00A576F2 /* CoreTelephony.framework */,
 				DEE92AF019882E5300A576F2 /* AdSupport.framework */,
 				DEE92AEE19882E4900A576F2 /* CoreData.framework */,
@@ -413,6 +422,14 @@
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 2EGXRYELNU;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -580,7 +597,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Matthew Perrins (2EGXRYELNU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -609,7 +626,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Gameboard;
-				PROVISIONING_PROFILE = "09DC6947-F32B-456F-AD12-5B7F48944453";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -622,7 +639,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Matthew Perrins (2EGXRYELNU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Gameboard/Gameboard-Prefix.pch";
@@ -649,7 +666,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Gameboard;
-				PROVISIONING_PROFILE = "09DC6947-F32B-456F-AD12-5B7F48944453";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

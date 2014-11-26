@@ -258,7 +258,13 @@ angular.module('gameboard.board.controllers', [])
         $scope.loadMore();
     };
 
- 
+
+    $scope.addBookmark = function(){
+
+        // Add Backmark of the Board
+
+    };
+
 
     // Create our modal
     $ionicModal.fromTemplateUrl('templates/add-video.html', function(modal) {

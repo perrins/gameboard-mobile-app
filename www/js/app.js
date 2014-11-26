@@ -124,11 +124,11 @@ angular.module("gameboard", [
 				}
 			}
 		})
-		.state("board.board", {
-			url: "/board/:bid",
+		.state("board.videos", {
+			url: "/videos/:bid",
 			views: {
 				"menuContent": {
-					templateUrl: "templates/board.html",
+					templateUrl: "templates/videos.html",
 					controller: "BoardCtrl"
 				}
 			}
@@ -164,7 +164,7 @@ angular.module("gameboard", [
 		})
 
 		.state("board.bookmarks", {
-			url: "/boardmarks",
+			url: "/bookmarks",
 			views: {
 				"menuContent": {
 					templateUrl: "templates/bookmarks.html",
@@ -182,11 +182,11 @@ angular.module("gameboard", [
 				}
 			}
 		})
-		.state("board.videos", {
-			url: "/videos",
+		.state("board.yourvideos", {
+			url: "/yourvideos",
 			views: {
 				"menuContent": {
-					templateUrl: "templates/videos.html",
+					templateUrl: "templates/yourvideos.html",
 					controller: "YourVideosCtrl"
 				}
 			}

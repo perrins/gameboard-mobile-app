@@ -269,7 +269,7 @@ angular.module("gameboard.member.controllers", [])
 		BookmarksService.allCloud().then(function (bookmarks) {
 
 			// Update the model with a list of Items
-			$scope.bookmarks = favs;
+			$scope.bookmarks = bookmarks;
 
 			// Let Angular know we have some data because of the Async nature of IBMBaaS
 			// This is required to make sure the information is uptodate

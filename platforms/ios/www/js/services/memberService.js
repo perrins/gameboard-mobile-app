@@ -194,7 +194,7 @@ angular.module("gameboard.member.services", [])
 /**
  * A simple example service that returns some data.
  */
-.factory("FavouritesService", function ($rootScope, $q, $cacheFactory, URL) {
+.factory("FavouritesService", function ($rootScope, $q, $cacheFactory, ACCESS) {
 
 	// Use an internal Cache for storing the List and map the operations to manage that from
 	// MBaaS SDK Calls
@@ -203,33 +203,47 @@ angular.module("gameboard.member.services", [])
 	return {
 		// Return all the Objects for a Given Class
 		allCloud: function () {
-			// Create a Defer as this is an async operation
-			var def = $q.defer();
 
-			// Clear the Cache with a new set
-			cache.remove("favourites");
+            // Create a deffer
+            var def = $q.defer();
 
-			// Lets Get a list of Genres
-			$.ajax({
-				type: "GET",
-				url: URL.FAVOURITES,
-				dataType: "json",
-				contentType: "application/json",
-				success: function (result,status) {
-					// Check if we were able to store it sucessfully
-					if (status === "success") {
-						// Place the Items in the Cache
-						cache.put("favourites",result);
-						// return the Cache
-						def.resolve(cache.get("favourites"));
-					} else {
-						def.reject([]);
-					}
-				},
-				error: function (err) {
-					def.reject(err);
-				}
-			});
+ 			var items = cache.get(ACCESS.FAVOURITES);
+
+ 			// Check if we are already Cached
+            if (!_.isUndefined(items)) {
+                defer.resolve(items);
+            } else {
+
+	            // Get handle to the CloudCode service
+	            var cc = IBMCloudCode.getService();
+
+	            // Get the User Id
+	            var userid = $rootScope.user.id;
+
+	            // USE THE CloudCode to Call the Board Services
+	            // This will integrate with Cloudant to retrieve a list of videos for a Board
+	            // Need to manage the Paging for this and sort it by ranking
+	            // Lets build a 
+	            var uri = new IBMUriBuilder().append(ACCESS.FAVOURITES).append(userid).toString();
+
+			  	// Clear the Cache with a new set
+	            cache.remove(ACCESS.FAVOURITES);
+
+	            // Get the Videos for my Board
+	            cc.get(uri, {
+	                "handleAs": "json"
+	            }).then(function(favourites) {
+
+					// Place the Items in the Cache
+	                cache.put(ACCESS.FAVOURITES, favourites);
+	                // return the Cache
+	                def.resolve(cache.get(ACCESS.FAVOURITES));
+	   
+	            }).catch(function(err) {
+	                console.log(err);
+	                def.reject(err);
+	            });
+            }
 
 			// Get the Objects for a particular Type
 			return def.promise;
@@ -238,10 +252,15 @@ angular.module("gameboard.member.services", [])
 		// Return the Cached List
 		allCache: function () {
 			// Return the Cached Items
-			return cache.get("favourites");
+			return cache.get(ACCESS.FAVOURITES);
 		},
 
-		add: function (data) { },
+		add: function (data) { 
+
+
+
+
+		},
 
 		del: function (video) {
 			var def = $q.defer();
@@ -258,4 +277,92 @@ angular.module("gameboard.member.services", [])
 			return def.promise;
 		}
 	};
+})
+
+/**
+ * A simple example service that returns some data.
+ */
+.factory("BookmarksService", function ($rootScope, $q, $cacheFactory, ACCESS) {
+
+	// Use an internal Cache for storing the List and map the operations to manage that from
+	// MBaaS SDK Calls
+	var cache = $cacheFactory("bookmarks");
+
+	return {
+		// Return all the Objects for a Given Class
+		allCloud: function () {
+
+            // Create a deffer
+            var def = $q.defer();
+
+ 			var items = cache.get(ACCESS.BOOKMARKS);
+
+ 			// Check if we are already Cached
+            if (!_.isUndefined(items)) {
+                defer.resolve(items);
+            } else {
+
+	            // Get handle to the CloudCode service
+	            var cc = IBMCloudCode.getService();
+
+	            // Get the User Id
+	            var userid = $rootScope.user.id;
+
+	            // USE THE CloudCode to Call the Board Services
+	            // This will integrate with Cloudant to retrieve a list of videos for a Board
+	            // Need to manage the Paging for this and sort it by ranking
+	            // Lets build a 
+	            var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
+
+			  	// Clear the Cache with a new set
+	            cache.remove(ACCESS.BOOKMARKS);
+
+	            // Get the Videos for my Board
+	            cc.get(uri, {
+	                "handleAs": "json"
+	            }).then(function(favourites) {
+
+					// Place the Items in the Cache
+	                cache.put(ACCESS.BOOKMARKS, favourites);
+	                // return the Cache
+	                def.resolve(cache.get(ACCESS.BOOKMARKS));
+	   
+	            }).catch(function(err) {
+	                console.log(err);
+	                def.reject(err);
+	            });
+            }
+
+			// Get the Objects for a particular Type
+			return def.promise;
+		},
+
+		// Return the Cached List
+		allCache: function () {
+			// Return the Cached Items
+			return cache.get(ACCESS.FAVOUR);
+		},
+
+		add: function (data) { 
+
+
+
+		},
+
+		del: function (bookmark) {
+			var def = $q.defer();
+
+			// Remove the Item from the Cache
+			var bookmarks = cache.get("bookmarks");
+			bookmarks.splice(bookmarks.indexOf(bookmark),1);
+
+			// AJAX DELETE
+			def.resolve("status");
+
+			// Remove it
+			// TMD: When a ASYNC defer when this is a sync process?
+			return def.promise;
+		}
+	};
 });
+

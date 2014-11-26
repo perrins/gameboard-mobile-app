@@ -152,7 +152,11 @@ angular.module("gameboard.member.controllers", [])
 	$scope.loadItems = function () {
 		// Clear the List before adding new items
 		// This needs to be improved
-		$scope.list = [];
+		$scope.members = [];
+		$scope.videos = [];
+
+		$scope.total_videos = 0;
+		$scope.total_members = 0;
 
 		// Refresh
 		if (!$scope.$$phase) {
@@ -166,8 +170,11 @@ angular.module("gameboard.member.controllers", [])
 		FavouritesService.allCloud().then(function (favs) {
 
 			// Update the model with a list of Items
+			$scope.favourites = favs;
 			$scope.videos = favs.videos;
-			$scope.members = favs.members;
+
+			$scope.total_videos = favs.videos.length;
+			$scope.total_members = favs.members.length;
 
 			// Let Angular know we have some data because of the Async nature of IBMBaaS
 			// This is required to make sure the information is uptodate
@@ -175,23 +182,38 @@ angular.module("gameboard.member.controllers", [])
 				$scope.$apply();
 			}
 
-			$rootScope.favourites = true;
-
 			// Trigger refresh complete on the pull to refresh action
 			$scope.$broadcast("scroll.refreshComplete");
-		}, function (err) {
-			$(".list-error").show(err.responseText);
+
+		}).catch(function(err){
+			 console.log(err);
 		});
 	};
 
-	// Check if we have Load Init MBaaS and wait for it to configure itself
-	// Once complete keep a reference to it so we can talk to it later
-	if (!$rootScope.favourites) {
-		$scope.loadItems();
-	} else {
+	$scope.loadItems();
+
+	$scope.showMembers = function() {
+
 		var favs = FavouritesService.allCache();
-		$scope.videos = favs.videos;
+		$scope.videos = [];
 		$scope.members = favs.members;
+
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
+
+	};
+
+	$scope.showVideos = function() {
+
+		var favs = FavouritesService.allCache();
+		$scope.members = [];
+		$scope.videos = favs.videos;
+
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
+
 	}
 
 	$scope.actionButtons = [{
@@ -203,18 +225,76 @@ angular.module("gameboard.member.controllers", [])
 		}
 	}];
 
-	$scope.selectVideo = function (item) {
-		// Shows/hides the delete button on hover
-		$location.path("#/board/list");
+	$scope.onRefresh = function() {
+		// Go back to the Cloud and load a new set of Objects as a hard refresh has been done
+		$scope.loadItems();
 	};
 
-	$scope.selectMember = function (member) {
-		$rootScope.$apply(function () {
-			// Moves to a Member
-			var mem = "#/board/member/" + member.muuid;
-			$location.path(mem);
+	$scope.onDelete = function (video) {
+
+		// Delete the Item
+		FavouritesService.delVideo(video).then(null, function (err) {
+			console.log(err);
+		});
+
+		$scope.list = FavouritesService.allCache();
+	};
+
+	$scope.itemButtons = [{
+		text: "Delete",
+		type: "button-assertive",
+		onTap: function(item) {
+			$scope.onDelete(item);
+		}
+	}];
+})
+
+// A simple controller that fetches a list of data from a service
+.controller("BookmarksCtrl", function ($rootScope, $scope, $location, $ionicLoading, BookmarksService) {
+
+	$scope.loadItems = function () {
+		// Clear the List before adding new items
+		// This needs to be improved
+		$scope.bookmarks = [];
+
+		// Refresh
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
+
+		// Because we are retrieving all the items every time we do something
+		// We need to clear the list before loading in some new values
+
+		// "List is " is a service returning data from the
+		BookmarksService.allCloud().then(function (bookmarks) {
+
+			// Update the model with a list of Items
+			$scope.bookmarks = bookmarks;
+
+			// Let Angular know we have some data because of the Async nature of IBMBaaS
+			// This is required to make sure the information is uptodate
+			if (!$scope.$$phase) {
+				$scope.$apply();
+			}
+
+			// Trigger refresh complete on the pull to refresh action
+			$scope.$broadcast("scroll.refreshComplete");
+
+		}).catch(function(err){
+			 console.log(err);
 		});
 	};
+
+	$scope.loadItems();
+
+	$scope.actionButtons = [{
+		type: "button-clear",
+		content: "<div class='buttons'><button class='button button-icon icon ion-ios7-minus-outline'></button></div>",
+		tap: function() {
+			// Set the Attribute
+			$scope.showDelete = !$scope.showDelete;
+		}
+	}];
 
 	$scope.onRefresh = function() {
 		// Go back to the Cloud and load a new set of Objects as a hard refresh has been done
@@ -222,8 +302,6 @@ angular.module("gameboard.member.controllers", [])
 	};
 
 	$scope.onDelete = function (video) {
-		// Work out what is being deleted
-		debugger;
 
 		// Delete the Item
 		FavouritesService.delVideo(video).then(null, function (err) {
@@ -241,3 +319,4 @@ angular.module("gameboard.member.controllers", [])
 		}
 	}];
 });
+
