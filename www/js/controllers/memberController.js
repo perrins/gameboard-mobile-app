@@ -250,7 +250,7 @@ angular.module("gameboard.member.controllers", [])
 })
 
 // A simple controller that fetches a list of data from a service
-.controller("BookmarksCtrl", function ($rootScope, $scope, $location, $ionicLoading, BookmarksService) {
+.controller("BookmarksCtrl", function ($state,$rootScope, $scope, $location, $ionicLoading, BookmarksService) {
 
 	$scope.loadItems = function () {
 		// Clear the List before adding new items
@@ -287,18 +287,35 @@ angular.module("gameboard.member.controllers", [])
 
 	$scope.loadItems();
 
-	$scope.actionButtons = [{
-		type: "button-clear",
-		content: "<div class='buttons'><button class='button button-icon icon ion-ios7-minus-outline'></button></div>",
-		tap: function() {
-			// Set the Attribute
-			$scope.showDelete = !$scope.showDelete;
-		}
-	}];
-
 	$scope.onRefresh = function() {
 		// Go back to the Cloud and load a new set of Objects as a hard refresh has been done
 		$scope.loadItems();
+	};
+
+	$scope.selectBookmark = function(bookmark) {
+
+		debugger;
+		switch (bookmark.type) {
+
+			case "GAME":
+
+				$state.go("board.games", {genid:bookmark.gid});
+				break;
+
+			case "CATEGORY" :
+
+				$state.go("board.categories", {gid:bookmark.gid,gmid:bookmark.gmid});
+				break;
+
+			case "BOARD" :
+
+				$state.go("board.videos", {bid:bookmark.bid});
+				break;
+
+			default:
+				console.log("Bookmark is invalid");
+		}
+
 	};
 
 	$scope.onDelete = function (video) {

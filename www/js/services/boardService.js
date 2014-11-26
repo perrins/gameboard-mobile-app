@@ -87,6 +87,11 @@ function(doc){
             // Resolve the Cache
             var genres = cache.get(ACCESS.GENRES);
 
+            // Load if not loaded
+            if (genres === null) {
+                genres = this.all();
+            }
+
             var _genre = null;
             genres.forEach(function(genre) {
                 if (genre.gid == gid) {

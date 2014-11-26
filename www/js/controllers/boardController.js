@@ -48,7 +48,7 @@ angular.module('gameboard.board.controllers', [])
 })
 
 // A simple controller that shows a tapped item's data
-.controller('GamesCtrl', function($state,$scope, $stateParams,$ionicLoading, $ionicPopup, GenresService, GamesService) {
+.controller('GamesCtrl', function($state,$scope, $stateParams,$ionicLoading, $ionicPopup, GenresService, GamesService,BookmarksService) {
 
     // Lets check we have a 
     var genid = $stateParams.genid;
@@ -103,10 +103,42 @@ angular.module('gameboard.board.controllers', [])
         $ionicLoading.hide();
     });
 
+    $scope.addBookmark = function() {
+
+        // Build the Bookmark
+        var data = {type:"GAME", gid: $scope.gid, title:$scope.title};
+
+        BookmarksService.addBookmark(data).then(function(status) {
+
+            // Tell User we have created the Book Mark
+            var infoPopup = $ionicPopup.alert({
+                title: 'Bookmark',
+                template: 'Bookmark has been saved for Games Genre '+$scope.title
+            });
+
+            infoPopup.then(function(res) {
+
+            });
+
+        },function(err){
+
+            var alertPopup = $ionicPopup.alert({
+                title: 'Bookmark',
+                template: 'Failed to create the Bookmark'
+            });
+
+            alertPopup.then(function(res) {
+
+            });
+
+        });
+
+    }
+
 })
 
 // A simple controller that shows a tapped item's data
-.controller('CategoriesCtrl', function($scope, $stateParams,$ionicLoading, CategoriesService,GamesService) {
+.controller('CategoriesCtrl', function($scope, $stateParams,$ionicLoading,$ionicPopup, CategoriesService,GamesService,BookmarksService) {
 
     // Lets check we have a 
     var gmid = $stateParams.gmid;
@@ -123,22 +155,72 @@ angular.module('gameboard.board.controllers', [])
     // Need to Check if we have got some already
     CategoriesService.all($stateParams.gmid).then(function(data) {
 
-        // Paint 
-        $scope.banner = data.banner;
-        $scope.categories = data.categories;
-        $scope.gmid = data.gmid;
 
-        $ionicLoading.hide();
+        // Check we have some Games for this Genre
+        if (_.isNull(data)) {
 
-        // This is required to make sure the information is uptodate
-        if (!$scope.$$phase) {
-            $scope.$apply();
+            $ionicLoading.hide();
+
+            var alertPopup = $ionicPopup.alert({
+                title: 'Categoies',
+                template: 'It seems we dont have a Category defined for this Game'
+            });
+
+            alertPopup.then(function(res) {
+                // Go Back to the Main Genres Screen
+                $state.go("board.genres");
+            });
+
+        } else {
+            // Paint 
+            $scope.banner = data.banner;
+            $scope.categories = data.categories;
+            $scope.gmid = data.gmid;
+
+            $ionicLoading.hide();
+
+            // This is required to make sure the information is uptodate
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
         }
 
     },function(err){
         console.log(err);
         $ionicLoading.hide();
     });
+
+     $scope.addBookmark = function() {
+
+        // Build the Bookmark
+        var data = {type:"CATEGORY", gemid: $scope.gmid, title:$scope.title};
+
+        BookmarksService.addBookmark(data).then(function(status) {
+
+            // Tell User we have created the Book Mark
+            var infoPopup = $ionicPopup.alert({
+                title: 'Bookmark',
+                template: 'Bookmark has been saved for Category '+$scope.title
+            });
+
+            infoPopup.then(function(res) {
+
+            });
+
+        },function(err){
+
+            var alertPopup = $ionicPopup.alert({
+                title: 'Bookmark',
+                template: 'Failed to create the Bookmark'
+            });
+
+            alertPopup.then(function(res) {
+
+            });
+
+        });
+
+    }
 
 })
 
