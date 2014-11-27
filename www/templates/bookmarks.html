@@ -29,14 +29,12 @@
             ng-show="bookmarks">
 
             <ion-item ng-repeat="book in bookmarks" 
-                class="item item-icon-right" 
+                class="item item-bookmark-left item-icon-right" 
                 type="item-text-wrap" 
                 item="book" 
                 ng-click="selectBookmark(book)">
 
-                <div class="Video">
-                    <img ng-src="{{video.thumb}}" lazyvideo>
-                </div>
+                <div ng-class="book.type"></div>
 
                 <h2>{{book.title}}</h2>
                 <h3>{{book.subtitle}}</h2>

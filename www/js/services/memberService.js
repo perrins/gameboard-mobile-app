@@ -164,25 +164,6 @@ angular.module("gameboard.member.services", [])
 			// Create a deffered
 			var def = $q.defer();
 
-			// Lets Get a list of Genres
-			$.ajax({
-				type: "GET",
-				url: URL.MEMBER,
-				dataType: "json",
-				contentType: "application/json",
-				success: function (result,status) {
-					// Check if we were able to store it sucessfully
-					if (status === "success") {
-						// return the Cache
-						def.resolve(result);
-					} else {
-						def.reject([]);
-					}
-				},
-				error: function (err) {
-					def.reject(err);
-				}
-			});
 
 			// Get the Objects for a particular Type
 			return def.promise;
@@ -211,7 +192,7 @@ angular.module("gameboard.member.services", [])
 
  			// Check if we are already Cached
             if (!_.isUndefined(items)) {
-                defer.resolve(items);
+                def.resolve(items);
             } else {
 
 	            // Get handle to the CloudCode service
@@ -299,7 +280,7 @@ angular.module("gameboard.member.services", [])
 
  			// Check if we are already Cached
             if (!_.isUndefined(items)) {
-                defer.resolve(items);
+                def.resolve(items);
             } else {
 
 	            // Get handle to the CloudCode service

@@ -294,22 +294,36 @@ angular.module("gameboard.member.controllers", [])
 
 	$scope.selectBookmark = function(bookmark) {
 
-		debugger;
 		switch (bookmark.type) {
 
 			case "GAME":
 
+				// Navigate to a Game
 				$state.go("board.games", {genid:bookmark.gid});
 				break;
 
 			case "CATEGORY" :
 
-				$state.go("board.categories", {gid:bookmark.gid,gmid:bookmark.gmid});
+				// Navigate the to a Category
+				$state.go("board.categories", {genid:bookmark.genid,gmid:bookmark.gmid});
 				break;
 
 			case "BOARD" :
 
+				// Navigate to a Board
 				$state.go("board.videos", {bid:bookmark.bid});
+				break;
+
+			case "MEMBER" :
+
+				// Navigate to a Board
+				$state.go("board.members", {muuid:bookmark.muuid});
+				break;
+
+			case "VIDEOS" :
+
+				// Navigate to a Board
+				$state.go("board.videos", {uuid:bookmark.uuid});
 				break;
 
 			default:

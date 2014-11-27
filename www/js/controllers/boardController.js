@@ -53,19 +53,21 @@ angular.module('gameboard.board.controllers', [])
     // Lets check we have a 
     var genid = $stateParams.genid;
 
-    // Access the Genres and get the Title and other information we need
-    var genre = GenresService.getGenre(genid);
-
-    // Display The Title
-    $scope.title = genre.title;
-
     // Lets load the Videos for the Youtube Channel
     $ionicLoading.show({
         template: 'Loading Games...'
     });
 
-    // Need to Check if we have got some already
-    GamesService.all(genid).then(function(data) {
+    // Access the Genres and get the Title and other information we need
+    GenresService.getGenre(genid).then(function(genre){
+
+        // Display The Title
+        $scope.title = genre.title;
+
+        // Get the Games
+        return GamesService.all(genid);
+
+    }).then(function(data) {
 
         // Check we have some Games for this Genre
         if (_.isNull(data)) {
@@ -346,7 +348,6 @@ angular.module('gameboard.board.controllers', [])
         // Add Backmark of the Board
 
     };
-
 
     // Create our modal
     $ionicModal.fromTemplateUrl('templates/add-video.html', function(modal) {

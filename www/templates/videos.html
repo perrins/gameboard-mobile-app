@@ -57,9 +57,9 @@
                     {{video.rank}}
                 </div>
 
-                <div class="Video">
-                    <img ng-src="{{video.thumb}}" lazyvideo>
-                </div>
+                <div class="spinner">
+                        <img  class="genre-image genre-image-load" alt="{{video.thumb}}"  ng-src="{{video.thumb}}" lazyload>
+                </div>    
 
                 <h2>{{video.title}}</h2>
                 <h3>{{video.gameTag}}</h3>
