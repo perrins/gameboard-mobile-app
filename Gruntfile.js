@@ -19,31 +19,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 
 
-		less: {
-		  dev: {
-			options: {
-			  paths: ["assets/css"]
-			},
-			files: {
-			  "path/to/result.css": "path/to/source.less"
-			}
-		  },
-		  dist: {
-			options: {
-			  paths: ["assets/css"],
-			  cleancss: true,
-			  modifyVars: {
-				imgPath: '"http://mycdn.com/path/to/images"',
-				bgColor: 'red'
-			  }
-			},
-			files: {
-			  "path/to/result.css": "path/to/source.less"
-			}
-		  }
-		},
-
-
 		clean: {
 			options: {
 				force: false

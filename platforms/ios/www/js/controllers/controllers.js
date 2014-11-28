@@ -160,6 +160,7 @@ angular.module("gameboard.controllers", [])
 
     // Move the Name section
     $scope.next = function() {
+        
         // VALIDATE THE FORM
         $ionicScrollDelegate.scrollTop();
         WizardHandler.wizard().next();
@@ -181,6 +182,7 @@ angular.module("gameboard.controllers", [])
 
     // Finish the Wizard
     $scope.register = function(member) {
+
         // Lets Validate and Add any other meta data we need
         MembersService.registerMember(member).then(function(member) {
             // Get the Global Scope

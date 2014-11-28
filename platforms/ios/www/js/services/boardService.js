@@ -84,17 +84,31 @@ function(doc){
         },
         getGenre: function(gid) {
 
-            // Resolve the Cache
-            var genres = cache.get(ACCESS.GENRES);
 
-            var _genre = null;
-            genres.forEach(function(genre) {
-                if (genre.gid == gid) {
-                    _genre = genre;
+            var def = $q.defer();
+
+            // Resolve the Cache            
+            this.all().then( function(genres) {
+
+                var _genre = null;
+                genres.forEach(function(genre) {
+                    if (genre.gid == gid) {
+                        _genre = genre;
+                    }
+                })
+
+                // Check if we have found one
+                if(!_.isNull(_genre)) {
+                    def.resolve(_genre);
+                } else {
+                    def.reject(_genre);
                 }
-            })
 
-            return _genre;
+            },function(err){
+                def.reject(err);
+            });
+
+            return def.promise;
 
         }
 
@@ -184,16 +198,31 @@ function(doc){
         },
         getGame: function(genid, gmid) {
 
-            // Resolve the Cache
-            var item = cache.get(genid + "_" + ACCESS.GAMES);
-            var _game = null;
-            var games = item.games
-            games.forEach(function(game) {
-                if (game.gmid == gmid) {
-                    _game = game;
+            var def = $q.defer();
+
+            // Resolve the Cache            
+            this.all(genid).then( function(item) {
+
+                var games = item.games
+                var _game = null;
+                games.forEach( function(game) {
+                    if (game.gmid == gmid) {
+                        _game = game;
+                    }
+                });
+
+                // Check if we have found one
+                if(!_.isNull(_game)) {
+                    def.resolve(_game);
+                } else {
+                    def.reject(_game);
                 }
-            })
-            return _game;
+
+            },function(err){
+                def.reject(err);
+            });
+
+            return def.promise;
         }
     }
 })
@@ -278,6 +307,12 @@ function(doc){
 
             // Resolve the Cache
             var cats = cache.get(ACCESS.CATEGORIES);
+
+            // Load if not loaded
+            if (_.isUndefined(cats)) {
+                cats = this.all();
+            }
+
             var _cat = null;
             cats.forEach(function(cat) {
                 if (cat.cid == cid) {
@@ -475,8 +510,6 @@ function(doc){
                 "handleAs": "json"
             }).then(function(video) {
 
-                debugger;
-
                 // Return the Video 
                 var _video = null;
                 if (video.length > 0 && _.has(video[0], "doc")) {
@@ -525,41 +558,6 @@ function(doc){
 
         },
 
-        put: function(item) {
-
-            // Create a deferred
-            var defer = $q.defer();
-
-            // get the Data Service
-            var data = IBMData.getService();
-
-            //Get the object with the given id
-            data.Object.withId(item.getId()).then(function(item) {
-
-                // Create Data to Update
-                var attributes = {
-                    name: item.get('name')
-                };
-
-                // Update the Contents of the Object
-                item.set(attributes);
-
-                // Save the updated items
-                return item.save();
-
-            }).done(function(saved) {
-
-
-
-                defer.resolve(saved);
-            }, function(err) {
-                defer.reject(err);
-            });
-
-            // Return a promise for the async operation of save
-            return defer.promise;
-
-        },
 
         del: function(item) {
 
