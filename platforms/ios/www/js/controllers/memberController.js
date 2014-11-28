@@ -250,7 +250,7 @@ angular.module("gameboard.member.controllers", [])
 })
 
 // A simple controller that fetches a list of data from a service
-.controller("BookmarksCtrl", function ($rootScope, $scope, $location, $ionicLoading, BookmarksService) {
+.controller("BookmarksCtrl", function ($state,$rootScope, $scope, $location, $ionicLoading, BookmarksService) {
 
 	$scope.loadItems = function () {
 		// Clear the List before adding new items
@@ -287,18 +287,49 @@ angular.module("gameboard.member.controllers", [])
 
 	$scope.loadItems();
 
-	$scope.actionButtons = [{
-		type: "button-clear",
-		content: "<div class='buttons'><button class='button button-icon icon ion-ios7-minus-outline'></button></div>",
-		tap: function() {
-			// Set the Attribute
-			$scope.showDelete = !$scope.showDelete;
-		}
-	}];
-
 	$scope.onRefresh = function() {
 		// Go back to the Cloud and load a new set of Objects as a hard refresh has been done
 		$scope.loadItems();
+	};
+
+	$scope.selectBookmark = function(bookmark) {
+
+		switch (bookmark.type) {
+
+			case "GAME":
+
+				// Navigate to a Game
+				$state.go("board.games", {genid:bookmark.gid});
+				break;
+
+			case "CATEGORY" :
+
+				// Navigate the to a Category
+				$state.go("board.categories", {genid:bookmark.genid,gmid:bookmark.gmid});
+				break;
+
+			case "BOARD" :
+
+				// Navigate to a Board
+				$state.go("board.videos", {bid:bookmark.bid});
+				break;
+
+			case "MEMBER" :
+
+				// Navigate to a Board
+				$state.go("board.members", {muuid:bookmark.muuid});
+				break;
+
+			case "VIDEOS" :
+
+				// Navigate to a Board
+				$state.go("board.videos", {uuid:bookmark.uuid});
+				break;
+
+			default:
+				console.log("Bookmark is invalid");
+		}
+
 	};
 
 	$scope.onDelete = function (video) {

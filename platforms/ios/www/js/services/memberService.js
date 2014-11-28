@@ -164,25 +164,6 @@ angular.module("gameboard.member.services", [])
 			// Create a deffered
 			var def = $q.defer();
 
-			// Lets Get a list of Genres
-			$.ajax({
-				type: "GET",
-				url: URL.MEMBER,
-				dataType: "json",
-				contentType: "application/json",
-				success: function (result,status) {
-					// Check if we were able to store it sucessfully
-					if (status === "success") {
-						// return the Cache
-						def.resolve(result);
-					} else {
-						def.reject([]);
-					}
-				},
-				error: function (err) {
-					def.reject(err);
-				}
-			});
 
 			// Get the Objects for a particular Type
 			return def.promise;
@@ -211,7 +192,7 @@ angular.module("gameboard.member.services", [])
 
  			// Check if we are already Cached
             if (!_.isUndefined(items)) {
-                defer.resolve(items);
+                def.resolve(items);
             } else {
 
 	            // Get handle to the CloudCode service
@@ -299,7 +280,7 @@ angular.module("gameboard.member.services", [])
 
  			// Check if we are already Cached
             if (!_.isUndefined(items)) {
-                defer.resolve(items);
+                def.resolve(items);
             } else {
 
 	            // Get handle to the CloudCode service
@@ -340,28 +321,80 @@ angular.module("gameboard.member.services", [])
 		// Return the Cached List
 		allCache: function () {
 			// Return the Cached Items
-			return cache.get(ACCESS.FAVOUR);
+			return cache.get(ACCESS.BOOKMARKS);
 		},
 
-		add: function (data) { 
+		addBookmark: function (data) { 
 
+            // Create a deffer
+            var def = $q.defer();
 
+			// Get handle to the CloudCode service
+            var cc = IBMCloudCode.getService();
+
+            // Get the User Id
+            var userid = $rootScope.user.id;
+
+            // USE THE CloudCode to Call the Board Services
+            // This will integrate with Cloudant to retrieve a list of videos for a Board
+            // Need to manage the Paging for this and sort it by ranking
+            // Lets build a 
+            var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
+
+		  	// Clear the Cache with a new set
+            cache.remove(ACCESS.BOOKMARKS);
+
+            // Get the Videos for my Board
+            cc.post(uri, data, {
+                "handleAs": "json"
+            }).then(function(status) {
+
+                // return the Cache
+                def.resolve(status);
+   
+            }).catch(function(err) {
+                console.log(err);
+                def.reject(err);
+            });
+
+            return def.promise;
 
 		},
 
-		del: function (bookmark) {
-			var def = $q.defer();
+		removeBookmark: function (bookmark) {
 
-			// Remove the Item from the Cache
-			var bookmarks = cache.get("bookmarks");
-			bookmarks.splice(bookmarks.indexOf(bookmark),1);
+		   // Create a deffer
+            var def = $q.defer();
 
-			// AJAX DELETE
-			def.resolve("status");
+			// Get handle to the CloudCode service
+            var cc = IBMCloudCode.getService();
 
-			// Remove it
-			// TMD: When a ASYNC defer when this is a sync process?
-			return def.promise;
+            // Get the User Id
+            var userid = $rootScope.user.id;
+
+            // USE THE CloudCode to Call the Board Services
+            // This will integrate with Cloudant to retrieve a list of videos for a Board
+            // Need to manage the Paging for this and sort it by ranking
+            // Lets build a 
+            var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
+
+		  	// Clear the Cache with a new set
+            cache.remove(ACCESS.BOOKMARKS);
+
+            // Get the Videos for my Board
+            cc.del(uri, {
+                "handleAs": "json"
+            }).then(function(status) {
+
+                // return the Cache
+                def.resolve(status);
+   
+            }).catch(function(err) {
+                console.log(err);
+                def.reject(err);
+            });
+
+            return def.promise;
 		}
 	};
 });

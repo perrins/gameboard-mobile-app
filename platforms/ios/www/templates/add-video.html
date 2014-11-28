@@ -34,7 +34,9 @@
 
                         <a ng-repeat="video in videos" class="item item-thumbnail-left item-icon-right" item="video" ng-click="selectVideo(video)">
 
-                            <img class="video" ng-src="{{video.snippet.thumbnails.default.url}}" lazyload>
+                            <div class="spinner">
+                                <img  class="genre-image genre-image-load"   ng-src="{{video.snippet.thumbnails.default.url}}" lazyload>
+                            </div>    
 
                             <h2>{{video.snippet.title}}</h2>
                             <p>{{video.snippet.description}}</p>
