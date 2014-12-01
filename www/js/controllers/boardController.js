@@ -146,17 +146,18 @@ angular.module('gameboard.board.controllers', [])
     var gmid = $stateParams.gmid;
     var genid = $stateParams.genid;
 
-    // Access the Genres and get the Title and other information we need
-    var game = GamesService.getGame(genid,gmid);
-
-    // Display The Title
-    $scope.title = game.title;
-
     $ionicLoading.show({template:'Loading Categories...'});
 
-    // Need to Check if we have got some already
-    CategoriesService.all($stateParams.gmid).then(function(data) {
+    // Access the Genres and get the Title and other information we need
+    GamesService.getGame(genid,gmid).then(function(game){
 
+        // Display The Title
+        $scope.title = game.title;
+
+        // Get the Games
+        return CategoriesService.all(gmid);
+
+    }).then(function(data) {
 
         // Check we have some Games for this Genre
         if (_.isNull(data)) {

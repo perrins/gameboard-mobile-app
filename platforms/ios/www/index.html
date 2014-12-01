@@ -5,15 +5,11 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0,user-scalable=0, target-densityDpi=device-dpi" />
         <title>game-board</title>
         <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
-        <!-- Gameboards Style Sheets NB. look to move to less or other -->
-        <link href="css/gameboard.css" rel="stylesheet">
+        <!-- compiled css output -->
         <link href="css/app.css" rel="stylesheet">
-        <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-        <link href="css/ionic.app.css" rel="stylesheet">
-        -->
         <link href="lib/angular/angular-wizard.min.css" rel="stylesheet">
         <!-- Only add in WebSecurity model if Not Running in Cordova -->
-        <script src="lib/oauth.js"></script>
+        <!--script src="lib/oauth.js"></script-->
 
         <!------------------- IONIC/ANGULAR/VENDOR ------------------>
         <script src="lib/jquery.min.js"></script>
@@ -50,13 +46,8 @@
         <script src="js/controllers/settings.js"></script>
         <!-- Directives -->
         <script src="js/directives/directives.js"></script>
-        <style>
-        .pane, .view {
-        height:517px;
-        }
-        </style>
     </head>
     <body id="main" ng-app="gameboard" animation="slide-left-right-ios7" class="hidden fadeSignin">
-        <ion-nav-view></ion-nav-view>
+        <ion-nav-view class="appContainer"></ion-nav-view>
     </body>
 </html>

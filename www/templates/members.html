@@ -8,16 +8,20 @@
         <button class="button button-clear button-positive" ng-click="findMembers()">Find</button>
     </ion-nav-buttons>
 
-    <label class="item item-input">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search for members">
-    </label>
+    <ion-content class="had-header">
 
-    <div class="item item-divider" ng-show="members">
-        Members found
-    </div>
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search for members">
+        </label>
 
-    <ion-content class="has-header" style="top:130px;">
+        <!--div class="item item-divider" ng-show="members">
+            Members found
+        </div-->
+
+    </ion-content>
+
+    <ion-content class="has-header" style="top:89px;">
 
         <ion-list class="list">
 
@@ -31,14 +35,16 @@
                 collection-item-width="'100%'"
                 collection-item-height="100">
 
-                    <img class="video genre-image-load"   
-                        ng-src="{{member.avatar}}" lazyload>
+                <img class="video genre-image-load"   
+                    ng-src="{{member.avatar}}" lazyload>
 
-                    <h2>{{member.gameTag}}</h2>
-                    <p>{{member.name}}</p>
-                    <span class="badge badge-assertive">{{member.prizes}}</span>
-                    <span class="badge badge-calm">{{member.videos}}</span>
-                </a>
+                <h2>{{member.gameTag}}</h2>
+                <p>{{member.name}}</p>
+                <span class="badge badge-assertive">{{member.prizes}}</span>
+                <span class="badge badge-calm">{{member.videos}}</span>
+
+                <i class="icon ion-chevron-right icon-accessory"></i>
+
 
             </ion-item>
             <ion-infinite-scroll 

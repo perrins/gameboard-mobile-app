@@ -129,11 +129,10 @@ angular.module("gameboard.member.controllers", [])
 	});
 })
 
-
-.controller("MemberDetailCtrl", function ($scope, $location, $stateParams, MemberDetailService) {
+.controller("MemberDetailCtrl", function ($scope, $location, $stateParams, MembersService) {
 
 	// Need to Check if we have got some already
-	MemberDetailService.getMember($stateParams.muuid).then(function (member) {
+	MembersService.getMember($stateParams.muuid).then(function (member) {
 		// Paint
 		$scope.member = member;
 		$scope.videos = member.videos;
