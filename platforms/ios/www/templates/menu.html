@@ -16,7 +16,7 @@
         <ion-content class="has-header">
             <ion-list>
 
-                <a class="item item-avatar item-icon-right" nav-clear menu-close href="#/account">
+                <a class="item item-avatar item-icon-right" nav-clear menu-close ng-href="#/account">
                     <img  class="genre-image genre-image-load" alt="{{user.avatar}}"  ng-src="{{user.avatar}}" lazyload>
                     <h2>{{user.firstname}}</h2>                    
                     <h2>{{user.lastname}}</h2>
@@ -27,7 +27,7 @@
 
                 </a>
 
-                <a ng-show="!user.registered" class="item item-icon-left item-icon-right" nav-clear menu-close href="#/register">
+                <a ng-show="!user.registered" class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/register">
                     <i class="icon ion-ios7-personadd"></i>
                     Please register
                    <i class="icon ion-chevron-right icon-accessory"></i>
@@ -38,7 +38,7 @@
                 <div class="item item-divider item-icon-right">
                 </div>
 
-                <a class="item item-icon-left item-icon-right" nav-clear menu-close href="#/board/genres">
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/board/genres">
                     <i class="icon ion-game-controller-b"></i>
                     Genres
 
@@ -46,7 +46,7 @@
 
                 </a>
 
-                <a class="item item-icon-left item-icon-right" nav-clear menu-close href="#/board/bookmarks">
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng--href="#/board/bookmarks">
                     <i class="icon ion-ios7-bookmarks"></i>
                     Bookmarks
 
@@ -54,7 +54,7 @@
 
                 </a>
 
-                <a class="item item-icon-left item-icon-right" nav-clear menu-close href="#/board/yourvideos">
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/board/yourvideos">
                     <i class="icon ion-videocamera"></i>
                     Your Videos
                     <span class="badge badge-positive">{{user.videos}}</span>
@@ -64,13 +64,17 @@
 
                 </a>
 
-                <!--a class="item item-icon-left" menu-close href="#/board/prizes">
-                <i class="icon ion-film-marker"></i>
-                Prizes
-                <span class="badge badge-royal">£12,500</span>
-                </a-->
 
-                <a class="item item-icon-left item-icon-right" nav-clear menu-close href="#/board/favourites">
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/board/yourvideos">
+                    <i class="icon ion-film-marker"></i>
+                    Prizes
+                    <span class="badge badge-royal">£12,500</span>
+
+                   <i class="icon ion-chevron-right icon-accessory"></i>
+
+                </a>
+
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/board/favourites">
                     <i class="icon ion-ios7-bookmarks"></i>
                     Favourites
                     <span class="badge badge-calm">{{user.favourites}}</span>
@@ -80,7 +84,7 @@
 
                 </a>
 
-                <a class="item item-icon-left item-icon-right" nav-clear menu-close href="#/board/members">
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/board/members">
                     <i class="icon ion-person-stalker"></i>
                     Members
 
@@ -90,7 +94,7 @@
 
                 </a>
 
-                <a class="item item-icon-left item-icon-right" nav-clear menu-close href="#/board/search">
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/board/search">
                     <i class="icon ion-ios7-search-strong"></i>
                     Search
                    <i class="icon ion-chevron-right icon-accessory"></i>
@@ -100,14 +104,17 @@
                 <div class="item item-divider item-icon-right">
                 </div>
 
-                <a class="item item-icon-left item-icon-right" nav-clear menu-close href="#/notifications">
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/notifications">
                     <i class="icon ion-flag"></i>
                     Notifications
+
+                    <span class="badge badge-balanced">{{notifications}}</span>
+
                    <i class="icon ion-chevron-right icon-accessory"></i>
 
                 </a>
 
-                <a class="item item-icon-left item-icon-right" nav-clear menu-close href="#/board/settings">
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/board/settings">
                     <i class="icon ion-gear-a"></i>
                     Settings
                    <i class="icon ion-chevron-right icon-accessory"></i>
@@ -122,7 +129,7 @@
 
                 </a>
 
-                <a class="item item-icon-left item-icon-right" nav-clear menu-close href="#/board/about">
+                <a class="item item-icon-left item-icon-right" nav-clear menu-close ng-href="#/board/about">
                     <i class="icon ion-ios7-help-outline"></i>
                     About
                    <i class="icon ion-chevron-right icon-accessory"></i>

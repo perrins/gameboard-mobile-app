@@ -129,11 +129,10 @@ angular.module("gameboard.member.controllers", [])
 	});
 })
 
-
-.controller("MemberDetailCtrl", function ($scope, $location, $stateParams, MemberDetailService) {
+.controller("MemberDetailCtrl", function ($scope, $location, $stateParams, MembersService) {
 
 	// Need to Check if we have got some already
-	MemberDetailService.getMember($stateParams.muuid).then(function (member) {
+	MembersService.getMember($stateParams.muuid).then(function (member) {
 		// Paint
 		$scope.member = member;
 		$scope.videos = member.videos;
@@ -268,8 +267,34 @@ angular.module("gameboard.member.controllers", [])
 		// "List is " is a service returning data from the
 		BookmarksService.allCloud().then(function (bookmarks) {
 
+			// Manage the Look and feel of the Bookmarks
+			var _bookmarks = Array();
+			bookmarks.forEach(function(item){
+
+				switch (item.type) {
+					case "GAME" :
+						item.color = "#00cc00";
+						break;
+					case "CATEGORY" :
+						item.color = "#eecc00";
+						break;
+					case "BOARD" :
+						item.color = "#00ccff";
+						break;
+					default :
+						item.color = "grey";
+						break;
+				}
+
+				// get the Character we want to display
+				item.tag = item.type.substr(0,1).toUpperCase();
+
+				_bookmarks.push(item);
+
+			});
+
 			// Update the model with a list of Items
-			$scope.bookmarks = bookmarks;
+			$scope.bookmarks = _bookmarks;
 
 			// Let Angular know we have some data because of the Async nature of IBMBaaS
 			// This is required to make sure the information is uptodate

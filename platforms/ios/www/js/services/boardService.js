@@ -84,7 +84,6 @@ function(doc){
         },
         getGenre: function(gid) {
 
-
             var def = $q.defer();
 
             // Resolve the Cache            
@@ -510,13 +509,8 @@ function(doc){
                 "handleAs": "json"
             }).then(function(video) {
 
-                // Return the Video 
-                var _video = null;
-                if (video.length > 0 && _.has(video[0], "doc")) {
-                    _video = video[0].doc;
-                }
                 // Resolve Promise
-                def.resolve(_video);
+                def.resolve(video);
 
             }).catch(function(err) {
                 console.log(err);

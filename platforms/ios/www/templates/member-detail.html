@@ -53,7 +53,8 @@
             <div class="list">
 
                 <div ng-repeat="video in videos" class="videoItem">
-                    <a class="video item item-thumbnail-left" href="#/board/video/{{video.vid}}">
+                    <a class="video item item-thumbnail-left item-icon-right " 
+                    href="#/board/video/{{video.uuid}}">
                         <div class="Video">
                             <img ng-src="{{video.thumb}}" lazyload>
                         </div>
@@ -62,6 +63,9 @@
                         <p>{{video.description}}</p>
                         <span class="badge badge-balanced">{{video.vides}}</span>
                         <span class="badge badge-royal">{{video.rank}}</span>
+
+                        <i class="icon ion-chevron-right icon-accessory"></i>
+
                     </a>
                 </div>
             </div>

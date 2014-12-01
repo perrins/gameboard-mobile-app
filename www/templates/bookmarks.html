@@ -29,15 +29,30 @@
             ng-show="bookmarks">
 
             <ion-item ng-repeat="book in bookmarks" 
-                class="item item-bookmark-left item-icon-right" 
+                class="item item-icon-right" 
                 type="item-text-wrap" 
                 item="book" 
                 ng-click="selectBookmark(book)">
 
-                <div ng-class="book.type"></div>
+                <div style="position:relative;width:25px;height:25px;">
 
-                <h2>{{book.title}}</h2>
-                <h3>{{book.subtitle}}</h2>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                        <circle cx="15" cy="20" r="15"
+                            style="stroke:#006600;
+                            stroke-width: .5;
+                            fill:{{book.color}}"/>
+                        <text x="15" y="22" font-size="16" 
+                          text-anchor="middle" alignment-baseline="middle">
+                            {{book.tag}}
+                        </text>                            
+                    </svg>
+
+                </div>
+
+                <h2 style="position:relative;left:40px;top:-15px;">{{book.title}}</h2>
+                <h4>{{book.subtitle}}</h4>
 
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>

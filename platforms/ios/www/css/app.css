@@ -32,7 +32,8 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
   position: absolute;
   top: 0px;
   margin: auto;
-  z-index: 0; }
+  z-index: 0;
+  display: none; }
 
 .unregistered {
   color: red;

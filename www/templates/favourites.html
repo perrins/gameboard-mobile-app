@@ -7,16 +7,16 @@
     <ion-content class="has-header" scroll="false">
 
         <div class="button-bar" scroll="false">
-            <button class="button button-balanced button-block nobuttonmargins" ng-click="showVideos()">Videos
+            <button class="button button-balanced" ng-click="showVideos()">Videos
             <span class="badge badge-energized">{{total_videos}}</span>
             </button>    
-            <button class="button button-positive button-block nobuttonmargins" ng-click="showMembers()">Members
+            <button class="button button-positive" ng-click="showMembers()">Members
             <span class="badge badge-royal">{{total_members}}</span>
             </button>
 
         </div>
     </ion-content>    
-    <ion-content class="has-header" style="top:110px;">
+    <ion-content class="has-header" style="top:90px;">
 
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();">
         </ion-refresher>
