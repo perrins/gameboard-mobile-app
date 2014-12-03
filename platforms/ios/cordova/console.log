@@ -1148,3 +1148,19 @@ You could find it at the following address https://developer.apple.com/icloud/do
 2014-12-01 21:46:23.435 Gameboard[51558:2321459] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/bookmarks/1292030202022
 2014-12-01 21:46:45.843 Gameboard[51558:2321459] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/games
 2014-12-01 21:46:58.762 Gameboard[51558:2321543] Terminating since there is no system app.
+2014-12-02 11:24:20.939 Gameboard[71815:70b] Multi-tasking -> Device: YES, App: YES
+2014-12-02 11:24:20.960 Gameboard[71815:70b] Unlimited access to network resources
+2014-12-02 11:24:20.964 Gameboard[71815:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-12-02 11:24:21.430 Gameboard[71815:70b] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-12-02 11:24:21.526 Gameboard[71815:70b] Resetting plugins due to page load.
+2014-12-02 11:24:22.192 Gameboard[71815:70b] Finished load of: file:///Users/matthewperrins/Library/Developer/CoreSimulator/Devices/69D98D4C-0A3B-449A-8BBA-11C01858B599/data/Applications/F963B5D3-8755-4525-95BB-785125E445EE/Gameboard.app/www/index.html#/signin
+2014-12-02 11:24:23.212 Gameboard[71815:70b] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-02 11:24:32.253 Gameboard[71815:70b] Signon to the application
+2014-12-02 11:24:32.253 Gameboard[71815:70b] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/genres
+2014-12-02 11:24:35.196 Gameboard[71815:70b] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/bookmarks/1292030202022

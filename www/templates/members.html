@@ -35,8 +35,9 @@
                 collection-item-width="'100%'"
                 collection-item-height="100">
 
-                <img class="video genre-image-load"   
-                    ng-src="{{member.avatar}}" lazyload>
+                <div class="spinnerSmall">
+                    <img class="video genre-image-load" ng-src="{{member.avatar}}" lazyload>
+                </div>
 
                 <h2>{{member.gameTag}}</h2>
                 <p>{{member.name}}</p>

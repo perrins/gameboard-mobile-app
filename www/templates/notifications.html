@@ -1,4 +1,4 @@
-<ion-view title="Bookmarks">
+<ion-view title="Notifications">
 
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
@@ -9,30 +9,31 @@
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();">
         </ion-refresher>
 
-        <div class="list-error card assertive-bg hidden" ng-show="!bookmarks">
+        <div class="list-error card assertive-bg hidden" ng-show="!videos">
             <div class="item item-text-wrap">
-                Cannot retrieve your bookmarks at this time
+                Cannot retrieve your notifications at this time
             </div>
         </div>
 
         <div class="item item-divider" ng-show="bookmarks">
-            Your Bookmarks
+            Your Notifications
         </div>
 
         <ion-list 
             can-delete="true" 
             can-swipe="true" 
-            on-delete="onBookmarkDelete(video)" 
+            on-delete="onVideoDelete(notify)" 
             show-delete="showDelete" 
             delete-icon="ion-minus-circled" 
             option-buttons="itemButtons" 
-            ng-show="bookmarks">
+            ng-show="notifications">
 
-            <ion-item ng-repeat="book in bookmarks" 
+            <ion-item ng-repeat="notify in notifications" 
                 class="item item-icon-right" 
+                ng-class="notify.color"
                 type="item-text-wrap" 
-                item="book" 
-                ng-click="selectBookmark(book)">
+                item="notify" 
+                ng-click="selectNotification(notify)">
 
                 <div style="position:relative;width:25px;height:25px;">
 
@@ -45,14 +46,14 @@
                             fill:{{book.color}}"/>
                         <text x="15" y="22" font-size="16" 
                           text-anchor="middle" alignment-baseline="middle">
-                            {{book.tag}}
+                            {{notify.tag}}
                         </text>                            
                     </svg>
 
                 </div>
 
-                <h2 style="position:relative;left:40px;top:-15px;">{{book.title}}</h2>
-                <h4>{{book.subtitle}}</h4>
+                <h2 style="position:relative;left:40px;top:-15px;">{{notify.title}}</h2>
+                <h4>{{notify.message}}</h4>
 
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>

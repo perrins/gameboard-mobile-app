@@ -7,16 +7,16 @@
     <ion-content class="has-header" scroll="false">
 
         <div class="button-bar" scroll="false">
-            <button class="button button-balanced button-block nobuttonmargins" ng-click="showVideos()">Videos
+            <button class="button button-balanced" ng-click="showVideos()">Videos
             <span class="badge badge-energized">{{total_videos}}</span>
             </button>    
-            <button class="button button-positive button-block nobuttonmargins" ng-click="showMembers()">Members
+            <button class="button button-positive" ng-click="showMembers()">Members
             <span class="badge badge-royal">{{total_members}}</span>
             </button>
 
         </div>
     </ion-content>    
-    <ion-content class="has-header" style="top:110px;">
+    <ion-content class="has-header" style="top:90px;">
 
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();">
         </ion-refresher>
@@ -39,10 +39,6 @@
                 type="item-text-wrap" 
                 item="video" 
                 ng-href="#/board/video/{{video.uuid}}">
-
-                <div class="Video">
-                    <img ng-src="{{video.thumb}}" lazyvideo>
-                </div>
 
                 <h2>{{video.title}}</h2>
                 <h3>{{video.gameTag}}</h2>
@@ -69,7 +65,10 @@
                 item="member" 
                 ng-href="#/board/member/{{member.muuid}}">
 
-                <img ng-src="{{member.avatar}}">
+                <div class="spinnerSmall">
+                    <img class="video genre-image-load" ng-src="{{member.avatar}}" lazyload>
+                </div>
+
                 <h2>{{member.gameTag}}</h2>
                 <p>{{member.name}}</p>
                 <span class="badge badge-assertive">{{member.prizes}}</span>

@@ -38,13 +38,14 @@ angular.module("gameboard", [
 	GAMES: "/games", //IBM Data
 	CATEGORIES: "/categories", //IBM Data
 	BOARD: "/videos/board", // IBM CloudCode with Cloudant
-	YOUR_VIDEOS: "/youtube/videos", // IBM CloudCode with YouTube API
+	YOUR_VIDEOS: "/videos/yours", // IBM CloudCode with YouTube API
 	YT_VIDEO_DETAIL: "/youtube/video", // IBM CloudCode with YouTube API
 	MEMBERS: "/members", // IBM CloudCode and Cloudant
 	SEARCH_MEMBERS : "/members/search",
 	REGISTER : "/members/register",
 	FAVOURITES: "/favourites", // IBM Cloudant
 	BOOKMARKS : "/bookmarks",
+	NOTIFICATIONS : "/notifications",
 	SEARCH: "/search", // IBM CloudCode with Cloudant
 	VIDEOS: "/videos", // IBM CloudCode with Cloudant
 	BYYTID : "/videos/youtube",
@@ -169,6 +170,16 @@ angular.module("gameboard", [
 				"menuContent": {
 					templateUrl: "templates/bookmarks.html",
 					controller: "BookmarksCtrl"
+				}
+			}
+		})
+
+		.state("board.notifications", {
+			url: "/notifications",
+			views: {
+				"menuContent": {
+					templateUrl: "templates/notifications.html",
+					controller: "NotificationsCtrl"
 				}
 			}
 		})

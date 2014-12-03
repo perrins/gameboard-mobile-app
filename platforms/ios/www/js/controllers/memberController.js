@@ -1,6 +1,6 @@
 angular.module("gameboard.member.controllers", [])
 
-.controller("YourVideosCtrl", function ($scope, $location, $stateParams, YourVidoesService) {
+.controller("YourVideosCtrl", function ($scope, $location, $stateParams, YourVidoeService) {
 
 	// Need to Check if we have got some already
 	YourVidoesService.getYourVideos().then(function (video) {
