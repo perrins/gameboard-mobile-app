@@ -45,6 +45,7 @@ angular.module("gameboard", [
 	REGISTER : "/members/register",
 	FAVOURITES: "/favourites", // IBM Cloudant
 	BOOKMARKS : "/bookmarks",
+	NOTIFICATIONS : "/notifications",
 	SEARCH: "/search", // IBM CloudCode with Cloudant
 	VIDEOS: "/videos", // IBM CloudCode with Cloudant
 	BYYTID : "/videos/youtube",
@@ -169,6 +170,16 @@ angular.module("gameboard", [
 				"menuContent": {
 					templateUrl: "templates/bookmarks.html",
 					controller: "BookmarksCtrl"
+				}
+			}
+		})
+
+		.state("board.notifications", {
+			url: "/notifications",
+			views: {
+				"menuContent": {
+					templateUrl: "templates/notifications.html",
+					controller: "NotificationsCtrl"
 				}
 			}
 		})
