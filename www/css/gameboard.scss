@@ -448,7 +448,8 @@ div.bigViews {
 }
 .signInAnimate div {
     z-index: 1500;
-    -webkit-animation: fadein 3s;
+    opacity: 0;
+    -webkit-animation: fadein 3s forwards;
     -webkit-animation-delay: 2s;
 }
 
