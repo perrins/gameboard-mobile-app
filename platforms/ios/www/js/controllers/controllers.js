@@ -13,8 +13,14 @@ angular.module("gameboard.controllers", [])
     // Prepare User for Display
     if ($rootScope.user) {
 
+        // So we have a User lets loo
         $scope.user = $rootScope.user;
         $scope.member = $rootScope.member;
+
+        $scope.members = 2302243;
+        $scope.notifications = 6;
+        $scope.videos = 3;
+        $scope.favourites = 5;
 
         // Clear the Back stack
         $ionicViewService.nextViewOptions({
@@ -35,6 +41,11 @@ angular.module("gameboard.controllers", [])
     }
 
     $scope.logout = function() {
+
+        // Clear the Back stack
+        $ionicViewService.nextViewOptions({
+            disableBack: true,
+        });
 
         // Remove the User State
         $rootScope.user = null;
