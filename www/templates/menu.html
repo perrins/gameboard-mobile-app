@@ -9,7 +9,7 @@
         <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
     </ion-pane>
 
-    <ion-side-menu side="left">
+    <ion-side-menu side="left" class="main-menu">
         <header class="bar bar-header bar-dark">
 
             <i class="icon ion-ionic"></i>
@@ -21,7 +21,7 @@
 
                 <a class="item item-dark item-avatar item-icon-right" nav-clear menu-close ng-href="#/account">
                     <img  class="genre-image genre-image-load" alt="{{user.avatar}}"  ng-src="{{user.avatar}}" lazyload>
-                    <h2 class="menu-name">{{user.firstname}}</h2>                    
+                    <h2 class="menu-name">{{user.firstname}}</h2>
                     <h2 class="menu-name">{{user.lastname}}</h2>
                     <p>{{user.gametag}}</p>
 
@@ -155,5 +155,5 @@
         </ion-content>
 
 
-    </ion-side-menu>    
+    </ion-side-menu>
 </ion-side-menus>
