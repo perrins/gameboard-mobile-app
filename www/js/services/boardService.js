@@ -408,7 +408,7 @@ function(doc){
             // Get Cloud Code
             var cc = IBMCloudCode.getService();
 
-            cc.get(ACCESS.YOUR_VIDEOS, {
+            cc.get(ACCESS.YOUTUBE_YOURS, {
                 "handleAs": "json"
             }).then(function(videos) {
                 def.resolve(videos);

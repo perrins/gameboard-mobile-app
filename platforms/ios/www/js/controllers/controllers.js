@@ -82,7 +82,7 @@ angular.module("gameboard.controllers", [])
 
         // Check if we are in local testing mode and then fake a user 
         // and go to the Intro Views.
-        if ($rootScope.config.localsecurity) {
+        if ($rootScope.config.localsecurity || typeof OAuth == 'undefined' ) {
 
             $rootScope.user = {   
                                 "id"      : "1292030202022",
@@ -248,10 +248,11 @@ angular.module("gameboard.controllers", [])
 
     // Lets Get the Member information
     MembersService.getMember(user.raw.id).then(function(member) {
+
         $ionicLoading.hide();
         $rootScope.user.registered = true;
-        $rootScope.member = member;
-        $scope.member = member;
+        $rootScope.member = member.doc;
+        $scope.member = member.doc;
 
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -370,7 +371,7 @@ angular.module("gameboard.controllers", [])
                             cc = IBMCloudCode.initializeService();
 
                         // Make it handle Local serving if set to try and local url set
-                        if (config.local && _.has(config, "local")) {
+                        if (config.localserver && _.has(config, "local")) {
                             // Set the Origin to Local Server for testing
                             cc.setBaseUrl(config.local);
                         }

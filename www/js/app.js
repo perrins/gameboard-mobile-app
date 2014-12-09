@@ -48,7 +48,7 @@ angular.module("gameboard", [
 	NOTIFICATIONS : "/notifications",
 	SEARCH_VIDEOS: "/search", // IBM CloudCode with Cloudant
 	VIDEOS: "/videos", // IBM CloudCode with Cloudant
-	BYYTID : "/videos/youtube",
+	YOUTUBE_YOURS : "/youtube/videos",
 	EMBED : "http://www.youtube.com/embed/"
 })
 
