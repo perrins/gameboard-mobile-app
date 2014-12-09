@@ -82,7 +82,7 @@ angular.module("gameboard.controllers", [])
 
         // Check if we are in local testing mode and then fake a user 
         // and go to the Intro Views.
-        if ($rootScope.config.localsecurity) {
+        if ($rootScope.config.localsecurity || typeof OAuth == 'undefined' ) {
 
             $rootScope.user = {   
                                 "id"      : "1292030202022",

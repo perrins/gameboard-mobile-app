@@ -13,38 +13,42 @@ angular.module("gameboard.search.services", [])
 /**
  * A simple example service that returns some data.
  */
-.factory("SearchService", function ($q, $cacheFactory,$stateParams, URL) {
+.factory("SearchService", function ($q, $cacheFactory,$stateParams, ACCESS) {
 
 	// Use an internal Cache for storing the List and map the operations to manage that from
 	// MBaaS SDK Calls
 
 	return {
-		findVideos: function () {
-			// Create a deffered
-			var def = $q.defer();
+		all: function (query, page, size) {
 
-			// Lets Get a list of Genres
-			$.ajax({
-				type: "GET",
-				url: URL.SEARCH,
-				dataType: "json",
-				contentType: "application/json",
-				success: function (result,status) {
-					// Check if we were able to store it sucessfully
-					if (status === "success") {
-					  // return the Cache
-					  def.resolve(result);
-					} else {
-						def.reject([]);
-					}
-				},
-				error: function (err) {
-					def.reject(err);
-				}
-			});
+            // Create a deffered
+            var def = $q.defer();
 
-			// Get the Objects for a particular Type
-			return def.promise;
+            // Get handle to the CloudCode service
+            var cc = IBMCloudCode.getService();
+
+            // USE THE CloudCode to Call the Board Services
+            // This will integrate with Cloudant to retrieve a list of videos for a Board
+            // Need to manage the Paging for this and sort it by ranking
+            // Lets build a 
+            var uri = new IBMUriBuilder().append(ACCESS.SEARCH_VIDEOS).toString();
+
+            // Add the Paging to the BoardList and Get back what we have
+            uri += "?query="+query+"&skip="+page+"&limit="+size;
+
+            // Get the Videos for my Board
+            cc.get(uri, {
+                "handleAs": "json"
+            }).then(function(videos) {
+                def.resolve(videos);
+            }).catch(function(err) {
+                console.log(err);
+                def.reject(err);
+            })
+
+            // Get the Objects for a particular Type
+            return def.promise;
+
 		}
 	};
 });

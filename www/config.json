@@ -4,6 +4,6 @@
     "applicationRoute": "gameboard-cloud.mybluemix.net",
     "security" : "P7Y2L-QgGFNW4XKgBOnQTB6xd3I",
     "localserver" : true,
-    "localsecurity" : true,
+    "localsecurity" : false,
     "local" : "http://localhost:3002"
 }

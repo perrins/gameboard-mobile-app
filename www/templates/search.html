@@ -8,40 +8,48 @@
         <button class="button button-clear button-positive" ng-click="findVideos()">Find</button>
     </ion-nav-buttons>
 
-    <ion-content class="has-header">
+     <ion-content class="had-header">
 
-        <div class="list">
-            <label class="item item-input">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" placeholder="Search videos"></input>
-            </label>
-            <div class="item item-divider" ng-show="videos">
-                Videos found
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search videos">
+        </label>
+
+    </ion-content>
+
+    <ion-content class="has-header" style="top:89px;">
+
+            <div class="list">
+
+                <ion-item 
+                    ng-show="members"
+                    class="item item-thumbnail-left item-icon-right board-item" 
+                    item="member" 
+                    ng-href="#/board/video/{{video.uuid}}"
+                    can-swipe="true" 
+                    collection-repeat="video in videos" 
+                    collection-item-width="'100%'"
+                    collection-item-height="100">
+
+                    <div class="Video">
+                        <img ng-src="{{video.thumb}}" lazyvideo>
+                    </div>
+
+                    <h2>{{video.title}}</h2>
+                    <h3>{{video.gameTag}}</h2>
+                        <p>{{video.description}}</p>
+                        <span class="badge badge-balanced">{{video.views}}</span>
+                        <span class="badge badge-royal">{{video.rank}}</span>
+                </ion-item>
+
+                <ion-infinite-scroll  
+                    class="progress"
+                    icon="ion-loading-c"
+                    on-infinite="loadMore()"
+                    distance="30%">
+                </ion-infinite-scroll>
             </div>
 
-            <ion-scroll zooming="false">
-
-                <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="loadMore()" distance="2%">
-                </ion-infinite-scroll>
-
-                <div class="list">
-
-                    <a ng-repeat="video in videos | orderBy:'rank'" class="item item-thumbnail-left" item="member" href="#/board/video/{{video.uuid}}">
-
-                        <div class="Video">
-                            <img ng-src="{{video.thumb}}" lazyvideo>
-                        </div>
-
-                        <h2>{{video.title}}</h2>
-                        <h3>{{video.gameTag}}</h2>
-                            <p>{{video.description}}</p>
-                            <span class="badge badge-balanced">{{video.views}}</span>
-                            <span class="badge badge-royal">{{video.rank}}</span>
-                    </a>
-
-                </div>
-
-            </ion-scroll>
 
         </div>
     </ion-content>
