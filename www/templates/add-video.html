@@ -9,7 +9,7 @@
     </header>
 
     <!-- Modal content area -->
-    <ion-content class="has-header">
+    <ion-content class="has-header" style="margin-bottom:110px;">
 
         <ion-nav-view name="videoContent" animation="slide-left-right">
 
@@ -34,9 +34,7 @@
 
                         <a ng-repeat="video in videos" class="item item-thumbnail-left item-icon-right" item="video" ng-click="selectVideo(video)">
 
-                            <div class="spinner">
-                                <img  class="genre-image genre-image-load"   ng-src="{{video.snippet.thumbnails.default.url}}" lazyload>
-                            </div>    
+                            <img ng-src="{{video.snippet.thumbnails.default.url}}" lazyload>
 
                             <h2>{{video.snippet.title}}</h2>
                             <p>{{video.snippet.description}}</p>
@@ -69,7 +67,7 @@
 
                         <div class="item item-thumbnail-left item-avatar">
 
-                            <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
+                            <img alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
 
                             <h2>{{user.name}}&nbsp{{user.surname}}</h2>
                             <p>{{video.snippet.publishedAt}}</p>
@@ -187,6 +185,8 @@
             </div>
             <div>
         </ion-nav-view>
+
+        <ion-footer style="margin-bottom:57px; background-color:blue;"><ion-footer>
 
     </ion-content>
 

@@ -33,12 +33,7 @@
 
             <a ng-repeat="game in games" class="item item-thumbnail-left item-icon-right" href="#/board/categories/{{gid}}/{{game.gmid}}">
 
-                <div class="spinner">
-
-                    <img  class="genre-image genre-image-load" alt="{{game.title}}"  ng-src="{{game.imageUrl}}" lazyload>
-
-                </div>
-
+                <img  class="genre-image genre-image-load" alt="{{game.title}}"  ng-src="{{game.imageUrl}}" lazyload>
 
                 <h2>{{game.title}}</h2>
                 <p>{{game.subtitle}}</p>

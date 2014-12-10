@@ -1278,3 +1278,181 @@ Dec  9 20:59:59 Matthews-MacBook-Pro.local rtcreporting[20099] <Debug>: setMessa
 2014-12-09 21:13:16.637 Gameboard[20817:575224] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/members/116314656208718221198
 2014-12-09 21:13:17.732 Gameboard[20817:575224] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/genres
 2014-12-09 21:13:22.348 Gameboard[20817:575224] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/bookmarks/116314656208718221198
+2014-12-10 14:47:37.758 Gameboard[34730:1409078] Multi-tasking -> Device: YES, App: YES
+2014-12-10 14:47:37.782 Gameboard[34730:1409078] Unlimited access to network resources
+2014-12-10 14:47:38.262 Gameboard[34730:1409078] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-12-10 14:47:38.459 Gameboard[34730:1409078] Resetting plugins due to page load.
+2014-12-10 14:47:39.345 Gameboard[34730:1409078] Finished load of: file:///Users/matthewperrins/Library/Developer/CoreSimulator/Devices/5F59858A-D874-4C2D-9E6E-B4547D7DC8F8/data/Containers/Bundle/Application/EA07D29B-B94B-4694-B5E2-899CD0E3423F/Gameboard.app/www/index.html#/signin
+2014-12-10 14:47:40.675 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 14:47:49.332 Gameboard[34730:1409078] Signon to the application
+2014-12-10 14:47:49.485 Gameboard[34730:1409078] Setting the WebView's frame to {{0, 0}, {320, 524}}
+2014-12-10 14:47:49.486 Gameboard[34730:1409078] Setting the WebView's frame to {{0, 0}, {320, 568}}
+2014-12-10 14:47:49.499 Gameboard[34730:1409078] THREAD WARNING: ['InAppBrowser'] took '167.062012' ms. Plugin should use a background thread.
+2014-12-10 14:47:52.950 Gameboard[34730:1409078] muuid 116314656208718221198
+2014-12-10 14:47:52.950 Gameboard[34730:1409078] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/members/116314656208718221198
+2014-12-10 14:47:54.142 Gameboard[34730:1409078] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/genres
+2014-12-10 14:47:58.975 Gameboard[34730:1409078] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/games
+2014-12-10 14:48:19.453 Gameboard[34730:1409078] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/categories
+2014-12-10 14:48:21.262 Gameboard[34730:1409078] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-10 14:48:23.404 Gameboard[34730:1409078] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
+2014-12-10 14:49:41.642 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 14:51:41.644 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 14:53:42.647 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 14:55:42.649 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 14:57:42.688 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 14:59:43.655 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:01:43.659 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:03:43.659 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:05:46.662 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:07:46.665 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:09:47.667 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:11:47.670 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:13:47.673 Gameboard[34730:1409078] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:14:48.302 Gameboard[36308:1553651] Multi-tasking -> Device: YES, App: YES
+2014-12-10 15:14:48.308 Gameboard[36308:1553651] Unlimited access to network resources
+2014-12-10 15:14:48.597 Gameboard[36308:1553651] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-12-10 15:14:48.734 Gameboard[36308:1553651] Resetting plugins due to page load.
+2014-12-10 15:14:49.435 Gameboard[36308:1553651] Finished load of: file:///Users/matthewperrins/Library/Developer/CoreSimulator/Devices/5F59858A-D874-4C2D-9E6E-B4547D7DC8F8/data/Containers/Bundle/Application/70654D3F-9554-4462-A53A-6506C43CA504/Gameboard.app/www/index.html#/signin
+2014-12-10 15:14:50.673 Gameboard[36308:1553651] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:14:53.899 Gameboard[36308:1553651] Signon to the application
+2014-12-10 15:14:54.699 Gameboard[36308:1553651] muuid 116314656208718221198
+2014-12-10 15:14:54.699 Gameboard[36308:1553651] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/members/116314656208718221198
+2014-12-10 15:14:55.372 Gameboard[36308:1553651] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/genres
+2014-12-10 15:14:56.861 Gameboard[36308:1553651] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/games
+2014-12-10 15:15:02.737 Gameboard[36308:1553651] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/categories
+2014-12-10 15:15:03.795 Gameboard[36308:1553651] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-10 15:15:06.531 Gameboard[36308:1553651] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
+2014-12-10 15:15:27.627 Gameboard[36308:1553651] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/FUKiPNXW5f8
+2014-12-10 15:15:30.609 Gameboard[36308:1553651] -------------------------------------------------
+2014-12-10 15:15:30.609 Gameboard[36308:1553651] INITWITHWEBVIEW
+2014-12-10 15:15:31.446 Gameboard[36308:1553651] [MRAVRoutingClientController] 1 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:15:31.446 Gameboard[36308:1553651] [MRAVRoutingClientController] Fetching routes from service...
+2014-12-10 15:15:31.446 Gameboard[36308:1553651] [MRAVRoutingClientController] 2 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:15:31.447 Gameboard[36308:1553651] [MRAVRoutingClientController] 3 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:15:31.447 Gameboard[36308:1553651] [MRAVRoutingClientController] 4 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:15:31.484 Gameboard[36308:1558865] [MRAVRoutingClientController] Finished fetching routes from service.
+2014-12-10 15:15:31.485 Gameboard[36308:1558865] [MRAVRoutingClientController] Flushed 4 pending completion blocks
+2014-12-10 15:15:31.544 Gameboard[36308:1553651] [MRAVRoutingClientController] 1 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:15:31.544 Gameboard[36308:1553651] [MRAVRoutingClientController] Fetching routes from service...
+2014-12-10 15:15:31.545 Gameboard[36308:1558865] [MRAVRoutingClientController] Finished fetching routes from service.
+2014-12-10 15:15:31.545 Gameboard[36308:1558865] [MRAVRoutingClientController] Flushed 1 pending completion blocks
+Dec 10 15:15:35 Matthews-MacBook-Pro.local rtcreporting[36308] <Info>: logging starts...
+Dec 10 15:15:35 Matthews-MacBook-Pro.local rtcreporting[36308] <Debug>: setMessageLoggingBlock: called
+2014-12-10 15:15:58.768 Gameboard[36308:1553651] Clean up
+2014-12-10 15:15:58.896 Gameboard[36308:1553651] Video was closed without error.
+2014-12-10 15:16:00.480 Gameboard[36308:1553651] [MRAVRoutingClientController] 1 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:16:00.480 Gameboard[36308:1553651] [MRAVRoutingClientController] Fetching routes from service...
+2014-12-10 15:16:00.481 Gameboard[36308:1553651] [MRAVRoutingClientController] 2 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:16:00.481 Gameboard[36308:1553651] [MRAVRoutingClientController] 3 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:16:00.481 Gameboard[36308:1560269] [MRAVRoutingClientController] Finished fetching routes from service.
+2014-12-10 15:16:00.481 Gameboard[36308:1553651] [MRAVRoutingClientController] 4 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:16:00.481 Gameboard[36308:1560269] [MRAVRoutingClientController] Flushed 4 pending completion blocks
+Dec 10 15:16:10 Matthews-MacBook-Pro.local rtcreporting[36308] <Debug>: setMessageLoggingBlock: called
+2014-12-10 15:16:15.746 Gameboard[36308:1553651] Clean up
+2014-12-10 15:16:15.871 Gameboard[36308:1553651] Video was closed without error.
+2014-12-10 15:16:51.675 Gameboard[36308:1553651] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:17:02.737 Gameboard[36691:1568169] Multi-tasking -> Device: YES, App: YES
+2014-12-10 15:17:02.746 Gameboard[36691:1568169] Unlimited access to network resources
+2014-12-10 15:17:03.056 Gameboard[36691:1568169] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-12-10 15:17:03.207 Gameboard[36691:1568169] Resetting plugins due to page load.
+2014-12-10 15:17:03.993 Gameboard[36691:1568169] Finished load of: file:///Users/matthewperrins/Library/Developer/CoreSimulator/Devices/5F59858A-D874-4C2D-9E6E-B4547D7DC8F8/data/Containers/Bundle/Application/CA84DE31-6B30-4CF9-A7B9-0B6B810E3447/Gameboard.app/www/index.html#/signin
+2014-12-10 15:17:05.676 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:17:08.020 Gameboard[36691:1568169] Signon to the application
+2014-12-10 15:17:08.597 Gameboard[36691:1568169] muuid 116314656208718221198
+2014-12-10 15:17:08.598 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/members/116314656208718221198
+2014-12-10 15:17:10.055 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/genres
+2014-12-10 15:17:11.820 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/games
+2014-12-10 15:17:13.346 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/categories
+2014-12-10 15:17:14.570 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-10 15:17:16.084 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
+2014-12-10 15:17:18.845 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/FUKiPNXW5f8
+2014-12-10 15:17:20.249 Gameboard[36691:1568169] -------------------------------------------------
+2014-12-10 15:17:20.249 Gameboard[36691:1568169] INITWITHWEBVIEW
+2014-12-10 15:17:20.619 Gameboard[36691:1568169] [MRAVRoutingClientController] 1 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:17:20.619 Gameboard[36691:1568169] [MRAVRoutingClientController] Fetching routes from service...
+2014-12-10 15:17:20.620 Gameboard[36691:1568169] [MRAVRoutingClientController] 2 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:17:20.620 Gameboard[36691:1568169] [MRAVRoutingClientController] 3 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:17:20.620 Gameboard[36691:1568169] [MRAVRoutingClientController] 4 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 15:17:20.656 Gameboard[36691:1568432] [MRAVRoutingClientController] Finished fetching routes from service.
+2014-12-10 15:17:20.656 Gameboard[36691:1568432] [MRAVRoutingClientController] Flushed 4 pending completion blocks
+Dec 10 15:17:22 Matthews-MacBook-Pro.local rtcreporting[36691] <Info>: logging starts...
+Dec 10 15:17:22 Matthews-MacBook-Pro.local rtcreporting[36691] <Debug>: setMessageLoggingBlock: called
+2014-12-10 15:17:22.665 Gameboard[36691:1568169] Clean up
+2014-12-10 15:17:22.722 Gameboard[36691:1568169] Video was closed without error.
+2014-12-10 15:17:28.450 Gameboard[36691:1568169] Add Video
+2014-12-10 15:17:28.450 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos
+2014-12-10 15:17:34.373 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-10 15:17:54.665 Gameboard[36691:1568169] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-10 15:19:05.681 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:21:05.688 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:23:05.760 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:25:06.690 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:27:06.692 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:29:06.696 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:31:07.697 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:33:07.699 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:35:07.705 Gameboard[36691:1568169] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+Dec 10 15:37:05 Matthews-MacBook-Pro.local rtcreporting[36691] <Debug>: initWithSessionInfo: XPC connection interrupted
+2014-12-10 15:37:05.035 Gameboard[36691:1618440] Terminating since there is no system app.
+Dec 10 15:37:05 Matthews-MacBook-Pro.local rtcreporting[36691] <Error>: initWithSessionInfo: Failed to get remote object proxy: Error Domain=NSCocoaErrorDomain Code=4097 "The operation couldn’t be completed. (Cocoa error 4097.)" (connection to service named com.apple.rtcreportingd) UserInfo=0x7b06ca30 {NSDebugDescription=connection to service named com.apple.rtcreportingd}
+2014-12-10 15:37:32.191 Gameboard[37918:1620613] Multi-tasking -> Device: YES, App: YES
+2014-12-10 15:37:32.197 Gameboard[37918:1620613] Unlimited access to network resources
+2014-12-10 15:37:32.485 Gameboard[37918:1620613] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-12-10 15:37:32.632 Gameboard[37918:1620613] Resetting plugins due to page load.
+2014-12-10 15:37:33.363 Gameboard[37918:1620613] Finished load of: file:///Users/matthewperrins/Library/Developer/CoreSimulator/Devices/5F59858A-D874-4C2D-9E6E-B4547D7DC8F8/data/Containers/Bundle/Application/4A80BB62-FC07-4629-A44E-6FF39B933DB4/Gameboard.app/www/index.html#/signin
+2014-12-10 15:37:34.705 Gameboard[37918:1620613] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 15:37:37.940 Gameboard[37918:1620613] Signon to the application
+2014-12-10 15:37:38.908 Gameboard[37918:1620613] muuid 116314656208718221198
+2014-12-10 15:37:38.908 Gameboard[37918:1620613] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/members/116314656208718221198
+2014-12-10 15:37:39.628 Gameboard[37918:1620613] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/genres
+2014-12-10 15:37:41.729 Gameboard[37918:1620613] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/games
+2014-12-10 15:37:44.238 Gameboard[37918:1620613] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/categories
+2014-12-10 15:37:45.435 Gameboard[37918:1620613] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-10 15:37:47.948 Gameboard[37918:1620613] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
+2014-12-10 15:39:34.808 Gameboard[37918:1620613] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 16:07:53.157 Gameboard[39482:1677476] Multi-tasking -> Device: YES, App: YES
+2014-12-10 16:07:53.164 Gameboard[39482:1677476] Unlimited access to network resources
+2014-12-10 16:07:53.434 Gameboard[39482:1677476] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-12-10 16:07:53.571 Gameboard[39482:1677476] Resetting plugins due to page load.
+2014-12-10 16:07:54.319 Gameboard[39482:1677476] Finished load of: file:///Users/matthewperrins/Library/Developer/CoreSimulator/Devices/5F59858A-D874-4C2D-9E6E-B4547D7DC8F8/data/Containers/Bundle/Application/E65096A2-FC14-4E91-928B-5CF32F804006/Gameboard.app/www/index.html#/signin
+2014-12-10 16:07:55.813 Gameboard[39482:1677476] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 16:07:58.976 Gameboard[39482:1677476] Signon to the application
+2014-12-10 16:07:59.133 Gameboard[39482:1677476] Setting the WebView's frame to {{0, 0}, {320, 524}}
+2014-12-10 16:07:59.133 Gameboard[39482:1677476] Setting the WebView's frame to {{0, 0}, {320, 568}}
+2014-12-10 16:07:59.145 Gameboard[39482:1677476] THREAD WARNING: ['InAppBrowser'] took '168.494873' ms. Plugin should use a background thread.
+2014-12-10 16:08:01.408 Gameboard[39482:1677476] muuid 116314656208718221198
+2014-12-10 16:08:01.408 Gameboard[39482:1677476] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/members/116314656208718221198
+2014-12-10 16:08:02.515 Gameboard[39482:1677476] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/genres
+2014-12-10 16:08:06.279 Gameboard[39482:1677476] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/games
+2014-12-10 16:08:07.821 Gameboard[39482:1677476] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/categories
+2014-12-10 16:08:09.138 Gameboard[39482:1677476] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-10 16:08:10.508 Gameboard[39482:1677476] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
+2014-12-10 16:08:55.491 Gameboard[39819:1683129] Multi-tasking -> Device: YES, App: YES
+2014-12-10 16:08:55.499 Gameboard[39819:1683129] Unlimited access to network resources
+2014-12-10 16:08:55.947 Gameboard[39819:1683129] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-12-10 16:08:56.147 Gameboard[39819:1683129] Resetting plugins due to page load.
+2014-12-10 16:08:57.076 Gameboard[39819:1683129] Finished load of: file:///Users/matthewperrins/Library/Developer/CoreSimulator/Devices/5F59858A-D874-4C2D-9E6E-B4547D7DC8F8/data/Containers/Bundle/Application/BAF8D520-7BA8-4217-A3FF-5FCEC9590A8B/Gameboard.app/www/index.html#/signin
+2014-12-10 16:08:58.753 Gameboard[39819:1683129] <Google:HTML> You are currently using version 6.10.0 of the SDK, which doesn't officially support iOS 8. Please consider updating your SDK to the most recent sdk version, 6.12.2, to get iOS 8 support, including a fix for smart banner rendering in landscape mode. The latest SDK can be downloaded from http://goo.gl/iGzfsP. A full list of release notes is available at https://developers.google.com/mobile-ads-sdk/docs/admob/ios/rel-notes.
+2014-12-10 16:09:01.195 Gameboard[39819:1683129] Signon to the application
+2014-12-10 16:09:01.769 Gameboard[39819:1683129] muuid 116314656208718221198
+2014-12-10 16:09:01.769 Gameboard[39819:1683129] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/members/116314656208718221198
+2014-12-10 16:09:02.848 Gameboard[39819:1683129] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/genres
+2014-12-10 16:09:04.188 Gameboard[39819:1683129] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/games
+2014-12-10 16:09:05.467 Gameboard[39819:1683129] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/categories
+2014-12-10 16:09:06.809 Gameboard[39819:1683129] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-10 16:09:08.421 Gameboard[39819:1683129] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/videos
+2014-12-10 16:09:15.375 Gameboard[39819:1683129] CloudCode URL:https://gameboard-cloud.mybluemix.net/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/youtube/video/FUKiPNXW5f8
+2014-12-10 16:09:17.440 Gameboard[39819:1683129] -------------------------------------------------
+2014-12-10 16:09:17.441 Gameboard[39819:1683129] INITWITHWEBVIEW
+2014-12-10 16:09:17.824 Gameboard[39819:1683129] [MRAVRoutingClientController] 1 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 16:09:17.824 Gameboard[39819:1683129] [MRAVRoutingClientController] Fetching routes from service...
+2014-12-10 16:09:17.825 Gameboard[39819:1683129] [MRAVRoutingClientController] 2 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 16:09:17.826 Gameboard[39819:1683129] [MRAVRoutingClientController] 3 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 16:09:17.826 Gameboard[39819:1683129] [MRAVRoutingClientController] 4 blocks queued for category MRAVRoutingActiveCategoryName
+2014-12-10 16:09:17.859 Gameboard[39819:1685908] [MRAVRoutingClientController] Finished fetching routes from service.
+2014-12-10 16:09:17.860 Gameboard[39819:1685908] [MRAVRoutingClientController] Flushed 4 pending completion blocks
+Dec 10 16:09:18 Matthews-MacBook-Pro.local rtcreporting[39819] <Info>: logging starts...
+Dec 10 16:09:18 Matthews-MacBook-Pro.local rtcreporting[39819] <Debug>: setMessageLoggingBlock: called
+2014-12-10 16:09:19.933 Gameboard[39819:1683129] Clean up
+2014-12-10 16:09:20.064 Gameboard[39819:1683129] Video was closed without error.
+Dec 10 16:09:29 Matthews-MacBook-Pro.local rtcreporting[39819] <Debug>: initWithSessionInfo: XPC connection interrupted
