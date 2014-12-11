@@ -228,7 +228,7 @@ angular.module('gameboard.board.controllers', [])
 })
 
 // A simple controller that shows a tapped item's data
-.controller('BoardCtrl', function($rootScope,$scope, $state, $stateParams, $ionicModal, $ionicLoading, BoardService, YouTubeService,WizardHandler,ACCESS) {
+.controller('BoardCtrl', function($rootScope,$scope, $state, $stateParams,$ionicPopup, $ionicModal, $ionicLoading, BoardService, YouTubeService,WizardHandler,BookmarksService,ACCESS) {
 
     var board = new Array();
 
@@ -343,10 +343,37 @@ angular.module('gameboard.board.controllers', [])
         $scope.loadMore();
     };
 
-
+    // Save a Bookmark 
     $scope.addBookmark = function(){
 
-        // Add Backmark of the Board
+        // Build the Bookmark
+        var data = {type:"CATEGORY", bid: $scope.bid, title:$scope.title};
+
+        BookmarksService.addBookmark(data).then(function(status) {
+
+            // Tell User we have created the Book Mark
+            var infoPopup = $ionicPopup.alert({
+                title: 'Bookmark',
+                template: 'Bookmark has been saved for this Board '+$scope.title
+            });
+
+            infoPopup.then(function(res) {
+
+            });
+
+        },function(err){
+
+            var alertPopup = $ionicPopup.alert({
+                title: 'Bookmark',
+                template: 'Failed to create the Bookmark'
+            });
+
+            alertPopup.then(function(res) {
+
+            });
+
+        });
+
 
     };
 
@@ -362,7 +389,7 @@ angular.module('gameboard.board.controllers', [])
     $scope.addVideo = function(video) {
 
         // If they are not registered then you need to register
-        if(!$scope.user.registered) {
+        if(!$rootScope.user.registered) {
             $state.go('register');
         }
 
