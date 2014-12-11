@@ -1,13 +1,13 @@
 angular.module("gameboard.member.controllers", [])
 
-.controller("YourVideosCtrl", function ($scope, $location, $stateParams, YourVidoeService) {
+.controller("YourVideosCtrl", function ($scope, $location, $stateParams, YourVideosService) {
 
 	// Need to Check if we have got some already
-	YourVidoesService.getYourVideos().then(function (video) {
+	YourVideosService.allCloud().then(function (videos) {
 
 		// Get information for display
-		$scope.member = video;
-		$scope.videos = video.videos;
+		$scope.member = videos;
+		$scope.videos = videos.videos;
 
 		// Let Angular know we have some data because of the Async nature of IBMBaaS
 		// This is required to make sure the information is uptodate

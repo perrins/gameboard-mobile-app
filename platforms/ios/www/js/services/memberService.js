@@ -296,15 +296,15 @@ angular.module("gameboard.member.services", [])
 	            var uri = new IBMUriBuilder().append(ACCESS.YOUR_VIDEOS).append(userid).toString();
 
 			  	// Clear the Cache with a new set
-	            cache.remove(ACCESS.FAVOURITES);
+	            cache.remove(ACCESS.YOURR_VIDEOS);
 
 	            // Get the Videos for my Board
 	            cc.get(uri, {
 	                "handleAs": "json"
-	            }).then(function(favourites) {
+	            }).then(function(yourvideos) {
 
 					// Place the Items in the Cache
-	                cache.put(ACCESS.YOUR_VIDEOS, favourites);
+	                cache.put(ACCESS.YOUR_VIDEOS, yourvideos);
 	                // return the Cache
 	                def.resolve(cache.get(ACCESS.YOUR_VIDEOS));
 	   
@@ -324,25 +324,39 @@ angular.module("gameboard.member.services", [])
 			return cache.get(ACCESS.YOUR_VIDEOS);
 		},
 
-		add: function (data) { 
-
-
-
-		},
-
 		del: function (video) {
-			var def = $q.defer();
+		   // Create a deffer
+            var def = $q.defer();
 
-			// Remove the Item from the Cache
-			var videos = cache.get("favorites").videos;
-			videos.splice(videos.indexOf(video),1);
+			// Get handle to the CloudCode service
+            var cc = IBMCloudCode.getService();
 
-			// AJAX DELETE
-			def.resolve("status");
+            // Get the User Id
+            var userid = $rootScope.user.id;
 
-			// Remove it
-			// TMD: When a ASYNC defer when this is a sync process?
-			return def.promise;
+            // USE THE CloudCode to Call the Board Services
+            // This will integrate with Cloudant to retrieve a list of videos for a Board
+            // Need to manage the Paging for this and sort it by ranking
+            // Lets build a 
+            var uri = new IBMUriBuilder().append(ACCESS.YOUR_VIDEOS).append(userid).append(videos.uuid).toString();
+
+		  	// Clear the Cache with a new set
+            cache.remove(ACCESS.YOUR_VIDEOS);
+
+            // Get the Videos for my Board
+            cc.del(uri, {
+                "handleAs": "json"
+            }).then(function(status) {
+
+                // return the Cache
+                def.resolve(status);
+   
+            }).catch(function(err) {
+                console.log(err);
+                def.reject(err);
+            });
+
+            return def.promise;
 		}
 	};
 })
