@@ -49,7 +49,8 @@ angular.module("gameboard", [
 	SEARCH_VIDEOS: "/search", // IBM CloudCode with Cloudant
 	VIDEOS: "/videos", // IBM CloudCode with Cloudant
 	YOUTUBE_YOURS : "/youtube/videos",
-	EMBED : "http://www.youtube.com/embed/"
+	EMBED : "http://www.youtube.com/embed/",
+	PRIZES : "/prizes"
 })
 
 // Configure the Angular Rules
@@ -221,6 +222,18 @@ angular.module("gameboard", [
 				}
 			}
 		})
+
+		.state("board.prizes", {
+			url: "/prizes",
+			views: {
+				"menuContent": {
+					templateUrl: "templates/prizes.html",
+					controller: "PrizesCtrl"
+				}
+			}
+		})
+
+
 		.state("board.search", {
 			url: "/search",
 			views: {

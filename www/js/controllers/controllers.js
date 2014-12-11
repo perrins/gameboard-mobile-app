@@ -105,6 +105,10 @@ angular.module("gameboard.controllers", [])
 
             };
 
+
+            // Hide Message
+            $ionicLoading.hide();
+
             // Havigate to the Board View
             $state.go("intro");         
 
@@ -152,6 +156,7 @@ angular.module("gameboard.controllers", [])
                     $rootScope.user.avatar = "img/avatar.png";
                     $state.go("intro");
                 });
+
             }).fail(failFunc);
         }).fail(failFunc);
     };
@@ -286,14 +291,16 @@ angular.module("gameboard.controllers", [])
     $scope.name = "Screaming Foulup";
     $scope.version = "0.0.1";
 
-    /*
-	$scope.introChange = function(change){
-		Settings.set("LOADSCREEN",change);
-	}
-	*/
-
     // Check
-    $scope.intro = Settings.get("LOADSCREEN");
+    $scope.intro = Settings.get("INTRO");
+
+    $scope.introChange = function(intro){
+
+        // Set the Intro Load Screen
+        Settings.set("INTRO", intro);
+
+    };
+
 
 })
 
@@ -301,6 +308,7 @@ angular.module("gameboard.controllers", [])
 
     // Called to navigate to the main app
     $scope.startApp = function() {
+
         // Clear the Back stack
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
@@ -308,7 +316,7 @@ angular.module("gameboard.controllers", [])
         });
 
         // Lets set that we have been through the Load Screen and Now no longer need to display it
-        Settings.set("LOADSCREEN", false);
+        Settings.set("INTRO", false);
 
         // Havigate to the Board View
         $state.go("board.genres");
@@ -316,7 +324,7 @@ angular.module("gameboard.controllers", [])
     };
 
     // If we have displayed the screen before lets go to Main
-    if (Settings.get("LOADSCREEN")) {
+    if (!Settings.get("INTRO")) {
         // Clear the Back stack
         $ionicViewService.nextViewOptions({
             disableBack: true
@@ -402,4 +410,16 @@ angular.module("gameboard.controllers", [])
                 return init();
             }
         };
-    });
+    })
+
+
+// A simple controller that shows a tapped item"s data
+.controller("PrizesCtrl", function($rootScope, $scope, Settings) {
+
+    // Manage the Prizes for Specific Boards and Show what is on offer
+
+
+});
+
+
+

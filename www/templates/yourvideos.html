@@ -38,17 +38,17 @@
                 <span class="badge badge-assertive">£12,000</span>
             </div>
 
-            <a  ng-repeat="video in videos | orderBy:'rank'" class="item" type="item-text-wrap" item="video" href="#/board/video/{{video.uuid}}">
+            <a  ng-repeat="video in videos | orderBy:'rank'" class="video item item-thumbnail-left item-icon-right" type="item-text-wrap" item="video" href="#/board/video/{{video.uuid}}">
 
-                <div class="Video">
-                    <img ng-src="{{video.thumb}}" lazyvideo>
-                </div>
+                <img ng-src="{{video.thumb}}" lazyvideo>
 
                 <h2>{{video.title}}</h2>
                 <h3>{{video.gameTag}}</h2>
-                    <p>{{video.description}}</p>
-                    <span class="badge badge-balanced">{{video.views}}</span>
-                    <span class="badge badge-royal">{{video.rank}}</span>
+                <p>{{video.description}}</p>
+                <span class="badge badge-balanced">{{video.views}}</span>
+                <span class="badge badge-royal">{{video.rank}}</span>
+
+                <i class="icon ion-chevron-right icon-accessory"></i>
 
             </a>
 

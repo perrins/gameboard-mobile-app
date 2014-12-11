@@ -47,4 +47,7 @@
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
+    <plugins>
+        <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
+    </plugins>
 </widget>

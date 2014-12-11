@@ -1,7 +1,7 @@
 angular.module("gameboard.settings", [])
 
 .constant("DEFAULT_SETTINGS", {
-	"UNITS": "dollars",
+	"UNITS": "punds",
 	"LOADSCREEN" : true,
 	"INTRO" : true,
 	"AUTOREFRESH" : false
@@ -33,6 +33,7 @@ angular.module("gameboard.settings", [])
 		},
 		// Get a settings val
 		get: function (k) {
+
 			return _settings[k];
 		},
 		// Set a settings val
