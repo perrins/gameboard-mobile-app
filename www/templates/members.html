@@ -37,13 +37,21 @@
 
                 <img class="video genre-image-load" ng-src="{{member.avatar}}" lazyload>
 
-                <h2>{{member.gameTag}}</h2>
-                <p>{{member.name}}</p>
-                <span class="badge badge-assertive">{{member.prizes}}</span>
-                <span class="badge badge-calm">{{member.videos}}</span>
+                <h1>{{member.gameTag}}</h1>
+                <h2>{{member.name}}&nbsp{{member.surname}}</h2>
+
+                <div class="btnFeed">
+                    <button ng-class="tweet.userLikedTweet ? 'button button-small button-royal' : 'button button-small button-outline button-balanced'" ng-click="like({{$index}})">
+                        {{member.prizes}}
+                        <i class="ion-ios7-star"></i></a>
+                    </button>
+                    <button class="button button-small button-balanced button-outline" ng-click="go('/tab/tweet/{{tweet.id}}')">
+                        {{member.videos}}
+                        <i class="ion-chatboxes"></i></a>
+                    </button>
+                </div>
 
                 <i class="icon ion-chevron-right icon-accessory"></i>
-
 
             </ion-item>
             <ion-infinite-scroll 

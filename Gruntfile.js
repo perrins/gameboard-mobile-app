@@ -18,6 +18,42 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 
+ 		exec:{
+        	prepare:{
+        		command:"cordova prepare android",
+        		stdout:true,
+        		stderror:true
+        	}
+        },
+
+        watch:{
+        	files:['www/**/*.*'],
+        	tasks:['exec:prepare','hockeyapp:Android']
+        },
+
+		hockeyapp: {
+		    /**
+		     * Global options
+		     */
+		    options: {
+		        notes: 'Latest release of the Android ',
+		        tags: 'Gameboard,Android,Alpha', // comma-separated list of tags
+		        download: true, // Enable/Disable download
+		        notify: 1 // 0 - Don't notify, 1 - Notify all that can install this app, 2 - Notify all
+		    },
+		    /**
+		     * App-specific options
+		     */
+		    Android: {
+		        options: {
+		            token: '09694e98bdaf4fb9aa0273faeb3117d5', // Upload Token
+		            app_id: '27f846d3d03a41bab432cd3968b79d5b', // Application ID
+		            download: false, // Disable download of this app
+		            file: '/Users/matthewperrins/projects/gameboard-mobile-app/platforms/android/ant-build/CordovaApp-debug.apk' // Path to file
+	        	}
+		    }
+
+	   }, 
 
 		clean: {
 			options: {
@@ -218,7 +254,6 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('build', [
-		'less:dev',
 		'bump',
 		'clean:dist',
 		'copy:dist',

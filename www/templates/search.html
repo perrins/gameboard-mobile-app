@@ -1,4 +1,4 @@
-<ion-view title="Search">
+<ion-view title="Search Videos">
 
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
@@ -37,9 +37,22 @@
 
                     <h2>{{video.title}}</h2>
                     <h3>{{video.gameTag}}</h2>
-                        <p>{{video.description}}</p>
-                        <span class="badge badge-balanced">{{video.views}}</span>
-                        <span class="badge badge-royal">{{video.rank}}</span>
+                    <p>{{video.description}}</p>
+
+                    <div class="btnFeed">
+                        <button ng-class="tweet.userLikedTweet ? 'button button-small button-royal' : 'button button-small button-outline button-balanced'" ng-click="like({{$index}})">
+                            {{video.rank}}
+                            <i class="ion-ios7-star"></i></a>
+                        </button>
+                        <button class="button button-small button-balanced button-outline" ng-click="go('/tab/tweet/{{tweet.id}}')">
+                            {{video.views}}
+                            <i class="ion-chatboxes"></i></a>
+                        </button>
+                    </div>
+
+                    <i class="icon ion-chevron-right icon-accessory"></i>
+
+
                 </ion-item>
 
                 <ion-infinite-scroll  
