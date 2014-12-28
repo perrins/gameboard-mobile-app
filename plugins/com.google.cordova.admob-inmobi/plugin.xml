@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	id="com.google.cordova.admob-inmobi"
+	version="1.0.0">
+      
+    <name>AdMob Mediation Adapter for InMobi</name>
+	<description>AdMob Mediation Adapter for InMobi</description>
+	<keywords>admob,inmobi,mediation</keywords>
+    <repo>https://github.com/floatinghotpot/cordova-admob-pro.git</repo>
+    <issue>https://github.com/floatinghotpot/cordova-admob-pro/issues</issue>
+
+	<engines>
+	    <engine name="cordova" version=">=3.0" />
+	</engines>
+
+    <dependency id="com.google.cordova.admob" version=">=2.0.0"/>
+    <dependency id="com.inmobi.sdk" version=">=5.4.1"/>
+    
+    <platform name="android">
+        <source-file src="libadapterinmobi.jar" target-dir="libs" />
+     </platform>
+
+     <platform name="ios">    
+          <source-file src="libAdapterInMobi.a" framework="true"/>
+	</platform>
+
+</plugin>

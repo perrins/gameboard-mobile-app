@@ -48,10 +48,8 @@ angular.module("gameboard.search.controllers", [])
 
             // Take the details from the content
             // Use the Calcualtion
-            $scope.total = 20;//board.videos.total_rows;
+            $scope.total = videos.length;//board.videos.total_rows;
             $scope.position = 0; //board.videos.offset;
-            $scope.count = 20;
-            $scope.number = 20;
 
             // Let Angular know we have some data because of the Async nature of IBMBaaS
             // This is required to make sure the information is uptodate

@@ -1,4 +1,4 @@
-<ion-view title="Member Detail">
+<ion-view title="{{member.gametag}}">
 
     <ion-content class="has-header padding">
 
@@ -16,7 +16,7 @@
 
                 <h1>{{member.gametag}}</h1>
                 <h2>{{member.name}}&nbsp{{member.surname}}</h2>
-                <p>{{member.memberSince}}</p>
+                <p>{{member.memberSince} | date:'medium' }</p>
                 <div class="bigPrize">{{member.prizes}}</div>
                 <div class="bigViews">{{member.views}}</div>
 

@@ -4,6 +4,13 @@
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
 
+    <ion-nav-buttons side="right">
+      <button class="button button-clear" ng-click="onShowDelete()">
+        <span ng-if="!showDelete">Edit</span>
+        <span ng-if="showDelete">Cancel</span>
+      </button>
+    </ion-nav-buttons>
+
     <ion-content class="has-header">
 
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();">
@@ -20,19 +27,16 @@
         </div>
 
         <ion-list 
-            can-delete="true" 
             can-swipe="true" 
-            on-delete="onBookmarkDelete(video)" 
             show-delete="showDelete" 
             delete-icon="ion-minus-circled" 
-            option-buttons="itemButtons" 
             ng-show="bookmarks">
 
             <ion-item ng-repeat="book in bookmarks" 
                 class="item item-icon-right" 
                 type="item-text-wrap" 
                 item="book" 
-                ng-click="selectBookmark(book)">
+                >
 
                 <div style="position:relative;width:25px;height:25px;">
 
@@ -53,6 +57,21 @@
 
                 <h2 style="position:relative;left:40px;top:-15px;">{{book.title}}</h2>
                 <h4>{{book.subtitle}}</h4>
+
+                <ion-option-button class="button-info"
+                       ng-click="selectBookmark(book)">
+                    View
+                </ion-option-button>
+
+                <ion-option-button class="button-assertive"
+                       ng-click="onBookmarkDelete(book)">
+                    Delete
+                </ion-option-button>
+
+                
+                <ion-delete-button class="ion-minus-circled"
+                                   ng-click="onBookmarkDelete(book">
+                </ion-delete-button>
 
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>

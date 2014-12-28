@@ -102,7 +102,14 @@ module.exports = function(grunt) {
 				{
 					src: "vendor/oauth-js/dist/oauth.js",
 					dest: "www/lib/oauth.js"
+				},
+				{
+					src: "vendor/ngCordova/dist/ng-cordova.min.js",
+					dest: "www/lib/ng-cordova.min.js"
 				}]
+
+
+
 			}
 		},
 

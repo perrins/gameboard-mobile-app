@@ -1,7 +1,24 @@
 angular.module("gameboard.controllers", [])
 
-.controller("MainCtrl", function($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicViewService, InitBluemix) {
+.controller("MainCtrl", function($cordovaAdMob,$rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory, InitBluemix) {
 
+            // Create Banner Add
+            $cordovaAdMob.createBannerView (
+                                            {
+                                            adId: "ca-app-pub-2283171672459446/6963593212",
+                                            addSize : 'SMART_BANNER',
+                                            position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                                            autoShow: true ,
+                                            success: function(){
+                                            alert("Successfully created");
+                                            },
+                                            error: function(){
+                                            alert('failed to create banner');
+                                            }
+                                            });
+            
+            
+            
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
     InitBluemix.init().then(function() {
@@ -23,7 +40,7 @@ angular.module("gameboard.controllers", [])
         $scope.favourites = 5;
 
         // Clear the Back stack
-        $ionicViewService.nextViewOptions({
+        $ionicHistory.nextViewOptions({
             disableBack: true,
         });
 
@@ -304,13 +321,19 @@ angular.module("gameboard.controllers", [])
 
 })
 
-.controller("IntroCtrl", function($scope, $state, $ionicSlideBoxDelegate, $ionicViewService, Settings) {
+.controller("IntroCtrl", function($scope, $state, $ionicSlideBoxDelegate,  $ionicHistory, Settings) {
+
+    // Clear the Back stack
+    $ionicHistory.nextViewOptions({
+            disableAnimate: true,
+            disableBack: true
+    });
 
     // Called to navigate to the main app
     $scope.startApp = function() {
 
         // Clear the Back stack
-        $ionicViewService.nextViewOptions({
+        $ionicHistory.nextViewOptions({
             disableAnimate: true,
             disableBack: true
         });
@@ -326,7 +349,7 @@ angular.module("gameboard.controllers", [])
     // If we have displayed the screen before lets go to Main
     if (!Settings.get("INTRO")) {
         // Clear the Back stack
-        $ionicViewService.nextViewOptions({
+        $ionicHistory.nextViewOptions({
             disableBack: true
         });
 

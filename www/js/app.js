@@ -2,6 +2,7 @@
 
 angular.module("gameboard", [
 	"ionic",
+	"ngCordova",
 	"mgo-angular-wizard",
 	"gameboard.directives",
 	"gameboard.controllers",
@@ -17,8 +18,29 @@ angular.module("gameboard", [
 // Handle Status Bar Styling on Load
 .run(function ($ionicPlatform, $rootScope) {
 
+	// Hide Splash Screen
 	// Handle Loading of the Runtime
 	$ionicPlatform.ready(function () {
+                                                  
+        // Create A Banner Add Area
+		if(AdMob) AdMob.createBanner( 
+    	{
+			adId: "ca-app-pub-2283171672459446/6963593212", 
+			addSize : 'SMART_BANNER',
+			position: AdMob.AD_POSITION.BOTTOM_CENTER, 
+			autoShow: true ,
+			success: function(){
+				alert("Successfully created");
+    		},
+		    error: function(){
+		        alert('failed to create banner');
+		    }
+		});
+
+		// Hide the Splash Screen after banner Add has been created
+        navigator.splashscreen.hide();
+
+
 		if (window.StatusBar) {
 			// org.apache.cordova.statusbar required
 			window.StatusBar.styleDefault();
@@ -27,10 +49,20 @@ angular.module("gameboard", [
 		    // Once complete keep a reference to it so we can talk to it later
 		    InitBluemix.init().then(function() {
 		    	$rootScope.IBMBluemix = IBMBluemix;
+                                    
 		    });	
 
 		}
 	});
+
+})
+
+.config(function($ionicConfigProvider) {
+  $ionicConfigProvider.views.maxCache(0);
+
+  // note that you can also chain configs
+  $ionicConfigProvider.backButton.text('Go Back').icon('ion-chevron-left');
+
 })
 
 .constant("ACCESS", {
@@ -108,34 +140,33 @@ angular.module("gameboard", [
 			}
 		}
 	})
-		.state("board.games", {
-			url: "/games/:genid",
-			views: {
-				"menuContent": {
-					templateUrl: "templates/games.html",
-					controller: "GamesCtrl"
-				}
+	.state("board.games", {
+		url: "/games/:genid",
+		views: {
+			"menuContent": {
+				templateUrl: "templates/games.html",
+				controller: "GamesCtrl"
 			}
-		})
-		.state("board.categories", {
-			url: "/categories/:genid/:gmid",
-			views: {
-				"menuContent": {
-					templateUrl: "templates/categories.html",
-					controller: "CategoriesCtrl"
-				}
+		}
+	})
+	.state("board.categories", {
+		url: "/categories/:genid/:gmid",
+		views: {
+			"menuContent": {
+				templateUrl: "templates/categories.html",
+				controller: "CategoriesCtrl"
 			}
-		})
-		.state("board.videos", {
-			url: "/videos/:bid",
-			views: {
-				"menuContent": {
-					templateUrl: "templates/videos.html",
-					controller: "BoardCtrl"
-				}
+		}
+	})
+	.state("board.videos", {
+		url: "/videos/:bid",
+		views: {
+			"menuContent": {
+				templateUrl: "templates/videos.html",
+				controller: "BoardCtrl"
 			}
-		})
-
+		}
+	})
 	.state("board.video", {
 		url: "/video/:uuid",
 		views: {

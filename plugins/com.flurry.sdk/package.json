@@ -1,0 +1,20 @@
+{
+    "version": "5.4.0",
+    "name": "com.flurry.sdk",
+    "cordova_name": "Flurry Analytics and Ads SDK",
+    "description": "Flurry SDK only, as dependency of other plugins",
+    "keywords": [
+        "flurry",
+        "sdk"
+    ],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0"
+        }
+    ]
+}

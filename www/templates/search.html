@@ -31,9 +31,7 @@
                     collection-item-width="'100%'"
                     collection-item-height="100">
 
-                    <div class="Video">
-                        <img ng-src="{{video.thumb}}" lazyvideo>
-                    </div>
+                    <img ng-src="{{video.ytimage}}" lazyvideo>
 
                     <h2>{{video.title}}</h2>
                     <h3>{{video.gameTag}}</h2>
@@ -61,6 +59,7 @@
                     on-infinite="loadMore()"
                     distance="30%">
                 </ion-infinite-scroll>
+
             </div>
 
 

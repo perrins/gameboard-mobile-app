@@ -1,0 +1,20 @@
+{
+    "version": "4.5.1",
+    "name": "com.inmobi.sdk",
+    "cordova_name": "InMobi SDK",
+    "description": "InMobi SDK only, as dependency of other plugins",
+    "keywords": [
+        "inmobi",
+        "sdk"
+    ],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0.0"
+        }
+    ]
+}

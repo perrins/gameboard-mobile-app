@@ -19,6 +19,22 @@
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage" />
     </feature>
+    <feature name="AdMob">
+        <param name="ios-package" value="CDVAdMobPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="FacebookAds">
+        <param name="ios-package" value="FacebookAdPlugin" />
+    </feature>
+    <feature name="FlurryAds">
+        <param name="ios-package" value="FlurryAdPlugin" />
+    </feature>
+    <feature name="mMedia">
+        <param name="ios-package" value="mMediaAdPlugin" />
+    </feature>
+    <feature name="MobFox">
+        <param name="ios-package" value="MobFoxPlugin" />
+    </feature>
     <feature name="StreamingMedia">
         <param name="ios-package" value="StreamingMedia" />
     </feature>
@@ -32,11 +48,15 @@
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
     <name>Gameboard</name>
     <description>
         Add Videos and track the best.
     </description>
-    <author email="info@gameboard.com" href="http://game-board.co/">
+    <author email="info@game-board.co" href="http://game-board.co/">
       Game-board Ltd
     </author>
     <content src="index.html" />
@@ -47,6 +67,8 @@
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
     <plugins>
         <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
     </plugins>

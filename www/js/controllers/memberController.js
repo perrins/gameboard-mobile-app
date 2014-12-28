@@ -251,6 +251,8 @@ angular.module("gameboard.member.controllers", [])
 // A simple controller that fetches a list of data from a service
 .controller("BookmarksCtrl", function ($state,$rootScope, $scope, $location, $ionicLoading, BookmarksService) {
 
+	$scope.showDelete = false;
+
 	$scope.loadItems = function () {
 		// Clear the List before adding new items
 		// This needs to be improved
@@ -357,23 +359,22 @@ angular.module("gameboard.member.controllers", [])
 
 	};
 
-	$scope.onDelete = function (video) {
+	// Handle the Removal of the Bookmark
+	$scope.onBookmarkDelete = function (book) {
 
 		// Delete the Item
-		BookmarkService.delBookmark(video).then(null, function (err) {
+		BookmarkService.delBookmark(book).then(null, function (err) {
 			console.log(err);
 		});
 
 		$scope.list = FavouritesService.allCache();
 	};
 
-	$scope.itemButtons = [{
-		text: "Delete",
-		type: "button-assertive",
-		onTap: function(item) {
-			$scope.onDelete(item);
-		}
-	}];
+	// 
+	$scope.onShowDelete = function() {
+		$scope.showDelete = !$scope.showDelete;
+	}
+
 })
 
 // A simple controller that fetches a list of data from a service
