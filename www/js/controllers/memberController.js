@@ -375,6 +375,8 @@ angular.module("gameboard.member.controllers", [])
 		$scope.showDelete = !$scope.showDelete;
 	}
 
+	
+
 })
 
 // A simple controller that fetches a list of data from a service

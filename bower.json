@@ -29,7 +29,8 @@
     "oauth-js": "~0.2.2",
     "angular-wizard": "~0.4.0",
     "collide": "~0.0.4",
-    "ngCordova": "~0.1.9-alpha"
+    "ngCordova": "~0.1.9-alpha",
+    "components-font-awesome": "~4.2.0"
   },
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-beta.14"

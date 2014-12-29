@@ -31,6 +31,7 @@
                 <h1>{{board.title}}</h1>
                 <h2>{{board.subtitle}}</h2>
                 <p>{{board.description}}</p>
+
                 <div class="bigPrize">{{board.prizes}}</div>
                 <div class="bigViews">{{board.number}}</div>
 
@@ -65,13 +66,32 @@
                 <h3>{{video.gameTag}}</h3>
                 <p>{{video.description}}</p>
 
+                <div star-rating rating-value="rating" max="5" on-rating-selected="rateFunction(rating)"></div>
+
+
+                <div class="btnFeed">
+                    <button ng-class="tweet.userLikedTweet ? 'button button-small button-royal' : 'button button-small button-outline button-balanced'" ng-click="like({{$index}})">
+                        {{video.views}}
+                        <i class="ion-ios7-star"></i></a>
+                    </button>
+                    <button class="button button-small button-balanced button-outline" ng-click="go('/tab/tweet/{{tweet.id}}')">
+                        {{video.prize}}
+                        <i class="ion-chatboxes"></i></a>
+                    </button>
+                </div>
+
                 <span class="badge badge-balanced">{{video.views}}</span>
                 <span class="badge badge-royal">{{video.prize}}</span>
 
-                <ion-option-button class="button-assertive" ng-click="onShare(item)">Share
+                <ion-option-button class="button-assertive" ng-click="onMenu(video)">Menu
                 </ion-option-button>
-                <ion-option-button class="button-royal" ng-click="addToFavourite(item)">
-                    <i class="icon ion-ios7-plus-empty"></i>
+
+                <ion-option-button class="button-royal" ng-click="viewVideo(video)">
+                    <i class="icon ion-videocamera"></i>
+                </ion-option-button>
+
+                <ion-option-button class="button-royal" ng-click="addToFavourite(video)">
+                    <i class="icon ion-heart"></i>
                 </ion-option-button>
 
                 <i class="icon ion-chevron-right icon-accessory"></i>

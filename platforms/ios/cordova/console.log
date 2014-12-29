@@ -87,3 +87,83 @@ To disable web storage backup to iCloud, set the BackupWebStorage preference to 
 2014-12-28 13:53:18.741 Gameboard[29885:3490482] AdMob, onBannerLeaveApp, 
 2014-12-28 13:53:18.741 Gameboard[29885:3490482] AdMob, onAdLeaveApp, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLeaveApp'}
 2014-12-28 13:53:29.606 Gameboard[29885:3491129] Terminating since there is no system app.
+2014-12-29 17:04:09.817 Gameboard[47042:3867189] Apache Cordova native platform version 3.7.0 is starting.
+2014-12-29 17:04:09.818 Gameboard[47042:3867189] Multi-tasking -> Device: YES, App: YES
+2014-12-29 17:04:09.827 Gameboard[47042:3867189] Unlimited access to network resources
+2014-12-29 17:04:09.830 Gameboard[47042:3867189] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2014-12-29 17:04:10.099 Gameboard[47042:3867189] [CDVTimer][admob] 2.847970ms
+2014-12-29 17:04:10.207 Gameboard[47042:3867189] [CDVTimer][splashscreen] 108.116031ms
+2014-12-29 17:04:10.208 Gameboard[47042:3867189] [CDVTimer][TotalPluginStartup] 111.355007ms
+2014-12-29 17:04:10.467 Gameboard[47042:3867189] Resetting plugins due to page load.
+2014-12-29 17:04:10.804 Gameboard[47042:3867189] Finished load of: file:///Users/matthewperrins/Library/Developer/CoreSimulator/Devices/AD542E3D-6FDD-4609-A783-755EEE87F31B/data/Containers/Bundle/Application/F357737B-1443-4401-A311-FA2E55FBBA61/Gameboard.app/www/index.html#/signin
+2014-12-29 17:04:10.913 Gameboard[47042:3867189] createBanner
+2014-12-29 17:04:11.025 Gameboard[47042:3867189] <Google> To get test ads on this device, call: request.testDevices = @[ GAD_SIMULATOR_ID ];
+2014-12-29 17:04:12.928 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:04:12.929 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:04:12.929 Gameboard[47042:3867189] statusbar offset:20.000000, overlap:0, ad position:8, x:0, y:0
+2014-12-29 17:04:12.931 Gameboard[47042:3867189] window, resize, 
+2014-12-29 17:04:17.751 Gameboard[47042:3867189] Signon to the application
+2014-12-29 17:04:17.923 Gameboard[47042:3867189] Setting the WebView's frame to {{0, 0}, {320, 524}}
+2014-12-29 17:04:17.923 Gameboard[47042:3867189] Setting the WebView's frame to {{0, 0}, {320, 568}}
+2014-12-29 17:04:17.930 Gameboard[47042:3867189] THREAD WARNING: ['InAppBrowser'] took '177.219727' ms. Plugin should use a background thread.
+2014-12-29 17:04:20.304 Gameboard[47042:3867189] muuid 116314656208718221198
+2014-12-29 17:04:20.304 Gameboard[47042:3867189] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/members/116314656208718221198
+2014-12-29 17:04:20.548 Gameboard[47042:3867189] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/genres
+2014-12-29 17:05:12.998 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:05:12.999 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:06:13.188 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:06:13.188 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:07:13.325 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:07:13.325 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:08:13.671 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:08:13.671 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:09:13.724 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:09:13.725 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:09:23.662 Gameboard[47042:3867189] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/games
+2014-12-29 17:09:26.798 Gameboard[47042:3867189] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/categories
+2014-12-29 17:09:28.420 Gameboard[47042:3867189] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-29 17:09:51.613 Gameboard[47042:3867189] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-29 17:09:51.817 Gameboard[47042:3867189] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-29 17:09:55.185 Gameboard[47042:3867189] CloudCode URL:http://localhost:3002/gameboard-cloud/v1/apps/ad023345-1722-44f6-94bb-bb408d90f527/videos/board/1001?skip=0&limit=20
+2014-12-29 17:10:13.774 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:10:13.774 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:11:14.197 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:11:14.197 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:12:14.090 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:12:14.090 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:13:14.242 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:13:14.243 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:14:14.428 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:14:14.428 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:15:14.657 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:15:14.657 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:16:14.688 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:16:14.688 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:17:14.837 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:17:14.837 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:18:15.034 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:18:15.034 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:19:15.291 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:19:15.294 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:20:15.376 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:20:15.376 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:21:15.533 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:21:15.533 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:22:15.678 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:22:15.678 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:23:15.913 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:23:15.914 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:24:16.040 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:24:16.041 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:25:16.166 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:25:16.166 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:26:16.355 Gameboard[47042:3867189] AdMob, onBannerReceive, 
+2014-12-29 17:26:16.355 Gameboard[47042:3867189] AdMob, onAdLoaded, {'adNetwork':'AdMob','adType':'banner','adEvent':'onAdLoaded'}
+2014-12-29 17:27:03.032 Gameboard[47042:3977330] Terminating since there is no system app.

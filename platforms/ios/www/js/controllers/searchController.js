@@ -7,7 +7,7 @@ angular.module("gameboard.search.controllers", [])
 	var videos = new Array();
 
     $scope.page = 0;
-    $scope.pageSize = 20;
+    $scope.pageSize = 10;
     $scope.total = 0;
     $scope.position = 0;
 

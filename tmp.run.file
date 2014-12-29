@@ -1,0 +1,1 @@
+ios-sim launch "./platforms/ios/build/emulator//Gameboard.app" --devicetypeid "com.apple.CoreSimulator.SimDeviceType.iPhone-5, 8.2" --stderr ./platforms/ios/cordova/console.log --stdout ./platforms/ios/cordova/console.log

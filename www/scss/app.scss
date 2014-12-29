@@ -191,4 +191,32 @@
     margin-bottom: 0px;
 }
 
+.rating{
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  li {
+    padding: 1px;
+    color: #a9a9a9;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+    &.filled {
+      color: #fd0; //#21568b
+    }
+  }
+}
+
+.rating a {
+  color: #0084e6;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
 

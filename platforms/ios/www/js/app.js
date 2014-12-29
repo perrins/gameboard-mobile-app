@@ -21,29 +21,28 @@ angular.module("gameboard", [
 	// Hide Splash Screen
 	// Handle Loading of the Runtime
 	$ionicPlatform.ready(function () {
+                                                  
+        // Create A Banner Add when in Cordova 
+		if(typeof(AdMob) != "undefined") {
+			AdMob.createBanner( 
+    		{
+				adId: "ca-app-pub-2283171672459446/6963593212", 
+				addSize : 'SMART_BANNER',
+				position: AdMob.AD_POSITION.BOTTOM_CENTER, 
+				autoShow: true ,
+				success: function(){
+					alert("Successfully created");
+	    		},
+			    error: function(){
+			        alert('failed to create banner');
+			    }
+			});
+		}
 
-                         console.log("Device Ready". $cordovaAdMob);
-                         
-                         
-        navigator.splashscreen.hide();
-
-        // 
-        console.log("Position "+AdMob.AD_POSITION.BOTTOM_CENTER);
-
-        // Create A Banner
-		if(AdMob) AdMob.createBanner( 
-    	{
-			adId: "ca-app-pub-2283171672459446/6963593212", 
-			addSize : 'SMART_BANNER',
-			position: AdMob.AD_POSITION.BOTTOM_CENTER, 
-			autoShow: true ,
-			success: function(){
-				alert("Successfully created");
-    		},
-		    error: function(){
-		        alert('failed to create banner');
-		    }
-		});
+		// Hide the Splash Screen after banner Add has been created
+		if(typeof(navigator) != "undefined") {
+	        navigator.splashscreen.hide();
+		}
 
 		if (window.StatusBar) {
 			// org.apache.cordova.statusbar required
@@ -65,7 +64,7 @@ angular.module("gameboard", [
   $ionicConfigProvider.views.maxCache(0);
 
   // note that you can also chain configs
-  $ionicConfigProvider.backButton.text('Go Back').icon('ion-chevron-left');
+  //$ionicConfigProvider.backButton.text('Go Back').icon('ion-chevron-left');
 
 })
 

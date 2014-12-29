@@ -1,23 +1,7 @@
 angular.module("gameboard.controllers", [])
 
-.controller("MainCtrl", function($cordovaAdMob,$rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory, InitBluemix) {
+.controller("MainCtrl", function($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory, InitBluemix) {
 
-            // Create Banner Add
-            $cordovaAdMob.createBannerView (
-                                            {
-                                            adId: "ca-app-pub-2283171672459446/6963593212",
-                                            addSize : 'SMART_BANNER',
-                                            position: AdMob.AD_POSITION.BOTTOM_CENTER,
-                                            autoShow: true ,
-                                            success: function(){
-                                            alert("Successfully created");
-                                            },
-                                            error: function(){
-                                            alert('failed to create banner');
-                                            }
-                                            });
-            
-            
             
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
@@ -47,7 +31,7 @@ angular.module("gameboard.controllers", [])
     } else {
 
         // Clear the Back stack
-        $ionicViewService.nextViewOptions({
+        $ionicHistory.nextViewOptions({
             disableBack: true,
             disableAnimate: true
         });
@@ -60,7 +44,7 @@ angular.module("gameboard.controllers", [])
     $scope.logout = function() {
 
         // Clear the Back stack
-        $ionicViewService.nextViewOptions({
+        $ionicHistory.nextViewOptions({
             disableBack: true,
         });
 
@@ -77,7 +61,7 @@ angular.module("gameboard.controllers", [])
 })
 
 // Sign In Controller, navigate to Intro
-.controller("SignInCtrl", function($rootScope, $state, $scope, $http,InitBluemix, MembersService, $ionicLoading) {
+.controller("SignInCtrl", function($ionicHistory,$rootScope, $state, $scope, $http,InitBluemix, MembersService, $ionicLoading) {
 
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
@@ -86,6 +70,12 @@ angular.module("gameboard.controllers", [])
         $rootScope.IBMBluemix = IBMBluemix;
         // Make the World visible
         angular.element("#main").removeClass("hidden");
+    });
+
+     // Clear the Back stack
+    $ionicHistory.nextViewOptions({
+        disableBack: true,
+        disableAnimate: true
     });
 
     // Signon to the App

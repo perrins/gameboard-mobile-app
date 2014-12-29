@@ -19,7 +19,14 @@
 
     <ion-content class="has-header" style="top:89px;">
 
-            <div class="list">
+
+            <div class="card" ng-show="!videos">
+              <div class="item item-text-wrap">
+                This is a basic Card which contains an item that has wrapping text.
+              </div>
+            </div>
+
+            <div class="list" ng-show="videos">
 
                 <ion-item 
                     ng-show="members"

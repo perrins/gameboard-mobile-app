@@ -106,9 +106,37 @@ module.exports = function(grunt) {
 				{
 					src: "vendor/ngCordova/dist/ng-cordova.min.js",
 					dest: "www/lib/ng-cordova.min.js"
-				}]
+				},
+				{
+					src: "vendor/components-font-awesome/fonts/FontAwesome.otf",
+					dest: "www/fonts/FontAwesome.otf"
+				},
+				{
+					src: "vendor/components-font-awesome/fonts/fontawesome-webfont.eot",
+					dest: "www/fonts/fontawesome-webfont.eot"
+				},
+
+				{
+					src: "vendor/components-font-awesome/fonts/fontawesome-webfont.ttf",
+					dest: "www/fonts/fontawesome-webfont.ttf"
+				},
+
+				{
+					src: "vendor/components-font-awesome/fonts/fontawesome-webfont.woff",
+					dest: "www/fonts/fontawesome-webfont.woff"
+				},
+
+				{
+					src: "vendor/components-font-awesome/fonts/fontawesome-webfont.svg",
+					dest: "www/fonts/fontawesome-webfont.svg"
+				},
+				{
+					src: "vendor/components-font-awesome/css/font-awesome.min.css",
+					dest: "www/css/font-awesome.min.css"
+				}
 
 
+				]
 
 			}
 		},

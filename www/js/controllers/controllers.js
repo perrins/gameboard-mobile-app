@@ -1,23 +1,7 @@
 angular.module("gameboard.controllers", [])
 
-.controller("MainCtrl", function($cordovaAdMob,$rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory, InitBluemix) {
+.controller("MainCtrl", function($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory, InitBluemix) {
 
-            // Create Banner Add
-            $cordovaAdMob.createBannerView (
-                                            {
-                                            adId: "ca-app-pub-2283171672459446/6963593212",
-                                            addSize : 'SMART_BANNER',
-                                            position: AdMob.AD_POSITION.BOTTOM_CENTER,
-                                            autoShow: true ,
-                                            success: function(){
-                                            alert("Successfully created");
-                                            },
-                                            error: function(){
-                                            alert('failed to create banner');
-                                            }
-                                            });
-            
-            
             
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
@@ -47,7 +31,7 @@ angular.module("gameboard.controllers", [])
     } else {
 
         // Clear the Back stack
-        $ionicViewService.nextViewOptions({
+        $ionicHistory.nextViewOptions({
             disableBack: true,
             disableAnimate: true
         });
@@ -60,7 +44,7 @@ angular.module("gameboard.controllers", [])
     $scope.logout = function() {
 
         // Clear the Back stack
-        $ionicViewService.nextViewOptions({
+        $ionicHistory.nextViewOptions({
             disableBack: true,
         });
 
@@ -77,7 +61,7 @@ angular.module("gameboard.controllers", [])
 })
 
 // Sign In Controller, navigate to Intro
-.controller("SignInCtrl", function($rootScope, $state, $scope, $http,InitBluemix, MembersService, $ionicLoading) {
+.controller("SignInCtrl", function($ionicHistory,$rootScope, $state, $scope, $http,InitBluemix, MembersService, $ionicLoading,Settings) {
 
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
@@ -88,6 +72,12 @@ angular.module("gameboard.controllers", [])
         angular.element("#main").removeClass("hidden");
     });
 
+     // Clear the Back stack
+    $ionicHistory.nextViewOptions({
+        disableBack: true,
+        disableAnimate: true
+    });
+
     // Signon to the App
     $scope.signon = function() {
         console.log("Signon to the application");
@@ -96,6 +86,23 @@ angular.module("gameboard.controllers", [])
         $ionicLoading.show({
             template: "Authenticating..."
         });
+
+        var nextView = function() {
+
+            // Clear the Back stack
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+
+             // If we have displayed the screen before lets go to Main
+            if (!Settings.get("INTRO")) {
+                $state.go("board.genres");
+                //$state.go("board.videos",{bid:1001});
+            } else {
+                $state.go("intro");
+            }
+
+        }
 
         // Check if we are in local testing mode and then fake a user 
         // and go to the Intro Views.
@@ -127,7 +134,7 @@ angular.module("gameboard.controllers", [])
             $ionicLoading.hide();
 
             // Havigate to the Board View
-            $state.go("intro");         
+            nextView();         
 
             return;
         }
@@ -140,6 +147,8 @@ angular.module("gameboard.controllers", [])
             // TMD: isn't this covered by the second arg to 'then' ?
             $ionicLoading.hide();
         };
+
+
 
         // Handle the Cordova OAuth experience
         OAuth.popup("google", {
@@ -163,15 +172,19 @@ angular.module("gameboard.controllers", [])
                     $ionicLoading.hide();
                     $rootScope.user.registered = true;
                     $rootScope.member = member;
-                    // Havigate to the Board View
-                    $state.go("intro");
+
+                    // Move to the Next View
+                    nextView();
+
 
                 }, function(err) {
 
                     $ionicLoading.hide();
                     $rootScope.user.registered = false;
                     $rootScope.user.avatar = "img/avatar.png";
-                    $state.go("intro");
+
+                    // Move to the Next view
+                    nextView();
                 });
 
             }).fail(failFunc);
