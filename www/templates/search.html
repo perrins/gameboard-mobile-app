@@ -20,10 +20,13 @@
                 <button class="button button-clear button-positive" ng-click="findVideos()">Find</button>
               </div>
 
-            <div class="card" ng-show="!videos">
-              <div class="item item-text-wrap">
-                This is a basic Card which contains an item that has wrapping text.
+            <div class="list card" ng-show="error">
+
+              <div class="item item-icon-left">
+                <i class="icon ion-information-circled"></i>
+                {{error}}
               </div>
+
             </div>
 
             <div class="list" ng-show="videos">
@@ -57,14 +60,15 @@
 
                     <i class="icon ion-chevron-right icon-accessory"></i>
 
-
                 </ion-item>
 
                 <ion-infinite-scroll  
+                    ng-if="!nodata"
                     class="progress"
                     icon="ion-loading-c"
                     on-infinite="loadMore()"
-                    distance="30%">
+                    distance="10%">
+
                 </ion-infinite-scroll>
 
             </div>

@@ -4,7 +4,8 @@ angular.module("gameboard.search.controllers", [])
 
 	var searchParam = "";
 
-	var videos = new Array();
+	$scope.videos = [];
+    var videos = [];
 
     $scope.page = 0;
     $scope.pageSize = 10;
@@ -24,7 +25,6 @@ angular.module("gameboard.search.controllers", [])
         $ionicLoading.show({
             template: $scope.message
         });
-
 
         // "List is " is a service returning data from the         
         SearchService.all(searchParam,page,size).then(function(_videos) {
@@ -72,9 +72,19 @@ angular.module("gameboard.search.controllers", [])
             }
 
         }, function(err) {
-            console.log(err);
+
+            // Then We have not found anything
+            if(err.info.statusCode == 404) {
+
+                $scope.error = "No Videos have been found with this query";
+                $scope.nodata = true;
+            }
+
             $ionicLoading.hide();
-            $scope.board = null;
+            $scope.videos = [];
+
+            // Lets Make a Call to the Service and then update the infinite scroll
+            $scope.$broadcast('scroll.infiniteScrollComplete');
 
         });
 
@@ -82,6 +92,10 @@ angular.module("gameboard.search.controllers", [])
 
     // If we get close to the end of the list and we have more 
     $scope.loadMore = function() {
+
+        if($scope.nodata) {
+            return;
+        }
 
         if(!$scope.message) {
             $scope.message = 'Fetching Videos...';
@@ -98,6 +112,12 @@ angular.module("gameboard.search.controllers", [])
 
 	// Search for Members
 	$scope.findVideos = function () {
+
+        try {
+            delete $scope.message;
+            delete $scope.nodata;
+            delete $scope.error;
+        } catch (e){}    
 
 		$scope.page = 0;
 		$scope.loadMore();

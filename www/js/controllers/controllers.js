@@ -148,8 +148,6 @@ angular.module("gameboard.controllers", [])
             $ionicLoading.hide();
         };
 
-
-
         // Handle the Cordova OAuth experience
         OAuth.popup("google", {
             cache: true
@@ -158,7 +156,7 @@ angular.module("gameboard.controllers", [])
             $rootScope.google = google;
 
             // Set the Security Token on IBM Bluemix
-            IBMBluemix.setSecurityToken(google.access_token, "GOOGLE");
+            IBMBluemix.setSecurityToken(google.access_token, IBMBluemix.SecurityProvider.GOOGLE);
 
             // Lets get some information about the User
             google.me().done(function(user) {

@@ -323,6 +323,8 @@ angular.module('gameboard.board.controllers', [])
         // "List is " is a service returning data from the 
         BoardService.all($scope.bid, page, size).then(function(board) {
 
+            debugger;
+
             // Reset the Array if we are on Page 1
             if ($scope.page === 0) {
                 // Prepare for the Query
@@ -344,7 +346,6 @@ angular.module('gameboard.board.controllers', [])
             // Use the Calcualtion
             $scope.total = board.videos.total_rows;
             $scope.position = board.videos.offset;
-            $scope.coint
 
             // Delete Video List
             delete board.videos
@@ -373,6 +374,9 @@ angular.module('gameboard.board.controllers', [])
             }
 
         }, function(err) {
+
+            debugger;
+
             console.log(err);
             $ionicLoading.hide();
             $scope.board = null;
@@ -633,7 +637,8 @@ angular.module('gameboard.board.controllers', [])
             views: views,
             rank: views,
             recorddate: $scope.video.snippet.publishedAt,
-            platform: "PS"
+            platform: "PS",
+            rating : 0
 
         };
 
