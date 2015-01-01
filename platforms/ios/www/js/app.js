@@ -40,7 +40,7 @@ angular.module("gameboard", [
 		}
 
 		// Hide the Splash Screen after banner Add has been created
-		if(typeof(navigator) != "undefined") {
+		if(typeof(navigator.splashscreen) != "undefined") {
 	        navigator.splashscreen.hide();
 		}
 

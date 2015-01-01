@@ -38,6 +38,28 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
   z-index: 0;
   display: none; }
 
+.rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block; }
+  .rating li {
+    padding: 1px;
+    color: #a9a9a9;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer; }
+    .rating li.filled {
+      color: #fd0; }
+
+.rating a {
+  color: #0084e6;
+  text-decoration: none; }
+  .rating a:hover {
+    text-decoration: underline; }
+
 .unregistered {
   color: red;
   font-weight: 600;
@@ -842,3 +864,25 @@ div.bigViews {
 .nobuttonmargins {
   margin-top: 0px;
   margin-bottom: 0px; }
+
+.rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block; }
+  .rating li {
+    padding: 1px;
+    color: #a9a9a9;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer; }
+    .rating li.filled {
+      color: #fd0; }
+
+.rating a {
+  color: #0084e6;
+  text-decoration: none; }
+  .rating a:hover {
+    text-decoration: underline; }

@@ -26,8 +26,29 @@ angular.module("gameboard.search.controllers", [])
             template: $scope.message
         });
 
+        var emptyData = function() {
+
+            $scope.error = "No Videos have been found with this query";
+            $scope.nodata = true;
+
+            $ionicLoading.hide();
+            $scope.videos = [];
+
+        }
+
         // "List is " is a service returning data from the         
         SearchService.all(searchParam,page,size).then(function(_videos) {
+
+            if ( !_.isObject(_videos) ) {
+                emptyData();
+                return;
+            }
+
+            // Lets Check
+            if(_.has(_videos,"total_rows") && _videos.total_rows == 0) {
+                emptyData();
+                return;
+            }
 
             // Reset the Array if we are on Page 1
             if($scope.page === 0) {

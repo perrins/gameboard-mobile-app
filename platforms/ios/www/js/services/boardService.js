@@ -10,18 +10,38 @@
  
 angular.module('gameboard.board.services', [])
 
-/*
-function(doc){
- index('uuid', doc._id, { 'facet': true ,'store':true});
- index('bid', doc.bid, { 'facet': true ,'store':true});
- index('title', doc.title, { 'facet': true ,'store':true});
- index('description', doc.description, { 'facet': true ,'store':true});
+/* board/search - search design document
+function(doc) {
+    
+ index("fields",
+    doc.title+" ",
+    doc.description+" ",
+    doc.bid+" ",
+    doc.gametag+" ",
+    doc.ytid+" ",
+    doc.ytimage+" ",
+    doc.muuid, +" ",
+    doc.location+" ",
+    doc.views+" ",
+    doc.recorddate+" ",
+    doc.platform+" ",
+    doc.rating, {'store':true});
+
+ index("title", doc.title,{'store':true});
+ index("description",doc.description,{'store':true});
+ index('bid', doc.bid, {'store':true});
+ index('gametag', doc.gametag, {'store':true});
+ index('ytid', doc.ytid, { 'store':true});
+ index('ytimage', doc.ytimage, {'store':true});
  index('rank', doc.rank, { 'facet': true ,'store':true});
- index('ytimage', doc.ytimage, { 'facet': true ,'store':true});
- index('yttd', doc.ytid, { 'facet': true ,'store':true});
- index('views', doc.views, { 'facet': true ,'store':true});
- index('gametag', doc.gametag, { 'facet': true ,'store':true});
- index('muuid', doc.muuid, { 'facet': true ,'store':true});
+ index('views', doc.views, {'store':true});
+ index('muuid', doc.muuid, {'store':true});
+ index('location', doc.location,{'store':true});
+ index('views', doc.views,{'store':true});
+ index('recorddate', doc.recorddate,{'store':true});
+ index('platform', doc.platform,{'store':true});
+ index('rating', doc.rating,{'store':true});
+ 
 }
 */
 
@@ -513,7 +533,6 @@ function(doc){
                 def.resolve(video);
 
             }).catch(function(err) {
-                console.log(err);
                 def.reject(err);
             })
 
