@@ -1,10 +1,9 @@
 angular.module('gameboard.board.controllers', [])
 
 
-.controller('GenresCtrl', function($scope, $ionicPopup, $ionicLoading, GenresService, InitBluemix) {
+.controller('GenresCtrl', function($rootScope,$scope, $ionicPopup, $ionicLoading, GenresService, InitBluemix) {
 
-
-    $scope.$on('$ionicView.loaded', function() {
+//    $scope.$on('$ionicView.loaded', function() {
 
         // Show what we are doing
         $ionicLoading.show({
@@ -48,9 +47,12 @@ angular.module('gameboard.board.controllers', [])
 
             // Handle Display of No Data and No Connection
             $ionicLoading.hide();
+
+            $scope.$emit('gb-error', err);
+
         });
 
-    });
+  //  });
 
 })
 
@@ -111,8 +113,10 @@ angular.module('gameboard.board.controllers', [])
         }
 
     }, function(err) {
-        console.log(err);
+
         $ionicLoading.hide();
+        $scope.$emit('gb-error', err);
+
     });
 
     //    });
@@ -143,14 +147,20 @@ angular.module('gameboard.board.controllers', [])
 
         }, function(err) {
 
-            var alertPopup = $ionicPopup.alert({
-                title: 'Bookmark',
-                template: 'Failed to create the Bookmark'
-            });
+             // Show Connectivity Error 
+            if(_.has(err,"info") && err.info.status == "error") {
+                $rootScope.wifi();
+            } else {
 
-            alertPopup.then(function(res) {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Bookmark',
+                    template: 'Failed to create the Bookmark'
+                });
 
-            });
+                alertPopup.then(function(res) {
+
+                });
+            }
 
         });
 
@@ -214,8 +224,12 @@ angular.module('gameboard.board.controllers', [])
         }
 
     }, function(err) {
-        console.log(err);
+
+        // Hide any Progress
         $ionicLoading.hide();
+
+        $scope.$emit('gb-error', err);
+
     });
 
     //});
@@ -246,14 +260,20 @@ angular.module('gameboard.board.controllers', [])
 
         }, function(err) {
 
-            var alertPopup = $ionicPopup.alert({
-                title: 'Bookmark',
-                template: 'Failed to create the Bookmark'
-            });
+             // Show Connectivity Error 
+            if(_.has(err,"info") && err.info.status == "error") {
+                $rootScope.wifi();
+            } else {
 
-            alertPopup.then(function(res) {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Bookmark',
+                    template: 'Failed to create the Bookmark'
+                });
 
-            });
+                alertPopup.then(function(res) {
+
+                });
+            }
 
         });
 
@@ -264,7 +284,7 @@ angular.module('gameboard.board.controllers', [])
 })
 
 // A simple controller that shows a tapped item's data
-.controller('BoardCtrl', function($rootScope, $scope, $state, $stateParams, $ionicPopup, $ionicModal, $ionicLoading, BoardService, YouTubeService, WizardHandler, BookmarksService, ACCESS,$ionicActionSheet, $timeout) {
+.controller('BoardCtrl', function($rootScope, $scope, $state, $stateParams,$ionicTabsDelegate, $ionicPopup, $ionicModal, $ionicLoading, BoardService, YouTubeService, WizardHandler, BookmarksService, ACCESS,$ionicActionSheet, $timeout) {
 
      // Triggered on a button click, or some other target
      $scope.showActions = function() {
@@ -323,8 +343,6 @@ angular.module('gameboard.board.controllers', [])
         // "List is " is a service returning data from the 
         BoardService.all($scope.bid, page, size).then(function(board) {
 
-            debugger;
-
             // Reset the Array if we are on Page 1
             if ($scope.page === 0) {
                 // Prepare for the Query
@@ -375,11 +393,31 @@ angular.module('gameboard.board.controllers', [])
 
         }, function(err) {
 
-            debugger;
+            // Lets Make a Call to the Service and then update the infinite scroll
+            $scope.$broadcast('scroll.infiniteScrollComplete');
 
-            console.log(err);
             $ionicLoading.hide();
-            $scope.board = null;
+            $scope.vidoes = [];
+
+            // Show Connectivity Error 
+            if(_.has(err,"info") && err.info.status == "error") {
+
+                $scope.error = "Cannot connect to the cloud";
+                $scope.nodata = true;
+
+               $scope.$emit('gb-error', err);
+
+             } else {
+
+                // Then We have not found anything
+                if(_.has(err,"info") && err.info.statusCode == 404) {
+
+                    $scope.error = "No Videos have been found with this query";
+                    $scope.nodata = true;
+                }
+
+            }    
+
 
         });
 
@@ -400,6 +438,13 @@ angular.module('gameboard.board.controllers', [])
             $scope.loadItems($scope.page, $scope.pageSize);
         }
     };
+
+    // Load Some data on the Display
+    $timeout(function() {
+        if($ionicTabsDelegate.$getByHandle('video-tabs').selectedIndex() == 0 ) {
+            $scope.loadMore();
+        }
+    },300);
 
     //    });
 
@@ -436,14 +481,19 @@ angular.module('gameboard.board.controllers', [])
 
         }, function(err) {
 
-            var alertPopup = $ionicPopup.alert({
-                title: 'Bookmark',
-                template: 'Failed to create the Bookmark'
-            });
+            if (err.info.status === "error") {
+                $scope.$emit('gb-error', err);
+            } else {
 
-            alertPopup.then(function(res) {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Bookmark',
+                    template: 'Failed to create the Bookmark'
+                });
 
-            });
+                alertPopup.then(function(res) {
+
+                });
+            }
 
         });
     };

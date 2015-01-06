@@ -1,24 +1,21 @@
 angular.module("gameboard.search.controllers", [])
 
-.controller("SearchCtrl", function ($scope, $location, $ionicLoading, $stateParams,SearchService) {
+.controller("SearchCtrl", function ($rootScope,$scope, $location, $ionicLoading, $stateParams,SearchService) {
 
 	var searchParam = "";
 
 	$scope.videos = [];
     var videos = [];
-
-    $scope.page = 0;
+    $scope.bookmark = null;
     $scope.pageSize = 10;
-    $scope.total = 0;
-    $scope.position = 0;
+    $scope.first = true;
+    $scope.nodata = false;
 
     // Load the Items
-    $scope.loadItems = function(page, size) {
+    $scope.loadItems = function(bookmark,pageSize) {
 
-        // Refresh
-        if (!$scope.$$phase) {
-            $scope.$apply();
-        }
+        // Lets Make a Call to the Service and then update the infinite scroll
+        $scope.$broadcast('scroll.infiniteScrollComplete');
 
         // Because we are retrieving all the items every time we do something
         // We need to clear the list before loading in some new values
@@ -37,7 +34,9 @@ angular.module("gameboard.search.controllers", [])
         }
 
         // "List is " is a service returning data from the         
-        SearchService.all(searchParam,page,size).then(function(_videos) {
+        SearchService.all(searchParam,bookmark,pageSize).then(function(_videos) {
+
+            $scope.first = false;
 
             if ( !_.isObject(_videos) ) {
                 emptyData();
@@ -81,8 +80,11 @@ angular.module("gameboard.search.controllers", [])
             // Hide the loading icons
             $ionicLoading.hide();
 
-            // Lets Make a Call to the Service and then update the infinite scroll
-            $scope.$broadcast('scroll.infiniteScrollComplete');
+            // Refresh
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
 
             // Check we can move forward.
             if ($scope.page && $scope.page <= parseInt(20)) {
@@ -94,18 +96,26 @@ angular.module("gameboard.search.controllers", [])
 
         }, function(err) {
 
-            // Then We have not found anything
-            if(err.info.statusCode == 404) {
-
-                $scope.error = "No Videos have been found with this query";
-                $scope.nodata = true;
-            }
-
             $ionicLoading.hide();
             $scope.videos = [];
+            $scope.nodata = true;
+            $scope.first = false;
+   
+            // Show Connectivity Error 
+            if(_.has(err,"info") && err.info.status == "error" ) {
+                $scope.error = "Cannot connect to the cloud";
+                $rootScope.wifi();
+            }
 
-            // Lets Make a Call to the Service and then update the infinite scroll
-            $scope.$broadcast('scroll.infiniteScrollComplete');
+            // Then We have not found anything
+            if(err.info.statusCode == 404) {
+                $scope.error = "No Videos have been found with this query";
+            }
+
+            // Then We have not found anything
+            if(err.info.statusCode == 500) {
+                $scope.error = "Internal server error, please contact App Support";
+            }
 
         });
 
@@ -113,10 +123,6 @@ angular.module("gameboard.search.controllers", [])
 
     // If we get close to the end of the list and we have more 
     $scope.loadMore = function() {
-
-        if($scope.nodata) {
-            return;
-        }
 
         if(!$scope.message) {
             $scope.message = 'Fetching Videos...';
@@ -126,23 +132,27 @@ angular.module("gameboard.search.controllers", [])
 
         // Check we can move one more page
         // Add Some More
-        if($scope.page <= $scope.total) {
-            $scope.loadItems($scope.page, $scope.pageSize);
+        if(!_.isNull($scope.bookmark) || $scope.first) {
+            $scope.first = false;
+            $scope.loadItems($scope.bookmark,$scope.pageSize);
         }    
     };
 
 	// Search for Members
 	$scope.findVideos = function () {
 
+        $scope.first = true;
+        $scope.message = 'Fetching Videos...';
+
+        // Clean Up 
         try {
             delete $scope.message;
             delete $scope.nodata;
             delete $scope.error;
         } catch (e){}    
 
-		$scope.page = 0;
-		$scope.loadMore();
-	};
+        $scope.loadItems($scope.bookmark,$scope.pageSize); 
+ 	};
 
 	$scope.$on("stateChangeSuccess", function () {
 		$scope.loadMore();

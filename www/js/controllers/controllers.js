@@ -1,7 +1,6 @@
 angular.module("gameboard.controllers", [])
 
 .controller("MainCtrl", function($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory, InitBluemix) {
-
             
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
@@ -40,7 +39,7 @@ angular.module("gameboard.controllers", [])
         // TODO : REMOVE AFTER DEBUGGING
         //$state.go("signin");
     }
-
+ 
     $scope.logout = function() {
 
         // Clear the Back stack
@@ -53,7 +52,6 @@ angular.module("gameboard.controllers", [])
         $rootScope.member = null;
 
         // Do an OAuth Logout Here
-
         $state.go("signin");
 
     };
@@ -61,7 +59,7 @@ angular.module("gameboard.controllers", [])
 })
 
 // Sign In Controller, navigate to Intro
-.controller("SignInCtrl", function($ionicHistory,$rootScope, $state, $scope, $http,InitBluemix, MembersService, $ionicLoading,Settings) {
+.controller("SignInCtrl", function($cordovaNetwork,$ionicModal,$ionicHistory,$rootScope, $state, $scope, $http,InitBluemix, MembersService, $ionicLoading,Settings) {
 
     // Init Mobile Cloud SDK and wait for it to configure itself
     // Once complete keep a reference to it so we can talk to it later
@@ -70,6 +68,50 @@ angular.module("gameboard.controllers", [])
         $rootScope.IBMBluemix = IBMBluemix;
         // Make the World visible
         angular.element("#main").removeClass("hidden");
+
+    });
+
+   // Create our modal
+    $ionicModal.fromTemplateUrl('templates/connectivity.html', function(modal) {
+        $rootScope.connectivity = modal;
+    }, {
+        scope: $rootScope,
+        animation: 'slide-in-up',
+        focusFirstInput: true
+    });
+
+    $rootScope.wifi = function() {
+        // Reverse the Paint Bug
+        $rootScope.connectivity.show();
+    };
+
+    $scope.wifi = function() {
+        // Reverse the Paint Bug
+        $rootScope.connectivity.show();
+    };
+
+    $scope.cancelWifi = function() {
+        // Reverse the Paint Bug
+        $rootScope.connectivity.hide();
+    };
+
+    $rootScope.cancelWifi = function() {
+        // Reverse the Paint Bug
+        $rootScope.connectivity.hide();
+    };
+
+    // listen for the event in the relevant $scope
+    $rootScope.$on('gb-error', function (event, err) {
+
+        if (_.isObject(err) && _.has(err,"info") ) {
+
+            // Show Connectivity Error 
+            if(err.info.status == "error") {
+                $rootScope.wifi();
+            }
+
+        }
+
     });
 
      // Clear the Back stack
@@ -80,7 +122,14 @@ angular.module("gameboard.controllers", [])
 
     // Signon to the App
     $scope.signon = function() {
-        console.log("Signon to the application");
+
+
+        // Check if we connecting to the world !
+        /*
+        if ($cordovaNetwork.isOffline()) {
+            $rootScope.wifi();
+            return;
+        }*/
 
         // Lets load the Videos for the Youtube Channel
         $ionicLoading.show({
@@ -96,8 +145,9 @@ angular.module("gameboard.controllers", [])
 
              // If we have displayed the screen before lets go to Main
             if (!Settings.get("INTRO")) {
-                $state.go("board.genres");
+                //$state.go("board.genres");
                 //$state.go("board.videos",{bid:1001});
+                $state.go("board.search");
             } else {
                 $state.go("intro");
             }

@@ -16,7 +16,7 @@ angular.module("gameboard", [
 ])
 
 // Handle Status Bar Styling on Load
-.run(function ($ionicPlatform, $rootScope) {
+.run(function ($ionicPlatform, $rootScope,$timeout) {
 
 	// Hide Splash Screen
 	// Handle Loading of the Runtime
@@ -24,24 +24,22 @@ angular.module("gameboard", [
                                                   
         // Create A Banner Add when in Cordova 
 		if(typeof(AdMob) != "undefined") {
+			
+			// Create the Banner Add Area through JS
 			AdMob.createBanner( 
     		{
 				adId: "ca-app-pub-2283171672459446/6963593212", 
 				addSize : 'SMART_BANNER',
 				position: AdMob.AD_POSITION.BOTTOM_CENTER, 
-				autoShow: true ,
-				success: function(){
-					alert("Successfully created");
-	    		},
-			    error: function(){
-			        alert('failed to create banner');
-			    }
+				autoShow: true 
+			},function() {
+				// Hide the Splash Screen after banner Add has been created
+				if(typeof(navigator.splashscreen) != "undefined") {
+			        navigator.splashscreen.hide();
+				}
+			},function() {
+				console.log("failed to create AdMob");
 			});
-		}
-
-		// Hide the Splash Screen after banner Add has been created
-		if(typeof(navigator.splashscreen) != "undefined") {
-	        navigator.splashscreen.hide();
 		}
 
 		if (window.StatusBar) {
@@ -51,11 +49,11 @@ angular.module("gameboard", [
 		    // Init Mobile Cloud SDK and wait for it to configure itself
 		    // Once complete keep a reference to it so we can talk to it later
 		    InitBluemix.init().then(function() {
-		    	$rootScope.IBMBluemix = IBMBluemix;
-                                    
+		    	$rootScope.IBMBluemix = IBMBluemix;                    
 		    });	
-
 		}
+
+
 	});
 
 })
