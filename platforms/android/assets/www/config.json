@@ -1,0 +1,9 @@
+{
+    "applicationId": "d885d542-0c0d-4b51-b095-e4d4fe65d56c",
+    "applicationSecret": "492fe7845a42921a1d60dc03f67db3509e887ff8",
+    "applicationRoute": "http://gameboard-cloud.eu-gb.mybluemix.net",
+    "security" : "P7Y2L-QgGFNW4XKgBOnQTB6xd3I",
+    "localserver" : true,
+    "localsecurity" : true,
+    "local" : "http://localhost:3002"
+}

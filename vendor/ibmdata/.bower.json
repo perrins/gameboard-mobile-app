@@ -1,0 +1,24 @@
+{
+  "name": "ibmdata",
+  "description": "Mobile Data service SDK for IBM Bluemix",
+  "main": "./js/IBMData.js",
+  "keywords": [
+    "bluemix"
+  ],
+  "authors": [
+    "IBM"
+  ],
+  "license": "IBM",
+  "dependencies": {
+    "ibmbluemix": "https://hub.jazz.net/git/bluemixmobilesdk/ibmbluemix-javascript/.git"
+  },
+  "_release": "c7ee205ddd",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "c7ee205ddd43f7556df47fddf3be7dd47a3ea4f8"
+  },
+  "_source": "https://hub.jazz.net/git/bluemixmobilesdk/ibmdata-javascript/.git",
+  "_target": "*",
+  "_originalSource": "https://hub.jazz.net/git/bluemixmobilesdk/ibmdata-javascript/.git"
+}

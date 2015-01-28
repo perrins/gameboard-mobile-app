@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="co.gameboard.mobile.gb" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="AdMob">
+        <param name="android-package" value="com.rjfun.cordova.admob.AdMobPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="FacebookAds">
+        <param name="android-package" value="com.rjfun.cordova.facebookads.FacebookAdPlugin" />
+    </feature>
+    <feature name="FlurryAds">
+        <param name="android-package" value="com.rjfun.cordova.flurry.FlurryAdPlugin" />
+    </feature>
+    <feature name="mMedia">
+        <param name="android-package" value="com.rjfun.cordova.mmedia.mMediaAdPlugin" />
+    </feature>
+    <feature name="MobFox">
+        <param name="android-package" value="com.rjfun.cordova.mobfox.MobFoxPlugin" />
+    </feature>
+    <feature name="StreamingMedia">
+        <param name="android-package" value="com.hutchind.cordova.plugins.streamingmedia.StreamingMedia" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <access origin="https://oauth.io" />
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+    </feature>
+    <name>Gameboard</name>
+    <description>
+        Add Videos and track the best.
+    </description>
+    <author email="info@game-board.co" href="http://game-board.co/">
+      Game-board Ltd
+    </author>
+    <content src="index.html" />
+    <access origin="https://oauth.io/*" />
+    <access origin="https://google.com/*" />
+    <access origin="*" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <plugins>
+        <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
+    </plugins>
+    <resources>
+        <integer name="google_play_services_version">4323000</integer>
+    </resources>
+</widget>
