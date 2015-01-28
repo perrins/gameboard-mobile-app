@@ -33,4 +33,5 @@
     <plugins>
         <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
     </plugins>
+    
 </widget>

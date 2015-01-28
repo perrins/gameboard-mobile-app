@@ -35,9 +35,6 @@ angular.module("gameboard.controllers", [])
             disableAnimate: true
         });
 
-        // If we dont have a user then lets signon
-        // TODO : REMOVE AFTER DEBUGGING
-        //$state.go("signin");
     }
  
     $scope.logout = function() {
@@ -145,9 +142,9 @@ angular.module("gameboard.controllers", [])
 
              // If we have displayed the screen before lets go to Main
             if (!Settings.get("INTRO")) {
-                //$state.go("board.genres");
+                $state.go("board.genres");
                 //$state.go("board.videos",{bid:1001});
-                $state.go("board.search");
+                //$state.go("board.search");
             } else {
                 $state.go("intro");
             }

@@ -195,7 +195,7 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 	z-index: 0;
 	/* prevent flicker after slick image fades */
 	-webkit-backface-visibility: hidden;
-	font-family: 'knowledge';
+	font-family: BebasNeueRegular;
 }
 
 .ImageButton .SlickImage {
@@ -614,10 +614,13 @@ div.bigViews {
 
 .menu-name {
     color:white;
+    font-family: 'BebasNeueRegular';
 }
 
 .menu-tag {
     color:yellow;
+    font-family: 'BebasNeueRegular';
+
 }
 
 .btnFeed{

@@ -1,7 +1,7 @@
 {
-    "applicationId": "c38c1e01-6e8d-407a-a66b-fb0c7370d8d4",
-    "applicationSecret": "9d728a17986dcd23247282f40343350c63ae5ced",
-    "applicationRoute": "gameboard-cloud.mybluemix.net",
+    "applicationId": "d885d542-0c0d-4b51-b095-e4d4fe65d56c",
+    "applicationSecret": "492fe7845a42921a1d60dc03f67db3509e887ff8",
+    "applicationRoute": "http://gameboard-cloud.eu-gb.mybluemix.net",
     "security" : "P7Y2L-QgGFNW4XKgBOnQTB6xd3I",
     "localserver" : true,
     "localsecurity" : true,
