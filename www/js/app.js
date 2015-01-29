@@ -7,7 +7,8 @@ angular.module("gameboard", [
 	"gameboard.directives",
 	"gameboard.controllers",
 	"gameboard.board.controllers",
-	"gameboard.member.controllers",
+	"gameboard.member.favourites",
+	"gameboard.controllers.member",
 	"gameboard.search.controllers",
 	"gameboard.board.services",
 	"gameboard.member.services",
@@ -177,15 +178,6 @@ angular.module("gameboard", [
 					"menuContent": {
 						templateUrl: "templates/members.html",
 						controller: "MembersCtrl"
-					}
-				}
-			})
-			.state("board.favourites", {
-				url: "/favourites",
-				views: {
-					"menuContent": {
-						templateUrl: "templates/favourites.html",
-						controller: "FavouritesCtrl"
 					}
 				}
 			})

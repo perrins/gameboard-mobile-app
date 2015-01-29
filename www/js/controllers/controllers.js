@@ -24,7 +24,7 @@ angular.module("gameboard.controllers", [])
 
 			// Clear the Back stack
 			$ionicHistory.nextViewOptions({
-				disableBack: true,
+				disableBack: true
 			});
 
 		} else {
@@ -41,7 +41,7 @@ angular.module("gameboard.controllers", [])
 
 			// Clear the Back stack
 			$ionicHistory.nextViewOptions({
-				disableBack: true,
+				disableBack: true
 			});
 
 			// Remove the User State

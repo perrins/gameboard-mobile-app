@@ -10,6 +10,7 @@
   "watchPatterns": [
     "www/**/*",
     "!www/lib/**/*",
-    "!www/scss/*"
+    "!www/scss/*",
+    "!www/js/**/*.scss"
   ]
 }

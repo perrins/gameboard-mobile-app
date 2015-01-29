@@ -6,13 +6,13 @@ var rename = require('gulp-rename');
 var autoprefixer = require('gulp-autoprefixer');
 
 var paths = {
-	sass: './www/scss/*.scss'
+	sass: ['./www/scss/*.scss', 'www/js/**/*.scss']
 };
 
 gulp.task('sass', function(done) {
 	gulp.src('./www/scss/app.scss')
 		.pipe(sass({
-				'style': 'expanded'
+			'style': 'expanded'
 		}))
 		.pipe(autoprefixer('last 2 version'))
 		.pipe(gulp.dest('./www/css/'))
