@@ -6,111 +6,110 @@
 /* IPHONE 3 ONLY */
 @media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1) {
 
-/* YOUR CUSTOM STYLE */
+	/* YOUR CUSTOM STYLE */
 
 }
 
 /* IPHONE 4 ONLY */
 @media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2) {
 
-/* YOUR CUSTOM STYLE */
+	/* YOUR CUSTOM STYLE */
 
 }
 
-
 /* IPAD 1, 2, Mini – Non Retina */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio: 1) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
 
-/* YOUR CUSTOM STYLE */
+	/* YOUR CUSTOM STYLE */
 
 }
 
 /* IPAD 3, 4, AIR Retina */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
 
-/* YOUR CUSTOM STYLE */
+	/* YOUR CUSTOM STYLE */
 
 }
 
 // DEFAULT iPhone 5
 @media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) {
 
-
 }
 
 .hidden {
-    display: none
+	display: none
 }
 
 .spinnerSmall:before {
-  border: 8px solid red;
-  border-radius: 20px 0 0 0;
-  animation: 2s waitingSmall 0s infinite;
-  transition: border-radius;
-    content: "...";
-    text-align: center;
-    line-height: 40px;
-    font-size: 60px;
-    color: #EEEEEE;
-    top: 20px;
-    left: 20px;
-    z-index: 1;
-    position: absolute;
-    display: block;
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
+	border: 8px solid red;
+	border-radius: 20px 0 0 0;
+	animation: 2s waitingSmall 0s infinite;
+	transition: border-radius;
+	content: "...";
+	text-align: center;
+	line-height: 40px;
+	font-size: 60px;
+	color: #EEEEEE;
+	top: 20px;
+	left: 20px;
+	z-index: 1;
+	position: absolute;
+	display: block;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
 }
 
 @keyframes waitingSmall {
-  0% {
-    border-radius: 30px 0 0 0;
-  }
-  25% {
-    border-radius: 0 30px 0 0;
-  }
-  50% {
-    border-radius: 0 0 30px 0;
-  }
-  75% {
-    border-radius: 0 0 0 30px;
-  }
+	0% {
+		border-radius: 30px 0 0 0;
+	}
+	25% {
+		border-radius: 0 30px 0 0;
+	}
+	50% {
+		border-radius: 0 0 30px 0;
+	}
+	75% {
+		border-radius: 0 0 0 30px;
+	}
 }
 
 .spinner:before {
-  border: 8px solid green;
-  border-radius: 30px 0 0 0;
-  animation: 2s waiting 0s infinite;
-  transition: border-radius;
-    content: "...";
-    text-align: center;
-    line-height: 40px;
-    font-size: 60px;
-    color: #EEEEEE;
-    top: 40px;
-    left: 40px;
-    z-index: 1;
-    position: absolute;
-    display: block;
-    width: 80px;
-    height: 80px;
-    border-radius: 100%;
+	border: 8px solid green;
+	border-radius: 30px 0 0 0;
+	animation: 2s waiting 0s infinite;
+	transition: border-radius;
+	content: "...";
+	text-align: center;
+	line-height: 40px;
+	font-size: 60px;
+	color: #EEEEEE;
+	top: 40px;
+	left: 40px;
+	z-index: 1;
+	position: absolute;
+	display: block;
+	width: 80px;
+	height: 80px;
+	border-radius: 100%;
 }
 
 @keyframes waiting {
-  0% {
-    border-radius: 40px 0 0 0;
-  }
-  25% {
-    border-radius: 0 40px 0 0;
-  }
-  50% {
-    border-radius: 0 0 40px 0;
-  }
-  75% {
-    border-radius: 0 0 0 40px;
-  }
+	0% {
+		border-radius: 40px 0 0 0;
+	}
+	25% {
+		border-radius: 0 40px 0 0;
+	}
+	50% {
+		border-radius: 0 0 40px 0;
+	}
+	75% {
+		border-radius: 0 0 0 40px;
+	}
 }
+
 /*
 .spinner:before {
     content: "...";
@@ -159,81 +158,86 @@
 
 */
 .slider {
-    height: 100%;
+	height: 100%;
 }
+
 .slider-slide {
-    padding-top: 80px;
-    color: #000;
-    background-color: #fff;
-    text-align: center;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
+	padding-top: 80px;
+	color: #000;
+	background-color: #fff;
+	text-align: center;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 300;
 }
+
 #logo {
-    margin: 30px 0px;
+	margin: 30px 0px;
 }
+
 #list {
-    width: 170px;
-    margin: 30px auto;
-    font-size: 20px;
+	width: 170px;
+	margin: 30px auto;
+	font-size: 20px;
 }
+
 #list ol {
-    margin-top: 30px;
+	margin-top: 30px;
 }
+
 #list ol li {
-    text-align: left;
-    list-style: decimal;
-    margin: 10px 0px;
+	text-align: left;
+	list-style: decimal;
+	margin: 10px 0px;
 }
 
 .nobuttonmargins {
-    margin-top: 0px;
-    margin-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
-.rating{
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  li {
-    padding: 1px;
-    color: #a9a9a9;
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-    list-style-type: none;
-    display: inline-block;
-    cursor: pointer;
-    &.filled {
-      color: #fd0; //#21568b
-    }
-  }
+.rating {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	li {
+		padding: 1px;
+		color: #a9a9a9;
+		text-align: center;
+		font-weight: bold;
+		font-size: 20px;
+		list-style-type: none;
+		display: inline-block;
+		cursor: pointer;
+		&.filled {
+			color: #fd0; //#21568b
+		}
+	}
 }
 
 .rating a {
-  color: #0084e6;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
+	color: #0084e6;
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .unregistered {
-  color: red;
-  font-weight: 600;
-  font-size: 16px;
-  font-family: 'BebasNeueRegular'; 
+	color: red;
+	font-weight: 600;
+	font-size: 16px;
+	font-family: 'BebasNeueRegular';
 }
 
 .registered {
-  font-family : 'BebasNeueRegular';
-  color: red;
-  font-weight: 600;
-  font-size: 16px; 
+	font-family: 'BebasNeueRegular';
+	color: red;
+	font-weight: 600;
+	font-size: 16px;
 }
 
 .title {
-  font-family : 'BebasNeueRegular';
+	font-family: 'BebasNeueRegular';
 }
 
 
