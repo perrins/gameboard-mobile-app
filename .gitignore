@@ -28,3 +28,6 @@ node_modules
 
 # Bower modules
 vendor
+
+# IDE Stuff
+.idea

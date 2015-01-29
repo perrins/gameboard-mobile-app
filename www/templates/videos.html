@@ -1,147 +1,157 @@
 <ion-view title="{{title}}">
 
-    <ion-nav-buttons side="right">
+	<ion-nav-buttons side="right">
 
-        <button ng-click="newVideo()" class="button button-positive button-clear icon-left ion-videocamera">
-        </button>
+		<button ng-click="newVideo()" class="button button-positive button-clear icon-left ion-videocamera">
+		</button>
 
-        <button class="button button-clear button-positive" ng-click="addBookmark()">
-            <i class="icon ion-bookmark"></i>
-        </button>
+		<button class="button button-clear button-positive" ng-click="addBookmark()">
+			<i class="icon ion-bookmark"></i>
+		</button>
 
-    </ion-nav-buttons>
+	</ion-nav-buttons>
 
-    <ion-tabs class="tabs-positive tabs-icon-top tabs-color-active-stable" delegate-handle="video-tabs">
+	<ion-tabs class="tabs-positive tabs-icon-top tabs-color-active-stable" delegate-handle="video-tabs">
 
-        <ion-tab title="Info" icon-on="ion-ios7-information" icon-off="ion-ios7-information-outline">
+		<ion-tab title="Info" icon-on="ion-ios7-information" icon-off="ion-ios7-information-outline">
 
-            <ion-content class="has-header" style="top:42px;">
+			<ion-content class="has-header" style="top:42px;">
 
-                <div class="list card" ng-show="error">
+				<div class="list card" ng-show="error">
 
-                    <div class="item item-icon-left">
-                        <i class="icon ion-information-circled"></i> {{error}}
-                    </div>
+					<div class="item item-icon-left">
+						<i class="icon ion-information-circled"></i> {{error}}
+					</div>
 
-                </div>
+				</div>
 
-                <div class="list card" ng-show="board">
+				<div class="list card" ng-show="board">
 
-                    <div class="item item-avatar">
-                        <img ng-src="img/call-of-duty-ghosts.jpg" lazload>
-                        <h2>{{board.title}}</h2>
-                        <p>{{board.subtitle}}</p>
-                    </div>
+					<div class="item item-avatar">
+						<img ng-src="img/call-of-duty-ghosts.jpg" lazload>
 
-                    <div class="item item-body">
-                        <p>
-                            {{board.description}}
-                        </p>
-                        <p>
-                            <a href="#" class="subdued">{{board.prizes}}</a>
-                            <a href="#" class="subdued">{{board.number}}</a>
-                        </p>
-                    </div>
+						<h2>{{board.title}}</h2>
 
-                    <div class="item tabs tabs-secondary tabs-icon-left">
-                        <a class="tab-item" href="#">
-                            <i class="icon ion-thumbsup"></i> Like
-                        </a>
-                        <a class="tab-item" href="#">
-                            <i class="icon ion-chatbox"></i> Comment
-                        </a>
-                        <a class="tab-item" href="#">
-                            <i class="icon ion-share"></i> Share
-                        </a>
-                    </div>
+						<p>{{board.subtitle}}</p>
+					</div>
 
-                </div>
+					<div class="item item-body">
+						<p>
+							{{board.description}}
+						</p>
 
-            </ion-content>
+						<p>
+							<a href="#" class="subdued">{{board.prizes}}</a>
+							<a href="#" class="subdued">{{board.number}}</a>
+						</p>
+					</div>
 
-        </ion-tab>
+					<div class="item tabs tabs-secondary tabs-icon-left">
+						<a class="tab-item" href="#">
+							<i class="icon ion-thumbsup"></i> Like
+						</a>
+						<a class="tab-item" href="#">
+							<i class="icon ion-chatbox"></i> Comment
+						</a>
+						<a class="tab-item" href="#">
+							<i class="icon ion-share"></i> Share
+						</a>
+					</div>
 
-        <ion-tab title="Board" icon-on="ion-aperture" icon-off="ion-aperture">
+				</div>
 
-            <ion-content class="has-header" style="top:42px;">
+			</ion-content>
 
-                <div class="list card" ng-show="error">
+		</ion-tab>
 
-                    <div class="item item-icon-left">
-                        <i class="icon ion-information-circled"></i> {{error}}
-                    </div>
+		<ion-tab title="Board" icon-on="ion-aperture" icon-off="ion-aperture">
 
-                </div>
+			<ion-content class="has-header" style="top:42px;">
 
-                <ion-list class="list" ng-show="videos">
+				<div class="list card" ng-show="error">
 
-                    <div class="item item-divider" ng-show="videos">
-                        {{board.title}}&nbspBoard
-                    </div>
+					<div class="item item-icon-left">
+						<i class="icon ion-information-circled"></i> {{error}}
+					</div>
 
-                    <ion-item ng-show="videos" class="item item-thumbnail-left item-icon-right board-item" ng-href="#/board/video/{{video._id}}" can-swipe="true" item="video" collection-repeat="video in videos" collection-item-width="'100%'" collection-item-height="100">
+				</div>
 
-                        <!--div class="rank">
-                            {{video.rank}}
-                        </div-->
+				<ion-list class="list" ng-show="videos">
 
-                        <img alt="{{video.ytimage}}" ng-src="{{video.ytimage}}" lazyload>
+					<div class="item item-divider" ng-show="videos">
+						{{board.title}}&nbspBoard
+					</div>
 
-                        <h2>{{video.title}}</h2>
-                        <h3>{{video.gameTag}}</h3>
-                        <p>{{video.description}}</p>
+					<ion-item ng-show="videos" class="item item-thumbnail-left item-icon-right board-item"
+							  ng-href="#/board/video/{{video._id}}" can-swipe="true" item="video"
+							  collection-repeat="video in videos" collection-item-width="'100%'"
+							  collection-item-height="100">
 
-                        <div star-rating rating-value="4" max="5" on-rating-selected="rateFunction(rating)"></div>
+						<!--div class="rank">
+							{{video.rank}}
+						</div-->
+
+						<img alt="{{video.ytimage}}" ng-src="{{video.ytimage}}" lazyload>
+
+						<h2>{{video.title}}</h2>
+
+						<h3>{{video.gameTag}}</h3>
+
+						<p>{{video.description}}</p>
+
+						<div star-rating rating-value="4" max="5" on-rating-selected="rateFunction(rating)"></div>
 
 
-                        <div class="btnFeed">
-                            <button ng-class="tweet.userLikedTweet ? 'button button-small button-royal' : 'button button-small button-outline button-balanced'" ng-click="like({{$index}})">
-                                {{video.views}}
-                                <i class="ion-ios7-star"></i>
-                                </a>
-                            </button>
-                            <button class="button button-small button-balanced button-outline" ng-click="go('/tab/tweet/{{tweet.id}}')">
-                                {{video.prize}}
-                                <i class="ion-chatboxes"></i>
-                                </a>
-                            </button>
-                        </div>
+						<div class="btnFeed">
+							<button ng-class="tweet.userLikedTweet ? 'button button-small button-royal' : 'button button-small button-outline button-balanced'"
+									ng-click="like({{$index}})">
+								{{video.views}}
+								<i class="ion-ios7-star"></i>
+								</a>
+							</button>
+							<button class="button button-small button-balanced button-outline"
+									ng-click="go('/tab/tweet/{{tweet.id}}')">
+								{{video.prize}}
+								<i class="ion-chatboxes"></i>
+								</a>
+							</button>
+						</div>
 
-                        <span class="badge badge-balanced">{{video.views}}</span>
-                        <span class="badge badge-royal">{{video.prize}}</span>
+						<span class="badge badge-balanced">{{video.views}}</span>
+						<span class="badge badge-royal">{{video.prize}}</span>
 
-                        <ion-option-button class="button-positive" ng-click="showActions(video)">Menu
-                        </ion-option-button>
+						<ion-option-button class="button-positive" ng-click="showActions(video)">Menu
+						</ion-option-button>
 
-                        <ion-option-button class="button-royal" ng-click="viewVideo(video)">
-                            <i class="icon ion-videocamera"></i>
-                        </ion-option-button>
+						<ion-option-button class="button-royal" ng-click="viewVideo(video)">
+							<i class="icon ion-videocamera"></i>
+						</ion-option-button>
 
-                        <ion-option-button class="button-royal" ng-click="addToFavourite(video)">
-                            <i class="icon ion-heart"></i>
-                        </ion-option-button>
+						<ion-option-button class="button-royal" ng-click="addToFavourite(video)">
+							<i class="icon ion-heart"></i>
+						</ion-option-button>
 
-                        <i class="icon ion-chevron-right icon-accessory"></i>
+						<i class="icon ion-chevron-right icon-accessory"></i>
 
-                    </ion-item>
+					</ion-item>
 
-                </ion-list>
+				</ion-list>
 
-                <ion-infinite-scroll class="progress" icon="ion-loading-c" on-infinite="loadMore()" distance="30%">
-                </ion-infinite-scroll>
+				<ion-infinite-scroll class="progress" icon="ion-loading-c" on-infinite="loadMore()" distance="30%">
+				</ion-infinite-scroll>
 
-            </ion-content>
+			</ion-content>
 
-        </ion-tab>
+		</ion-tab>
 
-        <ion-tab title="Map" icon-on="ion-ios7-location" icon-off="ion-ios7-location-outline">
+		<ion-tab title="Map" icon-on="ion-ios7-location" icon-off="ion-ios7-location-outline">
 
-            <ion-content class="has-header">
+			<ion-content class="has-header">
 
-                <p>Place a map of all the boards videos and locations
+				<p>Place a map of all the boards videos and locations
 
-                    <ion-content>
-        </ion-tab>
+					<ion-content>
+		</ion-tab>
 
-    </ion-tabs>
+	</ion-tabs>
 </ion-view>
