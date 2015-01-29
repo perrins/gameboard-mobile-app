@@ -87,7 +87,7 @@ angular.module("gameboard", [
 	})
 
 	// Configure the Angular Rules
-	.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+	.config(function ($stateProvider, $urlRouterProvider) {
 
 		// Ionic uses AngularUI Router which uses the concept of states
 		// Learn more here: https://github.com/angular-ui/ui-router
@@ -98,11 +98,6 @@ angular.module("gameboard", [
 		// Splash -> Login -> Main
 
 		// Looking to do Splash in Native, and keep call back all IOS/Android
-
-		$locationProvider.html5Mode(true);
-
-		// Default to Home
-		$urlRouterProvider.otherwise("signin");
 
 		$stateProvider
 			.state("signin", {
@@ -284,4 +279,7 @@ angular.module("gameboard", [
 					}
 				}
 			});
+
+		// Default to Home
+		$urlRouterProvider.otherwise("signin");
 	});
