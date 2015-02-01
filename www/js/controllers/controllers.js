@@ -1,15 +1,9 @@
 angular.module("gameboard.controllers", [])
 
-	.controller("MainCtrl", function ($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory, InitBluemix) {
+	.controller("MainCtrl", function ($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
 
-		// Init Mobile Cloud SDK and wait for it to configure itself
-		// Once complete keep a reference to it so we can talk to it later
-		InitBluemix.init().then(function () {
-			// TMD: IBMBluemix not defined?
-			// MJP: IBMBluemix is a global name space
-			$rootScope.IBMBluemix = IBMBluemix;
-		});
-
+		angular.element("#main").removeClass("hidden");
+		
 		// Prepare User for Display
 		if ($rootScope.user) {
 
@@ -56,17 +50,9 @@ angular.module("gameboard.controllers", [])
 	})
 
 // Sign In Controller, navigate to Intro
-	.controller("SignInCtrl", function ($cordovaNetwork, $ionicModal, $ionicHistory, $rootScope, $state, $scope, $http, InitBluemix, MembersService, $ionicLoading, Settings) {
+	.controller("SignInCtrl", function ($cordovaNetwork, $ionicModal, $ionicHistory, $rootScope, $state, $scope, $http, MembersService, $ionicLoading, Settings) {
 
-		// Init Mobile Cloud SDK and wait for it to configure itself
-		// Once complete keep a reference to it so we can talk to it later
-		InitBluemix.init().then(function () {
-			// Init the Main
-			$rootScope.IBMBluemix = IBMBluemix;
-			// Make the World visible
-			angular.element("#main").removeClass("hidden");
-
-		});
+		angular.element("#main").removeClass("hidden");
 
 		// Create our modal
 		$ionicModal.fromTemplateUrl('templates/connectivity.html', function (modal) {
@@ -429,79 +415,11 @@ angular.module("gameboard.controllers", [])
 		};
 	})
 
-
-/**
- * A Service that intialises MBaaS
- */
-	.factory("InitBluemix",
-	function ($rootScope, $http, $q) {
-		function init() {
-
-			// Create a defer
-			var defer = $q.defer();
-
-			// Check if we have been
-			if ($rootScope.initialized === true) {
-				defer.resolve();
-			} else {
-
-				// Lets load the Configuration from the bluelist.json file
-				$http.get("./config.json").success(function (config) {
-					$rootScope.config = config;
-
-					// Initialise the SDK
-					// TMD: Does this initialize function not return a proper promise?
-					IBMBluemix.initialize(config).done(function () {
-
-						// Let the user no they have logged in and can do some stuff if they require
-						console.log("Sucessful initialisation with Application : " + IBMBluemix.getConfig().getApplicationId());
-
-						// Initialize the Service
-						var data = IBMData.initializeService(),
-							cc = IBMCloudCode.initializeService();
-
-						// Make it handle Local serving if set to try and local url set
-						if (config.localserver && _.has(config, "local")) {
-							// Set the Origin to Local Server for testing
-							cc.setBaseUrl(config.local);
-						}
-
-						// Let the user no they have logged in and can do some stuff if they require
-						console.log("Sucessful initialisation Services ...");
-
-						$rootScope.initialized = true;
-
-						// Return the Data
-						defer.resolve();
-
-					}, function (response) {
-						// Error
-						console.log("Error:", response);
-						defer.reject(response);
-					});
-
-					$rootScope.config = config;
-				});
-			}
-
-			return defer.promise;
-		}
-
-		return {
-			init: function () {
-				return init();
-			}
-		};
-	})
-
-
-// A simple controller that shows a tapped item"s data
+	// A simple controller that shows a tapped item"s data
 	.controller("PrizesCtrl", function ($rootScope, $scope, Settings) {
 
 		// Manage the Prizes for Specific Boards and Show what is on offer
 
 
 	});
-
-
 

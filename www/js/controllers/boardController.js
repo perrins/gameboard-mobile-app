@@ -1,7 +1,7 @@
 angular.module('gameboard.board.controllers', [])
 
 
-	.controller('GenresCtrl', function ($rootScope, $scope, $ionicPopup, $ionicLoading, GenresService, InitBluemix) {
+	.controller('GenresCtrl', function ($rootScope, $scope, $ionicPopup, $ionicLoading, GenresService) {
 
 //    $scope.$on('$ionicView.loaded', function() {
 

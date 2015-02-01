@@ -90,6 +90,64 @@ angular.module("gameboard", [
 	// Configure the Angular Rules
 	.config(function ($stateProvider, $urlRouterProvider) {
 
+		// Init Function
+		var init = { 
+
+				IBMBluemix : function ($rootScope,$q,$http) {
+
+					// Create a defer
+					var defer = $q.defer();
+
+					// Check if we have been
+					if ($rootScope.initialized === true) {
+						defer.resolve($rootScope.IBMBluemix);
+					} else {
+
+						// Lets load the Configuration from the bluelist.json file
+						$http.get("./config.json").success(function (config) {
+							$rootScope.config = config;
+
+							// Initialise the SDK
+							// TMD: Does this initialize function not return a proper promise?
+							IBMBluemix.initialize(config).done(function () {
+
+								// Let the user no they have logged in and can do some stuff if they require
+								console.log("Sucessful initialisation with Application : " + IBMBluemix.getConfig().getApplicationId());
+
+								// Initialize the Service
+								var data = IBMData.initializeService(),
+									cc = IBMCloudCode.initializeService();
+
+								// Make it handle Local serving if set to try and local url set
+								if (config.localserver && _.has(config, "local")) {
+									// Set the Origin to Local Server for testing
+									cc.setBaseUrl(config.local);
+								}
+
+								// Let the user no they have logged in and can do some stuff if they require
+								console.log("Sucessful initialisation Services ...");
+
+								// Keep it Global
+								$rootScope.initialized = true;
+								$rootScope.IBMBluemix = IBMBluemix;
+
+								// Return the Data
+								defer.resolve(IBMBluemix);
+
+							}, function (response) {
+								// Error
+								console.log("Error:", response);
+								defer.reject(response);
+							});
+						});
+					}
+
+					return defer.promise;
+				}
+
+			};
+
+
 		// Ionic uses AngularUI Router which uses the concept of states
 		// Learn more here: https://github.com/angular-ui/ui-router
 		// Set up the various states which the app can be in.
@@ -104,7 +162,8 @@ angular.module("gameboard", [
 			.state("signin", {
 				url: "/signin",
 				templateUrl: "templates/signin.html",
-				controller: "SignInCtrl"
+				controller: "SignInCtrl",
+				resolve : init
 			})
 			.state("intro", {
 				url: "/intro",
@@ -125,14 +184,15 @@ angular.module("gameboard", [
 				url: "/board",
 				abstract: true,
 				templateUrl: "templates/menu.html",
-				controller: "MainCtrl"
+				controller: "MainCtrl",
+				resolve : init
 			})
 			.state("board.genres", {
 				url: "/genres",
 				views: {
 					"menuContent": {
 						templateUrl: "templates/genres.html",
-						controller: "GenresCtrl"
+						controller: "GenresCtrl",
 					}
 				}
 			})
