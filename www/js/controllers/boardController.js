@@ -7,7 +7,7 @@ angular.module('gameboard.board.controllers', [])
 
 		// Show what we are doing
 		$ionicLoading.show({
-			template: 'Loading Genres...'
+			template: "<i class=\"ion-loading-c\"></i><span>&nbsp;Loading Genres...</span>"
 		});
 
 		// Need to Check if we have got some already
