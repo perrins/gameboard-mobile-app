@@ -1,57 +1,60 @@
 <ion-view title="{{title}}">
 
-    <ion-nav-buttons side="right">
-        <button class="button button-clear button-positive" ng-click="addBookmark()">
-            <i class="icon ion-bookmark"></i>
-        </button>
-    </ion-nav-buttons>    
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-positive" ng-click="addBookmark()">
+			<i class="icon ion-bookmark"></i>
+		</button>
+	</ion-nav-buttons>
 
-    <ion-content class="has-header">
+	<ion-content class="has-header">
 
-        <div id="gamesSlider" class="swipe">
-            <div class="swipe-wrap">
+		<div id="gamesSlider" class="swipe">
+			<div class="swipe-wrap">
 
-                <div class="gameBanner ImageButton" ng-repeat="banner in banners" swipe>
+				<div class="gameBanner ImageButton" ng-repeat="banner in banners" swipe>
 
-                    <a href="#/board/board/{{banner.id}}">
+					<a href="#/board/board/{{banner.id}}">
 
-                        <div class="spinner">
-                            <img class="genre-image-load" ng-src="{{banner.imageUrl}}" lazyload>
-                        </div>
+						<div class="spinner">
+							<img class="genre-image-load" ng-src="{{banner.imageUrl}}" lazyload>
+						</div>
 
-                        <div class="summary">
-                            <div class="title">{{banner.title}}</div>
-                            <div class="subtitle">{{banner.subTitle}}</div>
-                        </div>
-                    </a>
-                </div>
+						<div class="summary">
+							<div class="title">{{banner.title}}</div>
+							<div class="subtitle">{{banner.subTitle}}</div>
+						</div>
+					</a>
+				</div>
 
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <div class="list" ng-show="games">
+		<div class="list" ng-show="games">
 
-            <a ng-repeat="game in games" class="item item-thumbnail-left item-icon-right" href="#/board/categories/{{gid}}/{{game.gmid}}">
+			<a ng-repeat="game in games" class="item item-thumbnail-left item-icon-right"
+			   href="#/board/categories/{{gid}}/{{game.gmid}}">
 
-                <img  class="genre-image genre-image-load" alt="{{game.title}}"  ng-src="{{game.imageUrl}}" lazyload>
+				<img class="genre-image genre-image-load" alt="{{game.title}}" ng-src="{{game.imageUrl}}" lazyload>
 
-                <h2>{{game.title}}</h2>
-                <p>{{game.subtitle}}</p>
-                <p>{{game.note}}</p>
+				<h2>{{game.title}}</h2>
 
-                <i class="icon ion-chevron-right icon-accessory"></i>
+				<p>{{game.subtitle}}</p>
 
-                <span class="badge badge-calm">{{game.count}}</span>
-            </a>
+				<p>{{game.note}}</p>
 
-        </div>
+				<i class="icon ion-chevron-right icon-accessory"></i>
 
-        <div class="card hidden" ng-show="!games">
-            <div class="item item-text-wrap">
-                No Games have been found for this Genre
-            </div>
-        </div>
+				<span class="badge badge-calm">{{game.count}}</span>
+			</a>
 
-    </ion-content>
+		</div>
+
+		<div class="card hidden" ng-show="!games">
+			<div class="item item-text-wrap">
+				No Games have been found for this Genre
+			</div>
+		</div>
+
+	</ion-content>
 
 </ion-view>

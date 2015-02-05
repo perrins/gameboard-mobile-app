@@ -43,13 +43,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/com.rjfun.cordova.flurryads/www/Flurry.js",
-        "id": "com.rjfun.cordova.flurryads.FlurryAds",
-        "clobbers": [
-            "window.FlurryAds"
-        ]
-    },
-    {
         "file": "plugins/com.rjfun.cordova.mmedia/www/mMedia.js",
         "id": "com.rjfun.cordova.mmedia.mMedia",
         "clobbers": [
@@ -78,7 +71,6 @@ module.exports.metadata =
     "com.flurry.sdk": "5.4.0",
     "com.google.cordova.admob": "2.6.3",
     "com.google.cordova.admob-facebook": "1.0.0",
-    "com.google.cordova.admob-flurry": "5.4.0",
     "com.google.cordova.admob-iad": "1.0.0",
     "com.google.cordova.admob-inmobi": "1.0.0",
     "com.google.cordova.admob-mmedia": "1.6.0",
@@ -88,10 +80,10 @@ module.exports.metadata =
     "org.apache.cordova.console": "0.2.8",
     "org.apache.cordova.device": "0.2.9",
     "org.apache.cordova.splashscreen": "0.3.5",
+    "org.apache.cordova.engine.crosswalk": "0.0.1-dev",
     "com.google.playservices": "19.0.0",
     "com.rjfun.cordova.extension": "1.0.6",
     "com.rjfun.cordova.facebookads": "3.21.1",
-    "com.rjfun.cordova.flurryads": "2.1.0",
     "com.inmobi.sdk": "4.5.1",
     "com.rjfun.cordova.mmedia": "2.1.1",
     "com.rjfun.cordova.mobfox": "2.1.0",

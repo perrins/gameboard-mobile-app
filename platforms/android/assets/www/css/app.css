@@ -630,6 +630,14 @@ div.bigViews {
   background-size: cover;
   color: white; }
 
+.favourites.pane {
+  background: url(../img/favouritesBack.jpg);
+  background-size: cover; }
+  .favourites.pane .item {
+    background: transparent; }
+  .favourites.pane .item-content, .favourites.pane .item-divider {
+    background: rgba(255, 255, 255, 0.4); }
+
 /* IPHONE IPAD DEVICE MEDIA QUERIES */
 /* IPHONE 3 ONLY */
 /* IPHONE 4 ONLY */

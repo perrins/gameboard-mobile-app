@@ -10,11 +10,11 @@
   ],
   "license": "IBM",
   "dependencies": {},
-  "_release": "067b6cbbf5",
+  "_release": "06b9b31380",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "067b6cbbf5dd1e7c9f191e690fdb974bc68375bd"
+    "commit": "06b9b313800f10550d9ad79d609b080c8d58f2ce"
   },
   "_source": "https://hub.jazz.net/git/bluemixmobilesdk/ibmbluemix-javascript/.git",
   "_target": "*",

@@ -1,82 +1,82 @@
 <ion-view title="Bookmarks">
 
-    <ion-nav-buttons side="left">
-        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    </ion-nav-buttons>
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
 
-    <ion-nav-buttons side="right">
-      <button class="button button-clear" ng-click="onShowDelete()">
-        <span ng-if="!showDelete">Edit</span>
-        <span ng-if="showDelete">Cancel</span>
-      </button>
-    </ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button class="button button-clear" ng-click="onShowDelete()">
+			<span ng-if="!showDelete">Edit</span>
+			<span ng-if="showDelete">Cancel</span>
+		</button>
+	</ion-nav-buttons>
 
-    <ion-content class="has-header">
+	<ion-content class="has-header">
 
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();">
-        </ion-refresher>
+		<ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();">
+		</ion-refresher>
 
-        <div class="list-error card assertive-bg hidden" ng-show="!bookmarks">
-            <div class="item item-text-wrap">
-                Cannot retrieve your bookmarks at this time
-            </div>
-        </div>
+		<div class="list-error card assertive-bg hidden" ng-show="!bookmarks">
+			<div class="item item-text-wrap">
+				Cannot retrieve your bookmarks at this time
+			</div>
+		</div>
 
-        <div class="item item-divider" ng-show="bookmarks">
-            Your Bookmarks
-        </div>
+		<div class="item item-divider" ng-show="bookmarks">
+			Your Bookmarks
+		</div>
 
-        <ion-list 
-            can-swipe="true" 
-            show-delete="showDelete" 
-            delete-icon="ion-minus-circled" 
-            ng-show="bookmarks">
+		<ion-list
+				can-swipe="true"
+				show-delete="showDelete"
+				delete-icon="ion-minus-circled"
+				ng-show="bookmarks">
 
-            <ion-item ng-repeat="book in bookmarks" 
-                class="item item-icon-right" 
-                type="item-text-wrap" 
-                item="book" 
-                >
+			<ion-item ng-repeat="book in bookmarks"
+					  class="item item-icon-right"
+					  type="item-text-wrap"
+					  item="book"
+					>
 
-                <div style="position:relative;width:25px;height:25px;">
+				<div style="position:relative;width:25px;height:25px;">
 
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink">
+					<svg xmlns="http://www.w3.org/2000/svg"
+						 xmlns:xlink="http://www.w3.org/1999/xlink">
 
-                        <circle cx="15" cy="20" r="15"
-                            style="stroke:#006600;
+						<circle cx="15" cy="20" r="15"
+								style="stroke:#006600;
                             stroke-width: .5;
                             fill:{{book.color}}"/>
-                        <text x="15" y="22" font-size="16" 
-                          text-anchor="middle" alignment-baseline="middle">
-                            {{book.tag}}
-                        </text>                            
-                    </svg>
+						<text x="15" y="22" font-size="16"
+							  text-anchor="middle" alignment-baseline="middle">
+							{{book.tag}}
+						</text>
+					</svg>
 
-                </div>
+				</div>
 
-                <h2 style="position:relative;left:40px;top:-15px;">{{book.title}}</h2>
-                <h4>{{book.subtitle}}</h4>
+				<h2 style="position:relative;left:40px;top:-15px;">{{book.title}}</h2>
+				<h4>{{book.subtitle}}</h4>
 
-                <ion-option-button class="button-info"
-                       ng-click="selectBookmark(book)">
-                    View
-                </ion-option-button>
+				<ion-option-button class="button-info"
+								   ng-click="selectBookmark(book)">
+					View
+				</ion-option-button>
 
-                <ion-option-button class="button-assertive"
-                       ng-click="onBookmarkDelete(book)">
-                    Delete
-                </ion-option-button>
+				<ion-option-button class="button-assertive"
+								   ng-click="onBookmarkDelete(book)">
+					Delete
+				</ion-option-button>
 
-                
-                <ion-delete-button class="ion-minus-circled"
-                                   ng-click="onBookmarkDelete(book)">
-                </ion-delete-button>
 
-                <i class="icon ion-chevron-right icon-accessory"></i>
-            </ion-item>
+				<ion-delete-button class="ion-minus-circled"
+								   ng-click="onBookmarkDelete(book)">
+				</ion-delete-button>
 
-        </ion-list>
+				<i class="icon ion-chevron-right icon-accessory"></i>
+			</ion-item>
 
-    </ion-content>
+		</ion-list>
+
+	</ion-content>
 </ion-view>

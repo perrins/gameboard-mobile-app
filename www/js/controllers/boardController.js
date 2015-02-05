@@ -286,6 +286,9 @@ angular.module('gameboard.board.controllers', [])
 // A simple controller that shows a tapped item's data
 	.controller('BoardCtrl', function ($rootScope, $scope, $state, $stateParams, $ionicTabsDelegate, $ionicPopup, $ionicModal, $ionicLoading, BoardService, YouTubeService, WizardHandler, BookmarksService, ACCESS, $ionicActionSheet, $timeout) {
 
+		// Lets Check they can Add Video Content
+		$scope.registered = $rootScope.user.registered;
+
 		// Triggered on a button click, or some other target
 		$scope.showActions = function () {
 

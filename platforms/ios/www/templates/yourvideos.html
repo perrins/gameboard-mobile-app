@@ -1,58 +1,63 @@
 <ion-view title="Your Videos">
 
-    <ion-nav-buttons side="left">
-        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    </ion-nav-buttons>
-    
-    <ion-content class="has-header" on-refresh="onRefresh()">
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
 
-        <ion-refresher></ion-refresher>
+	<ion-content class="has-header" on-refresh="onRefresh()">
 
-        <div class="list-error card assertive-bg hidden" ng-show="!videos">
-            <div class="item item-text-wrap">
-                Cannot retrieve your list of videos
-            </div>
-        </div>
+		<ion-refresher></ion-refresher>
 
-        <ion-list can-delete="true" 
-            can-swipe="true" 
-            on-delete="onVideoDelete(video)" 
-            show-delete="showDelete" 
-            delete-icon="ion-minus-circled" 
-            option-buttons="itemButtons">
+		<div class="list-error card assertive-bg hidden" ng-show="!videos">
+			<div class="item item-text-wrap">
+				Cannot retrieve your list of videos
+			</div>
+		</div>
 
-            <div class="item item-avatar">
+		<ion-list can-delete="true"
+				  can-swipe="true"
+				  on-delete="onVideoDelete(video)"
+				  show-delete="showDelete"
+				  delete-icon="ion-minus-circled"
+				  option-buttons="itemButtons">
 
-                <img ng-src="{{member.avatar}}" lazyload>
+			<div class="item item-avatar">
 
-                <h1>{{member.gametag}}</h1>
-                <h2>{{member.name}}&nbsp{{member.surname}}</h2>
-                <p>{{member.memberSince}}</p>
-                <div class="bigPrize">{{member.prizes}}</div>
-                <div class="bigViews">{{member.views}}</div>
+				<img ng-src="{{member.avatar}}" lazyload>
 
-            </div>
-    
-            <div class="item item-divider" ng-show="videos">
-                You Videos
-                <span class="badge badge-assertive">£12,000</span>
-            </div>
+				<h1>{{member.gametag}}</h1>
 
-            <a  ng-repeat="video in videos | orderBy:'rank'" class="video item item-thumbnail-left item-icon-right" type="item-text-wrap" item="video" href="#/board/video/{{video.uuid}}">
+				<h2>{{member.name}}&nbsp{{member.surname}}</h2>
 
-                <img ng-src="{{video.thumb}}" lazyvideo>
+				<p>{{member.memberSince}}</p>
 
-                <h2>{{video.title}}</h2>
-                <h3>{{video.gameTag}}</h2>
-                <p>{{video.description}}</p>
-                <span class="badge badge-balanced">{{video.views}}</span>
-                <span class="badge badge-royal">{{video.rank}}</span>
+				<div class="bigPrize">{{member.prizes}}</div>
+				<div class="bigViews">{{member.views}}</div>
 
-                <i class="icon ion-chevron-right icon-accessory"></i>
+			</div>
 
-            </a>
+			<div class="item item-divider" ng-show="videos">
+				You Videos
+				<span class="badge badge-assertive">£12,000</span>
+			</div>
 
-        </ion-list>
+			<a ng-repeat="video in videos | orderBy:'rank'" class="video item item-thumbnail-left item-icon-right"
+			   type="item-text-wrap" item="video" href="#/board/video/{{video.uuid}}">
 
-    </ion-content>
+				<img ng-src="{{video.thumb}}" lazyvideo>
+
+				<h2>{{video.title}}</h2>
+
+				<h3>{{video.gameTag}}</h2>
+					<p>{{video.description}}</p>
+					<span class="badge badge-balanced">{{video.views}}</span>
+					<span class="badge badge-royal">{{video.rank}}</span>
+
+					<i class="icon ion-chevron-right icon-accessory"></i>
+
+			</a>
+
+		</ion-list>
+
+	</ion-content>
 </ion-view>

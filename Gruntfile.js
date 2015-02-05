@@ -18,19 +18,6 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 
- 		exec:{
-        	prepare:{
-        		command:"cordova prepare android",
-        		stdout:true,
-        		stderror:true
-        	}
-        },
-
-        watch:{
-        	files:['www/**/*.*'],
-        	tasks:['exec:prepare','hockeyapp:Android']
-        },
-
 		hockeyapp: {
 		    /**
 		     * Global options
@@ -138,8 +125,28 @@ module.exports = function(grunt) {
 
 				]
 
-			}
-		},
+			},
+            apps: {
+                files: [
+                    {
+                        expand: true, flatten: true, filer: 'isFile',
+                        src: ['platforms/ios/build/CrocPad.ipa'],
+                        dest: '/<projectPath>/Dev/Client/buid/ios/'
+                    },
+                    {
+                        expand: true, flatten: true,
+                        src: ['platforms/android/bin/CrocPad-debug.apk'],
+                        dest: '/<projectPath>/Dev/Client/buid/android/'
+                    },
+                    {
+                        expand: true, flatten: true,
+                        src: ['package.json'],
+                        dest: '/<projectPath>/Dev/Client/buid/'
+                    }
+                ]
+            }
+
+        },
 
 		concat: {
 			options: {
@@ -279,6 +286,35 @@ module.exports = function(grunt) {
 			}
 		},
 
+		meta: {
+            banner: '/*! <%= pkg.name || pkg.name %> - v<%= pkg.version %> - ' +
+            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
+            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;' +
+            ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+        },
+        bumpup: ['package.json', 'www/js/build.json'],
+
+        shell: {
+          options: {
+            failOnError: true,
+            stdout: false,
+            stderr: true
+          },
+          build: {
+            command: 'cordova build ios android'
+          },
+          prepare: {
+            command: 'cordova prepare'
+          },
+          buildApk: {
+            command: 'cordova build android --release'
+          },
+          buildIpa: {
+            command: '/usr/bin/xcrun -sdk iphoneos PackageApplication -v "/./platforms/ios/build/Gameboard.app" -o "/<projectPath>/platforms/ios/build/Gameboard.ipa" --sign "iPhone Developer: Matthew Perrins (HQ89NV2SGV)" --embed "/./Dev/Keys/iOS/Rhino_Software_AdHoc.mobileprovision"'
+          }
+        },
+
 		pkg: grunt.file.readJSON('package.json')
 	});
 
@@ -298,6 +334,15 @@ module.exports = function(grunt) {
 		'removelogging',
 		'uglify:vendor'
 	]);
+
+	grunt.registerTask('buildApps',
+		[
+		'bumpup:build',
+        'shell:prepare',
+		'shell:build',
+        'shell:buildApk',
+		'shell:buildIpa', 
+		'copy:apps']);
 
 	grunt.registerMultiTask('version', 'Generate version JSON', function() {
 		var pkg = grunt.config('pkg');

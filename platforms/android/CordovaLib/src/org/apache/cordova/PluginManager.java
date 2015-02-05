@@ -18,8 +18,8 @@
  */
 package org.apache.cordova;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
@@ -51,31 +51,21 @@ public class PluginManager {
     private final CordovaInterface ctx;
     private final CordovaWebView app;
 
-    // Stores mapping of Plugin Name -> <url-filter> values.
-    // Using <url-filter> is deprecated.
-    protected HashMap<String, List<String>> urlMap = new HashMap<String, List<String>>();
-
-    @Deprecated
-    PluginManager(CordovaWebView cordovaWebView, CordovaInterface cordova) {
-        this(cordovaWebView, cordova, null);
-    }
-
-    PluginManager(CordovaWebView cordovaWebView, CordovaInterface cordova, List<PluginEntry> pluginEntries) {
+    public PluginManager(CordovaWebView cordovaWebView, CordovaInterface cordova, Collection<PluginEntry> pluginEntries) {
         this.ctx = cordova;
         this.app = cordovaWebView;
-        if (pluginEntries == null) {
-            ConfigXmlParser parser = new ConfigXmlParser();
-            parser.parse(ctx.getActivity());
-            pluginEntries = parser.getPluginEntries();
-        }
         setPluginEntries(pluginEntries);
     }
 
-    public void setPluginEntries(List<PluginEntry> pluginEntries) {
+    public Collection<PluginEntry> getPluginEntries() {
+        return entryMap.values();
+    }
+
+    public void setPluginEntries(Collection<PluginEntry> pluginEntries) {
         this.onPause(false);
         this.onDestroy();
         pluginMap.clear();
-        urlMap.clear();
+        entryMap.clear();
         for (PluginEntry entry : pluginEntries) {
             addService(entry);
         }
@@ -92,26 +82,17 @@ public class PluginManager {
         this.startupPlugins();
     }
 
-    @Deprecated
-    public void loadPlugins() {
-    }
-
-    /**
-     * Delete all plugin objects.
-     */
-    @Deprecated // Should not be exposed as public.
-    public void clearPluginObjects() {
-        pluginMap.clear();
-    }
-
     /**
      * Create plugins objects that have onload set.
      */
-    @Deprecated // Should not be exposed as public.
-    public void startupPlugins() {
+    private void startupPlugins() {
         for (PluginEntry entry : entryMap.values()) {
+            // Add a null entry to for each non-startup plugin to avoid ConcurrentModificationException
+            // When iterating plugins.
             if (entry.onload) {
                 getPlugin(entry.service);
+            } else {
+                pluginMap.put(entry.service, null);
             }
         }
     }
@@ -163,11 +144,6 @@ public class PluginManager {
         }
     }
 
-    @Deprecated
-    public void exec(String service, String action, String callbackId, String jsonArgs, boolean async) {
-        exec(service, action, callbackId, jsonArgs);
-    }
-
     /**
      * Get the plugin object that implements the service.
      * If the plugin object does not already exist, then create it.
@@ -214,15 +190,10 @@ public class PluginManager {
      */
     public void addService(PluginEntry entry) {
         this.entryMap.put(entry.service, entry);
-        List<String> urlFilters = entry.getUrlFilters();
-        if (urlFilters != null) {
-            urlMap.put(entry.service, urlFilters);
-        }
         if (entry.plugin != null) {
             entry.plugin.privateInitialize(ctx, app, app.getPreferences());
             pluginMap.put(entry.service, entry.plugin);
         }
-
     }
 
     /**
@@ -232,8 +203,50 @@ public class PluginManager {
      */
     public void onPause(boolean multitasking) {
         for (CordovaPlugin plugin : this.pluginMap.values()) {
-            plugin.onPause(multitasking);
+            if (plugin != null) {
+                plugin.onPause(multitasking);
+            }
         }
+    }
+
+    /**
+     * Called when the system received an HTTP authentication request. Plugins can use
+     * the supplied HttpAuthHandler to process this auth challenge.
+     *
+     * @param view              The WebView that is initiating the callback
+     * @param handler           The HttpAuthHandler used to set the WebView's response
+     * @param host              The host requiring authentication
+     * @param realm             The realm for which authentication is required
+     * 
+     * @return                  Returns True if there is a plugin which will resolve this auth challenge, otherwise False
+     * 
+     */
+    public boolean onReceivedHttpAuthRequest(CordovaWebView view, ICordovaHttpAuthHandler handler, String host, String realm) {
+        for (CordovaPlugin plugin : this.pluginMap.values()) {
+            if (plugin != null && plugin.onReceivedHttpAuthRequest(view, handler, host, realm)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Called when he system received an SSL client certificate request.  Plugin can use
+     * the supplied ClientCertRequest to process this certificate challenge.
+     *
+     * @param view              The WebView that is initiating the callback
+     * @param request           The client certificate request
+     *
+     * @return                  Returns True if plugin will resolve this auth challenge, otherwise False
+     *
+     */
+    public boolean onReceivedClientCertRequest(CordovaWebView view, ICordovaClientCertRequest request) {
+        for (CordovaPlugin plugin : this.pluginMap.values()) {
+            if (plugin != null && plugin.onReceivedClientCertRequest(view, request)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -243,7 +256,9 @@ public class PluginManager {
      */
     public void onResume(boolean multitasking) {
         for (CordovaPlugin plugin : this.pluginMap.values()) {
-            plugin.onResume(multitasking);
+            if (plugin != null) {
+                plugin.onResume(multitasking);
+            }
         }
     }
 
@@ -252,7 +267,9 @@ public class PluginManager {
      */
     public void onDestroy() {
         for (CordovaPlugin plugin : this.pluginMap.values()) {
-            plugin.onDestroy();
+            if (plugin != null) {
+                plugin.onDestroy();
+            }
         }
     }
 
@@ -269,9 +286,11 @@ public class PluginManager {
             return obj;
         }
         for (CordovaPlugin plugin : this.pluginMap.values()) {
-            obj = plugin.onMessage(id, data);
-            if (obj != null) {
-                return obj;
+            if (plugin != null) {
+                obj = plugin.onMessage(id, data);
+                if (obj != null) {
+                    return obj;
+                }
             }
         }
         return null;
@@ -282,7 +301,9 @@ public class PluginManager {
      */
     public void onNewIntent(Intent intent) {
         for (CordovaPlugin plugin : this.pluginMap.values()) {
-            plugin.onNewIntent(intent);
+            if (plugin != null) {
+                plugin.onNewIntent(intent);
+            }
         }
     }
 
@@ -298,18 +319,9 @@ public class PluginManager {
         // that they are loaded before this function is called (either by setting
         // the onload <param> or by making an exec() call to them)
         for (PluginEntry entry : this.entryMap.values()) {
-            List<String> urlFilters = urlMap.get(entry.service);
-            if (urlFilters != null) {
-                for (String s : urlFilters) {
-                    if (url.startsWith(s)) {
-                        return getPlugin(entry.service).onOverrideUrlLoading(url);
-                    }
-                }
-            } else {
-                CordovaPlugin plugin = pluginMap.get(entry.service);
-                if (plugin != null && plugin.onOverrideUrlLoading(url)) {
-                    return true;
-                }
+            CordovaPlugin plugin = pluginMap.get(entry.service);
+            if (plugin != null && plugin.onOverrideUrlLoading(url)) {
+                return true;
             }
         }
         return false;
@@ -320,15 +332,19 @@ public class PluginManager {
      */
     public void onReset() {
         for (CordovaPlugin plugin : this.pluginMap.values()) {
-            plugin.onReset();
+            if (plugin != null) {
+                plugin.onReset();
+            }
         }
     }
 
     Uri remapUri(Uri uri) {
         for (CordovaPlugin plugin : this.pluginMap.values()) {
-            Uri ret = plugin.remapUri(uri);
-            if (ret != null) {
-                return ret;
+            if (plugin != null) {
+                Uri ret = plugin.remapUri(uri);
+                if (ret != null) {
+                    return ret;
+                }
             }
         }
         return null;

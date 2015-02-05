@@ -5,641 +5,639 @@
  *  disclosure restricted by GSA ADP Schedule Contract with Gameboard Ltd.
  *
  *  Member Services
- * 
+ *
  */
- 
+
 angular.module("gameboard.member.services", [])
 
 /**
  * A simple example service that returns some data.
  */
-.factory("MembersService", function ($q, $rootScope, ACCESS) {
+	.factory("MembersService", function ($q, $rootScope, ACCESS) {
 
-	return {
+		return {
 
- 		all: function(search,page,size) {
+			all: function (search, page, size) {
 
-            // Create a deffered
-            var def = $q.defer();
+				// Create a deffered
+				var def = $q.defer();
 
-            // Get handle to the CloudCode service
-            var cc = IBMCloudCode.getService();
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
 
-            // USE THE CloudCode to Call the Board Services
-            // This will integrate with Cloudant to retrieve a list of videos for a Board
-            // Need to manage the Paging for this and sort it by ranking
-            // Lets build a 
-            var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).toString();
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).toString();
 
-            // Add the Paging to the BoardList and Get back what we have
-            uri += "?skip="+page+"&limit="+size;
+				// Add the Paging to the BoardList and Get back what we have
+				uri += "?skip=" + page + "&limit=" + size;
 
-            // Get the Videos for my Board
-            cc.get(uri, {
-                "handleAs": "json"
-            }).then(function(members) {
+				// Get the Videos for my Board
+				cc.get(uri, {
+					"handleAs": "json"
+				}).then(function (members) {
 
-                def.resolve(members);
+					def.resolve(members);
 
-            }).catch(function(err) {
-                console.log(err);
-                def.reject(err);
-            })
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				})
 
-            // Get the Objects for a particular Type
-            return def.promise;
+				// Get the Objects for a particular Type
+				return def.promise;
 
-        },
+			},
 
-		search: function(search,page,size) {
+			search: function (search, page, size) {
 
-            // Create a deffered
-            var def = $q.defer();
+				// Create a deffered
+				var def = $q.defer();
 
-            // Get handle to the CloudCode service
-            var cc = IBMCloudCode.getService();
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
 
-            // USE THE CloudCode to Call the Board Services
-            // This will integrate with Cloudant to retrieve a list of videos for a Board
-            // Need to manage the Paging for this and sort it by ranking
-            // Lets build a 
-            var uri = new IBMUriBuilder().append(ACCESS.SEARCH_MEMBERS).toString();
-            uri += "?search="+search;
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.SEARCH_MEMBERS).toString();
+				uri += "?search=" + search;
 
-            // Add the Paging to the BoardList and Get back what we have
-            uri += "&skip="+page+"&limit="+size;
+				// Add the Paging to the BoardList and Get back what we have
+				uri += "&skip=" + page + "&limit=" + size;
 
-            // Get the Videos for my Board
-            cc.get(uri, {
-                "handleAs": "json"
-            }).then(function(members) {
+				// Get the Videos for my Board
+				cc.get(uri, {
+					"handleAs": "json"
+				}).then(function (members) {
 
-                def.resolve(members);
+					def.resolve(members);
 
-            }).catch(function(err) {
-                console.log(err);
-                def.reject(err);
-            })
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				})
 
-            // Get the Objects for a particular Type
-            return def.promise;
+				// Get the Objects for a particular Type
+				return def.promise;
 
-        },
+			},
 
-		getMember: function (muuid) {
-			console.log("muuid",muuid);
+			getMember: function (muuid) {
+				console.log("muuid", muuid);
 
-			// Get a Defered
-			var def = $q.defer();
+				// Get a Defered
+				var def = $q.defer();
 
-			// Get the Cloud Code
-			var cc = IBMCloudCode.getService();
-			var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).append(muuid).toString();
+				// Get the Cloud Code
+				var cc = IBMCloudCode.getService();
+				var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).append(muuid).toString();
 
-			// TMD: When 'done' somethimes and 'then' other?
-			cc.get(uri,{
-				handleAs:"json"
-			}).done(function (member) {
+				// TMD: When 'done' somethimes and 'then' other?
+				cc.get(uri, {
+					handleAs: "json"
+				}).done(function (member) {
 
-				// Check we have a member we can work with
-				if (member) {
-					if( member.error && _member.error === "not_found" ) {
-						def.reject(null);
+					// Check we have a member we can work with
+					if (member) {
+						if (member.error && _member.error === "not_found") {
+							def.reject(null);
+						} else {
+							def.resolve(member);
+						}
 					} else {
-						def.resolve(member);
+						def.reject(null);
 					}
-				} else {
+				}, function (err) {
 					def.reject(null);
+				});
+
+				// Get the Objects for a particular Type
+				return def.promise;
+			},
+
+			registerMember: function (member) {
+				// Manage Defer on the Save
+				var def = $q.defer();
+
+				// get the Data Service
+				var cc = IBMCloudCode.getService();
+
+				// Send the Video request to the Bluemix to be added into the Cloudant Database
+				cc.post(ACCESS.REGISTER, member, {
+					"handleAs": "json"
+				}).then(function (member) {
+					// Was added successfully
+					def.resolve(member);
+
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
+
+				// Return a promise for the async operation of save
+				return def.promise;
+			}
+		};
+
+	})
+
+/**
+ * A simple example service that returns some data.
+ */
+	.factory("MemberDetailService", function ($q, $cacheFactory, $stateParams, URL) {
+
+		// Use an internal Cache for storing the List and map the operations to manage that from
+		// MBaaS SDK Calls
+
+		// TMD: cache never used
+		var cache = $cacheFactory("member");
+
+		return {
+			getMember: function (muuid) {
+
+				console.log("muuid", muuid);
+
+				// Create a deffered
+				var def = $q.defer();
+
+
+				// Get the Objects for a particular Type
+				return def.promise;
+
+			}
+		};
+	})
+
+/**
+ * A simple example service that returns some data.
+ */
+	.factory("FavouritesService", function ($rootScope, $q, $cacheFactory, ACCESS) {
+
+		// Use an internal Cache for storing the List and map the operations to manage that from
+		// MBaaS SDK Calls
+		var cache = $cacheFactory("favourites");
+
+		return {
+			// Return all the Objects for a Given Class
+			allCloud: function () {
+
+				// Create a deffer
+				var def = $q.defer();
+
+				var items = cache.get(ACCESS.FAVOURITES);
+
+				// Check if we are already Cached
+				if (!_.isUndefined(items)) {
+					def.resolve(items);
+				} else {
+
+					// Get handle to the CloudCode service
+					var cc = IBMCloudCode.getService();
+
+					// Get the User Id
+					var userid = $rootScope.user.id;
+
+					// USE THE CloudCode to Call the Board Services
+					// This will integrate with Cloudant to retrieve a list of videos for a Board
+					// Need to manage the Paging for this and sort it by ranking
+					// Lets build a
+					var uri = new IBMUriBuilder().append(ACCESS.FAVOURITES).append(userid).toString();
+
+					// Clear the Cache with a new set
+					cache.remove(ACCESS.FAVOURITES);
+
+					// Get the Videos for my Board
+					cc.get(uri, {
+						"handleAs": "json"
+					}).then(function (favourites) {
+
+						// Place the Items in the Cache
+						cache.put(ACCESS.FAVOURITES, favourites);
+						// return the Cache
+						def.resolve(cache.get(ACCESS.FAVOURITES));
+
+					}).catch(function (err) {
+						console.log(err);
+						def.reject(err);
+					});
 				}
-			}, function (err){
-				def.reject(null);
-			});
 
-			// Get the Objects for a particular Type
-			return def.promise;
-		},
+				// Get the Objects for a particular Type
+				return def.promise;
+			},
 
-		registerMember : function (member) {
-			// Manage Defer on the Save
-			var def = $q.defer();
+			// Return the Cached List
+			allCache: function () {
+				// Return the Cached Items
+				return cache.get(ACCESS.FAVOURITES);
+			},
 
-			// get the Data Service
-			var cc = IBMCloudCode.getService();
-
-			// Send the Video request to the Bluemix to be added into the Cloudant Database
-			cc.post(ACCESS.REGISTER, member,{
-				"handleAs": "json"
-			}).then(function (member) {
-				// Was added successfully
-				def.resolve(member);
-
-			}).catch(function (err) {
-				console.log(err);
-				def.reject(err);
-			});
-
-			// Return a promise for the async operation of save
-			return def.promise;
-		}
-	};
-
-})
-
-/**
- * A simple example service that returns some data.
- */
-.factory("MemberDetailService", function ($q, $cacheFactory, $stateParams, URL) {
-
-	// Use an internal Cache for storing the List and map the operations to manage that from
-	// MBaaS SDK Calls
-
-	// TMD: cache never used
-	var cache = $cacheFactory("member");
-
-	return {
-		getMember: function (muuid) {
-
-			console.log("muuid",muuid);
-
-			// Create a deffered
-			var def = $q.defer();
+			add: function (data) {
 
 
-			// Get the Objects for a particular Type
-			return def.promise;
+			},
 
-		}
-	};
-})
+			del: function (video) {
+				var def = $q.defer();
+
+				// Remove the Item from the Cache
+				var videos = cache.get("favorites").videos;
+				videos.splice(videos.indexOf(video), 1);
+
+				// AJAX DELETE
+				def.resolve("status");
+
+				// Remove it
+				// TMD: When a ASYNC defer when this is a sync process?
+				return def.promise;
+			}
+		};
+	})
 
 /**
  * A simple example service that returns some data.
  */
-.factory("FavouritesService", function ($rootScope, $q, $cacheFactory, ACCESS) {
+	.factory("YourVideosService", function ($rootScope, $q, $cacheFactory, ACCESS) {
 
-	// Use an internal Cache for storing the List and map the operations to manage that from
-	// MBaaS SDK Calls
-	var cache = $cacheFactory("favourites");
+		// Use an internal Cache for storing the List and map the operations to manage that from
+		// MBaaS SDK Calls
+		var cache = $cacheFactory("yourvideos");
 
-	return {
-		// Return all the Objects for a Given Class
-		allCloud: function () {
+		return {
+			// Return all the Objects for a Given Class
+			allCloud: function () {
 
-            // Create a deffer
-            var def = $q.defer();
+				// Create a deffer
+				var def = $q.defer();
 
- 			var items = cache.get(ACCESS.FAVOURITES);
+				var items = cache.get(ACCESS.YOUR_VIDEOS);
 
- 			// Check if we are already Cached
-            if (!_.isUndefined(items)) {
-                def.resolve(items);
-            } else {
+				// Check if we are already Cached
+				if (!_.isUndefined(items)) {
+					def.resolve(items);
+				} else {
 
-	            // Get handle to the CloudCode service
-	            var cc = IBMCloudCode.getService();
+					// Get handle to the CloudCode service
+					var cc = IBMCloudCode.getService();
 
-	            // Get the User Id
-	            var userid = $rootScope.user.id;
+					// Get the User Id
+					var userid = $rootScope.user.id;
 
-	            // USE THE CloudCode to Call the Board Services
-	            // This will integrate with Cloudant to retrieve a list of videos for a Board
-	            // Need to manage the Paging for this and sort it by ranking
-	            // Lets build a 
-	            var uri = new IBMUriBuilder().append(ACCESS.FAVOURITES).append(userid).toString();
+					// USE THE CloudCode to Call the Board Services
+					// This will integrate with Cloudant to retrieve a list of videos for a Board
+					// Need to manage the Paging for this and sort it by ranking
+					// Lets build a
+					var uri = new IBMUriBuilder().append(ACCESS.YOUR_VIDEOS).append(userid).toString();
 
-			  	// Clear the Cache with a new set
-	            cache.remove(ACCESS.FAVOURITES);
+					// Clear the Cache with a new set
+					cache.remove(ACCESS.YOURR_VIDEOS);
 
-	            // Get the Videos for my Board
-	            cc.get(uri, {
-	                "handleAs": "json"
-	            }).then(function(favourites) {
+					// Get the Videos for my Board
+					cc.get(uri, {
+						"handleAs": "json"
+					}).then(function (yourvideos) {
 
-					// Place the Items in the Cache
-	                cache.put(ACCESS.FAVOURITES, favourites);
-	                // return the Cache
-	                def.resolve(cache.get(ACCESS.FAVOURITES));
-	   
-	            }).catch(function(err) {
-	                console.log(err);
-	                def.reject(err);
-	            });
-            }
+						// Place the Items in the Cache
+						cache.put(ACCESS.YOUR_VIDEOS, yourvideos);
+						// return the Cache
+						def.resolve(cache.get(ACCESS.YOUR_VIDEOS));
 
-			// Get the Objects for a particular Type
-			return def.promise;
-		},
+					}).catch(function (err) {
+						console.log(err);
+						def.reject(err);
+					});
+				}
 
-		// Return the Cached List
-		allCache: function () {
-			// Return the Cached Items
-			return cache.get(ACCESS.FAVOURITES);
-		},
+				// Get the Objects for a particular Type
+				return def.promise;
+			},
 
-		add: function (data) { 
+			// Return the Cached List
+			allCache: function () {
+				// Return the Cached Items
+				return cache.get(ACCESS.YOUR_VIDEOS);
+			},
 
+			del: function (video) {
+				// Create a deffer
+				var def = $q.defer();
 
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
 
+				// Get the User Id
+				var userid = $rootScope.user.id;
 
-		},
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.YOUR_VIDEOS).append(userid).append(videos.uuid).toString();
 
-		del: function (video) {
-			var def = $q.defer();
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.YOUR_VIDEOS);
 
-			// Remove the Item from the Cache
-			var videos = cache.get("favorites").videos;
-			videos.splice(videos.indexOf(video),1);
+				// Get the Videos for my Board
+				cc.del(uri, {
+					"handleAs": "json"
+				}).then(function (status) {
 
-			// AJAX DELETE
-			def.resolve("status");
+					// return the Cache
+					def.resolve(status);
 
-			// Remove it
-			// TMD: When a ASYNC defer when this is a sync process?
-			return def.promise;
-		}
-	};
-})
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
 
-/**
- * A simple example service that returns some data.
- */
-.factory("YourVideosService", function ($rootScope, $q, $cacheFactory, ACCESS) {
-
-	// Use an internal Cache for storing the List and map the operations to manage that from
-	// MBaaS SDK Calls
-	var cache = $cacheFactory("yourvideos");
-
-	return {
-		// Return all the Objects for a Given Class
-		allCloud: function () {
-
-            // Create a deffer
-            var def = $q.defer();
-
- 			var items = cache.get(ACCESS.YOUR_VIDEOS);
-
- 			// Check if we are already Cached
-            if (!_.isUndefined(items)) {
-                def.resolve(items);
-            } else {
-
-	            // Get handle to the CloudCode service
-	            var cc = IBMCloudCode.getService();
-
-	            // Get the User Id
-	            var userid = $rootScope.user.id;
-
-	            // USE THE CloudCode to Call the Board Services
-	            // This will integrate with Cloudant to retrieve a list of videos for a Board
-	            // Need to manage the Paging for this and sort it by ranking
-	            // Lets build a 
-	            var uri = new IBMUriBuilder().append(ACCESS.YOUR_VIDEOS).append(userid).toString();
-
-			  	// Clear the Cache with a new set
-	            cache.remove(ACCESS.YOURR_VIDEOS);
-
-	            // Get the Videos for my Board
-	            cc.get(uri, {
-	                "handleAs": "json"
-	            }).then(function(yourvideos) {
-
-					// Place the Items in the Cache
-	                cache.put(ACCESS.YOUR_VIDEOS, yourvideos);
-	                // return the Cache
-	                def.resolve(cache.get(ACCESS.YOUR_VIDEOS));
-	   
-	            }).catch(function(err) {
-	                console.log(err);
-	                def.reject(err);
-	            });
-            }
-
-			// Get the Objects for a particular Type
-			return def.promise;
-		},
-
-		// Return the Cached List
-		allCache: function () {
-			// Return the Cached Items
-			return cache.get(ACCESS.YOUR_VIDEOS);
-		},
-
-		del: function (video) {
-		   // Create a deffer
-            var def = $q.defer();
-
-			// Get handle to the CloudCode service
-            var cc = IBMCloudCode.getService();
-
-            // Get the User Id
-            var userid = $rootScope.user.id;
-
-            // USE THE CloudCode to Call the Board Services
-            // This will integrate with Cloudant to retrieve a list of videos for a Board
-            // Need to manage the Paging for this and sort it by ranking
-            // Lets build a 
-            var uri = new IBMUriBuilder().append(ACCESS.YOUR_VIDEOS).append(userid).append(videos.uuid).toString();
-
-		  	// Clear the Cache with a new set
-            cache.remove(ACCESS.YOUR_VIDEOS);
-
-            // Get the Videos for my Board
-            cc.del(uri, {
-                "handleAs": "json"
-            }).then(function(status) {
-
-                // return the Cache
-                def.resolve(status);
-   
-            }).catch(function(err) {
-                console.log(err);
-                def.reject(err);
-            });
-
-            return def.promise;
-		}
-	};
-})
+				return def.promise;
+			}
+		};
+	})
 
 
 /**
  * A simple example service that returns some data.
  */
-.factory("BookmarksService", function ($rootScope, $q, $cacheFactory, ACCESS) {
+	.factory("BookmarksService", function ($rootScope, $q, $cacheFactory, ACCESS) {
 
-	// Use an internal Cache for storing the List and map the operations to manage that from
-	// MBaaS SDK Calls
-	var cache = $cacheFactory("bookmarks");
+		// Use an internal Cache for storing the List and map the operations to manage that from
+		// MBaaS SDK Calls
+		var cache = $cacheFactory("bookmarks");
 
-	return {
-		// Return all the Objects for a Given Class
-		allCloud: function () {
+		return {
+			// Return all the Objects for a Given Class
+			allCloud: function () {
 
-            // Create a deffer
-            var def = $q.defer();
+				// Create a deffer
+				var def = $q.defer();
 
- 			var items = cache.get(ACCESS.BOOKMARKS);
+				var items = cache.get(ACCESS.BOOKMARKS);
 
- 			// Check if we are already Cached
-            if (!_.isUndefined(items)) {
-                def.resolve(items);
-            } else {
+				// Check if we are already Cached
+				if (!_.isUndefined(items)) {
+					def.resolve(items);
+				} else {
 
-	            // Get handle to the CloudCode service
-	            var cc = IBMCloudCode.getService();
+					// Get handle to the CloudCode service
+					var cc = IBMCloudCode.getService();
 
-	            // Get the User Id
-	            var userid = $rootScope.user.id;
+					// Get the User Id
+					var userid = $rootScope.user.id;
 
-	            // USE THE CloudCode to Call the Board Services
-	            // This will integrate with Cloudant to retrieve a list of videos for a Board
-	            // Need to manage the Paging for this and sort it by ranking
-	            // Lets build a 
-	            var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
+					// USE THE CloudCode to Call the Board Services
+					// This will integrate with Cloudant to retrieve a list of videos for a Board
+					// Need to manage the Paging for this and sort it by ranking
+					// Lets build a
+					var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
 
-			  	// Clear the Cache with a new set
-	            cache.remove(ACCESS.BOOKMARKS);
+					// Clear the Cache with a new set
+					cache.remove(ACCESS.BOOKMARKS);
 
-	            // Get the Videos for my Board
-	            cc.get(uri, {
-	                "handleAs": "json"
-	            }).then(function(bookmarks) {
+					// Get the Videos for my Board
+					cc.get(uri, {
+						"handleAs": "json"
+					}).then(function (bookmarks) {
 
-					// Place the Items in the Cache
-	                cache.put(ACCESS.BOOKMARKS, bookmarks);
-	                // return the Cache
-	                def.resolve(cache.get(ACCESS.BOOKMARKS));
-	   
-	            }).catch(function(err) {
-	                console.log(err);
-	                def.reject(err);
-	            });
-            }
+						// Place the Items in the Cache
+						cache.put(ACCESS.BOOKMARKS, bookmarks);
+						// return the Cache
+						def.resolve(cache.get(ACCESS.BOOKMARKS));
 
-			// Get the Objects for a particular Type
-			return def.promise;
-		},
+					}).catch(function (err) {
+						console.log(err);
+						def.reject(err);
+					});
+				}
 
-		// Return the Cached List
-		allCache: function () {
-			// Return the Cached Items
-			return cache.get(ACCESS.BOOKMARKS);
-		},
+				// Get the Objects for a particular Type
+				return def.promise;
+			},
 
-		addBookmark: function (data) { 
+			// Return the Cached List
+			allCache: function () {
+				// Return the Cached Items
+				return cache.get(ACCESS.BOOKMARKS);
+			},
 
-            // Create a deffer
-            var def = $q.defer();
+			addBookmark: function (data) {
 
-			// Get handle to the CloudCode service
-            var cc = IBMCloudCode.getService();
+				// Create a deffer
+				var def = $q.defer();
 
-            // Get the User Id
-            var userid = $rootScope.user.id;
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
 
-            // USE THE CloudCode to Call the Board Services
-            // This will integrate with Cloudant to retrieve a list of videos for a Board
-            // Need to manage the Paging for this and sort it by ranking
-            // Lets build a 
-            var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
+				// Get the User Id
+				var userid = $rootScope.user.id;
 
-		  	// Clear the Cache with a new set
-            cache.remove(ACCESS.BOOKMARKS);
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
 
-            // Get the Videos for my Board
-            cc.post(uri, data, {
-                "handleAs": "json"
-            }).then(function(status) {
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.BOOKMARKS);
 
-                // return the Cache
-                def.resolve(status);
-   
-            }).catch(function(err) {
-                console.log(err);
-                def.reject(err);
-            });
+				// Get the Videos for my Board
+				cc.post(uri, data, {
+					"handleAs": "json"
+				}).then(function (status) {
 
-            return def.promise;
+					// return the Cache
+					def.resolve(status);
 
-		},
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
 
-		removeBookmark: function (bookmark) {
+				return def.promise;
 
-		   // Create a deffer
-            var def = $q.defer();
+			},
 
-			// Get handle to the CloudCode service
-            var cc = IBMCloudCode.getService();
+			removeBookmark: function (bookmark) {
 
-            // Get the User Id
-            var userid = $rootScope.user.id;
+				// Create a deffer
+				var def = $q.defer();
 
-            // USE THE CloudCode to Call the Board Services
-            // This will integrate with Cloudant to retrieve a list of videos for a Board
-            // Need to manage the Paging for this and sort it by ranking
-            // Lets build a 
-            var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
 
-		  	// Clear the Cache with a new set
-            cache.remove(ACCESS.BOOKMARKS);
+				// Get the User Id
+				var userid = $rootScope.user.id;
 
-            // Get the Videos for my Board
-            cc.del(uri, {
-                "handleAs": "json"
-            }).then(function(status) {
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
 
-                // return the Cache
-                def.resolve(status);
-   
-            }).catch(function(err) {
-                console.log(err);
-                def.reject(err);
-            });
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.BOOKMARKS);
 
-            return def.promise;
-		}
-	};
-})
+				// Get the Videos for my Board
+				cc.del(uri, {
+					"handleAs": "json"
+				}).then(function (status) {
+
+					// return the Cache
+					def.resolve(status);
+
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
+
+				return def.promise;
+			}
+		};
+	})
 
 
 /**
  * A simple example service that returns some data.
  */
-.factory("NotificationService", function ($rootScope, $q, $cacheFactory, ACCESS) {
+	.factory("NotificationService", function ($rootScope, $q, $cacheFactory, ACCESS) {
 
-	// Use an internal Cache for storing the List and map the operations to manage that from
-	// MBaaS SDK Calls
-	var cache = $cacheFactory("notifications");
+		// Use an internal Cache for storing the List and map the operations to manage that from
+		// MBaaS SDK Calls
+		var cache = $cacheFactory("notifications");
 
-	return {
-		// Return all the Objects for a Given Class
-		allCloud: function () {
+		return {
+			// Return all the Objects for a Given Class
+			allCloud: function () {
 
-            // Create a deffer
-            var def = $q.defer();
+				// Create a deffer
+				var def = $q.defer();
 
- 			var items = cache.get(ACCESS.NOTIFICATIONS);
+				var items = cache.get(ACCESS.NOTIFICATIONS);
 
- 			// Check if we are already Cached
-            if (!_.isUndefined(items)) {
-                def.resolve(items);
-            } else {
+				// Check if we are already Cached
+				if (!_.isUndefined(items)) {
+					def.resolve(items);
+				} else {
 
-	            // Get handle to the CloudCode service
-	            var cc = IBMCloudCode.getService();
+					// Get handle to the CloudCode service
+					var cc = IBMCloudCode.getService();
 
-	            // Get the User Id
-	            var userid = $rootScope.user.id;
+					// Get the User Id
+					var userid = $rootScope.user.id;
 
-	            // USE THE CloudCode to Call the Board Services
-	            // This will integrate with Cloudant to retrieve a list of videos for a Board
-	            // Need to manage the Paging for this and sort it by ranking
-	            // Lets build a 
-	            var uri = new IBMUriBuilder().append(ACCESS.NOTIFICATIONS).append(userid).toString();
+					// USE THE CloudCode to Call the Board Services
+					// This will integrate with Cloudant to retrieve a list of videos for a Board
+					// Need to manage the Paging for this and sort it by ranking
+					// Lets build a
+					var uri = new IBMUriBuilder().append(ACCESS.NOTIFICATIONS).append(userid).toString();
 
-			  	// Clear the Cache with a new set
-	            cache.remove(ACCESS.NOTIFICATIONS);
+					// Clear the Cache with a new set
+					cache.remove(ACCESS.NOTIFICATIONS);
 
-	            // Get the Videos for my Board
-	            cc.get(uri, {
-	                "handleAs": "json"
-	            }).then(function(notifications) {
+					// Get the Videos for my Board
+					cc.get(uri, {
+						"handleAs": "json"
+					}).then(function (notifications) {
 
-					// Place the Items in the Cache
-	                cache.put(ACCESS.NOTIFICATIONS, notifications);
-	                // return the Cache
-	                def.resolve(cache.get(ACCESS.NOTIFICATIONS));
-	   
-	            }).catch(function(err) {
-	                console.log(err);
-	                def.reject(err);
-	            });
-            }
+						// Place the Items in the Cache
+						cache.put(ACCESS.NOTIFICATIONS, notifications);
+						// return the Cache
+						def.resolve(cache.get(ACCESS.NOTIFICATIONS));
 
-			// Get the Objects for a particular Type
-			return def.promise;
-		},
+					}).catch(function (err) {
+						console.log(err);
+						def.reject(err);
+					});
+				}
 
-		// Return the Cached List
-		allCache: function () {
-			// Return the Cached Items
-			return cache.get(ACCESS.NOTIFICATIONS);
-		},
+				// Get the Objects for a particular Type
+				return def.promise;
+			},
 
-		addBookmark: function (data) { 
+			// Return the Cached List
+			allCache: function () {
+				// Return the Cached Items
+				return cache.get(ACCESS.NOTIFICATIONS);
+			},
 
-            // Create a deffer
-            var def = $q.defer();
+			addBookmark: function (data) {
 
-			// Get handle to the CloudCode service
-            var cc = IBMCloudCode.getService();
+				// Create a deffer
+				var def = $q.defer();
 
-            // Get the User Id
-            var userid = $rootScope.user.id;
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
 
-            // USE THE CloudCode to Call the Board Services
-            // This will integrate with Cloudant to retrieve a list of videos for a Board
-            // Need to manage the Paging for this and sort it by ranking
-            // Lets build a 
-            var uri = new IBMUriBuilder().append(ACCESS.NOTIFICATIONS).append(userid).toString();
+				// Get the User Id
+				var userid = $rootScope.user.id;
 
-		  	// Clear the Cache with a new set
-            cache.remove(ACCESS.NOTIFICATIONS);
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.NOTIFICATIONS).append(userid).toString();
 
-            // Get the Videos for my Board
-            cc.post(uri, data, {
-                "handleAs": "json"
-            }).then(function(status) {
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.NOTIFICATIONS);
 
-                // return the Cache
-                def.resolve(status);
-   
-            }).catch(function(err) {
-                console.log(err);
-                def.reject(err);
-            });
+				// Get the Videos for my Board
+				cc.post(uri, data, {
+					"handleAs": "json"
+				}).then(function (status) {
 
-            return def.promise;
+					// return the Cache
+					def.resolve(status);
 
-		},
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
 
-		removeBookmark: function (bookmark) {
+				return def.promise;
 
-		   // Create a deffer
-            var def = $q.defer();
+			},
 
-			// Get handle to the CloudCode service
-            var cc = IBMCloudCode.getService();
+			removeBookmark: function (bookmark) {
 
-            // Get the User Id
-            var userid = $rootScope.user.id;
+				// Create a deffer
+				var def = $q.defer();
 
-            // USE THE CloudCode to Call the Board Services
-            // This will integrate with Cloudant to retrieve a list of videos for a Board
-            // Need to manage the Paging for this and sort it by ranking
-            // Lets build a 
-            var uri = new IBMUriBuilder().append(ACCESS.NOTIFICATIONS).append(userid).toString();
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
 
-		  	// Clear the Cache with a new set
-            cache.remove(ACCESS.NOTIFICATIONS);
+				// Get the User Id
+				var userid = $rootScope.user.id;
 
-            // Get the Videos for my Board
-            cc.del(uri, {
-                "handleAs": "json"
-            }).then(function(status) {
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.NOTIFICATIONS).append(userid).toString();
 
-                // return the Cache
-                def.resolve(status);
-   
-            }).catch(function(err) {
-                console.log(err);
-                def.reject(err);
-            });
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.NOTIFICATIONS);
 
-            return def.promise;
-		}
-	};
-});
+				// Get the Videos for my Board
+				cc.del(uri, {
+					"handleAs": "json"
+				}).then(function (status) {
+
+					// return the Cache
+					def.resolve(status);
+
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
+
+				return def.promise;
+			}
+		};
+	});
 
 
 

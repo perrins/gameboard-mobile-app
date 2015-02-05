@@ -3,8 +3,9 @@
 	$.fn.loadNicely = function (options) {
 
 		var defaults = {
-			src : "",
-			preLoad: function () {},
+			src: "",
+			preLoad: function () {
+			},
 			onLoad: function (img) {
 				$(img).fadeIn(200);
 			}

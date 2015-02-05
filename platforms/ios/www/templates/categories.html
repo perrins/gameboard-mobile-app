@@ -1,34 +1,37 @@
 <ion-view title="{{title}}">
 
-    <ion-nav-buttons side="right">
-        <button class="button button-clear button-positive" ng-click="addBookmark()">
-            <i class="icon ion-bookmark"></i>
-        </button>
-    </ion-nav-buttons>    
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-positive" ng-click="addBookmark()">
+			<i class="icon ion-bookmark"></i>
+		</button>
+	</ion-nav-buttons>
 
-    <ion-content class="has-header">
+	<ion-content class="has-header">
 
-        <div class="spinner">
-            <img class="Banner genre-image-load" ng-src="{{banner}}" lazyload>
-        </div>    
+		<div class="spinner">
+			<img class="Banner genre-image-load" ng-src="{{banner}}" lazyload>
+		</div>
 
-    
-        <div class="list" ng-show="categories">
+
+		<div class="list" ng-show="categories">
 
 			<a ng-repeat="cat in categories" class="item item-icon-right" href="#/board/videos/{{cat.bid}}">
 
-                <h2>{{cat.title}}</h2>
-                <p>{{cat.subtitle}}</p>
-                <p>{{cat.description}}</p>
-                <div class="prize">{{cat.views}}</div>
-                <span class="badge badge-calm">{{cat.videos}}</span>
+				<h2>{{cat.title}}</h2>
 
-                <i class="icon ion-chevron-right icon-accessory"></i>   
+				<p>{{cat.subtitle}}</p>
 
-            </a>
-        </div>
+				<p>{{cat.description}}</p>
 
-    </ion-content>
+				<div class="prize">{{cat.views}}</div>
+				<span class="badge badge-calm">{{cat.videos}}</span>
+
+				<i class="icon ion-chevron-right icon-accessory"></i>
+
+			</a>
+		</div>
+
+	</ion-content>
 
 
 </ion-view>

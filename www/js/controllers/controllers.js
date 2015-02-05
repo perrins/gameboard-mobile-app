@@ -3,7 +3,7 @@ angular.module("gameboard.controllers", [])
 	.controller("MainCtrl", function ($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
 
 		angular.element("#main").removeClass("hidden");
-		
+
 		// Prepare User for Display
 		if ($rootScope.user) {
 
@@ -198,18 +198,27 @@ angular.module("gameboard.controllers", [])
 					// Default the Header to the ID of the authenicated user
 					//$http.defaults.headers.common["X-GB-ID"] = $rootScope.user.raw.id;
 
-					// Get a Member
+					// Get the signing in Member and see if they are registered
 					MembersService.getMember(user.raw.id).then(function (member) {
-						$ionicLoading.hide();
-						$rootScope.user.registered = true;
-						$rootScope.member = member;
+
+						debugger;
+
+						// Check if we have a registered member ?
+						if (_.isObject(member) ) {
+							$ionicLoading.hide();
+							$rootScope.user.registered = true;
+							$rootScope.member = member;
+						} else {
+							// If not then they need to register to do stuff
+							$rootScope.user.registered = false;
+						}
 
 						// Move to the Next View
 						nextView();
 
-
 					}, function (err) {
 
+						// If Not then force them to 
 						$ionicLoading.hide();
 						$rootScope.user.registered = false;
 						$rootScope.user.avatar = "img/avatar.png";

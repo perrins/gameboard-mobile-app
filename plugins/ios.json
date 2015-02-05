@@ -10,61 +10,61 @@
                     "AdSupport.framework": [
                         {
                             "xml": "false",
-                            "count": 7
+                            "count": 6
                         }
                     ],
                     "CoreGraphics.framework": [
                         {
                             "xml": "false",
-                            "count": 7
+                            "count": 6
                         }
                     ],
                     "Foundation.framework": [
                         {
                             "xml": "false",
-                            "count": 5
+                            "count": 4
                         }
                     ],
                     "MediaPlayer.framework": [
                         {
                             "xml": "false",
-                            "count": 6
+                            "count": 5
                         }
                     ],
                     "Security.framework": [
                         {
                             "xml": "false",
-                            "count": 4
+                            "count": 3
                         }
                     ],
                     "StoreKit.framework": [
                         {
                             "xml": "false",
-                            "count": 7
+                            "count": 6
                         }
                     ],
                     "MessageUI.framework": [
                         {
                             "xml": "false",
-                            "count": 5
+                            "count": 4
                         }
                     ],
                     "SystemConfiguration.framework": [
                         {
                             "xml": "false",
-                            "count": 6
+                            "count": 5
                         }
                     ],
                     "UIKit.framework": [
                         {
                             "xml": "false",
-                            "count": 5
+                            "count": 4
                         }
                     ],
                     "libz.dylib": [
                         {
                             "xml": "false",
-                            "count": 3
+                            "count": 2
                         }
                     ],
                     "AudioToolbox.framework": [
@@ -165,10 +165,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"FlurryAds\"><param name=\"ios-package\" value=\"FlurryAdPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"mMedia\"><param name=\"ios-package\" value=\"mMediaAdPlugin\" /></feature>",
                             "count": 1
                         },
@@ -218,9 +214,6 @@
         "com.google.cordova.admob-facebook": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "com.google.cordova.admob-flurry": {
-            "PACKAGE_NAME": "co.gameboard.mobile.gb"
-        },
         "com.google.cordova.admob-iad": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
@@ -247,6 +240,9 @@
         },
         "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
+        "org.apache.cordova.engine.crosswalk": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
         }
     },
     "dependent_plugins": {
@@ -254,9 +250,6 @@
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
         "com.rjfun.cordova.facebookads": {
-            "PACKAGE_NAME": "co.gameboard.mobile.gb"
-        },
-        "com.rjfun.cordova.flurryads": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
         "com.google.playservices": {

@@ -1,7 +1,7 @@
 {
   "name": "ibmbluemix",
   "description": "Mobile Cloud Services JavaScript SDK for IBM Bluemix",
-  "version": "1.0.0-20141204-1549",
+  "version": "1.0.0-20150112-0905",
   "author": {
     "name": [
       "IBM"

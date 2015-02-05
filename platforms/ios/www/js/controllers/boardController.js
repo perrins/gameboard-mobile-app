@@ -1,786 +1,789 @@
 angular.module('gameboard.board.controllers', [])
 
 
-.controller('GenresCtrl', function($rootScope,$scope, $ionicPopup, $ionicLoading, GenresService, InitBluemix) {
+	.controller('GenresCtrl', function ($rootScope, $scope, $ionicPopup, $ionicLoading, GenresService) {
 
 //    $scope.$on('$ionicView.loaded', function() {
 
-        // Show what we are doing
-        $ionicLoading.show({
-            template: 'Loading Genres...'
-        });
+		// Show what we are doing
+		$ionicLoading.show({
+			template: 'Loading Genres...'
+		});
 
-        // Need to Check if we have got some already
-        GenresService.all().then(function(genres) {
+		// Need to Check if we have got some already
+		GenresService.all().then(function (genres) {
 
-            // Check we have some Games for this Genre
-            if (_.isNull(genres)) {
+			// Check we have some Games for this Genre
+			if (_.isNull(genres)) {
 
-                $ionicLoading.hide();
+				$ionicLoading.hide();
 
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Games',
-                    template: 'It seems we dont have any Genres to list'
-                });
+				var alertPopup = $ionicPopup.alert({
+					title: 'Games',
+					template: 'It seems we dont have any Genres to list'
+				});
 
-                alertPopup.then(function(res) {
-                    // Handle the Next step
-                });
+				alertPopup.then(function (res) {
+					// Handle the Next step
+				});
 
-            } else {
-
-
-                // Paint 
-                $scope.genres = genres;
-
-                // Hide the Loading Message
-                $ionicLoading.hide();
-
-                // Let Angular know we have some data because of the Async nature of IBMBaaS
-                // This is required to make sure the information is uptodate
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            }
-
-        }, function(err) {
-
-            // Handle Display of No Data and No Connection
-            $ionicLoading.hide();
-
-            $scope.$emit('gb-error', err);
-
-        });
-
-  //  });
-
-})
-
-// A simple controller that shows a tapped item's data
-.controller('GamesCtrl', function($state, $scope, $stateParams, $ionicLoading, $ionicPopup, GenresService, GamesService, BookmarksService) {
-
-    // Lets check we have a 
-    var genid = $stateParams.genid;
-
-    //  $scope.$on('$ionicView.enter', function() {
+			} else {
 
 
-    // Lets load the Videos for the Youtube Channel
-    $ionicLoading.show({
-        template: 'Loading Games...'
-    });
+				// Paint
+				$scope.genres = genres;
 
-    // Access the Genres and get the Title and other information we need
-    GenresService.getGenre(genid).then(function(genre) {
+				// Hide the Loading Message
+				$ionicLoading.hide();
 
-        // Display The Title
-        $scope.title = genre.title;
+				// Let Angular know we have some data because of the Async nature of IBMBaaS
+				// This is required to make sure the information is uptodate
+				if (!$scope.$$phase) {
+					$scope.$apply();
+				}
+			}
 
-        // Get the Games
-        return GamesService.all(genid);
+		}, function (err) {
 
-    }).then(function(data) {
+			// Handle Display of No Data and No Connection
+			$ionicLoading.hide();
 
-        // Check we have some Games for this Genre
-        if (_.isNull(data)) {
+			$scope.$emit('gb-error', err);
 
-            $ionicLoading.hide();
+		});
 
-            var alertPopup = $ionicPopup.alert({
-                title: 'Games',
-                template: 'It seems we dont have a Games list defined for this Genre'
-            });
+		//  });
 
-            alertPopup.then(function(res) {
-                // Go Back to the Main Genres Screen
-                $state.go("board.genres");
-            });
-
-        } else {
-
-            // Layout the Games and the Banners
-            $scope.games = data.games;
-            $scope.banners = data.banners;
-            $scope.gid = data.gid;
-            $scope.genid = data.genid;
-
-            $ionicLoading.hide();
-            // Let Angular know we have some data because of the Async nature of IBMBaaS
-            // This is required to make sure the information is uptodate
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
-        }
-
-    }, function(err) {
-
-        $ionicLoading.hide();
-        $scope.$emit('gb-error', err);
-
-    });
-
-    //    });
-
-    // Define Scrop Variables
-    //    $scope.$on('$ionicView.loaded', function() {
-
-    $scope.addBookmark = function() {
-
-        // Build the Bookmark
-        var data = {
-            type: "GAME",
-            gid: $scope.gid,
-            title: $scope.title
-        };
-
-        BookmarksService.addBookmark(data).then(function(status) {
-
-            // Tell User we have created the Book Mark
-            var infoPopup = $ionicPopup.alert({
-                title: 'Bookmark',
-                template: 'Bookmark has been saved for Games Genre ' + $scope.title
-            });
-
-            infoPopup.then(function(res) {
-
-            });
-
-        }, function(err) {
-
-             // Show Connectivity Error 
-            if(_.has(err,"info") && err.info.status == "error") {
-                $rootScope.wifi();
-            } else {
-
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Bookmark',
-                    template: 'Failed to create the Bookmark'
-                });
-
-                alertPopup.then(function(res) {
-
-                });
-            }
-
-        });
-
-    }
-
-    //    });
-
-})
+	})
 
 // A simple controller that shows a tapped item's data
-.controller('CategoriesCtrl', function($scope, $stateParams, $ionicLoading, $ionicPopup, CategoriesService, GamesService, BookmarksService) {
+	.controller('GamesCtrl', function ($state, $scope, $stateParams, $ionicLoading, $ionicPopup, GenresService, GamesService, BookmarksService) {
 
-    // Lets check we have a 
-    var gmid = $stateParams.gmid;
-    var genid = $stateParams.genid;
+		// Lets check we have a
+		var genid = $stateParams.genid;
 
-    //$scope.$on('$ionicView.enter', function() {
+		//  $scope.$on('$ionicView.enter', function() {
 
-    $ionicLoading.show({
-        template: 'Loading Categories...'
-    });
 
-    // Access the Genres and get the Title and other information we need
-    GamesService.getGame(genid, gmid).then(function(game) {
+		// Lets load the Videos for the Youtube Channel
+		$ionicLoading.show({
+			template: 'Loading Games...'
+		});
 
-        // Display The Title
-        $scope.title = game.title;
+		// Access the Genres and get the Title and other information we need
+		GenresService.getGenre(genid).then(function (genre) {
 
-        // Get the Games
-        return CategoriesService.all(gmid);
+			// Display The Title
+			$scope.title = genre.title;
 
-    }).then(function(data) {
+			// Get the Games
+			return GamesService.all(genid);
 
-        // Check we have some Games for this Genre
-        if (_.isNull(data)) {
+		}).then(function (data) {
 
-            $ionicLoading.hide();
+			// Check we have some Games for this Genre
+			if (_.isNull(data)) {
 
-            var alertPopup = $ionicPopup.alert({
-                title: 'Categoies',
-                template: 'It seems we dont have a Category defined for this Game'
-            });
+				$ionicLoading.hide();
 
-            alertPopup.then(function(res) {
-                // Go Back to the Main Genres Screen
-                $state.go("board.genres");
-            });
+				var alertPopup = $ionicPopup.alert({
+					title: 'Games',
+					template: 'It seems we dont have a Games list defined for this Genre'
+				});
 
-        } else {
-            // Paint 
-            $scope.banner = data.banner;
-            $scope.categories = data.categories;
-            $scope.gmid = data.gmid;
+				alertPopup.then(function (res) {
+					// Go Back to the Main Genres Screen
+					$state.go("board.genres");
+				});
 
-            $ionicLoading.hide();
+			} else {
 
-            // This is required to make sure the information is uptodate
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
-        }
+				// Layout the Games and the Banners
+				$scope.games = data.games;
+				$scope.banners = data.banners;
+				$scope.gid = data.gid;
+				$scope.genid = data.genid;
 
-    }, function(err) {
+				$ionicLoading.hide();
+				// Let Angular know we have some data because of the Async nature of IBMBaaS
+				// This is required to make sure the information is uptodate
+				if (!$scope.$$phase) {
+					$scope.$apply();
+				}
+			}
 
-        // Hide any Progress
-        $ionicLoading.hide();
+		}, function (err) {
 
-        $scope.$emit('gb-error', err);
+			$ionicLoading.hide();
+			$scope.$emit('gb-error', err);
 
-    });
+		});
 
-    //});
+		//    });
 
-    //
-    //$scope.$on('$ionicView.loaded', function() {
+		// Define Scrop Variables
+		//    $scope.$on('$ionicView.loaded', function() {
 
-    $scope.addBookmark = function() {
+		$scope.addBookmark = function () {
 
-        // Build the Bookmark
-        var data = {
-            type: "CATEGORY",
-            gemid: $scope.gmid,
-            title: $scope.title
-        };
+			// Build the Bookmark
+			var data = {
+				type: "GAME",
+				gid: $scope.gid,
+				title: $scope.title
+			};
 
-        BookmarksService.addBookmark(data).then(function(status) {
+			BookmarksService.addBookmark(data).then(function (status) {
 
-            // Tell User we have created the Book Mark
-            var infoPopup = $ionicPopup.alert({
-                title: 'Bookmark',
-                template: 'Bookmark has been saved for Category ' + $scope.title
-            });
+				// Tell User we have created the Book Mark
+				var infoPopup = $ionicPopup.alert({
+					title: 'Bookmark',
+					template: 'Bookmark has been saved for Games Genre ' + $scope.title
+				});
 
-            infoPopup.then(function(res) {
+				infoPopup.then(function (res) {
 
-            });
+				});
 
-        }, function(err) {
+			}, function (err) {
 
-             // Show Connectivity Error 
-            if(_.has(err,"info") && err.info.status == "error") {
-                $rootScope.wifi();
-            } else {
+				// Show Connectivity Error
+				if (_.has(err, "info") && err.info.status == "error") {
+					$rootScope.wifi();
+				} else {
 
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Bookmark',
-                    template: 'Failed to create the Bookmark'
-                });
+					var alertPopup = $ionicPopup.alert({
+						title: 'Bookmark',
+						template: 'Failed to create the Bookmark'
+					});
 
-                alertPopup.then(function(res) {
+					alertPopup.then(function (res) {
 
-                });
-            }
+					});
+				}
 
-        });
+			});
 
-    }
+		}
 
-    //   });
+		//    });
 
-})
+	})
 
 // A simple controller that shows a tapped item's data
-.controller('BoardCtrl', function($rootScope, $scope, $state, $stateParams,$ionicTabsDelegate, $ionicPopup, $ionicModal, $ionicLoading, BoardService, YouTubeService, WizardHandler, BookmarksService, ACCESS,$ionicActionSheet, $timeout) {
-
-     // Triggered on a button click, or some other target
-     $scope.showActions = function() {
-
-       // Show the action sheet
-       var hideSheet = $ionicActionSheet.show({
-         buttons: [
-           { text: '<b>Share</b> This' },
-           { text: 'View' },
-           { text: '<b>Rate</b> this'}
-         ],
-         titleText: 'Actions for this Video',
-         cancelText: 'Cancel',
-         cancel: function() {
-              // add cancel code..
-            },
-         buttonClicked: function(index) {
-           return true;
-         }
-       });
-
-     };
-
-    //$scope.$on('$ionicView.enter', function() {
-
-    var board = new Array();
-    var videos = new Array();
+	.controller('CategoriesCtrl', function ($scope, $stateParams, $ionicLoading, $ionicPopup, CategoriesService, GamesService, BookmarksService) {
 
-    $scope.page = 0;
-    $scope.pageSize = 20;
-    $scope.total = 0;
-    $scope.position = 0;
-
-    // Load the Items
-    $scope.loadItems = function(page, size) {
+		// Lets check we have a
+		var gmid = $stateParams.gmid;
+		var genid = $stateParams.genid;
 
-        // Clear the List before adding new items
-        // This needs to be improved
-        $scope.boardlist = [];
+		//$scope.$on('$ionicView.enter', function() {
 
-        // Refresh
-        if (!$scope.$$phase) {
-            $scope.$apply();
-        }
+		$ionicLoading.show({
+			template: 'Loading Categories...'
+		});
 
-        // Because we are retrieving all the items every time we do something
-        // We need to clear the list before loading in some new values
-        $ionicLoading.show({
-            template: $scope.message
-        });
+		// Access the Genres and get the Title and other information we need
+		GamesService.getGame(genid, gmid).then(function (game) {
 
-        // Because we are retrieving all the items every time we do something
-        // We need to clear the list before loading in some new values
-        $scope.bid = $stateParams.bid;
+			// Display The Title
+			$scope.title = game.title;
 
-        // "List is " is a service returning data from the 
-        BoardService.all($scope.bid, page, size).then(function(board) {
+			// Get the Games
+			return CategoriesService.all(gmid);
 
-            // Reset the Array if we are on Page 1
-            if ($scope.page === 0) {
-                // Prepare for the Query
-                boardlist = new Array();
-            }
+		}).then(function (data) {
 
-            // Set the Title
-            $scope.title = board.title;
+			// Check we have some Games for this Genre
+			if (_.isNull(data)) {
 
-            // Check what has been returned versus side of what we are returning
-            angular.forEach(board.videos.rows, function(value, key) {
-                boardlist.push(value.doc);
-            });
+				$ionicLoading.hide();
 
-            // Update the model with a list of Items
-            $scope.videos = boardlist;
+				var alertPopup = $ionicPopup.alert({
+					title: 'Categoies',
+					template: 'It seems we dont have a Category defined for this Game'
+				});
 
-            // Take the details from the content
-            // Use the Calcualtion
-            $scope.total = board.videos.total_rows;
-            $scope.position = board.videos.offset;
+				alertPopup.then(function (res) {
+					// Go Back to the Main Genres Screen
+					$state.go("board.genres");
+				});
 
-            // Delete Video List
-            delete board.videos
+			} else {
+				// Paint
+				$scope.banner = data.banner;
+				$scope.categories = data.categories;
+				$scope.gmid = data.gmid;
 
-            // Add Board to Scope
-            $scope.board = board;
+				$ionicLoading.hide();
 
-            // Let Angular know we have some data because of the Async nature of IBMBaaS
-            // This is required to make sure the information is uptodate
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
+				// This is required to make sure the information is uptodate
+				if (!$scope.$$phase) {
+					$scope.$apply();
+				}
+			}
 
-            // Hide the loading icons
-            $ionicLoading.hide();
+		}, function (err) {
 
-            // Lets Make a Call to the Service and then update the infinite scroll
-            $scope.$broadcast('scroll.infiniteScrollComplete');
+			// Hide any Progress
+			$ionicLoading.hide();
 
-            // Check we can move forward.
-            if ($scope.page && $scope.page <= parseInt(board.videos.offset)) {
-                $scope.page++;
-            } else {
-                // No More Data
-                return;
-            }
+			$scope.$emit('gb-error', err);
 
-        }, function(err) {
+		});
 
-            // Lets Make a Call to the Service and then update the infinite scroll
-            $scope.$broadcast('scroll.infiniteScrollComplete');
+		//});
 
-            $ionicLoading.hide();
-            $scope.vidoes = [];
+		//
+		//$scope.$on('$ionicView.loaded', function() {
 
-            // Show Connectivity Error 
-            if(_.has(err,"info") && err.info.status == "error") {
+		$scope.addBookmark = function () {
 
-                $scope.error = "Cannot connect to the cloud";
-                $scope.nodata = true;
+			// Build the Bookmark
+			var data = {
+				type: "CATEGORY",
+				gemid: $scope.gmid,
+				title: $scope.title
+			};
 
-               $scope.$emit('gb-error', err);
+			BookmarksService.addBookmark(data).then(function (status) {
 
-             } else {
+				// Tell User we have created the Book Mark
+				var infoPopup = $ionicPopup.alert({
+					title: 'Bookmark',
+					template: 'Bookmark has been saved for Category ' + $scope.title
+				});
 
-                // Then We have not found anything
-                if(_.has(err,"info") && err.info.statusCode == 404) {
+				infoPopup.then(function (res) {
 
-                    $scope.error = "No Videos have been found with this query";
-                    $scope.nodata = true;
-                }
+				});
 
-            }    
+			}, function (err) {
 
+				// Show Connectivity Error
+				if (_.has(err, "info") && err.info.status == "error") {
+					$rootScope.wifi();
+				} else {
 
-        });
+					var alertPopup = $ionicPopup.alert({
+						title: 'Bookmark',
+						template: 'Failed to create the Bookmark'
+					});
 
-    };
+					alertPopup.then(function (res) {
 
-    // If we get close to the end of the list and we have more 
-    $scope.loadMore = function() {
+					});
+				}
 
-        if (!$scope.message) {
-            $scope.message = 'Loading videos...';
-        } else {
-            $scope.message = 'More videos...';
-        }
+			});
 
-        // Check we can move one more page
-        // Add Some More
-        if ($scope.page <= $scope.total) {
-            $scope.loadItems($scope.page, $scope.pageSize);
-        }
-    };
+		}
 
-    // Load Some data on the Display
-    $timeout(function() {
-        if($ionicTabsDelegate.$getByHandle('video-tabs').selectedIndex() == 0 ) {
-            $scope.loadMore();
-        }
-    },300);
+		//   });
 
-    //    });
+	})
 
-    //  $scope.$on('$ionicView.loaded', function() {
+// A simple controller that shows a tapped item's data
+	.controller('BoardCtrl', function ($rootScope, $scope, $state, $stateParams, $ionicTabsDelegate, $ionicPopup, $ionicModal, $ionicLoading, BoardService, YouTubeService, WizardHandler, BookmarksService, ACCESS, $ionicActionSheet, $timeout) {
 
-    // Handle a Refresh to the Beginning 
-    $scope.onRefresh = function() {
-        $scope.page = 0;
-        $scope.message = null;
-        $scope.loadMore();
-    };
+		// Lets Check they can Add Video Content
+		$scope.registered = $rootScope.user.registered;
 
-    // Save a Bookmark 
-    $scope.addBookmark = function() {
+		// Triggered on a button click, or some other target
+		$scope.showActions = function () {
 
-        // Build the Bookmark
-        var data = {
-            type: "CATEGORY",
-            bid: $scope.bid,
-            title: $scope.title
-        };
+			// Show the action sheet
+			var hideSheet = $ionicActionSheet.show({
+				buttons: [
+					{text: '<b>Share</b> This'},
+					{text: 'View'},
+					{text: '<b>Rate</b> this'}
+				],
+				titleText: 'Actions for this Video',
+				cancelText: 'Cancel',
+				cancel: function () {
+					// add cancel code..
+				},
+				buttonClicked: function (index) {
+					return true;
+				}
+			});
 
-        BookmarksService.addBookmark(data).then(function(status) {
+		};
 
-            // Tell User we have created the Book Mark
-            var infoPopup = $ionicPopup.alert({
-                title: 'Bookmark',
-                template: 'Bookmark has been saved for this Board ' + $scope.title
-            });
+		//$scope.$on('$ionicView.enter', function() {
 
-            infoPopup.then(function(res) {
+		var board = new Array();
+		var videos = new Array();
 
-            });
+		$scope.page = 0;
+		$scope.pageSize = 20;
+		$scope.total = 0;
+		$scope.position = 0;
 
-        }, function(err) {
+		// Load the Items
+		$scope.loadItems = function (page, size) {
 
-            if (err.info.status === "error") {
-                $scope.$emit('gb-error', err);
-            } else {
+			// Clear the List before adding new items
+			// This needs to be improved
+			$scope.boardlist = [];
 
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Bookmark',
-                    template: 'Failed to create the Bookmark'
-                });
+			// Refresh
+			if (!$scope.$$phase) {
+				$scope.$apply();
+			}
 
-                alertPopup.then(function(res) {
+			// Because we are retrieving all the items every time we do something
+			// We need to clear the list before loading in some new values
+			$ionicLoading.show({
+				template: $scope.message
+			});
 
-                });
-            }
+			// Because we are retrieving all the items every time we do something
+			// We need to clear the list before loading in some new values
+			$scope.bid = $stateParams.bid;
 
-        });
-    };
+			// "List is " is a service returning data from the
+			BoardService.all($scope.bid, page, size).then(function (board) {
 
-    // Create our modal
-    $ionicModal.fromTemplateUrl('templates/add-video.html', function(modal) {
-        $scope.videoModal = modal;
-    }, {
-        scope: $scope,
-        animation: 'slide-in-up',
-        focusFirstInput: true
-    });
+				// Reset the Array if we are on Page 1
+				if ($scope.page === 0) {
+					// Prepare for the Query
+					boardlist = new Array();
+				}
 
-    $scope.addVideo = function(video) {
+				// Set the Title
+				$scope.title = board.title;
 
-        // If they are not registered then you need to register
-        if (!$rootScope.user.registered) {
-            $state.go('register');
-        }
+				// Check what has been returned versus side of what we are returning
+				angular.forEach(board.videos.rows, function (value, key) {
+					boardlist.push(value.doc);
+				});
 
-        // Add the Item and then hide the modal view
-        BoardService.add(video).then(
-            function(payload) {
-                console.log("Video Added");
-            },
-            function(err) {
-                console.log(err);
-            }
-        );
+				// Update the model with a list of Items
+				$scope.videos = boardlist;
 
-        // Hide the Modal View
-        $scope.closeVideo();
+				// Take the details from the content
+				// Use the Calcualtion
+				$scope.total = board.videos.total_rows;
+				$scope.position = board.videos.offset;
 
-    };
+				// Delete Video List
+				delete board.videos
 
-    $scope.newVideo = function() {
+				// Add Board to Scope
+				$scope.board = board;
 
-        // Associate the User
-        $scope.user = $rootScope.user;
+				// Let Angular know we have some data because of the Async nature of IBMBaaS
+				// This is required to make sure the information is uptodate
+				if (!$scope.$$phase) {
+					$scope.$apply();
+				}
 
-        // Hide Back button
-        $scope.back = false;
+				// Hide the loading icons
+				$ionicLoading.hide();
 
-        // Start The Wizard from the Beginning
-        WizardHandler.wizard().goTo(0);
+				// Lets Make a Call to the Service and then update the infinite scroll
+				$scope.$broadcast('scroll.infiniteScrollComplete');
 
-        // Lets load the Videos for the Youtube Channel
-        $ionicLoading.show({
-            template: 'Accessing Youtube ...'
-        });
+				// Check we can move forward.
+				if ($scope.page && $scope.page <= parseInt(board.videos.offset)) {
+					$scope.page++;
+				} else {
+					// No More Data
+					return;
+				}
 
-        // Need to Check if we have got some already
-        YouTubeService.getYourVideos().then(function(data) {
+			}, function (err) {
 
-            // Paint the List of Youtube Videos
-            $scope.videos = data.items;
+				// Lets Make a Call to the Service and then update the infinite scroll
+				$scope.$broadcast('scroll.infiniteScrollComplete');
 
-            // This is required to make sure the information is uptodate
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
+				$ionicLoading.hide();
+				$scope.vidoes = [];
 
-            $ionicLoading.hide();
+				// Show Connectivity Error
+				if (_.has(err, "info") && err.info.status == "error") {
 
-        }, function(err) {
-            console.log(err)
-            $ionicLoading.hide();
-        });
+					$scope.error = "Cannot connect to the cloud";
+					$scope.nodata = true;
 
-        // Reverse the Paint Bug
-        $scope.videoModal.show();
+					$scope.$emit('gb-error', err);
 
-    };
+				} else {
 
-    $scope.closeVideo = function() {
-        // Reverse the Paint Bug
-        $scope.videoModal.hide();
-    };
+					// Then We have not found anything
+					if (_.has(err, "info") && err.info.statusCode == 404) {
 
-    $scope.wizardBack = function() {
+						$scope.error = "No Videos have been found with this query";
+						$scope.nodata = true;
+					}
 
-        if ($scope.currentStep == "Videos") {
-            $scope.back = false;
-        }
-        WizardHandler.wizard().previous();
-    };
+				}
 
-    $scope.selectVideo = function(_video) {
 
-        $scope.video = null;
+			});
 
-        // Get the Video Details
-        $scope.back = true;
+		};
 
-        $ionicLoading.show({
-            template: 'Fetching Video...'
-        });
+		// If we get close to the end of the list and we have more
+		$scope.loadMore = function () {
 
-        // Lets get the Information we need
-        var _id = null;
-        if (_.has(_video, "snippet")) {
-            var _id = _video.snippet.resourceId.videoId
-        } else {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Youtube',
-                template: 'The video item does not seem to be valid'
-            });
-            return;
-        }
+			if (!$scope.message) {
+				$scope.message = 'Loading videos...';
+			} else {
+				$scope.message = 'More videos...';
+			}
 
-        // Get the Video Details
-        YouTubeService.getVideo(_id).then(function(data) {
+			// Check we can move one more page
+			// Add Some More
+			if ($scope.page <= $scope.total) {
+				$scope.loadItems($scope.page, $scope.pageSize);
+			}
+		};
 
-            // Paint the List of Youtube Videos
-            $scope.video = data;
+		// Load Some data on the Display
+		$timeout(function () {
+			if ($ionicTabsDelegate.$getByHandle('video-tabs').selectedIndex() == 0) {
+				$scope.loadMore();
+			}
+		}, 300);
 
-            // This is required to make sure the information is uptodate
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
+		//    });
 
-            $ionicLoading.hide();
+		//  $scope.$on('$ionicView.loaded', function() {
 
+		// Handle a Refresh to the Beginning
+		$scope.onRefresh = function () {
+			$scope.page = 0;
+			$scope.message = null;
+			$scope.loadMore();
+		};
 
-        }, function(err) {
-            console.log(err)
-            $ionicLoading.hide();
-        });
+		// Save a Bookmark
+		$scope.addBookmark = function () {
 
-        // Could make it display before, lets see how this works
-        // Initialize the Video Display
-        WizardHandler.wizard().next();
+			// Build the Bookmark
+			var data = {
+				type: "CATEGORY",
+				bid: $scope.bid,
+				title: $scope.title
+			};
 
-    };
+			BookmarksService.addBookmark(data).then(function (status) {
 
-    $scope.viewVideo = function(video) {
+				// Tell User we have created the Book Mark
+				var infoPopup = $ionicPopup.alert({
+					title: 'Bookmark',
+					template: 'Bookmark has been saved for this Board ' + $scope.title
+				});
 
-        // Check we have something to display
-        if (!video) {
+				infoPopup.then(function (res) {
 
-            var alertPopup = $ionicPopup.alert({
-                title: 'Youtube',
-                template: 'The video item does not seem to be valid'
-            });
-            return;
-        }
+				});
 
-        // Prepare Video URL
-        var videoUrl = ACCESS.EMBED + video.id;
+			}, function (err) {
 
-        // Play a video with callbacks
-        var options = {
-            successCallback: function() {
-                console.log("Video was closed without error.");
-            },
-            errorCallback: function(errMsg) {
-                console.log("Error! " + errMsg);
-            }
-        };
+				if (err.info.status === "error") {
+					$scope.$emit('gb-error', err);
+				} else {
 
-        // Open the Media Player
-        window.plugins.streamingMedia.playVideo(videoUrl, options);
+					var alertPopup = $ionicPopup.alert({
+						title: 'Bookmark',
+						template: 'Failed to create the Bookmark'
+					});
 
-    };
+					alertPopup.then(function (res) {
 
-    $scope.useVideo = function(video) {
+					});
+				}
 
-        // Flesh out the Video model from what we have let the user add the rest
-        // Lets build up an Object model for the gamer to edit
-        var bid = $scope.bid;
-        var views = $scope.video.statistics.viewCount;
-        try {
-            bid = parseInt(bid);
-            views = parseInt(views);
-            rank = views;
-        } catch (e) {
-            console.log(e);
-        }
+			});
+		};
 
-        // Build Model Object from known data and ask for a few more details
-        // This composite model will be used by 
-        $scope.add = {
-            title: $scope.video.snippet.title,
-            description: $scope.video.snippet.description,
-            gametag: $scope.user.gametag,
-            ytid: $scope.video.id,
-            ytimage: $scope.video.snippet.thumbnails.default.url,
-            bid: bid,
-            muuid: $scope.user.raw.id,
-            location: $scope.user.location,
-            views: views,
-            rank: views,
-            recorddate: $scope.video.snippet.publishedAt,
-            platform: "PS",
-            rating : 0
+		// Create our modal
+		$ionicModal.fromTemplateUrl('templates/add-video.html', function (modal) {
+			$scope.videoModal = modal;
+		}, {
+			scope: $scope,
+			animation: 'slide-in-up',
+			focusFirstInput: true
+		});
 
-        };
+		$scope.addVideo = function (video) {
 
-        // Initialize the Video Display
-        WizardHandler.wizard().next();
+			// If they are not registered then you need to register
+			if (!$rootScope.user.registered) {
+				$state.go('register');
+			}
 
-    };
+			// Add the Item and then hide the modal view
+			BoardService.add(video).then(
+				function (payload) {
+					console.log("Video Added");
+				},
+				function (err) {
+					console.log(err);
+				}
+			);
 
-    $scope.addVideo = function(add) {
+			// Hide the Modal View
+			$scope.closeVideo();
 
-        console.log("Add Video");
-        if (!_.isObject(add)) {
-            console.log("Video to add is not an object");
-        }
+		};
 
-        // Add the Video to the Board
-        BoardService.registerVideo(add).then(function(success) {
+		$scope.newVideo = function () {
 
-            // Move to the Finish Wizard Page
-            // Initialize the Video Display
-            WizardHandler.wizard().next();
+			// Associate the User
+			$scope.user = $rootScope.user;
 
-        }).catch(function(err) {
+			// Hide Back button
+			$scope.back = false;
 
-            var alertPopup = $ionicPopup.alert({
-                title: 'Register',
-                template: 'Failed to register video'
-            });
-            return;
-        })
+			// Start The Wizard from the Beginning
+			WizardHandler.wizard().goTo(0);
 
-    }
+			// Lets load the Videos for the Youtube Channel
+			$ionicLoading.show({
+				template: 'Accessing Youtube ...'
+			});
 
-    // Finish the Wizard 
-    $scope.finish = function() {
+			// Need to Check if we have got some already
+			YouTubeService.getYourVideos().then(function (data) {
 
-        // Refresh the View 
-        $scope.onRefresh();
+				// Paint the List of Youtube Videos
+				$scope.videos = data.items;
 
-        // Hide The dialog
-        $scope.videoModal.hide();
+				// This is required to make sure the information is uptodate
+				if (!$scope.$$phase) {
+					$scope.$apply();
+				}
 
-    }
+				$ionicLoading.hide();
 
-    // Handle a Refresh to the Beginning 
-    //});
+			}, function (err) {
+				console.log(err)
+				$ionicLoading.hide();
+			});
 
-})
+			// Reverse the Paint Bug
+			$scope.videoModal.show();
+
+		};
+
+		$scope.closeVideo = function () {
+			// Reverse the Paint Bug
+			$scope.videoModal.hide();
+		};
+
+		$scope.wizardBack = function () {
+
+			if ($scope.currentStep == "Videos") {
+				$scope.back = false;
+			}
+			WizardHandler.wizard().previous();
+		};
+
+		$scope.selectVideo = function (_video) {
+
+			$scope.video = null;
+
+			// Get the Video Details
+			$scope.back = true;
+
+			$ionicLoading.show({
+				template: 'Fetching Video...'
+			});
+
+			// Lets get the Information we need
+			var _id = null;
+			if (_.has(_video, "snippet")) {
+				var _id = _video.snippet.resourceId.videoId
+			} else {
+				var alertPopup = $ionicPopup.alert({
+					title: 'Youtube',
+					template: 'The video item does not seem to be valid'
+				});
+				return;
+			}
+
+			// Get the Video Details
+			YouTubeService.getVideo(_id).then(function (data) {
+
+				// Paint the List of Youtube Videos
+				$scope.video = data;
+
+				// This is required to make sure the information is uptodate
+				if (!$scope.$$phase) {
+					$scope.$apply();
+				}
+
+				$ionicLoading.hide();
+
+
+			}, function (err) {
+				console.log(err)
+				$ionicLoading.hide();
+			});
+
+			// Could make it display before, lets see how this works
+			// Initialize the Video Display
+			WizardHandler.wizard().next();
+
+		};
+
+		$scope.viewVideo = function (video) {
+
+			// Check we have something to display
+			if (!video) {
+
+				var alertPopup = $ionicPopup.alert({
+					title: 'Youtube',
+					template: 'The video item does not seem to be valid'
+				});
+				return;
+			}
+
+			// Prepare Video URL
+			var videoUrl = ACCESS.EMBED + video.id;
+
+			// Play a video with callbacks
+			var options = {
+				successCallback: function () {
+					console.log("Video was closed without error.");
+				},
+				errorCallback: function (errMsg) {
+					console.log("Error! " + errMsg);
+				}
+			};
+
+			// Open the Media Player
+			window.plugins.streamingMedia.playVideo(videoUrl, options);
+
+		};
+
+		$scope.useVideo = function (video) {
+
+			// Flesh out the Video model from what we have let the user add the rest
+			// Lets build up an Object model for the gamer to edit
+			var bid = $scope.bid;
+			var views = $scope.video.statistics.viewCount;
+			try {
+				bid = parseInt(bid);
+				views = parseInt(views);
+				rank = views;
+			} catch (e) {
+				console.log(e);
+			}
+
+			// Build Model Object from known data and ask for a few more details
+			// This composite model will be used by
+			$scope.add = {
+				title: $scope.video.snippet.title,
+				description: $scope.video.snippet.description,
+				gametag: $scope.user.gametag,
+				ytid: $scope.video.id,
+				ytimage: $scope.video.snippet.thumbnails.default.url,
+				bid: bid,
+				muuid: $scope.user.raw.id,
+				location: $scope.user.location,
+				views: views,
+				rank: views,
+				recorddate: $scope.video.snippet.publishedAt,
+				platform: "PS",
+				rating: 0
+
+			};
+
+			// Initialize the Video Display
+			WizardHandler.wizard().next();
+
+		};
+
+		$scope.addVideo = function (add) {
+
+			console.log("Add Video");
+			if (!_.isObject(add)) {
+				console.log("Video to add is not an object");
+			}
+
+			// Add the Video to the Board
+			BoardService.registerVideo(add).then(function (success) {
+
+				// Move to the Finish Wizard Page
+				// Initialize the Video Display
+				WizardHandler.wizard().next();
+
+			}).catch(function (err) {
+
+				var alertPopup = $ionicPopup.alert({
+					title: 'Register',
+					template: 'Failed to register video'
+				});
+				return;
+			})
+
+		}
+
+		// Finish the Wizard
+		$scope.finish = function () {
+
+			// Refresh the View
+			$scope.onRefresh();
+
+			// Hide The dialog
+			$scope.videoModal.hide();
+
+		}
+
+		// Handle a Refresh to the Beginning
+		//});
+
+	})
 
 // A simple controller that shows retrieves a list of You Tube Videos
-.controller('YTVideoDetailCtrl', function($scope, $stateParams, YouTubeService, $ionicLoading) {
+	.controller('YTVideoDetailCtrl', function ($scope, $stateParams, YouTubeService, $ionicLoading) {
 
-    // Lets load the Videos for the Youtube Channel
-    $ionicLoading.show({
-        template: 'Loading ...'
-    });
+		// Lets load the Videos for the Youtube Channel
+		$ionicLoading.show({
+			template: 'Loading ...'
+		});
 
 
-})
+	})
 
 // A simple controller that shows retrieves a list of You Tube Videos
-.controller('VideoCtrl', function($scope, $stateParams, VideoService, $ionicLoading) {
+	.controller('VideoCtrl', function ($scope, $stateParams, VideoService, $ionicLoading) {
 
-    // Retrieve the Video content
-    // Lets load the Videos for the Youtube Channel
-    $ionicLoading.show({
-        template: 'Loading ...'
-    });
+		// Retrieve the Video content
+		// Lets load the Videos for the Youtube Channel
+		$ionicLoading.show({
+			template: 'Loading ...'
+		});
 
-    // Need to Check if we have got some already
-    VideoService.get($stateParams.uuid).then(function(video) {
+		// Need to Check if we have got some already
+		VideoService.get($stateParams.uuid).then(function (video) {
 
-        // Paint 
-        $scope.video = video;
+			// Paint
+			$scope.video = video;
 
-        // This is required to make sure the information is uptodate
-        if (!$scope.$$phase) {
-            $scope.$apply();
-        }
-        $ionicLoading.hide();
+			// This is required to make sure the information is uptodate
+			if (!$scope.$$phase) {
+				$scope.$apply();
+			}
+			$ionicLoading.hide();
 
-    }, function(err) {
-        console.log(err)
-        $ionicLoading.hide();
-    });
+		}, function (err) {
+			console.log(err)
+			$ionicLoading.hide();
+		});
 
-    // Add Sharing
+		// Add Sharing
 
-    // Social information 
+		// Social information
 
-    // Likes helps etc etc 
+		// Likes helps etc etc
 
-    // Comments
+		// Comments
 
-});
+	});

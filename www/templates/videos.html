@@ -2,10 +2,10 @@
 
 	<ion-nav-buttons side="right">
 
-		<button ng-click="newVideo()" class="button button-positive button-clear icon-left ion-videocamera">
+		<button ng-click="newVideo()" ng-if="registered" class="button button-positive button-clear icon-left ion-videocamera">
 		</button>
 
-		<button class="button button-clear button-positive" ng-click="addBookmark()">
+		<button class="button button-clear button-positive"  ng-if="registered" ng-click="addBookmark()">
 			<i class="icon ion-bookmark"></i>
 		</button>
 

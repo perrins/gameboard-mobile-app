@@ -1,6 +1,6 @@
 {
   "name": "gameboard-mobile-app",
-  "version": "0.0.53",
+  "version": "0.0.58",
   "codename": "Joe Release",
   "author": {
     "name": [
@@ -13,9 +13,9 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-compress": "~0.7.0",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-copy": "*",
     "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-jshint": "*",
     "grunt-contrib-uglify": "~0.3.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-conventional-changelog": "~1.1.0",
@@ -35,7 +35,9 @@
     "ionic": "^1.1.7",
     "load-grunt-tasks": "^0.4.0",
     "time-grunt": "^0.3.1",
-    "which": "^1.0.8"
+    "which": "^1.0.8",
+    "grunt-shell": "*",
+    "grunt-bumpup": "*"
   },
   "licenses": [
     {

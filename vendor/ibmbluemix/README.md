@@ -7,7 +7,7 @@ the client and the Mobile Cloud Services in Bluemix.
 
 When you use Bluemix to create a Mobile Cloud application, BlueMix provisions multiple services under a single application context. Your mobile application is given access to the following mobile services: Mobile Application Security, Push, and Mobile Data.
 
-Version: v1.0.0-20141204-1549
+Version: v1.0.0-20150112-0905
 
 ##Install the SDK
 You can install the SDK by downloading a [zip file](https://mbaas-catalog.ng.bluemix.net/sdk/ibm-bluemix-sdk-javascript.zip),
@@ -86,7 +86,7 @@ To learn more about using the SDK, please consult the following resources:
 [Meetup](http://www.meetup.com/bluemix/)
 
 *Licensed Materials - Property of IBM
-(C) Copyright IBM Corp. 2013, 2014. All Rights Reserved.
+(C) Copyright IBM Corp. 2013, 2015. All Rights Reserved.
 US Government Users Restricted Rights - Use, duplication or
 disclosure restricted by GSA ADP Schedule Contract with IBM Corp.*
 
