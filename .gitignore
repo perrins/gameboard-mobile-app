@@ -17,11 +17,12 @@ www/scss/**
 **/.DS_STORE
 
 # NPM modules
-node_modules
+node_modules/
 
 # Bower modules
-vendor
+vendor/
 
 # IDE Stuff
-.idea
-tmp
+.idea/
+tmp/
+
