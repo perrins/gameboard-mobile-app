@@ -1,5 +1,7 @@
-Gameboard Mobile App
+Gameboard Mobile App 
 =====================
+
+[![bitHound Score](https://www.bithound.io/projects/badges/fc6e4780-ae06-11e4-a235-f33ecd1bc26e/score.svg)](https://www.bithound.io/perrins/gameboard-mobile-app)
 
 This project contains the code for the Mobile Client App for the Gameboard Video ranking service
 

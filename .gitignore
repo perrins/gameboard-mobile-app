@@ -1,7 +1,7 @@
 # IOS and Android Platforms
-platforms/
-engine/
-plugins/**
+platforms
+engine
+plugins
 
 # Keep these files
 !plugins/android.json
@@ -17,12 +17,11 @@ www/scss/**
 **/.DS_STORE
 
 # NPM modules
-node_modules/
+node_modules
 
 # Bower modules
-vendor/
+vendor
 
 # IDE Stuff
-.idea/
-tmp/
-
+.idea
+tmp

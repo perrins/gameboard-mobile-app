@@ -6,8 +6,15 @@ angular.module("gameboard", [
 	"mgo-angular-wizard",
 	"gameboard.directives",
 	"gameboard.controllers",
+
 	"gameboard.board.controllers",
-	"gameboard.member.favourites",
+
+    "gameboard.boards.genres",
+    "gameboard.boards.games",
+    "gameboard.boards.categories",
+
+    "gameboard.member.favourites",
+
 	"gameboard.controllers.member",
 	"gameboard.search.controllers",
 	"gameboard.board.services",
@@ -187,33 +194,7 @@ angular.module("gameboard", [
 				controller: "MainCtrl",
 				resolve : init
 			})
-			.state("board.genres", {
-				url: "/genres",
-				views: {
-					"menuContent": {
-						templateUrl: "templates/genres.html",
-						controller: "GenresCtrl",
-					}
-				}
-			})
-			.state("board.games", {
-				url: "/games/:genid",
-				views: {
-					"menuContent": {
-						templateUrl: "templates/games.html",
-						controller: "GamesCtrl"
-					}
-				}
-			})
-			.state("board.categories", {
-				url: "/categories/:genid/:gmid",
-				views: {
-					"menuContent": {
-						templateUrl: "templates/categories.html",
-						controller: "CategoriesCtrl"
-					}
-				}
-			})
+
 			.state("board.videos", {
 				url: "/videos/:bid",
 				views: {
