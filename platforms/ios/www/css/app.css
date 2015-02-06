@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: 'BebasNeueRegular';
   src: url('fonts/BebasNeue-webfont.eot');
@@ -26,7 +27,7 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
   background-color: black; }
 
 .body {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   font-family: Constantia, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
   opacity: 1;
   margin-bottom: 57px; }
@@ -140,7 +141,8 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 
 .genre-image-show {
   opacity: 1;
-  transition: opacity 0.4s ease-in; }
+  -webkit-transition: opacity .4s ease-in;
+          transition: opacity .4s ease-in; }
 
 .gameBanner img {
   width: 100%;
@@ -185,10 +187,10 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
   padding-bottom: 5px; }
 
 .ImageButton .subtitle {
-  font-size: 0.75em; }
+  font-size: .75em; }
 
 .ImageButton .count {
-  font-size: 0.5em;
+  font-size: .5em;
   color: green; }
 
 .ImageButton .title {
@@ -374,7 +376,6 @@ div.bigViews {
   z-index: 0;
   -webkit-backface-visibility: hidden;
   -webkit-animation: imageAnimation 36s linear infinite 0s;
-  -ms-animation: imageAnimation 36s linear infinite 0s;
   animation: imageAnimation 36s linear infinite 0s; }
 
 .cb-slideshow li div {
@@ -385,7 +386,6 @@ div.bigViews {
   width: 100%;
   opacity: 0;
   -webkit-animation: titleAnimation 36s linear infinite 0s;
-  -ms-animation: titleAnimation 36s linear infinite 0s;
   animation: titleAnimation 36s linear infinite 0s; }
 
 .signInAnimate div {
@@ -570,13 +570,11 @@ div.bigViews {
 
 @media screen and (max-width: 1140px) {
   .cb-slideshow li div h3 {
-    font-size: 100px; }
- }
+    font-size: 100px; } }
 
 @media screen and (max-width: 600px) {
   .cb-slideshow li div h3 {
-    font-size: 50px; }
- }
+    font-size: 50px; } }
 
 .container {
   position: relative; }
@@ -651,7 +649,8 @@ div.bigViews {
   border-radius: 20px 0 0 0;
   -webkit-animation: 2s waitingSmall 0s infinite;
           animation: 2s waitingSmall 0s infinite;
-  transition: border-radius;
+  -webkit-transition: border-radius;
+          transition: border-radius;
   content: "...";
   text-align: center;
   line-height: 40px;
@@ -697,7 +696,8 @@ div.bigViews {
   border-radius: 30px 0 0 0;
   -webkit-animation: 2s waiting 0s infinite;
           animation: 2s waiting 0s infinite;
-  transition: border-radius;
+  -webkit-transition: border-radius;
+          transition: border-radius;
   content: "...";
   text-align: center;
   line-height: 40px;

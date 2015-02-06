@@ -50,7 +50,7 @@
         Add Videos and track the best.
     </description>
     <author email="info@game-board.co" href="http://game-board.co/">
-      Game-board Ltd
+        Game-board Ltd
     </author>
     <content src="index.html" />
     <access origin="https://oauth.io/*" />
@@ -63,7 +63,7 @@
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="2000" />
     <plugins>
         <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
     </plugins>
