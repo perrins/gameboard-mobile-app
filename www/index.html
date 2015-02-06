@@ -28,6 +28,7 @@
 	<script src="lib/angular/angular-wizard.min.js"></script>
 
 	<script src="lib/collide/collide.js"></script>
+
 	<!-- Load the Vendor Elements -->
 	<script src="lib/gameboard-mobile-app.vendor.min.js"></script>
 	<!-- cordova script (this will be a 404 during development) -->
@@ -53,7 +54,13 @@
 	<!-- Controllers -->
 	<script src="js/controllers/controllers.js"></script>
 	<script src="js/controllers/boardController.js"></script>
+
+    // Main Controllers
 	<script src="js/member/favourites.js"></script>
+    <script src="js/boards/genres.js"></script>
+    <script src="js/boards/games.js"></script>
+    <script src="js/boards/categories.js"></script>
+
 	<script src="js/controllers/memberController.js"></script>
 	<script src="js/controllers/searchController.js"></script>
 	<script src="js/controllers/settings.js"></script>
@@ -61,6 +68,6 @@
 	<script src="js/directives/directives.js"></script>
 </head>
 <body id="main" ng-app="gameboard" animation="slide-left-right-ios7" class="hidden fadeSignin">
-<ion-nav-view class="appContainer"></ion-nav-view>
+    <ion-nav-view class="appContainer"></ion-nav-view>
 </body>
 </html>
