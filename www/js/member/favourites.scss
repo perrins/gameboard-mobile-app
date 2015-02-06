@@ -1,5 +1,7 @@
+@import "../../scss/_variables";
+
 .favourites.pane {
-	background: url(../img/favouritesBack.jpg);
+	background: url('#{$image-path}/backgrounds/favourites.jpg');
 	background-size: cover;
 	.item {
 		background: transparent;
