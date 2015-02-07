@@ -10,7 +10,6 @@ plugins
 # Bower
 www/components/**
 www/lib/**
-www/scss/**
 
 # Other
 **/.DS_store
