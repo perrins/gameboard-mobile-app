@@ -54,7 +54,7 @@
 				set: setter,
 				enumerable: true
 			});
-			return;
+
 		}
 	};
 

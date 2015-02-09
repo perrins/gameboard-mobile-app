@@ -4,8 +4,7 @@ define('ibm/baas/service/cloudcode/IBMCloudCodeService', function (require, expo
 function IBMCloudCodeService(appName) {
     this.setAppName(appName);
   }
-  ;
-  IBMCloudCodeService.prototype = {
+    IBMCloudCodeService.prototype = {
     _baseUrl: null,
     appName: null,
     setAppName: function (appName) {
@@ -45,4 +44,4 @@ function IBMCloudCodeService(appName) {
   return IBMCloudCodeService;
 
 
-})
+});

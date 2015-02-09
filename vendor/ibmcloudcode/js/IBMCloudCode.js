@@ -454,8 +454,7 @@ function IBMCloudCodeService(requester) {
     this.logger = IBMLogger.getLogger();
     this.requester = requester;
   }
-  ;
-  var SLASH = "/";
+    var SLASH = "/";
   IBMCloudCodeService.prototype = {
     METHOD_GET: "GET",
     METHOD_POST: "POST",
@@ -665,4 +664,4 @@ if (__isAMD) {
     }
 }
 }).call(this, (typeof exports === 'object' ? global : window),
-              (typeof exports === 'object' ? global : window))
+              (typeof exports === 'object' ? global : window));

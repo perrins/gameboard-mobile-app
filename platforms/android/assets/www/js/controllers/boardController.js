@@ -31,8 +31,8 @@ angular.module('gameboard.board.controllers', [])
 
 		//$scope.$on('$ionicView.enter', function() {
 
-		var board = new Array();
-		var videos = new Array();
+		var board = [];
+		var videos = [];
 
 		$scope.page = 0;
 		$scope.pageSize = 20;
@@ -67,7 +67,7 @@ angular.module('gameboard.board.controllers', [])
 				// Reset the Array if we are on Page 1
 				if ($scope.page === 0) {
 					// Prepare for the Query
-					boardlist = new Array();
+					boardlist = [];
 				}
 
 				// Set the Title
@@ -87,7 +87,7 @@ angular.module('gameboard.board.controllers', [])
 				$scope.position = board.videos.offset;
 
 				// Delete Video List
-				delete board.videos
+				delete board.videos;
 
 				// Add Board to Scope
 				$scope.board = board;
@@ -109,7 +109,7 @@ angular.module('gameboard.board.controllers', [])
 					$scope.page++;
 				} else {
 					// No More Data
-					return;
+
 				}
 
 			}, function (err) {
@@ -280,7 +280,7 @@ angular.module('gameboard.board.controllers', [])
 				$ionicLoading.hide();
 
 			}, function (err) {
-				console.log(err)
+				console.log(err);
 				$ionicLoading.hide();
 			});
 
@@ -340,7 +340,7 @@ angular.module('gameboard.board.controllers', [])
 
 
 			}, function (err) {
-				console.log(err)
+				console.log(err);
 				$ionicLoading.hide();
 			});
 
@@ -438,10 +438,10 @@ angular.module('gameboard.board.controllers', [])
 					title: 'Register',
 					template: 'Failed to register video'
 				});
-				return;
+
 			})
 
-		}
+		};
 
 		// Finish the Wizard
 		$scope.finish = function () {
@@ -452,7 +452,7 @@ angular.module('gameboard.board.controllers', [])
 			// Hide The dialog
 			$scope.videoModal.hide();
 
-		}
+		};
 
 		// Handle a Refresh to the Beginning
 		//});
@@ -492,7 +492,7 @@ angular.module('gameboard.board.controllers', [])
 			$ionicLoading.hide();
 
 		}, function (err) {
-			console.log(err)
+			console.log(err);
 			$ionicLoading.hide();
 		});
 

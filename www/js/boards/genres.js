@@ -16,56 +16,57 @@ angular.module("gameboard.boards.genres", [])
 
     .controller('GenresCtrl', function ($rootScope, $scope, $ionicPopup, $ionicLoading, GenresService) {
 
-//    $scope.$on('$ionicView.loaded', function() {
+        // Handle the Load
+        $scope.$on('$ionicView.loaded', function() {
 
-        // Show what we are doing
-        $ionicLoading.show({
-            template: "<i class=\"ion-loading-c\"></i><span>&nbsp;Loading Genres...</span>"
-        });
+            // Show what we are doing
+            $ionicLoading.show({
+                template: "<i class=\"ion-loading-c\"></i><span>&nbsp;Loading Genres...</span>"
+            });
 
-        // Need to Check if we have got some already
-        GenresService.all().then(function (genres) {
+            // Need to Check if we have got some already
+            GenresService.all().then(function (genres) {
 
-            // Check we have some Games for this Genre
-            if (_.isNull(genres)) {
+                // Check we have some Games for this Genre
+                if (_.isNull(genres)) {
 
-                $ionicLoading.hide();
+                    $ionicLoading.hide();
 
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Games',
-                    template: 'It seems we dont have any Genres to list'
-                });
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Games',
+                        template: 'It seems we dont have any Genres to list'
+                    });
 
-                alertPopup.then(function (res) {
-                    // Handle the Next step
-                });
+                    alertPopup.then(function (res) {
+                        // Handle the Next step
+                    });
 
-            } else {
+                } else {
 
 
-                // Paint
-                $scope.genres = genres;
+                    // Paint
+                    $scope.genres = genres;
 
-                // Hide the Loading Message
-                $ionicLoading.hide();
+                    // Hide the Loading Message
+                    $ionicLoading.hide();
 
-                // Let Angular know we have some data because of the Async nature of IBMBaaS
-                // This is required to make sure the information is uptodate
-                if (!$scope.$$phase) {
-                    $scope.$apply();
+                    // Let Angular know we have some data because of the Async nature of IBMBaaS
+                    // This is required to make sure the information is uptodate
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
                 }
-            }
 
-        }, function (err) {
+            }, function (err) {
 
-            // Handle Display of No Data and No Connection
-            $ionicLoading.hide();
+                // Handle Display of No Data and No Connection
+                $ionicLoading.hide();
 
-            $scope.$emit('gb-error', err);
+                $scope.$emit('gb-error', err);
+
+            });
 
         });
-
-
     })
 
     /**
@@ -136,7 +137,7 @@ angular.module("gameboard.boards.genres", [])
                         if (genre.gid == gid) {
                             _genre = genre;
                         }
-                    })
+                    });
 
                     // Check if we have found one
                     if (!_.isNull(_genre)) {

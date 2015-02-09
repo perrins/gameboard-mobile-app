@@ -4,4 +4,4 @@ module.exports = function() {
             return 'MY_HASH'
         }
     };
-}
+};

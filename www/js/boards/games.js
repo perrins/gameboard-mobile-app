@@ -123,7 +123,7 @@ angular.module("gameboard.boards.games", [])
 
             });
 
-        }
+        };
 
         //    });
 
@@ -143,7 +143,7 @@ angular.module("gameboard.boards.games", [])
             // Return all the Objects for a Given Class
             all: function (genid) {
 
-                var _genid = null
+                var _genid = null;
                 try {
                     var _genid = parseInt(genid);
                 } catch (err) {
@@ -216,7 +216,7 @@ angular.module("gameboard.boards.games", [])
                 // Resolve the Cache
                 this.all(genid).then(function (item) {
 
-                    var games = item.games
+                    var games = item.games;
                     var _game = null;
                     games.forEach(function (game) {
                         if (game.gmid == gmid) {

@@ -123,7 +123,7 @@ var IABExecs = {
                     } else {
                         back.classList.add('disabled');
                     }
-                }
+                };
                 var forwardReq = browserElem.getCanGoForward();
                 forwardReq.onsuccess = function() {
                     if (this.result) {
@@ -132,8 +132,7 @@ var IABExecs = {
                         forward.classList.add('disabled');
                     }
                 }
-            };
-
+            }
             browserElem.addEventListener('mozbrowserloadend', checkForwardBackward);
 
             close.addEventListener('click', function () {

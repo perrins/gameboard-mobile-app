@@ -103,7 +103,7 @@ angular.module("gameboard.directives", [])
 			replace: true,
 			template: "<span class='current-time'>{{currentTime}}</span>",
 			scope: {
-				localtz: "=",
+				localtz: "="
 			},
 			link: function ($scope, $element, $attr) {
 				$timeout(function checkTime() {

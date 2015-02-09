@@ -44,7 +44,7 @@ angular.module("gameboard.search.services", [])
 				}).catch(function (err) {
 					console.log(err);
 					def.reject(err);
-				})
+				});
 
 				// Get the Objects for a particular Type
 				return def.promise;

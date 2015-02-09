@@ -180,7 +180,7 @@ angular.module('mgo-angular-wizard').directive('wizard', function() {
                         $scope.$emit('wizard:stepChanged', {step: step, index: _.indexOf($scope.steps , step)});
                         //$log.log('current step number: ', $scope.currentStepNumber());
                     } else {
-                        return;
+
                     }
                 }
             };

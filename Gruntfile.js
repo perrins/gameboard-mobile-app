@@ -38,9 +38,22 @@ module.exports = function(grunt) {
 		            download: false, // Disable download of this app
 		            file: '/Users/matthewperrins/projects/gameboard-mobile-app/platforms/android/ant-build/CordovaApp-debug.apk' // Path to file
 	        	}
-		    }
+		    },
 
-	   }, 
+            /**
+             * App-specific options
+             */
+            IOS: {
+                options: {
+                    token: '09694e98bdaf4fb9aa0273faeb3117d5', // Upload Token
+                    app_id: '27f846d3d03a41bab432cd3968b79d5b', // Application ID
+                    download: false, // Disable download of this app
+                    file: '/Users/matthewperrins/projects/gameboard-mobile-app/platforms/ios/build/Gameboard.ipa' // Path to file
+                }
+            }
+
+
+        },
 
 		clean: {
 			options: {
@@ -311,8 +324,10 @@ module.exports = function(grunt) {
             command: 'cordova build android --release'
           },
           buildIpa: {
-            command: '/usr/bin/xcrun -sdk iphoneos PackageApplication -v "/./platforms/ios/build/Gameboard.app" -o "/<projectPath>/platforms/ios/build/Gameboard.ipa" --sign "iPhone Developer: Matthew Perrins (HQ89NV2SGV)" --embed "/./Dev/Keys/iOS/Rhino_Software_AdHoc.mobileprovision"'
+            command: '/usr/bin/xcrun -sdk iphoneos PackageApplication -v "platforms/ios/build/emulator/Gameboard.app" -o "platforms/ios/build/Gameboard.ipa" --sign "iPhone Developer: Matthew Perrins (HQ89NV2SGV)" -o "Gameboard.ipa" --embed "dev/Gameboard_Adhoc.mobileprovision"'
           }
+
+
         },
 
 		pkg: grunt.file.readJSON('package.json')
@@ -340,8 +355,7 @@ module.exports = function(grunt) {
 		'bumpup:build',
         'shell:prepare',
 		'shell:build',
-        'shell:buildApk',
-		'shell:buildIpa', 
+		'shell:buildIpa',
 		'copy:apps']);
 
 	grunt.registerMultiTask('version', 'Generate version JSON', function() {

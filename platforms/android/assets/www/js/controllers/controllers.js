@@ -135,7 +135,7 @@ angular.module("gameboard.controllers", [])
 					$state.go("intro");
 				}
 
-			}
+			};
 
 			// Check if we are in local testing mode and then fake a user
 			// and go to the Intro Views.
@@ -340,7 +340,7 @@ angular.module("gameboard.controllers", [])
 				template: "Failed to register your details, please try again later"
 			});
 
-			return;
+
 		});
 
 		// Move the Name section

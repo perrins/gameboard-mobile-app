@@ -2919,7 +2919,7 @@ var _IBMLoggerLevel = function (weight, name) {
     this.weight = weight;
     this.name = name;
   };
-  var levels = new Array(new _IBMLoggerLevel(1000, "ERROR"), new _IBMLoggerLevel(900, "WARN"), new _IBMLoggerLevel(800, "INFO"), new _IBMLoggerLevel(700, "DEBUG"), new _IBMLoggerLevel(600, "VERBOSE"));
+  var levels = [new _IBMLoggerLevel(1000, "ERROR"), new _IBMLoggerLevel(900, "WARN"), new _IBMLoggerLevel(800, "INFO"), new _IBMLoggerLevel(700, "DEBUG"), new _IBMLoggerLevel(600, "VERBOSE")];
   var IBMLoggerLevel = {
     levels: levels,
     getLevel: function (level) {
@@ -7035,8 +7035,7 @@ define('ibm/mobile/utils/IBMUriBuilder', ['require','exports','module'],function
     }
     return this;
   }
-  ;
-  IBMUriBuilder.prototype = {
+      IBMUriBuilder.prototype = {
     _uri: "",
     constructor: IBMUriBuilder,
     append: function (segment) {
@@ -7598,8 +7597,7 @@ var VCAP_SERVICES_NAME = "VCAP_SERVICES";
     }
     return mbaasConfig;
   }
-  ;
-  function exportConfiguration() {
+    function exportConfiguration() {
     mbaasConfig.port = process.env.VCAP_APP_PORT || VCAP_APP_PORT_ENVLOG || 3000;
     if (getApplicationId()) {
       mbaasConfig.applicationId = getApplicationId();
@@ -7770,4 +7768,4 @@ if (__isAMD) {
     }
 }
 }).call(this, (typeof exports === 'object' ? global : window),
-              (typeof exports === 'object' ? global : window))
+              (typeof exports === 'object' ? global : window));

@@ -121,7 +121,7 @@ angular.module("gameboard.boards.categories", [])
 
             });
 
-        }
+        };
 
         //   });
 
@@ -141,7 +141,7 @@ angular.module("gameboard.boards.categories", [])
             // Return all the Objects for a Given Class
             all: function (gmid) {
 
-                var _gmid = null
+                var _gmid = null;
                 try {
                     var _gmid = parseInt(gmid);
                 } catch (err) {
@@ -218,7 +218,7 @@ angular.module("gameboard.boards.categories", [])
                     if (cat.cid == cid) {
                         _cat = cat;
                     }
-                })
+                });
 
                 return _cat;
 

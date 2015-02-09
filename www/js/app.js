@@ -30,25 +30,6 @@ angular.module("gameboard", [
 		// Handle Loading of the Runtime
 		$ionicPlatform.ready(function () {
 
-			// Create A Banner Add when in Cordova
-			if (typeof(AdMob) != "undefined") {
-
-				// Create the Banner Add Area through JS
-				AdMob.createBanner(
-					{
-						adId: "ca-app-pub-2283171672459446/6963593212",
-						addSize: 'SMART_BANNER',
-						position: AdMob.AD_POSITION.BOTTOM_CENTER,
-						autoShow: true
-					}, function () {
-						// Hide the Splash Screen after banner Add has been created
-						if (typeof(navigator.splashscreen) != "undefined") {
-							navigator.splashscreen.hide();
-						}
-					}, function () {
-						console.log("failed to create AdMob");
-					});
-			}
 
 			if (window.StatusBar) {
 				// org.apache.cordova.statusbar required

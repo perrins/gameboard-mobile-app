@@ -10,7 +10,7 @@ module.exports = function(options) {
     var sha1 = require('./mocks/sha1')();
     var popup = {
 
-    }
+    };
     var navigator = {
         userAgent: 'chrome',
         appVersion: '22.0'

@@ -482,8 +482,7 @@ define('ibm/mobile/utils', ['require','exports','module'],function (require, exp
 if (typeof _ == "undefined") {
     throw new Error("IBMBluemix has not been initialised");
   }
-  ;
-  function toQueryString(obj) {
+    function toQueryString(obj) {
     var str = "";
     for (prop in obj) {
       var val = obj[prop];
@@ -1026,8 +1025,7 @@ var TAG = "RestRequest";
           defer.reject(new RestRequestError("No data returned"));
         }
       }
-      ;
-      function onError(err) {
+        function onError(err) {
         defer.reject(new RestRequestError("Unexpected error when communicating with server", err));
       }
       return isError ? onError : onSuccess;
@@ -1443,4 +1441,4 @@ if (__isAMD) {
     }
 }
 }).call(this, (typeof exports === 'object' ? global : window),
-              (typeof exports === 'object' ? global : window))
+              (typeof exports === 'object' ? global : window));

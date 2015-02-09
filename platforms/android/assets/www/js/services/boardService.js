@@ -79,7 +79,7 @@ angular.module('gameboard.board.services', [])
 				}).catch(function (err) {
 					console.log(err);
 					def.reject(err);
-				})
+				});
 
 				// Get the Objects for a particular Type
 				return def.promise;
@@ -134,7 +134,7 @@ angular.module('gameboard.board.services', [])
 				}).catch(function (err) {
 					console.log(err);
 					def.reject(err);
-				})
+				});
 
 				// Get the Objects for a particular Type
 				return def.promise;
@@ -163,7 +163,7 @@ angular.module('gameboard.board.services', [])
 				}).catch(function (err) {
 					console.log(err);
 					def.reject(err);
-				})
+				});
 
 				// Get the Objects for a particular Type
 				return def.promise;
@@ -196,7 +196,7 @@ angular.module('gameboard.board.services', [])
 				}).catch(function (err) {
 					console.log(err);
 					def.reject(err);
-				})
+				});
 
 				// Get the Objects for a particular Type
 				return def.promise;
@@ -233,7 +233,7 @@ angular.module('gameboard.board.services', [])
 
 				}).catch(function (err) {
 					def.reject(err);
-				})
+				});
 
 				// Get the Objects for a particular Type
 				return def.promise;
@@ -261,7 +261,7 @@ angular.module('gameboard.board.services', [])
 					// Was added successfully
 					def.resolve(video);
 				}).catch(function (err) {
-					console.log(err)
+					console.log(err);
 					def.reject(err);
 				});
 
@@ -279,7 +279,7 @@ angular.module('gameboard.board.services', [])
 
 				// Remove the Item from the Cache
 				var items = cache.get('items');
-				items.splice(items.indexOf(item), 1)
+				items.splice(items.indexOf(item), 1);
 
 				//Get the object with the given id so we can delete it
 				data.Object.withId(item.getId()).then(function (item) {

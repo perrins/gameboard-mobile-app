@@ -13,60 +13,20 @@
 
 	<ion-tabs class="tabs-positive tabs-icon-top tabs-color-active-stable" delegate-handle="video-tabs">
 
-		<ion-tab title="Info" icon-on="ion-ios7-information" icon-off="ion-ios7-information-outline">
-
-			<ion-content class="has-header" style="top:42px;">
-
-				<div class="list card" ng-show="error">
-
-					<div class="item item-icon-left">
-						<i class="icon ion-information-circled"></i> {{error}}
-					</div>
-
-				</div>
-
-				<div class="list card" ng-show="board">
-
-					<div class="item item-avatar">
-						<img ng-src="img/call-of-duty-ghosts.jpg" lazload>
-
-						<h2>{{board.title}}</h2>
-
-						<p>{{board.subtitle}}</p>
-					</div>
-
-					<div class="item item-body">
-						<p>
-							{{board.description}}
-						</p>
-
-						<p>
-							<a href="#" class="subdued">{{board.prizes}}</a>
-							<a href="#" class="subdued">{{board.number}}</a>
-						</p>
-					</div>
-
-					<div class="item tabs tabs-secondary tabs-icon-left">
-						<a class="tab-item" href="#">
-							<i class="icon ion-thumbsup"></i> Like
-						</a>
-						<a class="tab-item" href="#">
-							<i class="icon ion-chatbox"></i> Comment
-						</a>
-						<a class="tab-item" href="#">
-							<i class="icon ion-share"></i> Share
-						</a>
-					</div>
-
-				</div>
-
-			</ion-content>
-
-		</ion-tab>
-
 		<ion-tab title="Board" icon-on="ion-aperture" icon-off="ion-aperture">
 
-			<ion-content class="has-header" style="top:42px;">
+            <div class="gameBanner imageButton spinner">
+                <div class="spinner">
+                    <img class="Banner genre-image-load" ng-src="{{board.banner}}" lazyload>
+                </div>
+
+                <div class="summary">
+                    <div class="title">{{board..title}}</div>
+                    <div class="subtitle">{{board.subTitle}}</div>
+                </div>
+            </div>
+
+            <ion-content class="has-header" style="top:42px;">
 
 				<div class="list card" ng-show="error">
 

@@ -81,7 +81,7 @@ angular.module("gameboard.member.favourites", [])
 				$scope.$apply();
 			}
 
-		}
+		};
 
 		$scope.actionButtons = [{
 			type: "button-clear",
@@ -114,4 +114,4 @@ angular.module("gameboard.member.favourites", [])
 				$scope.onDelete(item);
 			}
 		}];
-	})
+	});

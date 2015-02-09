@@ -41284,7 +41284,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
 				set: setter,
 				enumerable: true
 			});
-			return;
+
 		}
 	};
 

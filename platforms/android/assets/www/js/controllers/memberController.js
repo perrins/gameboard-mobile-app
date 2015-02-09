@@ -23,7 +23,7 @@ angular.module("gameboard.controllers.member", [])
 
 		var searchParam = "";
 
-		var members = new Array();
+		var members = [];
 
 		$scope.page = 0;
 		$scope.pageSize = 20;
@@ -51,7 +51,7 @@ angular.module("gameboard.controllers.member", [])
 				// Reset the Array if we are on Page 1
 				if ($scope.page === 0) {
 					// Prepare for the Query
-					members = new Array();
+					members = [];
 				}
 
 				// Set the Title
@@ -89,7 +89,7 @@ angular.module("gameboard.controllers.member", [])
 					$scope.page++;
 				} else {
 					// No More Data
-					return;
+
 				}
 
 			}, function (err) {

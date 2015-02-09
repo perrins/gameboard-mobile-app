@@ -31,7 +31,7 @@ angular.module("gameboard.search.controllers", [])
 				$ionicLoading.hide();
 				$scope.videos = [];
 
-			}
+			};
 
 			// "List is " is a service returning data from the
 			SearchService.all(searchParam, bookmark, pageSize).then(function (_videos) {
@@ -52,7 +52,7 @@ angular.module("gameboard.search.controllers", [])
 				// Reset the Array if we are on Page 1
 				if ($scope.page === 0) {
 					// Prepare for the Query
-					videos = new Array();
+					videos = [];
 				}
 
 				// Set the Title
@@ -91,7 +91,7 @@ angular.module("gameboard.search.controllers", [])
 					$scope.page++;
 				} else {
 					// No More Data
-					return;
+
 				}
 
 			}, function (err) {

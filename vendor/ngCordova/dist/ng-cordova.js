@@ -5627,7 +5627,7 @@ angular.module('ngCordova.plugins.sqlite', [])
                 }
               }, function (transaction, error) {
                 q.reject(error);
-                return;
+
               });
             } catch (exception) {
               q.reject(exception);

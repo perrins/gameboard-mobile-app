@@ -37,4 +37,4 @@ __umodule__.noConflict = function () {
 return __umodule__;
 };
 return __umodule__;
-})
+});

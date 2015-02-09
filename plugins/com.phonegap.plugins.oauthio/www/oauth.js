@@ -106,7 +106,7 @@ module.exports = {
 				return;
 			}
 			callback(new Error("Authorization timed out"));
-		}, 1200 * 1000)
+		}, 1200 * 1000);
 
 		wnd = window.open(url, '_blank', 'location=no,toolbar=no');
 		wnd.addEventListener('loadstart', function(ev) {
@@ -334,7 +334,7 @@ function rstr2any(input, encoding)
 
 	/* Append leading zero equivalents */
 	var full_length = Math.ceil(input.length * 8 /
-																		(Math.log(encoding.length) / Math.log(2)))
+																		(Math.log(encoding.length) / Math.log(2)));
 	for(i = output.length; i < full_length; i++)
 		output = encoding[0] + output;
 
