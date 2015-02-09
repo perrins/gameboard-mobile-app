@@ -67,7 +67,10 @@ angular.module('gameboard.board.services', [])
 				var uri = new IBMUriBuilder().append(ACCESS.BOARD).append(bid).toString();
 
 				// Add the Paging to the BoardList and Get back what we have
-				uri += "?bookmark=" + bookmark + "&limit=" + size;
+                uri += "?limit=" + size;
+                if (bookmark) {
+                   uri += "&bookmark="+bookmark;
+                }
 
 				// Get the Videos for my Board
 				cc.get(uri, {

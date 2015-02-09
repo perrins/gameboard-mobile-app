@@ -32,6 +32,9 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
   opacity: 1;
   margin-bottom: 57px; }
 
+.gbdark {
+  background: #000; }
+
 .rating {
   margin: 0;
   padding: 0;
@@ -149,7 +152,7 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 .imageButton .summary {
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
-  bottom: 0;
+  bottom: 5px;
   width: 100%;
   height: auto;
   padding: 10px 5px 10px;
@@ -559,6 +562,16 @@ div.bigViews {
 
 .container {
   position: relative; }
+
+.board-rank {
+  position: absolute;
+  left: 20px;
+  top: 15px; }
+
+.board-views {
+  top: 10px;
+  position: relative;
+  float: right; }
 
 .board-item {
   left: 0;

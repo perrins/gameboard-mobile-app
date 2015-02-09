@@ -238,10 +238,10 @@
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "org.apache.cordova.splashscreen": {
+        "org.apache.cordova.engine.crosswalk": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "org.apache.cordova.engine.crosswalk": {
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         }
     },

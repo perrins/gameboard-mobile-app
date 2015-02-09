@@ -1,6 +1,6 @@
 <ion-view title="{{video.title}}">
 
-    <ion-content class="has-header padding">
+    <ion-content class="has-header">
 
         <div class="card hidden" ng-show="!video">
             <div class="item item-text-wrap">
@@ -8,42 +8,34 @@
             </div>
         </div>
 
+        <div class="gameBanner imageButton" swipe>
+            <div class="spinner">
+                <img class="genre-image-load" ng-src="{{video.ytimage}}" lazyload>
+            </div>
+            <div class="summary">
+                <div class="title">{{video.title}}</div>
+            </div>
+        </div>
+
         <ion-list>
 
-            <div class="item">
-                <div class="gameBanner imageButton" swipe>
-                    <div class="spinner">
-                        <img class="genre-image-load" ng-src="{{vide.ytimagel}}" lazyload>
-                    </div>
-                    <div class="summary">
-                        <div class="title">{{video.title}}</div>
-                        <div class="subtitle">{{video.subTitle}}</div>
-                    </div>
-                    </a>
-                </div>
+            <a class="item item-dark item-avatar item-icon-right" nav-clear menu-close ng-href="#/account">
+                <img class="genre-image genre-image-load" alt="{{video.avatar}}" ng-src="{{video.avatar}}"
+                     lazyload>
 
-                <a class="item item-dark item-avatar item-icon-right" nav-clear menu-close ng-href="#/account">
-                    <img class="genre-image genre-image-load" alt="{{video.avatar}}" ng-src="{{video.avatar}}"
-                         lazyload>
+                <h2 class="menu-name">{{video.firstname}}</h2>
 
-                    <h2 class="menu-name">{{video.firstname}}</h2>
+                <h2 class="menu-name">{{video.lastname}}</h2>
 
-                    <h2 class="menu-name">{{video.lastname}}</h2>
+                <p class="menu-tag">{{video.gametag}}</p>
 
-                    <p class="menu-tag">{{video.gametag}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
 
-                    <i class="icon ion-chevron-right icon-accessory"></i>
-                </a>
+            </a>
 
-
-                <div class="item item-body">
+            <div class="item item-body">
                     <p>
-                        {{board.description}}
-                    </p>
-
-                    <p>
-                        <a href="#" class="subdued">{{board.prizes}}</a>
-                        <a href="#" class="subdued">{{board.number}}</a>
+                        {{video.description}}
                     </p>
                 </div>
 
@@ -61,10 +53,8 @@
 
             </div>
 
-
             <div class="item>
 
-                <img
                 <p>{{video.videoSince}}</p>
 
                 <div class="bigPrize">{{video.prizes}}</div>
@@ -72,38 +62,10 @@
 
             </div>
 
-            <div class="item item-body">
-                <h1>{{video.title}}</h1>
-                <img ng-src="{{video.ytimage}}">
-
-                <p>{{video.description}}</p>
-
-                <p>
-                    <a href="#" class="subdued">1 Like</a>
-                    <a href="#" class="subdued">5 Comments</a>
-                </p>
-            </div>
-
-            <div class="item tabs tabs-secondary tabs-icon-left">
-                <a class="tab-item" href="#">
-                    <i class="icon ion-thumbsup"></i>
-                    Like
-                </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ion-chatbox"></i>
-                    Comment
-                </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ion-share"></i>
-                    Share
-                </a>
-            </div>
-
             <div id="videosDivide" class="item item-divider" ng-show="videos">
                 Videos added
                 <span class="badge badge-assertive">£0,000</span>
             </div>
-
 
         </ion-list>
 

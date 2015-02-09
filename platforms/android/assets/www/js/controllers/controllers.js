@@ -1,5 +1,51 @@
 angular.module("gameboard.controllers", [])
 
+    // Only Show the Splash Screen on Sign Load
+    .run(function ($ionicPlatform, $rootScope, $timeout) {
+
+        // Hide Splash Screen
+        // Handle Loading of the Runtime
+        $ionicPlatform.ready(function () {
+
+            // Create A Banner Add when in Cordova
+            if (typeof(AdMob) != "undefined") {
+
+                // Create the Banner Add Area through JS
+                AdMob.createBanner(
+                    {
+                        adId: "ca-app-pub-2283171672459446/6963593212",
+                        addSize: 'SMART_BANNER',
+                        position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                        autoShow: true
+                    }, function () {
+
+                        // Hide the Splash Screen after banner Add has been created
+                        if (typeof(navigator.splashscreen) != "undefined") {
+
+                            setTimeout(function() {
+
+                                console.log("Hide splash screen !!");
+                                navigator.splashscreen.hide();
+                            }, 500);
+                        }
+
+                    }, function () {
+                        console.log("failed to create AdMob");
+                    });
+
+
+                document.addEventListener(event_name, function(e){
+
+
+
+                });
+
+
+            }
+
+        });
+    })
+
 	.controller("MainCtrl", function ($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
 
 		angular.element("#main").removeClass("hidden");
