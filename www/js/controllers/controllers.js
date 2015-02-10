@@ -274,8 +274,6 @@ angular.module("gameboard.controllers", [])
 			$state.go("signin");
 		}
 
-        debugger;
-
         $scope.countries = [
             {id: 1, text: 'USA', checked: false, icon: "http://www.sciencekids.co.nz/images/pictures/flags680/United_States.jpg"},
             {id: 2, text: 'United Kingdom', checked: false, icon: 'http://www.sciencekids.co.nz/images/pictures/flags680/United_Kingdom.jpg'},
@@ -330,9 +328,33 @@ angular.module("gameboard.controllers", [])
 			// ADD CODE TO AUTHENTICATE Gameboard app with Facebook
 		};
 
-		$scope.twitter = function () {
+		$scope.twitter = function (check) {
 
-		};
+            debugger;
+
+            // Handle the Cordova OAuth experience
+            OAuth.popup("twitter", {
+                cache: false
+            }).done(function (twitter) {
+
+                debugger;
+                // Save the context so we can
+
+                // Lets get some information about the User
+                twitter.me().done(function (twitter_user) {
+
+                    $scope.member.twitter_token = twitter.access_token
+
+                }).fail(function(err) {
+                    $ionicLoading.hide();
+                    $rootScope.wifi();
+                });
+            }).fail(function(err) {
+                $ionicLoading.hide();
+                $rootScope.wifi();
+            });
+
+        };
 
 		// Finish the Wizard
 		$scope.register = function (member) {
