@@ -12260,7 +12260,7 @@ function Swipe(container, options) {
     move: function(event) {
 
       // ensure swiping with one touch and not pinching
-      if ( event.touches.length > 1 || event.scale && event.scale !== 1) return;
+      if ( event.touches.length > 1 || event.scale && event.scale !== 1) return
 
       if (options.disableScroll) event.preventDefault();
 
@@ -12270,7 +12270,7 @@ function Swipe(container, options) {
       delta = {
         x: touches.pageX - start.x,
         y: touches.pageY - start.y
-      };
+      }
 
       // determine if scrolling test has run - one time test
       if ( typeof isScrolling == 'undefined') {
@@ -12357,7 +12357,7 @@ function Swipe(container, options) {
       }
 
       // kill touchmove and touchend event listeners until touchstart called again
-      element.removeEventListener('touchmove', events, false);
+      element.removeEventListener('touchmove', events, false)
       element.removeEventListener('touchend', events, false)
 
     },
@@ -12373,7 +12373,7 @@ function Swipe(container, options) {
 
     }
 
-  };
+  }
 
   // trigger setup
   setup();
@@ -15415,7 +15415,7 @@ var _IBMLoggerLevel = function (weight, name) {
     this.weight = weight;
     this.name = name;
   };
-  var levels = [new _IBMLoggerLevel(1000, "ERROR"), new _IBMLoggerLevel(900, "WARN"), new _IBMLoggerLevel(800, "INFO"), new _IBMLoggerLevel(700, "DEBUG"), new _IBMLoggerLevel(600, "VERBOSE")];
+  var levels = new Array(new _IBMLoggerLevel(1000, "ERROR"), new _IBMLoggerLevel(900, "WARN"), new _IBMLoggerLevel(800, "INFO"), new _IBMLoggerLevel(700, "DEBUG"), new _IBMLoggerLevel(600, "VERBOSE"));
   var IBMLoggerLevel = {
     levels: levels,
     getLevel: function (level) {
@@ -19531,7 +19531,8 @@ define('ibm/mobile/utils/IBMUriBuilder', ['require','exports','module'],function
     }
     return this;
   }
-      IBMUriBuilder.prototype = {
+  ;
+  IBMUriBuilder.prototype = {
     _uri: "",
     constructor: IBMUriBuilder,
     append: function (segment) {
@@ -20093,7 +20094,8 @@ var VCAP_SERVICES_NAME = "VCAP_SERVICES";
     }
     return mbaasConfig;
   }
-    function exportConfiguration() {
+  ;
+  function exportConfiguration() {
     mbaasConfig.port = process.env.VCAP_APP_PORT || VCAP_APP_PORT_ENVLOG || 3000;
     if (getApplicationId()) {
       mbaasConfig.applicationId = getApplicationId();
@@ -20264,7 +20266,7 @@ if (__isAMD) {
     }
 }
 }).call(this, (typeof exports === 'object' ? global : window),
-              (typeof exports === 'object' ? global : window));;
+              (typeof exports === 'object' ? global : window));
 /*!
  *  Licensed Materials - Property of IBM
  *  5725-I43 (C) Copyright IBM Corp. 2011, 2014. All Rights Reserved.
@@ -20721,7 +20723,8 @@ function IBMCloudCodeService(requester) {
     this.logger = IBMLogger.getLogger();
     this.requester = requester;
   }
-    var SLASH = "/";
+  ;
+  var SLASH = "/";
   IBMCloudCodeService.prototype = {
     METHOD_GET: "GET",
     METHOD_POST: "POST",
@@ -20931,7 +20934,7 @@ if (__isAMD) {
     }
 }
 }).call(this, (typeof exports === 'object' ? global : window),
-              (typeof exports === 'object' ? global : window));;
+              (typeof exports === 'object' ? global : window));
 /*!
  *  Licensed Materials - Property of IBM
  *  5725-I43 (C) Copyright IBM Corp. 2011, 2014. All Rights Reserved.
@@ -21416,7 +21419,8 @@ define('ibm/mobile/utils', ['require','exports','module'],function (require, exp
 if (typeof _ == "undefined") {
     throw new Error("IBMBluemix has not been initialised");
   }
-    function toQueryString(obj) {
+  ;
+  function toQueryString(obj) {
     var str = "";
     for (prop in obj) {
       var val = obj[prop];
@@ -21959,7 +21963,8 @@ var TAG = "RestRequest";
           defer.reject(new RestRequestError("No data returned"));
         }
       }
-        function onError(err) {
+      ;
+      function onError(err) {
         defer.reject(new RestRequestError("Unexpected error when communicating with server", err));
       }
       return isError ? onError : onSuccess;
@@ -22375,4 +22380,4 @@ if (__isAMD) {
     }
 }
 }).call(this, (typeof exports === 'object' ? global : window),
-              (typeof exports === 'object' ? global : window));
+              (typeof exports === 'object' ? global : window))
