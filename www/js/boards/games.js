@@ -74,7 +74,23 @@ angular.module("gameboard.boards.games", [])
         }, function (err) {
 
             $ionicLoading.hide();
-            $scope.$emit('gb-error', err);
+            $scope.nodata = true;
+
+            // Show Connectivity Error
+            if (_.has(err, "info") && err.info.status == "error") {
+                $scope.error = "Cannot connect to the cloud";
+                $rootScope.wifi();
+            }
+
+            // Then We have not found anything
+            if (err.info.statusCode == 404) {
+                $scope.error = "No Videos have been found with this query";
+            }
+
+            // Then We have not found anything
+            if (err.info.statusCode == 500) {
+                $scope.error = "Internal server error, please contact App Support";
+            }
 
         });
 

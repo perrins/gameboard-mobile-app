@@ -53,6 +53,10 @@
                         {
                             "xml": "false",
                             "count": 5
+                        },
+                        {
+                            "xml": "true",
+                            "count": 1
                         }
                     ],
                     "UIKit.framework": [
@@ -195,6 +199,10 @@
                         {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"ios-package\" value=\"CDVConnection\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -229,9 +237,6 @@
         "com.hutchind.cordova.plugins.streamingmedia": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "com.phonegap.plugins.oauthio": {
-            "PACKAGE_NAME": "co.gameboard.mobile.gb"
-        },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
@@ -242,6 +247,12 @@
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
         "org.apache.cordova.splashscreen": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
+        "com.oauthio.plugins.oauthio": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
+        "org.apache.cordova.network-information": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         }
     },

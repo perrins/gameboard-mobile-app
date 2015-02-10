@@ -133,8 +133,11 @@ module.exports = function(grunt) {
 				{
 					src: "vendor/components-font-awesome/css/font-awesome.min.css",
 					dest: "www/css/font-awesome.min.css"
-				}
-
+				},
+                {
+                    src: "tmp/js/<%= pkg.name%>.vendor.js",
+                    dest: "www/lib/<%= pkg.name%>.vendor.js"
+                }
 
 				]
 
@@ -342,13 +345,14 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
 		'bump',
 		'clean:dist',
-		'copy:dist',
 		'concat:vendor',
 		'version',
 		'string-replace',
 		'removelogging',
-		'uglify:vendor'
-	]);
+		'uglify:vendor',
+        'copy:dist'
+
+    ]);
 
 	grunt.registerTask('buildApps',
 		[

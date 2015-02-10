@@ -66,4 +66,7 @@
         <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
     </plugins>
     <icon density="xhdpi" src="resources/android/icon/drawable-xhdpi-icon.png" />
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
 </widget>

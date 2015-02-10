@@ -30,7 +30,7 @@
 	<script src="lib/collide/collide.js"></script>
 
 	<!-- Load the Vendor Elements -->
-	<script src="lib/gameboard-mobile-app.vendor.min.js"></script>
+	<script src="lib/gameboard-mobile-app.vendor.js"></script>
 	<!-- cordova script (this will be a 404 during development) -->
 
 	<script src="lib/ng-cordova.min.js"></script>
@@ -38,7 +38,11 @@
 
 	<!--------------------- CODE LOADING ------------------------->
 	<!-- your app's js -->
-	<script src="js/app.js"></script>
+
+    <!-- Load The AdMob Plugin -->
+    <script src="js/base/core.js"></script>
+
+    <script src="js/app.js"></script>
 	<!-- Handle any global Script code needed outside the angular framework -->
 	<script src="js/base/core.js"></script>
 	<!-- your app's scripts -->
@@ -57,6 +61,7 @@
 
     <!--Main Controllers-->
 	<script src="js/member/favourites.js"></script>
+    <script src="js/member/members.js"></script>
     <script src="js/boards/genres.js"></script>
     <script src="js/boards/games.js"></script>
     <script src="js/boards/categories.js"></script>

@@ -2,7 +2,7 @@
 module.exports = {
   oauthd_url: "https://oauth.io",
   oauthd_api: "https://oauth.io/api",
-  version: "phonegap-0.2.1",
+  version: "phonegap-0.2.4",
   options: {}
 };
 
@@ -224,7 +224,7 @@ module.exports = function(window, document, jQuery, navigator) {
               wnd.close();
             } catch (_error) {}
           }, 1200 * 1000);
-          wnd = window.open(url, "_blank", 'location=no,toolbar=no');
+          wnd = window.open(url, "_blank", 'toolbar=yes,closebuttoncaption=Back,presentationstyle=formsheet,toolbarposition=top,clearsessioncache=yes,clearcache=yes');
           wnd.addEventListener("loadstart", function(ev) {
             var results;
             if (ev.url.substr(0, 17) !== "http://localhost/") {
@@ -247,6 +247,14 @@ module.exports = function(window, document, jQuery, navigator) {
               if (defer != null) {
                 defer.reject(new Error("unable to receive token"));
               }
+            }
+          });
+          wnd.addEventListener("exit", function() {
+            if (defer != null) {
+              defer.reject(new Error("The popup was closed"));
+            }
+            if (opts.callback && typeof opts.callback === "function") {
+              return opts.callback(new Error("The popup was closed"));
             }
           });
           return defer != null ? defer.promise() : void 0;
@@ -320,7 +328,7 @@ var Url,
 
 Url = require('../tools/url')();
 
-module.exports = function($, config, client_states, cache) {
+module.exports = function($, config, client_states, cache, providers_api) {
   return {
     http: function(opts) {
       var defer, desc_opts, doRequest, i, options;
@@ -685,15 +693,42 @@ module.exports = {
     return false;
   },
   clearCache: function(provider) {
-    return window.localStorage.removeItem("oauthio_provider_" + provider);
+    var cached_providers, e, k;
+    if ((provider != null)) {
+      return window.localStorage.removeItem("oauthio_provider_" + provider);
+    } else {
+      try {
+        cached_providers = JSON.parse(window.localStorage.getItem("oauthio_cached_providers"));
+      } catch (_error) {
+        e = _error;
+        cached_providers = {};
+      }
+      cached_providers = cached_providers || {};
+      for (k in cached_providers) {
+        if (cached_providers[k]) {
+          cached_providers[k] = false;
+          window.localStorage.removeItem("oauthio_provider_" + k);
+        }
+      }
+      return window.localStorage.setItem("oauthio_cached_providers", JSON.stringify(cached_providers));
+    }
   },
   storeCache: function(provider, cache) {
-    var expires_in;
+    var cached_providers, e, expires_in;
     expires_in = cache.expires_in * 1000 - 10000 || 36000000;
     window.localStorage.setItem("oauthio_provider_" + provider, JSON.stringify({
       value: encodeURIComponent(JSON.stringify(cache)),
       date: new Date().getTime() + expires_in
     }));
+    try {
+      cached_providers = JSON.parse(window.localStorage.getItem("oauthio_cached_providers"));
+    } catch (_error) {
+      e = _error;
+      cached_providers = {};
+    }
+    cached_providers = cached_providers || {};
+    cached_providers[provider] = true;
+    window.localStorage.setItem("oauthio_cached_providers", JSON.stringify(cached_providers));
   },
   cacheEnabled: function(cache) {
     if (typeof cache === "undefined") {
@@ -1073,4 +1108,4 @@ module.exports = function(document) {
   };
 };
 
-},{}]},{},[4]);
+},{}]},{},[4])

@@ -68,7 +68,7 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-                            "count": 6
+                            "count": 7
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
@@ -173,6 +173,10 @@
                         {
                             "xml": "<preference name=\"webView\" value=\"org.apache.cordova.engine.crosswalk.XWalkCordovaWebView\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -207,9 +211,6 @@
         "com.hutchind.cordova.plugins.streamingmedia": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "com.phonegap.plugins.oauthio": {
-            "PACKAGE_NAME": "co.gameboard.mobile.gb"
-        },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
@@ -220,6 +221,12 @@
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
         "org.apache.cordova.engine.crosswalk": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
+        "com.oauthio.plugins.oauthio": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
+        "org.apache.cordova.network-information": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         }
     },

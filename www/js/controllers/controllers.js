@@ -7,50 +7,52 @@ angular.module("gameboard.controllers", [])
         // Handle Loading of the Runtime
         $ionicPlatform.ready(function () {
 
-            // Create A Banner Add when in Cordova
-            if (typeof(AdMob) != "undefined") {
-
-                // Create the Banner Add Area through JS
-                AdMob.createBanner(
-                    {
-                        adId: "ca-app-pub-2283171672459446/6963593212",
-                        addSize: 'SMART_BANNER',
-                        position: AdMob.AD_POSITION.BOTTOM_CENTER,
-                        autoShow: true
-                    }, function () {
-
-                        // Hide the Splash Screen after banner Add has been created
-                        if (typeof(navigator.splashscreen) != "undefined") {
-
-                            setTimeout(function() {
-
-                                console.log("Hide splash screen !!");
-                                navigator.splashscreen.hide();
-                            }, 500);
-                        }
-
-                    }, function () {
-                        console.log("failed to create AdMob");
-                    });
-
-
-                document.addEventListener(event_name, function(e){
-
-
-
-                });
-
-
-            }
 
         });
     })
 
-	.controller("MainCtrl", function ($rootScope, $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
+	.controller("MainCtrl", function ($rootScope,  $ionicModal,$scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
 
 		angular.element("#main").removeClass("hidden");
 
-		// Prepare User for Display
+        // Create Wifi
+        if(!$rootScope.wifi) {
+
+            // Create our modal
+            $ionicModal.fromTemplateUrl('templates/connectivity.html', function (modal) {
+                $rootScope.connectivity = modal;
+            }, {
+                scope: $rootScope,
+                animation: 'slide-in-up',
+                focusFirstInput: true
+            });
+
+            $rootScope.wifi = function () {
+                // Reverse the Paint Bug
+                $rootScope.connectivity.show();
+            };
+
+            $rootScope.cancelWifi = function () {
+                // Reverse the Paint Bug
+                $rootScope.connectivity.hide();
+            };
+
+            // listen for the event in the relevant $scope
+            $rootScope.$on('gb-error', function (event, err) {
+
+                if (_.isObject(err) && _.has(err, "info")) {
+
+                    // Show Connectivity Error
+                    if (err.info.status == "error") {
+                        $rootScope.wifi();
+                    }
+
+                }
+
+            });
+        }
+
+        // Prepare User for Display
 		if ($rootScope.user) {
 
 			// So we have a User lets loo
@@ -96,52 +98,9 @@ angular.module("gameboard.controllers", [])
 	})
 
 // Sign In Controller, navigate to Intro
-	.controller("SignInCtrl", function ($cordovaNetwork, $ionicModal, $ionicHistory, $rootScope, $state, $scope, $http, MembersService, $ionicLoading, Settings) {
+	.controller("SignInCtrl", function ($cordovaNetwork, $ionicHistory, $rootScope, $state, $scope, $http, MembersService, $ionicLoading, Settings) {
 
 		angular.element("#main").removeClass("hidden");
-
-		// Create our modal
-		$ionicModal.fromTemplateUrl('templates/connectivity.html', function (modal) {
-			$rootScope.connectivity = modal;
-		}, {
-			scope: $rootScope,
-			animation: 'slide-in-up',
-			focusFirstInput: true
-		});
-
-		$rootScope.wifi = function () {
-			// Reverse the Paint Bug
-			$rootScope.connectivity.show();
-		};
-
-		$scope.wifi = function () {
-			// Reverse the Paint Bug
-			$rootScope.connectivity.show();
-		};
-
-		$scope.cancelWifi = function () {
-			// Reverse the Paint Bug
-			$rootScope.connectivity.hide();
-		};
-
-		$rootScope.cancelWifi = function () {
-			// Reverse the Paint Bug
-			$rootScope.connectivity.hide();
-		};
-
-		// listen for the event in the relevant $scope
-		$rootScope.$on('gb-error', function (event, err) {
-
-			if (_.isObject(err) && _.has(err, "info")) {
-
-				// Show Connectivity Error
-				if (err.info.status == "error") {
-					$rootScope.wifi();
-				}
-
-			}
-
-		});
 
 		// Clear the Back stack
 		$ionicHistory.nextViewOptions({
@@ -152,14 +111,29 @@ angular.module("gameboard.controllers", [])
 		// Signon to the App
 		$scope.signon = function () {
 
+            function checkConnection() {
+                var networkState = navigator.connection.type;
 
-			// Check if we connecting to the world !
-			/*
-			 if ($cordovaNetwork.isOffline()) {
-			 $rootScope.wifi();
-			 return;
-			 }*/
+                var states = {};
+                states[Connection.UNKNOWN]  = 'Unknown connection';
+                states[Connection.ETHERNET] = 'Ethernet connection';
+                states[Connection.WIFI]     = 'WiFi connection';
+                states[Connection.CELL_2G]  = 'Cell 2G connection';
+                states[Connection.CELL_3G]  = 'Cell 3G connection';
+                states[Connection.CELL_4G]  = 'Cell 4G connection';
+                states[Connection.CELL]     = 'Cell generic connection';
+                states[Connection.NONE]     = 'No network connection';
 
+                $rootScope.states = states;
+                cosole.log("Connection : "+states[networkState]);
+            }
+
+            if(navigator.connection) {
+                checkConnection();
+                if(navigator.connection.type === Connection.NONE){
+                    $rootScope.wifi();
+                }
+            }
 			// Lets load the Videos for the Youtube Channel
 			$ionicLoading.show({
 				template: "Authenticating..."
@@ -175,8 +149,7 @@ angular.module("gameboard.controllers", [])
 				// If we have displayed the screen before lets go to Main
 				if (!Settings.get("INTRO")) {
 					$state.go("board.genres");
-					//$state.go("board.videos",{bid:1001});
-					//$state.go("board.search");
+
 				} else {
 					$state.go("intro");
 				}
@@ -208,7 +181,6 @@ angular.module("gameboard.controllers", [])
 
 				};
 
-
 				// Hide Message
 				$ionicLoading.hide();
 
@@ -225,12 +197,14 @@ angular.module("gameboard.controllers", [])
 			var failFunc = function (err) {
 				// TMD: isn't this covered by the second arg to 'then' ?
 				$ionicLoading.hide();
+                $rootScope.wifi();
 			};
 
 			// Handle the Cordova OAuth experience
 			OAuth.popup("google", {
 				cache: true
 			}).done(function (google) {
+
 				// Save the context so we can
 				$rootScope.google = google;
 
@@ -239,15 +213,12 @@ angular.module("gameboard.controllers", [])
 
 				// Lets get some information about the User
 				google.me().done(function (user) {
-					$rootScope.user = user;
 
-					// Default the Header to the ID of the authenicated user
-					//$http.defaults.headers.common["X-GB-ID"] = $rootScope.user.raw.id;
+                    // Get the User
+					$rootScope.user = user;
 
 					// Get the signing in Member and see if they are registered
 					MembersService.getMember(user.raw.id).then(function (member) {
-
-						debugger;
 
 						// Check if we have a registered member ?
 						if (_.isObject(member) ) {
@@ -273,8 +244,14 @@ angular.module("gameboard.controllers", [])
 						nextView();
 					});
 
-				}).fail(failFunc);
-			}).fail(failFunc);
+				}).fail(function(err) {
+                    $ionicLoading.hide();
+                    $rootScope.wifi();
+                });
+			}).fail(function(err) {
+                $ionicLoading.hide();
+                $rootScope.wifi();
+            });
 		};
 
 	})

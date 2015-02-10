@@ -12,6 +12,7 @@ angular.module("gameboard", [
     "gameboard.boards.genres",
     "gameboard.boards.games",
     "gameboard.boards.categories",
+    "gameboard.member.search",
 
     "gameboard.member.favourites",
 
@@ -30,18 +31,36 @@ angular.module("gameboard", [
 		// Handle Loading of the Runtime
 		$ionicPlatform.ready(function () {
 
+            // Create A Banner Add when in Cordova
+            if (typeof(AdMob) != "undefined") {
 
-			if (window.StatusBar) {
+                // Create the Banner Add Area through JS
+                AdMob.createBanner(
+                    {
+                        adId: "ca-app-pub-2283171672459446/6963593212",
+                        addSize: 'SMART_BANNER',
+                        position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                        autoShow: true
+                    }, function () {
+
+                        // Hide the Splash Screen after banner Add has been created
+                        if (typeof(navigator.splashscreen) != "undefined") {
+                            navigator.splashscreen.hide();
+                        }
+
+
+                    }, function () {
+                        console.log("failed to create AdMob");
+                    });
+
+            }
+
+            // Check if we can hide the Splash screen
+            if (window.StatusBar) {
+
 				// org.apache.cordova.statusbar required
 				window.StatusBar.styleDefault();
-
-				// Init Mobile Cloud SDK and wait for it to configure itself
-				// Once complete keep a reference to it so we can talk to it later
-				InitBluemix.init().then(function () {
-					$rootScope.IBMBluemix = IBMBluemix;
-				});
 			}
-
 
 		});
 
@@ -194,16 +213,8 @@ angular.module("gameboard", [
 					}
 				}
 			})
-			.state("board.members", {
-				url: "/members",
-				views: {
-					"menuContent": {
-						templateUrl: "templates/members.html",
-						controller: "MembersCtrl"
-					}
-				}
-			})
-			.state("board.bookmarks", {
+
+            .state("board.bookmarks", {
 				url: "/bookmarks",
 				views: {
 					"menuContent": {
@@ -218,15 +229,6 @@ angular.module("gameboard", [
 					"menuContent": {
 						templateUrl: "templates/notifications.html",
 						controller: "NotificationsCtrl"
-					}
-				}
-			})
-			.state("board.member", {
-				url: "/member/:muuid",
-				views: {
-					"menuContent": {
-						templateUrl: "templates/member-detail.html",
-						controller: "MemberDetailCtrl"
 					}
 				}
 			})

@@ -9207,6 +9207,7 @@ if ( typeof noGlobal === strundefined ) {
 return jQuery;
 
 }));
+;
 /*!
  * getStyleProperty v1.0.4
  * original by kangax
@@ -9262,6 +9263,7 @@ if ( typeof define === 'function' && define.amd ) {
 }
 
 })( window );
+;
 /*!
  * getSize v1.2.2
  * measure size of elements
@@ -9512,6 +9514,7 @@ if ( typeof define === 'function' && define.amd ) {
 }
 
 })( window );
+;
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
@@ -9519,7 +9522,7 @@ if ( typeof define === 'function' && define.amd ) {
  * @preserve
  */
 
-(function () {
+;(function () {
     'use strict';
 
     /**
@@ -9984,6 +9987,7 @@ if ( typeof define === 'function' && define.amd ) {
         exports.EventEmitter = EventEmitter;
     }
 }.call(this));
+;
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -10066,6 +10070,7 @@ if ( typeof define === 'function' && define.amd ) {
 }
 
 })( window );
+;
 /*!
  * docReady v1.0.4
  * Cross browser DOMContentLoaded event emitter
@@ -10146,6 +10151,7 @@ if ( typeof define === 'function' && define.amd ) {
 }
 
 })( window );
+;
 /**
  * matchesSelector v1.0.2
  * matchesSelector( element, '.selector' )
@@ -10249,6 +10255,7 @@ if ( typeof define === 'function' && define.amd ) {
   }
 
 })( Element.prototype );
+;
 /**
  * Outlayer Item
  */
@@ -10779,6 +10786,7 @@ if ( typeof define === 'function' && define.amd ) {
 }
 
 })( window );
+;
 /*!
  * Outlayer v1.3.0
  * the brains and guts of a layout library
@@ -11799,6 +11807,7 @@ if ( typeof define === 'function' && define.amd ) {
 }
 
 })( window );
+;
 /*!
  * Masonry v3.1.5
  * Cascading grid layout library
@@ -12004,6 +12013,7 @@ if ( typeof define === 'function' && define.amd ) {
 }
 
 })( window );
+;
 /*
  * Swipe 2.0
  *
@@ -12483,6 +12493,7 @@ if ( window.jQuery || window.Zepto ) {
     }
   })( window.jQuery || window.Zepto )
 }
+;
 /*!
  *  Licensed Materials - Property of IBM
  *  5725-I43 (C) Copyright IBM Corp. 2011, 2014. All Rights Reserved.
@@ -20253,7 +20264,7 @@ if (__isAMD) {
     }
 }
 }).call(this, (typeof exports === 'object' ? global : window),
-              (typeof exports === 'object' ? global : window));
+              (typeof exports === 'object' ? global : window));;
 /*!
  *  Licensed Materials - Property of IBM
  *  5725-I43 (C) Copyright IBM Corp. 2011, 2014. All Rights Reserved.
@@ -20920,7 +20931,7 @@ if (__isAMD) {
     }
 }
 }).call(this, (typeof exports === 'object' ? global : window),
-              (typeof exports === 'object' ? global : window));
+              (typeof exports === 'object' ? global : window));;
 /*!
  *  Licensed Materials - Property of IBM
  *  5725-I43 (C) Copyright IBM Corp. 2011, 2014. All Rights Reserved.

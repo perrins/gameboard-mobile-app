@@ -1,6 +1,6 @@
 {
   "name": "gameboard-mobile-app",
-  "version": "0.0.61",
+  "version": "0.0.63",
   "codename": "Joe Release",
   "author": {
     "name": [
@@ -47,5 +47,10 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "load-grunt-tasks": "^0.6.0"
-  }
+  },
+  "cordovaPlugins": [
+    "org.apache.cordova.splashscreen",
+    "https://github.com/oauth-io/oauth-phonegap",
+    "org.apache.cordova.network-information"
+  ]
 }
