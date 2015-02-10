@@ -17,9 +17,10 @@ www/css/**
 
 # NPM modules
 node_modules
+npm-debug.log
 
 # Bower modules
-vendor
+vendor/*
 
 # IDE Stuff
 .idea
