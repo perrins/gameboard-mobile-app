@@ -1,56 +1,56 @@
 angular.module("gameboard.controllers", [])
 
     // Only Show the Splash Screen on Sign Load
-    .run(function ($ionicPlatform, $rootScope, $timeout) {
+    .run(function ( $ionicPlatform,$ionicModal, $rootScope, $timeout) {
 
         // Hide Splash Screen
         // Handle Loading of the Runtime
         $ionicPlatform.ready(function () {
 
+            // Create Wifi
+            if(!$rootScope.wifi) {
+
+                // Create our modal
+                $ionicModal.fromTemplateUrl('templates/connectivity.html', function (modal) {
+                    $rootScope.connectivity = modal;
+                }, {
+                    scope: $rootScope,
+                    animation: 'slide-in-up',
+                    focusFirstInput: true
+                });
+
+                $rootScope.wifi = function () {
+                    // Reverse the Paint Bug
+                    $rootScope.connectivity.show();
+                };
+
+                $rootScope.cancelWifi = function () {
+                    // Reverse the Paint Bug
+                    $rootScope.connectivity.hide();
+                };
+
+                // listen for the event in the relevant $scope
+                $rootScope.$on('gb-error', function (event, err) {
+
+                    if (_.isObject(err) && _.has(err, "info")) {
+
+                        // Show Connectivity Error
+                        if (err.info.status == "error") {
+                            $rootScope.wifi();
+                        }
+
+                    }
+
+                });
+            }
+
 
         });
     })
 
-	.controller("MainCtrl", function ($rootScope,  $ionicModal,$scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
+	.controller("MainCtrl", function ($rootScope,  $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
 
 		angular.element("#main").removeClass("hidden");
-
-        // Create Wifi
-        if(!$rootScope.wifi) {
-
-            // Create our modal
-            $ionicModal.fromTemplateUrl('templates/connectivity.html', function (modal) {
-                $rootScope.connectivity = modal;
-            }, {
-                scope: $rootScope,
-                animation: 'slide-in-up',
-                focusFirstInput: true
-            });
-
-            $rootScope.wifi = function () {
-                // Reverse the Paint Bug
-                $rootScope.connectivity.show();
-            };
-
-            $rootScope.cancelWifi = function () {
-                // Reverse the Paint Bug
-                $rootScope.connectivity.hide();
-            };
-
-            // listen for the event in the relevant $scope
-            $rootScope.$on('gb-error', function (event, err) {
-
-                if (_.isObject(err) && _.has(err, "info")) {
-
-                    // Show Connectivity Error
-                    if (err.info.status == "error") {
-                        $rootScope.wifi();
-                    }
-
-                }
-
-            });
-        }
 
         // Prepare User for Display
 		if ($rootScope.user) {
@@ -102,7 +102,7 @@ angular.module("gameboard.controllers", [])
 
 		angular.element("#main").removeClass("hidden");
 
-		// Clear the Back stack
+        // Clear the Back stack
 		$ionicHistory.nextViewOptions({
 			disableBack: true,
 			disableAnimate: true
@@ -111,32 +111,9 @@ angular.module("gameboard.controllers", [])
 		// Signon to the App
 		$scope.signon = function () {
 
-            function checkConnection() {
-                var networkState = navigator.connection.type;
-
-                var states = {};
-                states[Connection.UNKNOWN]  = 'Unknown connection';
-                states[Connection.ETHERNET] = 'Ethernet connection';
-                states[Connection.WIFI]     = 'WiFi connection';
-                states[Connection.CELL_2G]  = 'Cell 2G connection';
-                states[Connection.CELL_3G]  = 'Cell 3G connection';
-                states[Connection.CELL_4G]  = 'Cell 4G connection';
-                states[Connection.CELL]     = 'Cell generic connection';
-                states[Connection.NONE]     = 'No network connection';
-
-                $rootScope.states = states;
-                cosole.log("Connection : "+states[networkState]);
-            }
-
-            if(navigator.connection) {
-                checkConnection();
-                if(navigator.connection.type === Connection.NONE){
-                    $rootScope.wifi();
-                }
-            }
 			// Lets load the Videos for the Youtube Channel
 			$ionicLoading.show({
-				template: "Authenticating..."
+                template: "<i class=\"ion-loading-c\"></i><span>&nbsp;Authenticating...</span>"
 			});
 
 			var nextView = function () {
@@ -156,7 +133,40 @@ angular.module("gameboard.controllers", [])
 
 			};
 
-			// Check if we are in local testing mode and then fake a user
+            function checkConnection() {
+                var networkState = navigator.connection.type;
+
+                var states = {};
+                states[Connection.UNKNOWN]  = 'Unknown connection';
+                states[Connection.ETHERNET] = 'Ethernet connection';
+                states[Connection.WIFI]     = 'WiFi connection';
+                states[Connection.CELL_2G]  = 'Cell 2G connection';
+                states[Connection.CELL_3G]  = 'Cell 3G connection';
+                states[Connection.CELL_4G]  = 'Cell 4G connection';
+                states[Connection.CELL]     = 'Cell generic connection';
+                states[Connection.NONE]     = 'No network connection';
+
+                $rootScope.states = states;
+                console.log("Connection : "+states[networkState]);
+            }
+
+            //
+            if(navigator.connection) {
+                checkConnection();
+                if(navigator.connection.type === Connection.NONE){
+                    $ionicLoading.hide();
+                    $rootScope.wifi();
+                    return;
+                } else {
+                    console.log("We have a connection "+$rootScope.states[navigator.connection.type]);
+                }
+            } else {
+                $ionicLoading.hide();
+                $rootScope.wifi();
+                return;
+            }
+
+            // Check if we are in local testing mode and then fake a user
 			// and go to the Intro Views.
 			if ($rootScope.config.localsecurity || typeof OAuth == 'undefined') {
 
@@ -217,9 +227,6 @@ angular.module("gameboard.controllers", [])
                     // Get the User
 					$rootScope.user = user;
 
-					// Default the Header to the ID of the authenicated user
-					$http.defaults.headers.common["X-GB-ID"] = $rootScope.user.raw.id;
-
 					// Get the signing in Member and see if they are registered
 					MembersService.getMember(user.raw.id).then(function (member) {
 
@@ -247,8 +254,14 @@ angular.module("gameboard.controllers", [])
 						nextView();
 					});
 
-				}).fail(failFunc);
-			}).fail(failFunc);
+				}).fail(function(err) {
+                    $ionicLoading.hide();
+                    $rootScope.wifi();
+                });
+			}).fail(function(err) {
+                $ionicLoading.hide();
+                $rootScope.wifi();
+            });
 		};
 
 	})
