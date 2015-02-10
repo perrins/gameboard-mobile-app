@@ -7,15 +7,13 @@
   <author email="info@game-board.co" href="http://game-board.co/">
         Game-board Ltd
     </author>
-    <content src="index.html"/>
-
-    <access origin="https://oauth.io/*"/>
-    <access origin="https://google.com/*"/>
-    <access origin="https://graph.facebook.com/*"/>
-    <access origin="https://api.twitter.com/*"/>
-    <access origin="https://gameboard-cloud.eu-gb.mybluemix.net/*"/>
-    <access origin="*"/>
-
+  <content src="index.html"/>
+  <access origin="https://oauth.io/*"/>
+  <access origin="https://google.com/*"/>
+  <access origin="https://graph.facebook.com/*"/>
+  <access origin="https://api.twitter.com/*"/>
+  <access origin="https://gameboard-cloud.eu-gb.mybluemix.net/*"/>
+  <access origin="*"/>
   <preference name="fullscreen" value="true"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
