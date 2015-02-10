@@ -1,4 +1,4 @@
-<ion-view title="Favourites" class="favourites">
+<ion-view title="Favourites" class="favourites glass">
 
 	<ion-nav-buttons side="left">
 		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
@@ -6,12 +6,12 @@
 
 	<ion-content class="has-header" scroll="false">
 
-		<div class="button-bar" scroll="false">
-			<button class="button button-balanced" ng-click="showVideos()">Videos
-				<span class="badge badge-energized">{{total_videos}}</span>
+		<div class="button-bar glass" scroll="false">
+			<button class="button" ng-click="showVideos()">Videos
+				<span class="badge badge-dark">{{total_videos}}</span>
 			</button>
-			<button class="button button-positive" ng-click="showMembers()">Members
-				<span class="badge badge-royal">{{total_members}}</span>
+			<button class="button" ng-click="showMembers()">Members
+				<span class="badge badge-dark">{{total_members}}</span>
 			</button>
 
 		</div>
@@ -43,7 +43,7 @@
 
 				<h2>{{video.title}}</h2>
 
-				<h3>{{video.gameTag}}</h2>
+				<h3>{{video.gameTag}}</h3>
 					<p>{{video.description}}</p>
 					<span class="badge badge-balanced">{{video.views}}</span>
 					<span class="badge badge-royal">{{video.rank}}</span>
