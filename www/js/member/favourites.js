@@ -19,7 +19,7 @@ angular.module("gameboard.member.favourites", [])
 		$scope.loadItems = function () {
 			// Clear the List before adding new items
 			// This needs to be improved
-			$scope.members = [];
+			$scope.members = null;
 			$scope.videos = [];
 
 			$scope.total_videos = 0;
@@ -62,7 +62,7 @@ angular.module("gameboard.member.favourites", [])
 		$scope.showMembers = function () {
 
 			var favs = FavouritesService.allCache();
-			$scope.videos = [];
+			$scope.videos = null;
 			$scope.members = favs.members;
 
 			if (!$scope.$$phase) {
@@ -74,7 +74,7 @@ angular.module("gameboard.member.favourites", [])
 		$scope.showVideos = function () {
 
 			var favs = FavouritesService.allCache();
-			$scope.members = [];
+			$scope.members = null;
 			$scope.videos = favs.videos;
 
 			if (!$scope.$$phase) {

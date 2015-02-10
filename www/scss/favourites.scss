@@ -1,0 +1,6 @@
+@import "_variables";
+
+.favourites.pane {
+	background: url('#{$image-path}/backgrounds/favourites.jpg');
+	background-size: cover;
+}
