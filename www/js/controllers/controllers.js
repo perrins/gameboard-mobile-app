@@ -160,11 +160,7 @@ angular.module("gameboard.controllers", [])
                 } else {
                     console.log("We have a connection "+$rootScope.states[navigator.connection.type]);
                 }
-            } else {
-                $ionicLoading.hide();
-                $rootScope.wifi();
-                return;
-            }
+            } 
 
             // Check if we are in local testing mode and then fake a user
 			// and go to the Intro Views.

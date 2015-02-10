@@ -126,13 +126,13 @@ angular.module("gameboard", [
 									cc = IBMCloudCode.initializeService();
 
 								// Make it handle Local serving if set to try and local url set
-								if (config.localserver && _.has(config, "local")) {
+								if (_.has(config, "localserver") && config.localserver ) {
 									// Set the Origin to Local Server for testing
 									cc.setBaseUrl(config.local);
 								}
 
 								// Let the user no they have logged in and can do some stuff if they require
-								console.log("Sucessful initialisation Services ...");
+								console.log("Successful initialisation Services ...");
 
 								// Keep it Global
 								$rootScope.initialized = true;

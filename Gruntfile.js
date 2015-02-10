@@ -133,11 +133,7 @@ module.exports = function(grunt) {
 				{
 					src: "vendor/components-font-awesome/css/font-awesome.min.css",
 					dest: "www/css/font-awesome.min.css"
-				},
-                {
-                    src: "tmp/js/<%= pkg.name%>.vendor.js",
-                    dest: "www/lib/<%= pkg.name%>.vendor.js"
-                }
+				}
 
 				]
 
