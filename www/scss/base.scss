@@ -53,22 +53,28 @@
 	}
 }
 
-.glass {
-	&.button-bar {
-		button {
-			background: rgba(255,255,255,0.4);
-			font-weight: bold;
-		}
+.glass-list {
+	.item {
+		background: transparent;
+		border: 1px solid rgba(200,200,200,0.5);
 	}
-	&.pane {
-		.item {
-			background: transparent;
-		}
-		.item-content, .item-divider, a.item {
-			background: rgba(255,255,255,0.4);
-		}
+	.item-content, .item-divider, a.item {
+		background: rgba(200,200,200,0.5);
+		color: #fff;
 	}
+}
 
+
+.glass-button-bar {
+	button {
+		background: rgba(150,150,150,0.5);
+		border: 0;
+		color: #ececec;
+		&.active {
+			color: #ececec;
+			background: rgba(120,120,120,0.5);
+		}
+	}
 }
 
 .dark-glass-background {
