@@ -1,4 +1,4 @@
-<ion-view title="Favourites" class="favourites glass">
+<ion-view title="Favourites" class="favourites">
 
 	<ion-nav-buttons side="left">
 		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
@@ -6,17 +6,17 @@
 
 	<ion-content class="has-header" scroll="false">
 
-		<div class="button-bar glass" scroll="false">
-			<button class="button" ng-click="showVideos()">Videos
+		<div class="button-bar glass-button-bar" scroll="false">
+			<button class="button" ng-click="showVideos()" ng-class="{active: videos}">Videos
 				<span class="badge badge-dark">{{total_videos}}</span>
 			</button>
-			<button class="button" ng-click="showMembers()">Members
+			<button class="button" ng-click="showMembers()" ng-class="{active: members}">Members
 				<span class="badge badge-dark">{{total_members}}</span>
 			</button>
 
 		</div>
 	</ion-content>
-	<ion-content class="has-header" style="top:90px;">
+	<ion-content class="has-header glass-list" style="top:90px;">
 
 		<ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();">
 		</ion-refresher>
