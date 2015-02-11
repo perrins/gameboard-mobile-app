@@ -76,7 +76,7 @@ angular.module("gameboard.boards.genres", [])
                 }
 
                 // Then We have not found anything
-                if (err.info.statusCode == 500) {
+                if (err.info.statusCode == 500 || err.info.statusCode == 400) {
                     $scope.error = "Internal server error, please contact App Support";
                 }
 

@@ -160,10 +160,6 @@ angular.module("gameboard.controllers", [])
                 } else {
                     console.log("We have a connection "+$rootScope.states[navigator.connection.type]);
                 }
-            } else {
-                $ionicLoading.hide();
-                $rootScope.wifi();
-                return;
             }
 
             // Check if we are in local testing mode and then fake a user
@@ -248,7 +244,11 @@ angular.module("gameboard.controllers", [])
 						// If Not then force them to 
 						$ionicLoading.hide();
 						$rootScope.user.registered = false;
-						$rootScope.user.avatar = "img/avatar.png";
+
+                        // Check we have an Avatar if not give them a simple one
+                        if (!_.has($rootScope.user,"avatar")) {
+                            $rootScope.user.avatar = "img/avatar.png";
+                        }
 
 						// Move to the Next view
 						nextView();
@@ -274,19 +274,69 @@ angular.module("gameboard.controllers", [])
 			$state.go("signin");
 		}
 
+        $scope.actionText = "Next";
+
+        $scope.countries = [
+            {id: 1, text: 'USA', checked: false, icon: "http://www.sciencekids.co.nz/images/pictures/flags680/United_States.jpg"},
+            {id: 2, text: 'United Kingdom', checked: false, icon: 'http://www.sciencekids.co.nz/images/pictures/flags680/United_Kingdom.jpg'},
+            {id: 3, text: 'Japan', checked: true, icon: "http://www.sciencekids.co.nz/images/pictures/flags680/Japan.jpg"},
+            {id: 4, text: 'Germany', checked: true, icon: "http://www.sciencekids.co.nz/images/pictures/flags680/Germany.jpg"}];
+
+        $scope.platforms = [
+            {id: 1, text: 'PS4', checked: false, icon: null},
+            {id: 2, text: 'PS3', checked: false, icon: null},
+            {id: 3, text: 'XBOX 360', checked: false, icon: null},
+            {id: 4, text: 'XBOX One', checked: false, icon: null},
+            {id: 5, text: 'Wii', checked: false, icon: null},
+            {id: 6, text: 'Wii U', checked: false, icon: null},
+            {id: 7, text: 'Apple Mac', checked: false, icon: null},
+            {id: 8, text: 'PC', checked: false, icon: null},
+            {id: 9, text: 'Gamers PC', checked: false, icon: null},
+
+            {id: 10, text: 'XBOX One', checked: false, icon: null},
+            {id: 11, text: 'XBOX One', checked: false, icon: null},
+
+
+            {id: 12, text: 'Steam', checked: false, icon: null},
+            {id: 13, text: 'iPad', checked: false, icon: null},
+            {id: 14, text: 'Android Tablet', checked: false, icon: null},
+            {id: 15, text: 'iPhone', checked: false, icon: null},
+            {id: 16, text: 'Android Phone', checked: false, icon: null}];
+
+
+        $scope.countries_text_single = 'Choose country';
+        $scope.platforms_text_multiple = 'Choose Platforms';
+
 		// Manage the Registration Process
 		$scope.user = $rootScope.user;
 
 		// Move the Name section
 		$scope.next = function () {
 
-			// VALIDATE THE FORM
+            // Work out where we are and then the proposed action
+            switch (WizardHandler.wizard().currentStepNumber() ) {
+                case 1:
+
+                    // Validate Form 1
+
+                    $scope.actionText = "Next";
+                    break;
+                case 2:
+                    $scope.actionText = "Register";
+                    break;
+                case 3:
+                    $scope.actionText = "Finish";
+                    break;
+            }
+
+            // VALIDATE THE FORM
 			$ionicScrollDelegate.scrollTop();
 			WizardHandler.wizard().next();
 		};
 
 		// Move the Name section
 		$scope.back = function () {
+
 			$ionicScrollDelegate.scrollTop();
 			WizardHandler.wizard().previous();
 		};
@@ -297,11 +347,38 @@ angular.module("gameboard.controllers", [])
 			// ADD CODE TO AUTHENTICATE Gameboard app with Facebook
 		};
 
-		$scope.twitter = function () {
-		};
+		$scope.twitter = function (check) {
+
+            debugger;
+
+            OAuth.initialize($rootScope.config.security);
+
+            // Handle the Cordova OAuth experience
+            OAuth.popup("twitter", {
+                cache: false
+            }).done(function (twitter) {
+
+                debugger;
+                // Save the context so we can
+
+                // Lets get some information about the User
+                twitter.me().done(function (twitter_user) {
+
+                    $scope.member.twitter_token = twitter.access_token
+
+                }).fail(function(err) {
+                    $rootScope.wifi();
+                });
+            }).fail(function(err) {
+                $rootScope.wifi();
+            });
+
+        };
 
 		// Finish the Wizard
 		$scope.register = function (member) {
+
+            // Validate the Member information before trying to
 
 			// Lets Validate and Add any other meta data we need
 			MembersService.registerMember(member).then(function (member) {
@@ -309,7 +386,9 @@ angular.module("gameboard.controllers", [])
 				var appscope = angular.element("body").injector().get("$rootScope");
 				appscope.user.registered = true;
 
-				// Go to the Final Wizard Page
+                $scope.action = "Finish";
+
+            	// Go to the Final Wizard Page
 				WizardHandler.wizard().next();
 
 			}, function (err) {
@@ -321,7 +400,26 @@ angular.module("gameboard.controllers", [])
 
 		};
 
-		// Finish the Wizard
+        // Handle the Registration Action
+        $scope.action = function(member) {
+
+            switch($scope.actionText) {
+                case  "Next" :
+
+                    $scope.next();
+                    break;
+
+                case  "Register" :
+                    $scope.register(member)
+                    break;
+                case  "Finish" :
+                    $scope.finish();
+                    break;
+            }
+
+        }
+
+        // Finish the Wizard
 		$scope.finish = function () {
 			$state.go("intro");
 		};
@@ -463,5 +561,155 @@ angular.module("gameboard.controllers", [])
 		// Manage the Prizes for Specific Boards and Show what is on offer
 
 
-	});
+	})
+
+    .directive('fancySelect',
+    [
+        '$ionicModal',
+        function($ionicModal) {
+            return {
+                /* Only use as <fancy-select> tag */
+                restrict : 'E',
+
+                /* Our template */
+                templateUrl: 'templates/fancy-select.html',
+
+                /* Attributes to set */
+                scope: {
+                    'items'        : '=', /* Items list is mandatory */
+                    'text'         : '=', /* Displayed text is mandatory */
+                    'value'        : '=', /* Selected value binding is mandatory */
+                    'callback'     : '&'
+                },
+
+                link: function (scope, element, attrs) {
+
+                    /* Default values */
+                    scope.multiSelect   = attrs.multiSelect === 'true' ? true : false;
+                    scope.allowEmpty    = attrs.allowEmpty === 'false' ? false : true;
+
+                    /* Header used in ion-header-bar */
+                    scope.headerText    = attrs.headerText || '';
+
+                    /* Text displayed on label */
+                    // scope.text          = attrs.text || '';
+                    scope.defaultText   = scope.text || '';
+
+                    /* Notes in the right side of the label */
+                    scope.noteText      = attrs.noteText || '';
+                    scope.noteImg       = attrs.noteImg || '';
+                    scope.noteImgClass  = attrs.noteImgClass || '';
+
+                    /* Optionnal callback function */
+                    // scope.callback = attrs.callback || null;
+
+                    /* Instanciate ionic modal view and set params */
+
+                    /* Some additionnal notes here :
+                     *
+                     * In previous version of the directive,
+                     * we were using attrs.parentSelector
+                     * to open the modal box within a selector.
+                     *
+                     * This is handy in particular when opening
+                     * the "fancy select" from the right pane of
+                     * a side view.
+                     *
+                     * But the problem is that I had to edit ionic.bundle.js
+                     * and the modal component each time ionic team
+                     * make an update of the FW.
+                     *
+                     * Also, seems that animations do not work
+                     * anymore.
+                     *
+                     */
+                    $ionicModal.fromTemplateUrl(
+                        'templates/fancy-select-items.html',
+                        {'scope': scope}
+                    ).then(function(modal) {
+                            scope.modal = modal;
+                        });
+
+                    /* Validate selection from header bar */
+                    scope.validate = function (event) {
+                        // Construct selected values and selected text
+                        if (scope.multiSelect == true) {
+
+                            // Clear values
+                            scope.value = '';
+                            scope.text = '';
+
+                            // Loop on items
+                            jQuery.each(scope.items, function (index, item) {
+                                if (item.checked) {
+                                    scope.value = scope.value + item.id+';';
+                                    scope.text = scope.text + item.text+', ';
+                                }
+                            });
+
+                            // Remove trailing comma
+                            scope.value = scope.value.substr(0,scope.value.length - 1);
+                            scope.text = scope.text.substr(0,scope.text.length - 2);
+                        }
+
+                        // Select first value if not nullable
+                        if (typeof scope.value == 'undefined' || scope.value == '' || scope.value == null ) {
+                            if (scope.allowEmpty == false) {
+                                scope.value = scope.items[0].id;
+                                scope.text = scope.items[0].text;
+
+                                // Check for multi select
+                                scope.items[0].checked = true;
+                            } else {
+                                scope.text = scope.defaultText;
+                            }
+                        }
+
+                        // Hide modal
+                        scope.hideItems();
+
+                        // Execute callback function
+                        if (typeof scope.callback == 'function') {
+                            scope.callback (scope.value);
+                        }
+                    }
+
+                    /* Show list */
+                    scope.showItems = function (event) {
+                        event.preventDefault();
+                        scope.modal.show();
+                    }
+
+                    /* Hide list */
+                    scope.hideItems = function () {
+                        scope.modal.hide();
+                    }
+
+                    /* Destroy modal */
+                    scope.$on('$destroy', function() {
+                        scope.modal.remove();
+                    });
+
+                    /* Validate single with data */
+                    scope.validateSingle = function (item) {
+
+                        // Set selected text
+                        scope.text = item.text;
+
+                        // Set selected value
+                        scope.value = item.id;
+
+                        // Hide items
+                        scope.hideItems();
+
+                        // Execute callback function
+                        if (typeof scope.callback == 'function') {
+                            scope.callback (scope.value);
+                        }
+                    }
+                }
+            };
+        }
+    ]
+);
 

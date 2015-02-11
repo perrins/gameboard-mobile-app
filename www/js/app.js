@@ -91,7 +91,9 @@ angular.module("gameboard", [
 		VIDEOS: "/videos", // IBM CloudCode with Cloudant
 		YOUTUBE_YOURS: "/youtube/videos",
 		EMBED: "http://www.youtube.com/embed/",
-		PRIZES: "/prizes"
+		PRIZES: "/prizes",
+        SOCIAL_AUTH_CODE : "/social/authcode",
+        SOCIAL_AUTH : "/social/authorise"
 	})
 
 	// Configure the Angular Rules

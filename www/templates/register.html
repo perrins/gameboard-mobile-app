@@ -1,13 +1,16 @@
 <ion-pane>
 
 	<header class="bar bar-header bar-dark">
-		<button class="button button-clear button-assertive" ng-click="back()" ng-show="back">Back</button>
+
+        <button class="button button-clear button-assertive" ng-click="cancel()">Cancel</button>
 
 		<h1 class="title">Register</h1>
-		<button class="button button-clear button-assertive" ng-click="cancel()">Cancel</button>
-	</header>
 
-	<ion-content class="has-header" padding="false">
+        <button class="button button-clear button-assertive" ng-click="action(member)">{{actionText}}</button>
+
+    </header>
+
+	<ion-content class="has-header">
 
 		<wizard current-step="step" hide-indicators="true">
 
@@ -36,9 +39,9 @@
                         <img src="img/call-of-duty-ghosts.jpg">
                     </div>
 
-                    <a class="item item-icon-left assertive" ng-click="next()">
+                    <a class="item item-icon-left assertive">
                         <i class="icon ion-log-in"></i>
-                        Continue Registration
+                        Click Next to Continue Registration
                     </a>
 
                 </div>
@@ -147,13 +150,6 @@
 						</label>
 					</li>
 
-					<div class="row">
-						<div class="col col-50">
-							<button class="button button-block button-energized" item="video" ng-click="next()">
-								Continue
-							</button>
-						</div>
-					</div>
 				</div>
 			</wz-step>
 			<wz-step title="Social">
@@ -178,6 +174,11 @@
 						Social Notifications
 					</div>
 
+                    <div class="item item-body">
+                        <p>If you authorise Gameboard to use your social acttions, we can then share your videos
+                            with a wider audience. This will increase your ranking and views </p>
+                    </div>
+
 					<li class="item item-avatar item-toggle">
 						<img src="img/email.png">
 
@@ -196,12 +197,15 @@
 						<img src="img/twitter.png">
 
 						<h2>Twitter</h2>
-						<label ng-model="member.twitter" class="toggle toggle-dark">
-							<input type="checkbox" checked="" ng-click="twitter()">
+						<label class="toggle toggle-dark">
+
+							<input ng-model="member.twitter" type="checkbox" ng-click="authTwitter()">
+                            <span ng-show="member.twitterid">@</span><span ng-show="member.twitterid">{{member.twitterid}}</span>
 
 							<div class="track">
 								<div class="handle"></div>
 							</div>
+
 						</label>
 					</li>
 
@@ -209,8 +213,8 @@
 						<img src="img/facebook.png">
 
 						<h2>Facebook</h2>
-						<label class="toggle toggle-dark" ng-click="facebook()">
-							<input ng-model="member.facebook" type="checkbox" checked="">
+						<label class="toggle toggle-dark" ng-click="authFacebook()">
+							<input ng-model="member.facebook" type="checkbox">
 
 							<div class="track">
 								<div class="handle"></div>
@@ -223,7 +227,7 @@
 
 						<h2>Google+</h2>
 						<label class="toggle toggle-dark">
-							<input ng-model="member.googleplus" type="checkbox" checked="">
+							<input ng-model="member.googleplus" type="checkbox">
 
 							<div class="track">
 								<div class="handle"></div>
@@ -231,15 +235,21 @@
 						</label>
 					</li>
 
-					<div class="row">
-						<div class="col col-50">
-							<button class="button button-block button-royal" item="member" ng-click="register(member)">
-								Register
-							</button>
-						</div>
-					</div>
+                    <li class="item item-avatar item-toggle">
+                        <img src="img/sms.png">
 
-				</div>
+                        <h2>SMS</h2>
+                        <label class="toggle toggle-dark">
+                            <input ng-model="member.sms" type="checkbox">
+
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </li>
+
+
+                </div>
 
 			</wz-step>
 
@@ -261,16 +271,6 @@
 
 				</div>
 
-				<div class="row" ng- show="video">
-					<div class="col col-10"></div>
-
-					<div class="col col-80">
-						<button class="button button-block button-balanced" ng-click="finish()">
-							Finish
-						</button>
-					</div>
-
-				</div>
 
 			</wz-step>
 
