@@ -50,8 +50,6 @@ angular.module("gameboard.controllers", [])
 
 	.controller("MainCtrl", function ($rootScope,  $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
 
-		angular.element("#main").removeClass("hidden");
-
         // Prepare User for Display
 		if ($rootScope.user) {
 
@@ -99,8 +97,6 @@ angular.module("gameboard.controllers", [])
 
 // Sign In Controller, navigate to Intro
 	.controller("SignInCtrl", function ($cordovaNetwork, $ionicHistory, $rootScope, $state, $scope, $http, MembersService, $ionicLoading, Settings) {
-
-		angular.element("#main").removeClass("hidden");
 
         // Clear the Back stack
 		$ionicHistory.nextViewOptions({
@@ -266,8 +262,101 @@ angular.module("gameboard.controllers", [])
 
 	})
 
+    .factory('SocialIntegration', function ($q, $cacheFactory,$rootScope, $stateParams,$http, ACCESS) {
+
+        return {
+
+            twitter: function () {
+
+                // Create a Defered, one of the collest programming patterns going
+                var def = $q.defer();
+
+                debugger;
+
+                // Initialise and lets get this party started
+                OAuth.initialize($rootScope.config.security);
+
+                // Get A Code
+                Q.fcall ( function () {
+
+                    // Request a Server Side Generated Auth Code
+
+                    var def = $q.defer();
+
+                    // Get handle to the CloudCode service
+                    var cc = IBMCloudCode.getService();
+                    var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH_CODE).toString();
+
+                    // Get the Genres
+                    cc.get(uri, {
+                        "handleAs": "json"
+                    }).then(function (token) {
+                        def.resolve(token);
+                    }).catch(function (err) {
+                        defer.reject(err);
+                    })
+
+                    return def.promise;
+
+                }).then(function(token){
+
+                    var def = Q.defer();
+
+                    // Present Token to Popup
+                    OAuth.popup("twitter", {
+                        cache: true,
+                        state: token.token
+                    }).then(function (twitter) {
+                        def.resolve(twitter);
+                    }).fail(function(err){
+                        def.reject(err);
+                    });
+
+                    return def.promise;
+
+                }).then(function(twitter) {
+
+                    var def = $q.defer();
+
+                    // Get handle to the CloudCode service
+                    var cc = IBMCloudCode.getService();
+                    var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH).append("twitter").toString();
+
+                    // Now ask for the Access Token
+                    cc.post(uri,{data:{code: twitter.code},"handleAs":"json"}).then(function (accesstoken) {
+                        def.resolve({twitter:twitter,accesstoken:accesstoken});
+                    }).catch(function (err) {
+                        defer.reject(err);
+                    })
+
+                    return def.promise;
+
+                }).then(function(twitter) {
+
+                    debugger;
+                    var def = $q.defer();
+                    // Lets get some information about the User
+                    twitter.twitter.me().done(function (twitter_user) {
+                        def.resolve({twitter:twitter.twitter,user:twitter_user,accesstoken:twitter.accesstoken});
+                    }).fail(function(err) {
+                        def.reject(err);
+                    });
+
+                    return def.promise;
+
+                }).fail(function(err) {
+                    def.reject(err);
+                });
+
+                return def.promise;
+
+            }
+        }
+
+    })
+
 // A simple controller that shows a tapped item"s data
-	.controller("RegisterCtrl", function ($ionicScrollDelegate, $rootScope, $state, $scope, MembersService, WizardHandler, $ionicPopup) {
+	.controller("RegisterCtrl", function ($ionicScrollDelegate, $rootScope, $state, $scope, MembersService, WizardHandler, $ionicPopup,SocialIntegration) {
 
 		// Check if user is defined
 		if (!$rootScope.user) {
@@ -316,9 +405,7 @@ angular.module("gameboard.controllers", [])
             // Work out where we are and then the proposed action
             switch (WizardHandler.wizard().currentStepNumber() ) {
                 case 1:
-
                     // Validate Form 1
-
                     $scope.actionText = "Next";
                     break;
                 case 2:
@@ -343,35 +430,30 @@ angular.module("gameboard.controllers", [])
 
 		// Handle Social Integration, need the FB, Twitter details to be able to
 		// Post information of videos that have been added.
-		$scope.facebook = function () {
+		$scope.authFacebook = function () {
 			// ADD CODE TO AUTHENTICATE Gameboard app with Facebook
 		};
 
-		$scope.twitter = function (check) {
+		$scope.authTwitter = function (check) {
 
-            debugger;
+            // If On THen Do it
+            if(!$scope.member.twitter) {
 
-            OAuth.initialize($rootScope.config.security);
+                // Lets Get the socual integration
+                SocialIntegration.twitter().then(function (access) {
 
-            // Handle the Cordova OAuth experience
-            OAuth.popup("twitter", {
-                cache: false
-            }).done(function (twitter) {
+                    debugger;
+                    // Save the
+                    $scope.member.twitter_token = access.accesstoken;
+                    $scope.member.twitterid = access.twitter.alias;
 
-                debugger;
-                // Save the context so we can
-
-                // Lets get some information about the User
-                twitter.me().done(function (twitter_user) {
-
-                    $scope.member.twitter_token = twitter.access_token
-
-                }).fail(function(err) {
+                }, function (err) {
                     $rootScope.wifi();
                 });
-            }).fail(function(err) {
-                $rootScope.wifi();
-            });
+
+            } else {
+                $scope.member.twitter_token = null;
+            }
 
         };
 
@@ -384,6 +466,7 @@ angular.module("gameboard.controllers", [])
 			MembersService.registerMember(member).then(function (member) {
 				// Get the Global Scope
 				var appscope = angular.element("body").injector().get("$rootScope");
+
 				appscope.user.registered = true;
 
                 $scope.action = "Finish";
@@ -429,6 +512,8 @@ angular.module("gameboard.controllers", [])
 			$state.go("intro");
 		};
 	})
+
+
 
 // A simple controller that shows a tapped item"s data
 	.controller("AccountCtrl", function ($ionicScrollDelegate, $ionicLoading, $rootScope, $state, $scope, MembersService, WizardHandler) {
@@ -505,6 +590,8 @@ angular.module("gameboard.controllers", [])
 
 
 	})
+
+
 
 	.controller("IntroCtrl", function ($scope, $state, $ionicSlideBoxDelegate, $ionicHistory, Settings) {
 

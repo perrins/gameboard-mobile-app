@@ -43,12 +43,7 @@ angular.module("gameboard", [
                         autoShow: true
                     }, function () {
 
-                        // Hide the Splash Screen after banner Add has been created
-                        if (typeof(navigator.splashscreen) != "undefined") {
-                            navigator.splashscreen.hide();
-                        }
-
-
+                        console.log("banner created");
                     }, function () {
                         console.log("failed to create AdMob");
                     });
@@ -57,12 +52,19 @@ angular.module("gameboard", [
 
             // Check if we can hide the Splash screen
             if (window.StatusBar) {
-
 				// org.apache.cordova.statusbar required
 				window.StatusBar.styleDefault();
 			}
 
-		});
+            // Hide the Splash Screen after banner Add has been created
+            if (typeof(navigator.splashscreen) != "undefined") {
+                navigator.splashscreen.hide();
+                angular.element("#main").removeClass("hidden");
+            } else {
+                angular.element("#main").removeClass("hidden");
+            }
+
+        });
 
 	})
 

@@ -16,6 +16,8 @@ angular.module("gameboard.boards.genres", [])
 
     .controller('GenresCtrl', function ($rootScope, $scope, $ionicPopup, $ionicLoading, GenresService) {
 
+        $scope.nodata = false;
+
         // Handle the Load
         $scope.$on('$ionicView.loaded', function() {
 

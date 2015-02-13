@@ -50,8 +50,6 @@ angular.module("gameboard.controllers", [])
 
 	.controller("MainCtrl", function ($rootScope,  $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
 
-		angular.element("#main").removeClass("hidden");
-
         // Prepare User for Display
 		if ($rootScope.user) {
 
@@ -98,9 +96,7 @@ angular.module("gameboard.controllers", [])
 	})
 
 // Sign In Controller, navigate to Intro
-	.controller("SignInCtrl", function ($cordovaNetwork, $ionicHistory, $rootScope, $state, $scope, $http, MembersService, $ionicLoading, Settings) {
-
-		angular.element("#main").removeClass("hidden");
+	.controller("SignInCtrl", function ($cordovaNetwork, $ionicHistory, $rootScope, $state, $scope, $http, MembersService, $ionicLoading, Settings,ACCESS,$q) {
 
         // Clear the Back stack
 		$ionicHistory.nextViewOptions({
@@ -183,7 +179,7 @@ angular.module("gameboard.controllers", [])
 					"avatar": "img/avatar.png",
 					"bio": "The best minecraft player on the planet",
 					"prizes": "£23,456",
-					"views": "4,343",
+					"views": "4,343"
 
 				};
 
@@ -206,59 +202,95 @@ angular.module("gameboard.controllers", [])
                 $rootScope.wifi();
 			};
 
-			// Handle the Cordova OAuth experience
-			OAuth.popup("google", {
-				cache: true
-			}).done(function (google) {
+            // Get A Code
+            Q.fcall ( function () {
 
-				// Save the context so we can
-				$rootScope.google = google;
+                // Request a Server Side Generated Auth Code
+                var def = $q.defer();
 
-				// Set the Security Token on IBM Bluemix
-				IBMBluemix.setSecurityToken(google.access_token, IBMBluemix.SecurityProvider.GOOGLE);
+                // Get handle to the CloudCode service
+                var cc = IBMCloudCode.getService();
+                var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH_CODE).toString();
 
-				// Lets get some information about the User
-				google.me().done(function (user) {
+                // Get the Genres
+                cc.get(uri, {
+                    "handleAs": "json"
+                }).then(function (token) {
+                    def.resolve(token);
+                }).catch(function (err) {
+                    defer.reject(err);
+                })
 
-                    // Get the User
-					$rootScope.user = user;
+                return def.promise;
 
-					// Get the signing in Member and see if they are registered
-					MembersService.getMember(user.raw.id).then(function (member) {
+            }).then(function(token) {
 
-						// Check if we have a registered member ?
-						if (_.isObject(member) ) {
-							$ionicLoading.hide();
-							$rootScope.user.registered = true;
-							$rootScope.member = member;
-						} else {
-							// If not then they need to register to do stuff
-							$rootScope.user.registered = false;
-						}
+                // Check we have a token
+                if (_.has(token, "token")) {
+                    $rootScope.security_token = token.token;
+                } else {
+                    $ionicLoading.hide();
+                    $rootScope.wifi();
+                }
 
-						// Move to the Next View
-						nextView();
+                // Handle the Cordova OAuth experience
+                OAuth.popup("google", {
+                    cache: true,
+                    state : token.token
+                }).done(function (google) {
 
-					}, function (err) {
+                    // Save the context so we can
+                    $rootScope.google = google;
 
-						// If Not then force them to 
-						$ionicLoading.hide();
-						$rootScope.user.registered = false;
+                    // Set the Security Token on IBM Bluemix
+                    IBMBluemix.setSecurityToken(google.access_token, IBMBluemix.SecurityProvider.GOOGLE);
 
-                        // Check we have an Avatar if not give them a simple one
-                        if (!_.has($rootScope.user,"avatar")) {
-                            $rootScope.user.avatar = "img/avatar.png";
-                        }
+                    // Lets get some information about the User
+                    google.me().done(function (user) {
 
-						// Move to the Next view
-						nextView();
-					});
+                        // Get the User
+                        $rootScope.user = user;
 
-				}).fail(function(err) {
+                        // Get the signing in Member and see if they are registered
+                        MembersService.getMember(user.raw.id).then(function (member) {
+
+                            // Check if we have a registered member ?
+                            if (_.isObject(member)) {
+                                $ionicLoading.hide();
+                                $rootScope.user.registered = true;
+                                $rootScope.member = member;
+                            } else {
+                                // If not then they need to register to do stuff
+                                $rootScope.user.registered = false;
+                            }
+
+                            // Move to the Next View
+                            nextView();
+
+                        }, function (err) {
+
+                            // If Not then force them to
+                            $ionicLoading.hide();
+                            $rootScope.user.registered = false;
+
+                            // Check we have an Avatar if not give them a simple one
+                            if (!_.has($rootScope.user, "avatar")) {
+                                $rootScope.user.avatar = "img/avatar.png";
+                            }
+
+                            // Move to the Next view
+                            nextView();
+                        });
+
+                    }).fail(function (err) {
+                        $ionicLoading.hide();
+                        $rootScope.wifi();
+                    });
+                }).fail(function (err) {
                     $ionicLoading.hide();
                     $rootScope.wifi();
                 });
-			}).fail(function(err) {
+            }).catch(function(err){
                 $ionicLoading.hide();
                 $rootScope.wifi();
             });
@@ -270,12 +302,10 @@ angular.module("gameboard.controllers", [])
 
         return {
 
-            twitter: function () {
+            getAccessToken: function (provider) {
 
                 // Create a Defered, one of the collest programming patterns going
                 var def = $q.defer();
-
-                debugger;
 
                 // Initialise and lets get this party started
                 OAuth.initialize($rootScope.config.security);
@@ -283,65 +313,61 @@ angular.module("gameboard.controllers", [])
                 // Get A Code
                 Q.fcall ( function () {
 
-                    // Request a Server Side Generated Auth Code
-
-                    var def = $q.defer();
-
-                    // Get handle to the CloudCode service
-                    var cc = IBMCloudCode.getService();
-                    var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH_CODE).toString();
-
-                    // Get the Genres
-                    cc.get(uri, {
-                        "handleAs": "json"
-                    }).then(function (token) {
-                        def.resolve(token);
-                    }).catch(function (err) {
-                        defer.reject(err);
-                    })
-
-                    return def.promise;
-
-                }).then(function(token){
+                    debugger;
 
                     var def = Q.defer();
 
-                    // Present Token to Popup
-                    OAuth.popup("twitter", {
-                        cache: true,
-                        state: token.token
-                    }).then(function (twitter) {
-                        def.resolve(twitter);
-                    }).fail(function(err){
-                        def.reject(err);
-                    });
+                    if(!$rootScope.security_token) {
+                        def.reject("no security token which should have been resolved at signin");
+                    } else {
+
+                        // Present Token to Popup
+                        OAuth.popup(provider, {
+                            cache: false,
+                            state: token.token
+                        }).then(function (auth) {
+                            def.resolve(auth);
+                        }).fail(function(err){
+                            def.reject(err);
+                        });
+
+                    }
 
                     return def.promise;
 
-                }).then(function(twitter) {
+                }).then(function(auth) {
 
+                    debugger;
+
+                    // Check if we need to
                     var def = $q.defer();
 
-                    // Get handle to the CloudCode service
-                    var cc = IBMCloudCode.getService();
-                    var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH).append("twitter").toString();
+                    if(_.has(auth,"access_token")) {
+                        def.resolve({auth:auth,accesstoken:auth.access_token});
+                    } else {
 
-                    // Now ask for the Access Token
-                    cc.post(uri,{data:{code: twitter.code},"handleAs":"json"}).then(function (accesstoken) {
-                        def.resolve({twitter:twitter,accesstoken:accesstoken});
-                    }).catch(function (err) {
-                        defer.reject(err);
-                    })
+                        // Get handle to the CloudCode service
+                        var cc = IBMCloudCode.getService();
+                        var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH).append(provider).toString();
+
+                        // Now ask for the Access Token
+                        cc.post(uri, {data: {code: auth.code}, "handleAs": "json"}).then(function (accesstoken) {
+                            def.resolve({auth: auth, accesstoken: accesstoken});
+                        }).catch(function (err) {
+                            defer.reject(err);
+                        });
+                    }
 
                     return def.promise;
 
-                }).then(function(twitter) {
+                }).then(function(provider) {
 
                     debugger;
                     var def = $q.defer();
+
                     // Lets get some information about the User
-                    twitter.twitter.me().done(function (twitter_user) {
-                        def.resolve({twitter:twitter.twitter,user:twitter_user,accesstoken:twitter.accesstoken});
+                    provider.auth.me().done(function (user) {
+                        def.resolve({twitter:provider.auth,user:user,accesstoken:provider.accesstoken});
                     }).fail(function(err) {
                         def.reject(err);
                     });
@@ -368,6 +394,7 @@ angular.module("gameboard.controllers", [])
 		}
 
         $scope.actionText = "Next";
+        $scope.member = {};
 
         $scope.countries = [
             {id: 1, text: 'USA', checked: false, icon: "http://www.sciencekids.co.nz/images/pictures/flags680/United_States.jpg"},
@@ -435,28 +462,47 @@ angular.module("gameboard.controllers", [])
 		// Handle Social Integration, need the FB, Twitter details to be able to
 		// Post information of videos that have been added.
 		$scope.authFacebook = function () {
-			// ADD CODE TO AUTHENTICATE Gameboard app with Facebook
-		};
-
-		$scope.authTwitter = function (check) {
 
             // If On THen Do it
-            if(!$scope.member.twitter) {
+            if(!_.has($scope.member,"facebook_token")) {
 
                 // Lets Get the socual integration
-                SocialIntegration.twitter().then(function (access) {
+                SocialIntegration.getAccessToke("facebook").then(function (access) {
 
                     debugger;
                     // Save the
                     $scope.member.twitter_token = access.accesstoken;
-                    $scope.member.twitterid = access.twitter.alias;
+                    $scope.member.twitterid = access.auth.alias;
 
                 }, function (err) {
                     $rootScope.wifi();
                 });
 
             } else {
-                $scope.member.twitter_token = null;
+                delete $scope.member.twitter_token;
+            }
+
+        };
+
+		$scope.authTwitter = function (check) {
+
+            // If On THen Do it
+            if(!_.has($scope.member,"twitter_token")) {
+
+                // Lets Get the socual integration
+                SocialIntegration.getAccessToken("twitter").then(function (access) {
+
+                    debugger;
+                    // Save the
+                    $scope.member.facebook_token = access.accesstoken;
+                    $scope.member.facebookid = access.auth.alias;
+
+                }, function (err) {
+                    $rootScope.wifi();
+                });
+
+            } else {
+                delete $scope.member.twitter_token;
             }
 
         };

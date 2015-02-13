@@ -1,10 +1,10 @@
-<ion-view title="Your Videos">
+<ion-view title="Your Videos" class="yourVideos">
 
 	<ion-nav-buttons side="left">
 		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
 	</ion-nav-buttons>
 
-	<ion-content class="has-header" on-refresh="onRefresh()">
+	<ion-content class="has-header glass-list" on-refresh="onRefresh()">
 
 		<ion-refresher></ion-refresher>
 
@@ -37,7 +37,7 @@
 			</div>
 
 			<div class="item item-divider" ng-show="videos">
-				You Videos
+				Your Videos
 				<span class="badge badge-assertive">£12,000</span>
 			</div>
 
@@ -50,8 +50,8 @@
 
 				<h3>{{video.gameTag}}</h2>
 					<p>{{video.description}}</p>
-					<span class="badge badge-balanced">{{video.views}}</span>
-					<span class="badge badge-royal">{{video.rank}}</span>
+					<span class="badge badge-stable">{{video.views}}</span>
+					<span class="badge dark">{{video.rank}}</span>
 
 					<i class="icon ion-chevron-right icon-accessory"></i>
 

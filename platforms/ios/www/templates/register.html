@@ -12,7 +12,7 @@
 
 	<ion-content class="has-header">
 
-		<wizard current-step="step" hide-indicators="false">
+		<wizard current-step="step" hide-indicators="true">
 
 			<wz-step title="start">
 
@@ -174,6 +174,11 @@
 						Social Notifications
 					</div>
 
+                    <div class="item item-body">
+                        <p>If you authorise Gameboard to use your social acttions, we can then share your videos
+                            with a wider audience. This will increase your ranking and views </p>
+                    </div>
+
 					<li class="item item-avatar item-toggle">
 						<img src="img/email.png">
 
@@ -192,9 +197,10 @@
 						<img src="img/twitter.png">
 
 						<h2>Twitter</h2>
-						<label ng-model="member.twitter" class="toggle toggle-dark">
+						<label class="toggle toggle-dark">
 
-							<input type="checkbox" checked="" ng-click="twitter()">
+							<input ng-model="member.twitter" type="checkbox" ng-click="authTwitter()">
+                            <span ng-show="member.twitterid">@</span><span ng-show="member.twitterid">{{member.twitterid}}</span>
 
 							<div class="track">
 								<div class="handle"></div>
@@ -207,8 +213,8 @@
 						<img src="img/facebook.png">
 
 						<h2>Facebook</h2>
-						<label class="toggle toggle-dark" ng-click="facebook()">
-							<input ng-model="member.facebook" type="checkbox" checked="">
+						<label class="toggle toggle-dark" ng-click="authFacebook()">
+							<input ng-model="member.facebook" type="checkbox">
 
 							<div class="track">
 								<div class="handle"></div>
@@ -221,7 +227,7 @@
 
 						<h2>Google+</h2>
 						<label class="toggle toggle-dark">
-							<input ng-model="member.googleplus" type="checkbox" checked="">
+							<input ng-model="member.googleplus" type="checkbox">
 
 							<div class="track">
 								<div class="handle"></div>
@@ -229,7 +235,21 @@
 						</label>
 					</li>
 
-				</div>
+                    <li class="item item-avatar item-toggle">
+                        <img src="img/sms.png">
+
+                        <h2>SMS</h2>
+                        <label class="toggle toggle-dark">
+                            <input ng-model="member.sms" type="checkbox">
+
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </li>
+
+
+                </div>
 
 			</wz-step>
 
