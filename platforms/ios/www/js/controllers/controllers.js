@@ -96,7 +96,7 @@ angular.module("gameboard.controllers", [])
 	})
 
 // Sign In Controller, navigate to Intro
-	.controller("SignInCtrl", function ($cordovaNetwork, $ionicHistory, $rootScope, $state, $scope, $http, MembersService, $ionicLoading, Settings) {
+	.controller("SignInCtrl", function ($cordovaNetwork, $ionicHistory, $rootScope, $state, $scope, $http, MembersService, $ionicLoading, Settings,ACCESS,$q) {
 
         // Clear the Back stack
 		$ionicHistory.nextViewOptions({
@@ -149,7 +149,7 @@ angular.module("gameboard.controllers", [])
             //
             if(navigator.connection) {
                 checkConnection();
-                if(navigator.connection.type === Connection.NONE){
+                if(navigator.connection.type === Connection.NONE && !$rootScope.config.localsecurity){
                     $ionicLoading.hide();
                     $rootScope.wifi();
                     return;
@@ -179,7 +179,7 @@ angular.module("gameboard.controllers", [])
 					"avatar": "img/avatar.png",
 					"bio": "The best minecraft player on the planet",
 					"prizes": "£23,456",
-					"views": "4,343",
+					"views": "4,343"
 
 				};
 
@@ -202,59 +202,95 @@ angular.module("gameboard.controllers", [])
                 $rootScope.wifi();
 			};
 
-			// Handle the Cordova OAuth experience
-			OAuth.popup("google", {
-				cache: true
-			}).done(function (google) {
+            // Get A Code
+            Q.fcall ( function () {
 
-				// Save the context so we can
-				$rootScope.google = google;
+                // Request a Server Side Generated Auth Code
+                var def = $q.defer();
 
-				// Set the Security Token on IBM Bluemix
-				IBMBluemix.setSecurityToken(google.access_token, IBMBluemix.SecurityProvider.GOOGLE);
+                // Get handle to the CloudCode service
+                var cc = IBMCloudCode.getService();
+                var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH_CODE).toString();
 
-				// Lets get some information about the User
-				google.me().done(function (user) {
+                // Get the Genres
+                cc.get(uri, {
+                    "handleAs": "json"
+                }).then(function (token) {
+                    def.resolve(token);
+                }).catch(function (err) {
+                    def.reject(err);
+                })
 
-                    // Get the User
-					$rootScope.user = user;
+                return def.promise;
 
-					// Get the signing in Member and see if they are registered
-					MembersService.getMember(user.raw.id).then(function (member) {
+            }).then(function(token) {
 
-						// Check if we have a registered member ?
-						if (_.isObject(member) ) {
-							$ionicLoading.hide();
-							$rootScope.user.registered = true;
-							$rootScope.member = member;
-						} else {
-							// If not then they need to register to do stuff
-							$rootScope.user.registered = false;
-						}
+                // Check we have a token
+                if (_.has(token, "token")) {
+                    $rootScope.security_token = token.token;
+                } else {
+                    $ionicLoading.hide();
+                    $rootScope.wifi();
+                }
 
-						// Move to the Next View
-						nextView();
+                // Handle the Cordova OAuth experience
+                OAuth.popup("google", {
+                    cache: true,
+                    state : token.token
+                }).done(function (google) {
 
-					}, function (err) {
+                    // Save the context so we can
+                    $rootScope.google = google;
 
-						// If Not then force them to 
-						$ionicLoading.hide();
-						$rootScope.user.registered = false;
+                    // Set the Security Token on IBM Bluemix
+                    IBMBluemix.setSecurityToken(google.access_token, IBMBluemix.SecurityProvider.GOOGLE);
 
-                        // Check we have an Avatar if not give them a simple one
-                        if (!_.has($rootScope.user,"avatar")) {
-                            $rootScope.user.avatar = "img/avatar.png";
-                        }
+                    // Lets get some information about the User
+                    google.me().done(function (user) {
 
-						// Move to the Next view
-						nextView();
-					});
+                        // Get the User
+                        $rootScope.user = user;
 
-				}).fail(function(err) {
+                        // Get the signing in Member and see if they are registered
+                        MembersService.getMember(user.raw.id).then(function (member) {
+
+                            // Check if we have a registered member ?
+                            if (_.isObject(member)) {
+                                $ionicLoading.hide();
+                                $rootScope.user.registered = true;
+                                $rootScope.member = member;
+                            } else {
+                                // If not then they need to register to do stuff
+                                $rootScope.user.registered = false;
+                            }
+
+                            // Move to the Next View
+                            nextView();
+
+                        }, function (err) {
+
+                            // If Not then force them to
+                            $ionicLoading.hide();
+                            $rootScope.user.registered = false;
+
+                            // Check we have an Avatar if not give them a simple one
+                            if (!_.has($rootScope.user, "avatar")) {
+                                $rootScope.user.avatar = "img/avatar.png";
+                            }
+
+                            // Move to the Next view
+                            nextView();
+                        });
+
+                    }).fail(function (err) {
+                        $ionicLoading.hide();
+                        $rootScope.wifi();
+                    });
+                }).fail(function (err) {
                     $ionicLoading.hide();
                     $rootScope.wifi();
                 });
-			}).fail(function(err) {
+            }).catch(function(err){
                 $ionicLoading.hide();
                 $rootScope.wifi();
             });
@@ -262,321 +298,12 @@ angular.module("gameboard.controllers", [])
 
 	})
 
-    .factory('SocialIntegration', function ($q, $cacheFactory,$rootScope, $stateParams,$http, ACCESS) {
-
-        return {
-
-            twitter: function () {
-
-                // Create a Defered, one of the collest programming patterns going
-                var def = $q.defer();
-
-                debugger;
-
-                // Initialise and lets get this party started
-                OAuth.initialize($rootScope.config.security);
-
-                // Get A Code
-                Q.fcall ( function () {
-
-                    // Request a Server Side Generated Auth Code
-
-                    var def = $q.defer();
-
-                    // Get handle to the CloudCode service
-                    var cc = IBMCloudCode.getService();
-                    var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH_CODE).toString();
-
-                    // Get the Genres
-                    cc.get(uri, {
-                        "handleAs": "json"
-                    }).then(function (token) {
-                        def.resolve(token);
-                    }).catch(function (err) {
-                        defer.reject(err);
-                    })
-
-                    return def.promise;
-
-                }).then(function(token){
-
-                    var def = Q.defer();
-
-                    // Present Token to Popup
-                    OAuth.popup("twitter", {
-                        cache: true,
-                        state: token.token
-                    }).then(function (twitter) {
-                        def.resolve(twitter);
-                    }).fail(function(err){
-                        def.reject(err);
-                    });
-
-                    return def.promise;
-
-                }).then(function(twitter) {
-
-                    var def = $q.defer();
-
-                    // Get handle to the CloudCode service
-                    var cc = IBMCloudCode.getService();
-                    var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH).append("twitter").toString();
-
-                    // Now ask for the Access Token
-                    cc.post(uri,{data:{code: twitter.code},"handleAs":"json"}).then(function (accesstoken) {
-                        def.resolve({twitter:twitter,accesstoken:accesstoken});
-                    }).catch(function (err) {
-                        defer.reject(err);
-                    })
-
-                    return def.promise;
-
-                }).then(function(twitter) {
-
-                    debugger;
-                    var def = $q.defer();
-                    // Lets get some information about the User
-                    twitter.twitter.me().done(function (twitter_user) {
-                        def.resolve({twitter:twitter.twitter,user:twitter_user,accesstoken:twitter.accesstoken});
-                    }).fail(function(err) {
-                        def.reject(err);
-                    });
-
-                    return def.promise;
-
-                }).fail(function(err) {
-                    def.reject(err);
-                });
-
-                return def.promise;
-
-            }
-        }
-
-    })
-
-// A simple controller that shows a tapped item"s data
-	.controller("RegisterCtrl", function ($ionicScrollDelegate, $rootScope, $state, $scope, MembersService, WizardHandler, $ionicPopup,SocialIntegration) {
-
-		// Check if user is defined
-		if (!$rootScope.user) {
-			$state.go("signin");
-		}
-
-        $scope.actionText = "Next";
-
-        $scope.countries = [
-            {id: 1, text: 'USA', checked: false, icon: "http://www.sciencekids.co.nz/images/pictures/flags680/United_States.jpg"},
-            {id: 2, text: 'United Kingdom', checked: false, icon: 'http://www.sciencekids.co.nz/images/pictures/flags680/United_Kingdom.jpg'},
-            {id: 3, text: 'Japan', checked: true, icon: "http://www.sciencekids.co.nz/images/pictures/flags680/Japan.jpg"},
-            {id: 4, text: 'Germany', checked: true, icon: "http://www.sciencekids.co.nz/images/pictures/flags680/Germany.jpg"}];
-
-        $scope.platforms = [
-            {id: 1, text: 'PS4', checked: false, icon: null},
-            {id: 2, text: 'PS3', checked: false, icon: null},
-            {id: 3, text: 'XBOX 360', checked: false, icon: null},
-            {id: 4, text: 'XBOX One', checked: false, icon: null},
-            {id: 5, text: 'Wii', checked: false, icon: null},
-            {id: 6, text: 'Wii U', checked: false, icon: null},
-            {id: 7, text: 'Apple Mac', checked: false, icon: null},
-            {id: 8, text: 'PC', checked: false, icon: null},
-            {id: 9, text: 'Gamers PC', checked: false, icon: null},
-
-            {id: 10, text: 'XBOX One', checked: false, icon: null},
-            {id: 11, text: 'XBOX One', checked: false, icon: null},
-
-
-            {id: 12, text: 'Steam', checked: false, icon: null},
-            {id: 13, text: 'iPad', checked: false, icon: null},
-            {id: 14, text: 'Android Tablet', checked: false, icon: null},
-            {id: 15, text: 'iPhone', checked: false, icon: null},
-            {id: 16, text: 'Android Phone', checked: false, icon: null}];
-
-
-        $scope.countries_text_single = 'Choose country';
-        $scope.platforms_text_multiple = 'Choose Platforms';
-
-		// Manage the Registration Process
-		$scope.user = $rootScope.user;
-
-		// Move the Name section
-		$scope.next = function () {
-
-            // Work out where we are and then the proposed action
-            switch (WizardHandler.wizard().currentStepNumber() ) {
-                case 1:
-                    // Validate Form 1
-                    $scope.actionText = "Next";
-                    break;
-                case 2:
-                    $scope.actionText = "Register";
-                    break;
-                case 3:
-                    $scope.actionText = "Finish";
-                    break;
-            }
-
-            // VALIDATE THE FORM
-			$ionicScrollDelegate.scrollTop();
-			WizardHandler.wizard().next();
-		};
-
-		// Move the Name section
-		$scope.back = function () {
-
-			$ionicScrollDelegate.scrollTop();
-			WizardHandler.wizard().previous();
-		};
-
-		// Handle Social Integration, need the FB, Twitter details to be able to
-		// Post information of videos that have been added.
-		$scope.authFacebook = function () {
-			// ADD CODE TO AUTHENTICATE Gameboard app with Facebook
-		};
-
-		$scope.authTwitter = function (check) {
-
-            // If On THen Do it
-            if(!$scope.member.twitter) {
-
-                // Lets Get the socual integration
-                SocialIntegration.twitter().then(function (access) {
-
-                    debugger;
-                    // Save the
-                    $scope.member.twitter_token = access.accesstoken;
-                    $scope.member.twitterid = access.twitter.alias;
-
-                }, function (err) {
-                    $rootScope.wifi();
-                });
-
-            } else {
-                $scope.member.twitter_token = null;
-            }
-
-        };
-
-		// Finish the Wizard
-		$scope.register = function (member) {
-
-            // Validate the Member information before trying to
-
-			// Lets Validate and Add any other meta data we need
-			MembersService.registerMember(member).then(function (member) {
-				// Get the Global Scope
-				var appscope = angular.element("body").injector().get("$rootScope");
-
-				appscope.user.registered = true;
-
-                $scope.action = "Finish";
-
-            	// Go to the Final Wizard Page
-				WizardHandler.wizard().next();
-
-			}, function (err) {
-				var alertPopup = $ionicPopup.alert({
-					title: "Register",
-					template: "Failed to register your details, please try again later"
-				});
-			});
-
-		};
-
-        // Handle the Registration Action
-        $scope.action = function(member) {
-
-            switch($scope.actionText) {
-                case  "Next" :
-
-                    $scope.next();
-                    break;
-
-                case  "Register" :
-                    $scope.register(member)
-                    break;
-                case  "Finish" :
-                    $scope.finish();
-                    break;
-            }
-
-        }
-
-        // Finish the Wizard
-		$scope.finish = function () {
-			$state.go("intro");
-		};
-
-		// Handle the the cancel
-		$scope.cancel = function () {
-			$state.go("intro");
-		};
-	})
-
-
-
-// A simple controller that shows a tapped item"s data
-	.controller("AccountCtrl", function ($ionicScrollDelegate, $ionicLoading, $rootScope, $state, $scope, MembersService, WizardHandler) {
-
-		// Manage the Registration Process
-		var user = $rootScope.user;
-
-		// No User lets navigate
-		if (!user) {
-			$state.go("signin");
-			return;
-		}
-
-		// If they are not registered then take them to registration
-		if (!user.registered) {
-			$state.go("register");
-			return;
-		}
-
-		// Lets load the Videos for the Youtube Channel
-		$ionicLoading.show({
-			template: "Getting your membership..."
-		});
-
-		// Lets Get the Member information
-		MembersService.getMember(user.raw.id).then(function (member) {
-
-			$ionicLoading.hide();
-			$rootScope.user.registered = true;
-			$rootScope.member = member.doc;
-			$scope.member = member.doc;
-
-			if (!$scope.$$phase) {
-				$scope.$apply();
-			}
-		}, function (err) {
-
-			var alertPopup = $ionicPopup.alert({
-				title: "Loading Register",
-				template: "Failed to register your details, please try again later"
-			});
-
-
-		});
-
-		// Move the Name section
-		$scope.save = function () {
-			// Update Account Details
-
-		};
-
-		// Handle the the cancel
-		$scope.cancel = function () {
-			$state.go("intro");
-		};
-	})
-
 
 // A simple controller that shows a tapped item"s data
 	.controller("AboutCtrl", function ($rootScope, $scope, Settings) {
 
 		$scope.name = "Screaming Foulup";
-		$scope.version = "0.0.1";
+		$scope.version = "0.0.4";
 
 		// Check
 		$scope.intro = Settings.get("INTRO");
@@ -590,8 +317,6 @@ angular.module("gameboard.controllers", [])
 
 
 	})
-
-
 
 	.controller("IntroCtrl", function ($scope, $state, $ionicSlideBoxDelegate, $ionicHistory, Settings) {
 

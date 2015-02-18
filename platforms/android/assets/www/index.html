@@ -26,6 +26,7 @@
 	<script src="lib/angular/angular-sanitize.min.js"></script>
 	<script src="lib/angular/angular-touch.min.js"></script>
 	<script src="lib/angular/angular-wizard.min.js"></script>
+    <script src="lib/angular/angular-messages.min.js"></script>
 
 	<script src="lib/collide/collide.js"></script>
 
@@ -38,7 +39,11 @@
 
 	<!--------------------- CODE LOADING ------------------------->
 	<!-- your app's js -->
-	<script src="js/app.js"></script>
+
+    <!-- Load The AdMob Plugin -->
+    <script src="js/base/core.js"></script>
+
+    <script src="js/app.js"></script>
 	<!-- Handle any global Script code needed outside the angular framework -->
 	<script src="js/base/core.js"></script>
 	<!-- your app's scripts -->
@@ -57,11 +62,13 @@
 
     <!--Main Controllers-->
 	<script src="js/member/favourites.js"></script>
+    <script src="js/member/members.js"></script>
     <script src="js/boards/genres.js"></script>
     <script src="js/boards/games.js"></script>
     <script src="js/boards/categories.js"></script>
+    <script src="js/register/register.js"></script>
 
-	<script src="js/controllers/memberController.js"></script>
+    <script src="js/controllers/memberController.js"></script>
 	<script src="js/controllers/searchController.js"></script>
 	<script src="js/controllers/settings.js"></script>
 	<!-- Directives -->

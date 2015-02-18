@@ -6,13 +6,6 @@
 
 	<ion-content class="scroll-content ionic-scroll has-header">
 
-        <div class="list card" ng-show="nodata">
-            <div class="item item-icon-left">
-                <i class="icon ion-information-circled"></i> {{error}}
-            </div>
-        </div>
-
-        <!--<div id="genres">-->
 		<ol class="unstyled">
 			<li class="genreItem masonryItem imageButton" ng-repeat="genre in genres">
 
@@ -31,8 +24,12 @@
 			</li>
 		</ol>
 
+        <div class="list card" ng-show="nodata">
+            <div class="item item-icon-left">
+                <i class="icon ion-information-circled"></i> {{error}}
+            </div>
+        </div>
 
-		<!--</div>-->
 
 	</ion-content>
 

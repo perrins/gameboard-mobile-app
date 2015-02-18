@@ -36,7 +36,7 @@ function extend() {
 
   for (; i < length; i++) {
     // Only deal with non-null/undefined values
-    options = arguments[i];
+    options = arguments[i]
     if (options != null) {
       if (typeof options === 'string') {
           options = options.split('');
@@ -73,8 +73,9 @@ function extend() {
 
   // Return the modified object
   return target;
-}
-    /**
+};
+
+/**
  * @public
  */
 extend.version = '1.0.8';
@@ -934,10 +935,10 @@ var now = _dereq_('performance-now')
   , vendors = ['moz', 'webkit']
   , suffix = 'AnimationFrame'
   , raf = global['request' + suffix]
-  , caf = global['cancel' + suffix] || global['cancelRequest' + suffix];
+  , caf = global['cancel' + suffix] || global['cancelRequest' + suffix]
 
 for(var i = 0; i < vendors.length && !raf; i++) {
-  raf = global[vendors[i] + 'Request' + suffix];
+  raf = global[vendors[i] + 'Request' + suffix]
   caf = global[vendors[i] + 'Cancel' + suffix]
       || global[vendors[i] + 'CancelRequest' + suffix]
 }
@@ -947,19 +948,19 @@ if(!raf || !caf) {
   var last = 0
     , id = 0
     , queue = []
-    , frameDuration = 1000 / 60;
+    , frameDuration = 1000 / 60
 
   raf = function(callback) {
     if(queue.length === 0) {
       var _now = now()
-        , next = Math.max(0, frameDuration - (_now - last));
-      last = next + _now;
+        , next = Math.max(0, frameDuration - (_now - last))
+      last = next + _now
       setTimeout(function() {
-        var cp = queue.slice(0);
+        var cp = queue.slice(0)
         // Clear queue here to prevent
         // callbacks from appending listeners
         // to the current frame's queue
-        queue.length = 0;
+        queue.length = 0
         for (var i = 0; i < cp.length; i++) {
           if (!cp[i].cancelled) {
             cp[i].callback(last)
@@ -971,9 +972,9 @@ if(!raf || !caf) {
       handle: ++id,
       callback: callback,
       cancelled: false
-    });
+    })
     return id
-  };
+  }
 
   caf = function(handle) {
     for(var i = 0; i < queue.length; i++) {
@@ -989,7 +990,7 @@ module.exports = function() {
   // `cancel` potentially being assigned
   // to the native rAF function
   return raf.apply(global, arguments)
-};
+}
 module.exports.cancel = function() {
   caf.apply(global, arguments)
 }
@@ -2430,7 +2431,7 @@ process.emit = noop;
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
-};
+}
 
 // TODO(shtylman)
 process.cwd = function () { return '/' };
