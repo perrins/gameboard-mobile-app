@@ -31,8 +31,6 @@ angular.module("gameboard.register", [])
 
                     var def = $q.defer();
 
-                    debugger;
-
                     if(!$rootScope.security_token) {
                         def.reject({error:"no security token which should have been resolved at signin"});
                     } else {
@@ -44,7 +42,6 @@ angular.module("gameboard.register", [])
                         }).then(function (auth) {
                             def.resolve(auth);
                         }).fail(function(err){
-                            debugger;
                             def.reject(err);
                         });
                     }
@@ -98,6 +95,11 @@ angular.module("gameboard.register", [])
         // Check if user is defined
         if (!$rootScope.user) {
             $state.go("signin");
+        }
+
+        // Keep a Scope copy of the wizard
+        $scope.init = function init() {
+            $scope.wizard = WizardHandler.wizard("registerWizard");
         }
 
         $scope.actionText = "Next";
@@ -160,7 +162,7 @@ angular.module("gameboard.register", [])
         $scope.next = function () {
 
             // Work out where we are and then the proposed action
-            $scope.page = WizardHandler.wizard().currentStepNumber();
+            $scope.page = $scope.wizard.currentStepNumber();
 
             switch ($scope.page ) {
                 case 0:
@@ -178,7 +180,7 @@ angular.module("gameboard.register", [])
 
             // VALIDATE THE FORM
             $ionicScrollDelegate.scrollTop();
-            WizardHandler.wizard().next();
+            $scope.wizard.next();
         };
 
         // Move the Name section
@@ -233,7 +235,6 @@ angular.module("gameboard.register", [])
         $scope.register = function (member) {
 
             // Validate the Member information before trying to
-            debugger;
 
             // Lets Validate and Add any other meta data we need
             MembersService.registerMember(member).then(function (member) {
@@ -246,7 +247,7 @@ angular.module("gameboard.register", [])
                 $scope.action = "Finish";
 
                 // Go to the Final Wizard Page
-                WizardHandler.wizard().next();
+                $scope.wizard.next();
 
             }, function (err) {
                 var alertPopup = $ionicPopup.alert({

@@ -12,10 +12,11 @@
 
 	<ion-content class="has-header">
 
-		<wizard current-step="step" hide-indicators="true" name="wizard">
+		<wizard name="registerWizard" current-step="step" hide-indicators="true">
+
+            <div ng-init="init()"></div>
 
             <wz-step title="start">
-
 
                 <div class="list card">
 
