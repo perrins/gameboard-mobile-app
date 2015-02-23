@@ -187,6 +187,7 @@ angular.module("gameboard.member.search", [])
                 // Get the Videos for my Board
                 cc.get(uri, options).then(function (members) {
 
+                    debugger;
                     def.resolve(members);
 
                 }).catch(function (err) {

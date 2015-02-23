@@ -98,7 +98,12 @@ module.exports = function(grunt) {
                     src: "vendor/angular-messages/angular-messages.min.js",
                     dest: "www/lib/angular/angular-messages.min.js"
                 },
-				{
+                {
+                    src: "vendor/angular-cookies/angular-cookies.min.js",
+                    dest: "www/lib/angular/angular-cookies.min.js"
+                },
+
+                {
 					src: "vendor/collide/collide.js",
 					dest: "www/lib/collide/collide.js"
 				},

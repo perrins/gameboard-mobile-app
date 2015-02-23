@@ -17,11 +17,15 @@ angular.module("gameboard.register", [])
 
 	}])
 
-    .factory('SocialIntegration', function ($q, $cacheFactory,$rootScope, $stateParams,$http, ACCESS) {
+    .factory('SocialIntegration', function ($q, $cacheFactory,$rootScope, $stateParams,$http,$cookies, ACCESS) {
 
         return {
 
             getAccessToken: function (provider) {
+
+
+
+                debugger;
 
                 // Create a Defered, one of the collest programming patterns going
                 var defer = $q.defer();
@@ -29,6 +33,28 @@ angular.module("gameboard.register", [])
                 // Get A Code
                 var calls = Q.fcall ( function () {
 
+                    /*
+                    // Request a Server Side Generated Auth Code
+                    var def = $q.defer();
+
+                    // Get handle to the CloudCode service
+                    var cc = IBMCloudCode.getService();
+                    var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH_CODE).toString();
+
+                    // Get the Genres
+                    cc.get(uri, {
+                        "handleAs": "json"
+                    }).then(function (token,options,data) {
+                        debugger;
+                        def.resolve(token);
+                    }).catch(function (err) {
+                        def.reject(err);
+                    })
+
+                    return def.promise;
+
+                }).then( function(csrf) {
+*/
                     var def = $q.defer();
 
                     if(!$rootScope.security_token) {
@@ -38,8 +64,9 @@ angular.module("gameboard.register", [])
                         // Present Token to Popup
                         OAuth.popup(provider, {
                             cache: false,
-                            state: $rootScope.security_token
+                            state: $rootScope.security_token.token
                         }).then(function (auth) {
+                            debugger;
                             def.resolve(auth);
                         }).fail(function(err){
                             def.reject(err);
@@ -53,22 +80,34 @@ angular.module("gameboard.register", [])
                     // Check if we need to
                     var def = $q.defer();
 
+                    var options =  {handleAs:"json"};
+                    if($rootScope.google && $rootScope.user) {
+                        options.headers = {"X-GB-ACCESS-TOKEN":$rootScope.google.access_token,
+                            "X-GB-USER-ID":$rootScope.user.raw.id};
+                    }
+
+                    // Add in CSRF Token
+                    if(_.has($rootScope.security_token,"csrf")){
+                        options.headers["x-csrf-token"] = $rootScope.security_token.csrf;
+                    }
+
                     // Get handle to the CloudCode service
                     var cc = IBMCloudCode.getService();
                     var uri = new IBMUriBuilder().append(ACCESS.SOCIAL_AUTH).append(provider).toString();
+                    uri += "?_csrf="+$rootScope.security_token;
+
+                    console.log("CODE :"+auth.code);
+                    console.log("CSRF :"+$rootScope.security_token.csrf);
 
                     // Now ask for the Access Token
-                    cc.post(uri, {data: {code: auth.code}, "handleAs": "json"}).then(function (data) {
-
-                        var _data = null;
-                        try {
-                            _data = JSON.parse(data);
-                        } catch (e) {
-                            def.reject(e);
+                    cc.post(uri, {code:auth.code},options).then(function (data) {
+                        // Lets Check if we have an object
+                        if(!_.isObject(data)) {
+                            def.reject(data);
+                        } else {
+                            // Resolve the Data
+                            def.resolve({auth: auth, code: auth.code, token:data.token, user: data.user});
                         }
-                        // Resolve the Data
-                        def.resolve({auth: auth, code:auth.code, token: _data.token, user: _data.user});
-
                     }).catch(function (err) {
                         def.reject(err);
                     });
@@ -76,6 +115,7 @@ angular.module("gameboard.register", [])
                     return def.promise;
 
                 }).fail(function(err) {
+                    console.log("ERROR:"+JSON.Stringify(err));
                     defer.reject(err);
                 });
 
@@ -90,7 +130,7 @@ angular.module("gameboard.register", [])
     })
 
 // A simple controller that shows a tapped item"s data
-    .controller("RegisterCtrl", function ($ionicScrollDelegate, $rootScope, $state, $scope, MembersService,$ionicLoading, WizardHandler, $ionicPopup,SocialIntegration) {
+    .controller("RegisterCtrl", function ($ionicScrollDelegate,$cookies, $rootScope, $state, $scope, MembersService,$ionicLoading, WizardHandler, $ionicPopup,SocialIntegration) {
 
         // Check if user is defined
         if (!$rootScope.user) {
@@ -204,11 +244,16 @@ angular.module("gameboard.register", [])
 
                 // Lets Get the socual integration
                 SocialIntegration.getAccessToken(provider).then(function (access) {
+
                     // Check we got something back
                     if(access) {
                         // Save the
                         $scope.member[provider+"_token"] = access;
-                        $scope.member[provider+"id"] = access.user.name;
+                        if(provider==="twitter") {
+                            $scope.member[provider+"id"] = access.user.alias;
+                        } else {
+                            $scope.member[provider + "id"] = access.user.name;
+                        }
                         $scope.member[provider] = true;
 
                     } else {
@@ -244,10 +289,9 @@ angular.module("gameboard.register", [])
 
                 // Set them as Registerd
                 appscope.user.registered = true;
-                $scope.action = "Finish";
+                $scope.actionText = "Finish";
 
-                // Go to the Final Wizard Page
-                $scope.wizard.next();
+                $scope.next();
 
             }, function (err) {
                 var alertPopup = $ionicPopup.alert({
@@ -268,8 +312,8 @@ angular.module("gameboard.register", [])
                     break;
                 case 1:
 
-                    //$scope.next();
-                    //break;
+        //            $scope.next();
+        //            break;
 
                     // Check if Form is valid
                     if($scope.personalForm.$valid) {
@@ -291,7 +335,14 @@ angular.module("gameboard.register", [])
 
                     // Check we have one Social integration
                     if($scope.socialForm.$valid) {
-                        $scope.register(member)
+
+                        debugger;
+
+                        // Add in the Logged in User Details
+                        member.muuid = $rootScope.user.raw.id;
+                        member.user = $rootScope.user;
+
+                        $scope.register(member);
                     }
 
                     break;
@@ -343,8 +394,8 @@ angular.module("gameboard.register", [])
 
             $ionicLoading.hide();
             $rootScope.user.registered = true;
-            $rootScope.member = member.doc;
-            $scope.member = member.doc;
+            $rootScope.member = member;
+            $scope.member = member;
 
             if (!$scope.$$phase) {
                 $scope.$apply();

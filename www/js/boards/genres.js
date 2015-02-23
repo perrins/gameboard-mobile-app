@@ -133,7 +133,6 @@ angular.module("gameboard.boards.genres", [])
                         defer.resolve(cache.get(ACCESS.GENRES));
 
                     }).catch(function (err) {
-                        console.log(err);
                         defer.reject(err);
                     })
 

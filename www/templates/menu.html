@@ -32,6 +32,18 @@
 			<ion-list>
 
 				<a ng-if="user.registered" class="item item-dark item-avatar item-icon-right" nav-clear menu-close ng-href="#/account">
+
+                    <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
+
+                    <h2 class="menu-name">{{user.firstname}}</h2>
+
+                    <h2 class="menu-name">{{user.lastname}}</h2>
+
+                    <p class="menu-tag">{{user.gametag}}</p>
+
+                    <i class="icon ion-chevron-right icon-accessory"></i>
+
+                </a>
                 <a ng-if="!user.registered" class="item item-dark item-avatar item-icon-right" nav-clear menu-close ng-href="#/register">
 
                     <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
@@ -44,7 +56,6 @@
 
 					<span class="unregistered" ng-show="!user.registered">Unregistered</span>
 					<i class="icon ion-chevron-right icon-accessory"></i>
-
 				</a>
 
 				<a ng-show="!user.registered" class="item item-dark item-icon-left item-icon-right" nav-clear menu-close

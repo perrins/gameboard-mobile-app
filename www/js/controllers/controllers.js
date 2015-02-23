@@ -227,7 +227,7 @@ angular.module("gameboard.controllers", [])
 
                 // Check we have a token
                 if (_.has(token, "token")) {
-                    $rootScope.security_token = token.token;
+                    $rootScope.security_token = token;
                 } else {
                     $ionicLoading.hide();
                     $rootScope.wifi();

@@ -4,6 +4,7 @@ angular.module("gameboard", [
 	"ionic",
 	"ngCordova",
     "ngMessages",
+    "ngCookies",
 	"mgo-angular-wizard",
 	"gameboard.directives",
 	"gameboard.controllers",
