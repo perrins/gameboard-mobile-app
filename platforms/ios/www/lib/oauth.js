@@ -5437,7 +5437,7 @@ process.argv = [];
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
-};
+}
 
 // TODO(shtylman)
 process.cwd = function () { return '/' };
@@ -5498,7 +5498,7 @@ process.chdir = function (dir) {
     // SES (Secure EcmaScript)
     } else if (typeof ses !== "undefined") {
         if (!ses.ok()) {
-
+            return;
         } else {
             ses.makeQ = definition;
         }
@@ -7386,4 +7386,4 @@ return Q;
 });
 
 }).call(this,require("/Users/antoine/projects/oauth-js/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"/Users/antoine/projects/oauth-js/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":15}]},{},[8]);
+},{"/Users/antoine/projects/oauth-js/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":15}]},{},[8])

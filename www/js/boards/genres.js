@@ -16,6 +16,8 @@ angular.module("gameboard.boards.genres", [])
 
     .controller('GenresCtrl', function ($rootScope, $scope, $ionicPopup, $ionicLoading, GenresService) {
 
+        $scope.nodata = false;
+
         // Handle the Load
         $scope.$on('$ionicView.loaded', function() {
 
@@ -76,7 +78,7 @@ angular.module("gameboard.boards.genres", [])
                 }
 
                 // Then We have not found anything
-                if (err.info.statusCode == 500) {
+                if (err.info.statusCode == 500 || err.info.statusCode == 400) {
                     $scope.error = "Internal server error, please contact App Support";
                 }
 
@@ -131,7 +133,6 @@ angular.module("gameboard.boards.genres", [])
                         defer.resolve(cache.get(ACCESS.GENRES));
 
                     }).catch(function (err) {
-                        console.log(err);
                         defer.reject(err);
                     })
 

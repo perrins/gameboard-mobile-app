@@ -49,8 +49,6 @@ angular.module('gameboard.board.controllers', [])
             // Load the Items
             $scope.loadItems = function (page, size) {
 
-                debugger;
-
                 // Clear the List before adding new items
                 // This needs to be improved
                 $scope.boardlist = [];

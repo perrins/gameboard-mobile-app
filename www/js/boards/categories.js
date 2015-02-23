@@ -18,8 +18,8 @@ angular.module("gameboard.boards.categories", [])
     .controller('CategoriesCtrl', function ($scope, $stateParams, $ionicLoading, $ionicPopup, CategoriesService, GamesService, BookmarksService) {
 
         // Lets check we have a
-        var gmid = $stateParams.gmid;
-        var genid = $stateParams.genid;
+        $scope.gmid = $stateParams.gmid;
+        $scope.genid = $stateParams.genid;
 
         //$scope.$on('$ionicView.enter', function() {
 
@@ -28,13 +28,13 @@ angular.module("gameboard.boards.categories", [])
         });
 
         // Access the Genres and get the Title and other information we need
-        GamesService.getGame(genid, gmid).then(function (game) {
+        GamesService.getGame($scope.genid, $scope.gmid).then(function (game) {
 
             // Display The Title
             $scope.title = game.title;
 
             // Get the Games
-            return CategoriesService.all(gmid);
+            return CategoriesService.all($scope.gmid);
 
         }).then(function (data) {
 
@@ -57,7 +57,6 @@ angular.module("gameboard.boards.categories", [])
                 // Paint
                 $scope.banner = data.banner;
                 $scope.categories = data.categories;
-                $scope.gmid = data.gmid;
 
                 $ionicLoading.hide();
 
@@ -102,6 +101,8 @@ angular.module("gameboard.boards.categories", [])
             // Build the Bookmark
             var data = {
                 type: "CATEGORY",
+
+                genid: $scope.genid,
                 gemid: $scope.gmid,
                 title: $scope.title
             };

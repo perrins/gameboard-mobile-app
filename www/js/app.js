@@ -3,6 +3,8 @@
 angular.module("gameboard", [
 	"ionic",
 	"ngCordova",
+    "ngMessages",
+    "ngCookies",
 	"mgo-angular-wizard",
 	"gameboard.directives",
 	"gameboard.controllers",
@@ -13,6 +15,7 @@ angular.module("gameboard", [
     "gameboard.boards.games",
     "gameboard.boards.categories",
     "gameboard.member.search",
+    "gameboard.register",
 
     "gameboard.member.favourites",
 
@@ -31,8 +34,16 @@ angular.module("gameboard", [
 		// Handle Loading of the Runtime
 		$ionicPlatform.ready(function () {
 
+            // Hide the Splash Screen after banner Add has been created
+            if (!_.isUndefined(navigator.splashscreen)) {
+                navigator.splashscreen.hide();
+                angular.element("#main").removeClass("hidden");
+            } else {
+                angular.element("#main").removeClass("hidden");
+            }
+
             // Create A Banner Add when in Cordova
-            if (typeof(AdMob) != "undefined") {
+            if (! _.isUndefined(AdMob) ) {
 
                 // Create the Banner Add Area through JS
                 AdMob.createBanner(
@@ -43,12 +54,7 @@ angular.module("gameboard", [
                         autoShow: true
                     }, function () {
 
-                        // Hide the Splash Screen after banner Add has been created
-                        if (typeof(navigator.splashscreen) != "undefined") {
-                            navigator.splashscreen.hide();
-                        }
-
-
+                        console.log("banner created");
                     }, function () {
                         console.log("failed to create AdMob");
                     });
@@ -57,12 +63,11 @@ angular.module("gameboard", [
 
             // Check if we can hide the Splash screen
             if (window.StatusBar) {
-
 				// org.apache.cordova.statusbar required
-				window.StatusBar.styleDefault();
+				//window.StatusBar.styleDefault();
 			}
 
-		});
+        });
 
 	})
 
@@ -91,7 +96,9 @@ angular.module("gameboard", [
 		VIDEOS: "/videos", // IBM CloudCode with Cloudant
 		YOUTUBE_YOURS: "/youtube/videos",
 		EMBED: "http://www.youtube.com/embed/",
-		PRIZES: "/prizes"
+		PRIZES: "/prizes",
+        SOCIAL_AUTH_CODE : "/social/authcode",
+        SOCIAL_AUTH : "/social/authorise"
 	})
 
 	// Configure the Angular Rules
@@ -177,16 +184,7 @@ angular.module("gameboard", [
 				templateUrl: "templates/intro.html",
 				controller: "IntroCtrl"
 			})
-			.state("register", {
-				url: "/register",
-				templateUrl: "templates/register.html",
-				controller: "RegisterCtrl"
-			})
-			.state("account", {
-				url: "/account",
-				templateUrl: "templates/account.html",
-				controller: "AccountCtrl"
-			})
+
 			.state("board", {
 				url: "/board",
 				abstract: true,

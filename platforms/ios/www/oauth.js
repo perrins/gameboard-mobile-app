@@ -201,11 +201,14 @@ module.exports = function(window, document, jQuery, navigator) {
               }
             }
           }
+
           if (!opts.state) {
             opts.state = sha1.create_hash();
             opts.state_type = "client";
-          }
-          client_states.push(opts.state);
+            }
+            console.log("state:"+opts.state);
+
+            client_states.push(opts.state);
           url = config.oauthd_url + "/auth/" + provider + "?k=" + config.key;
           url += '&redirect_uri=http%3A%2F%2Flocalhost';
           if (opts) {
@@ -569,6 +572,9 @@ module.exports = function($, config, client_states, cache, providers_api) {
           return;
         }
       }
+
+      console.log("data state:"+data.state+" "+JSON.stringify(client_states));
+
       if (!data.state || client_states.indexOf(data.state) === -1) {
         if (defer != null) {
           defer.reject(new Error("State is not matching"));

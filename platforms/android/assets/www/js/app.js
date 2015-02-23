@@ -3,6 +3,8 @@
 angular.module("gameboard", [
 	"ionic",
 	"ngCordova",
+    "ngMessages",
+    "ngCookies",
 	"mgo-angular-wizard",
 	"gameboard.directives",
 	"gameboard.controllers",
@@ -12,6 +14,8 @@ angular.module("gameboard", [
     "gameboard.boards.genres",
     "gameboard.boards.games",
     "gameboard.boards.categories",
+    "gameboard.member.search",
+    "gameboard.register",
 
     "gameboard.member.favourites",
 
@@ -30,20 +34,40 @@ angular.module("gameboard", [
 		// Handle Loading of the Runtime
 		$ionicPlatform.ready(function () {
 
+            // Hide the Splash Screen after banner Add has been created
+            if (!_.isUndefined(navigator.splashscreen)) {
+                navigator.splashscreen.hide();
+                angular.element("#main").removeClass("hidden");
+            } else {
+                angular.element("#main").removeClass("hidden");
+            }
 
-			if (window.StatusBar) {
+            // Create A Banner Add when in Cordova
+            if (! _.isUndefined(AdMob) ) {
+
+                // Create the Banner Add Area through JS
+                AdMob.createBanner(
+                    {
+                        adId: "ca-app-pub-2283171672459446/6963593212",
+                        addSize: 'SMART_BANNER',
+                        position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                        autoShow: true
+                    }, function () {
+
+                        console.log("banner created");
+                    }, function () {
+                        console.log("failed to create AdMob");
+                    });
+
+            }
+
+            // Check if we can hide the Splash screen
+            if (window.StatusBar) {
 				// org.apache.cordova.statusbar required
-				window.StatusBar.styleDefault();
-
-				// Init Mobile Cloud SDK and wait for it to configure itself
-				// Once complete keep a reference to it so we can talk to it later
-				InitBluemix.init().then(function () {
-					$rootScope.IBMBluemix = IBMBluemix;
-				});
+				//window.StatusBar.styleDefault();
 			}
 
-
-		});
+        });
 
 	})
 
@@ -72,7 +96,9 @@ angular.module("gameboard", [
 		VIDEOS: "/videos", // IBM CloudCode with Cloudant
 		YOUTUBE_YOURS: "/youtube/videos",
 		EMBED: "http://www.youtube.com/embed/",
-		PRIZES: "/prizes"
+		PRIZES: "/prizes",
+        SOCIAL_AUTH_CODE : "/social/authcode",
+        SOCIAL_AUTH : "/social/authorise"
 	})
 
 	// Configure the Angular Rules
@@ -107,13 +133,13 @@ angular.module("gameboard", [
 									cc = IBMCloudCode.initializeService();
 
 								// Make it handle Local serving if set to try and local url set
-								if (config.localserver && _.has(config, "local")) {
+								if (_.has(config, "localserver") && config.localserver ) {
 									// Set the Origin to Local Server for testing
 									cc.setBaseUrl(config.local);
 								}
 
 								// Let the user no they have logged in and can do some stuff if they require
-								console.log("Sucessful initialisation Services ...");
+								console.log("Successful initialisation Services ...");
 
 								// Keep it Global
 								$rootScope.initialized = true;
@@ -158,16 +184,7 @@ angular.module("gameboard", [
 				templateUrl: "templates/intro.html",
 				controller: "IntroCtrl"
 			})
-			.state("register", {
-				url: "/register",
-				templateUrl: "templates/register.html",
-				controller: "RegisterCtrl"
-			})
-			.state("account", {
-				url: "/account",
-				templateUrl: "templates/account.html",
-				controller: "AccountCtrl"
-			})
+
 			.state("board", {
 				url: "/board",
 				abstract: true,
@@ -194,16 +211,8 @@ angular.module("gameboard", [
 					}
 				}
 			})
-			.state("board.members", {
-				url: "/members",
-				views: {
-					"menuContent": {
-						templateUrl: "templates/members.html",
-						controller: "MembersCtrl"
-					}
-				}
-			})
-			.state("board.bookmarks", {
+
+            .state("board.bookmarks", {
 				url: "/bookmarks",
 				views: {
 					"menuContent": {
@@ -218,15 +227,6 @@ angular.module("gameboard", [
 					"menuContent": {
 						templateUrl: "templates/notifications.html",
 						controller: "NotificationsCtrl"
-					}
-				}
-			})
-			.state("board.member", {
-				url: "/member/:muuid",
-				views: {
-					"menuContent": {
-						templateUrl: "templates/member-detail.html",
-						controller: "MemberDetailCtrl"
 					}
 				}
 			})

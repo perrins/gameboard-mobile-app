@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="co.gameboard.mobile.gb" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="co.gameboard.mobile.gb" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
     <feature name="AdMob">
         <param name="android-package" value="com.rjfun.cordova.admob.AdMobPlugin" />
@@ -28,6 +28,9 @@
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
     </feature>
     <preference name="webView" value="org.apache.cordova.engine.crosswalk.XWalkCordovaWebView" />
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
     <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
     <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -55,6 +58,9 @@
     <content src="index.html" />
     <access origin="https://oauth.io/*" />
     <access origin="https://google.com/*" />
+    <access origin="https://graph.facebook.com/*" />
+    <access origin="https://api.twitter.com/*" />
+    <access origin="https://gameboard-cloud.eu-gb.mybluemix.net/*" />
     <access origin="*" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="false" />
@@ -62,11 +68,10 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
     <plugins>
         <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
     </plugins>
     <icon density="xhdpi" src="resources/android/icon/drawable-xhdpi-icon.png" />
-    <feature name="NetworkStatus">
-        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
-    </feature>
 </widget>

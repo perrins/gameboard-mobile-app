@@ -38,19 +38,16 @@ angular.module("gameboard.directives", [])
 		};
 	})
 
-	.directive("masonary", function () {
+	.directive("gbMasonryGrid", function () {
 		return {
 			restrict: "A",
 			link: function ($scope, $element, $attrs) {
-
 				// Register Masonary for our Directive.
 				if ($scope.$last) {
-					var parent = $($element.parent())[0];
-					// TMD: msnry never used
-					var msnry = new Masonry(parent, {
+					new Masonry($element[0].parentNode, {
 						// options
-						columnWidth: 160,
-						itemSelector: ".genreItem"
+						columnWidth: $scope.$eval($attrs.gbMasonryGrid),
+						itemSelector: ".masonryItem"
 					});
 				}
 			}

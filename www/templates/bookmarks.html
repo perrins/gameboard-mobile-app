@@ -13,29 +13,46 @@
 
 	<ion-content class="has-header glass-list">
 
-		<ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();">
+		<ion-refresher ng-show="!nodata" pulling-text="Pull to refresh..." on-refresh="onRefresh();">
 		</ion-refresher>
 
-		<div class="list-error card assertive-bg hidden" ng-show="!bookmarks">
-			<div class="item item-text-wrap">
-				Cannot retrieve your bookmarks at this time
-			</div>
-		</div>
 
-		<div class="item item-divider" ng-show="bookmarks">
-			Your Bookmarks
-		</div>
+        <div class="list card" ng-show="nodata">
+
+            <div class="item item-body">
+
+                <h2>Adding Bookmarks is easy!</h2>
+
+                <p>
+                    As you navigate through Genres, Games and Categories and Boards you can bookmark
+                    a specific view to easily return to it later.
+                </p>
+
+                <p>
+                    Bookmarking allows you to quickly return to a board you might be following or to a specifc game
+                    interests you. They are different from Favourites as you Favourite a Board, Video or Member.
+                </p>
+
+            </div>
+
+            <a class="item item-icon-left item-dark">
+                <i class="icon ion-bookmark"></i>
+                Click on the Bookmark icon at save it.
+            </a>
+
+        </div>
 
 		<ion-list
 				can-swipe="true"
 				show-delete="showDelete"
 				delete-icon="ion-minus-circled"
-				ng-show="bookmarks">
+				ng-show="bookmarks && !nodata">
 
 			<ion-item ng-repeat="book in bookmarks"
 					  class="item item-icon-right"
 					  type="item-text-wrap"
 					  item="book"
+                      ng-click="selectBookmark(book)"
 					>
 
 				<div style="position:relative;width:25px;height:25px;">

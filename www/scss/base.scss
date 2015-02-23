@@ -2,6 +2,10 @@
 	display: none !important;
 }
 
+.back {
+  background-color: black;
+}
+
 .spinnerSmall:before {
 	border: 8px solid red;
 	animation: 2s waiting 0s infinite;
