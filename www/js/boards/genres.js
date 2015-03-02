@@ -18,6 +18,28 @@ angular.module("gameboard.boards.genres", [])
 
         $scope.nodata = false;
 
+        // Handle the Load Events
+        /*
+        $scope.$on('$ionicView.enter', function() {
+
+        });
+
+        // Handle the Load
+        $scope.$on('$ionicView.leave', function() {
+
+        });
+
+        // Handle the Load
+        $scope.$on('$ionicView.beforeEnter', function() {
+
+        });
+
+        // Handle the Load
+        $scope.$on('$ionicView.unloaded', function() {
+
+        });
+        */
+
         // Handle the Load
         $scope.$on('$ionicView.loaded', function() {
 

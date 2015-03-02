@@ -19,8 +19,6 @@ angular.module("gameboard.controllers.member", [])
 
 	})
 
-
-
 // A simple controller that fetches a list of data from a service
 	.controller("BookmarksCtrl", function ($state, $rootScope, $scope, $location, $ionicLoading, BookmarksService) {
 
@@ -29,7 +27,8 @@ angular.module("gameboard.controllers.member", [])
 		$scope.loadItems = function () {
 			// Clear the List before adding new items
 			// This needs to be improved
-			$scope.bookmarks = [];
+			$scope.bookmarks = null;
+            $scope.nodata = false;
 
 			// Refresh
 			if (!$scope.$$phase) {
@@ -42,34 +41,44 @@ angular.module("gameboard.controllers.member", [])
 			// "List is " is a service returning data from the
 			BookmarksService.allCloud().then(function (bookmarks) {
 
-				// Manage the Look and feel of the Bookmarks
-				var _bookmarks = Array();
-				bookmarks.forEach(function (item) {
 
-					switch (item.type) {
-						case "GAME" :
-							item.color = "#00cc00";
-							break;
-						case "CATEGORY" :
-							item.color = "#eecc00";
-							break;
-						case "BOARD" :
-							item.color = "#00ccff";
-							break;
-						default :
-							item.color = "grey";
-							break;
-					}
+                if(_.isArray(bookmarks) && bookmarks.length > 0) {
 
-					// get the Character we want to display
-					item.tag = item.type.substr(0, 1).toUpperCase();
+                    // Manage the Look and feel of the Bookmarks
+                    var _bookmarks = Array();
 
-					_bookmarks.push(item);
+                    bookmarks.forEach(function (item) {
 
-				});
+                        var _item = item.doc;
+                        switch (item.doc.type) {
+                            case "GAME" :
+                                _item.color = "#00cc00";
+                                break;
+                            case "CATEGORY" :
+                                _item.color = "#eecc00";
+                                break;
+                            case "BOARD" :
+                                _item.color = "#00ccff";
+                                break;
+                            default :
+                                _item.color = "grey";
+                                break;
+                        }
 
-				// Update the model with a list of Items
-				$scope.bookmarks = _bookmarks;
+                        // get the Character we want to display
+                        _item.tag = item.doc.type.substr(0, 1).toUpperCase();
+
+                        _bookmarks.push(_item);
+
+                    });
+
+                    // Update the model with a list of Items
+                    $scope.bookmarks = _bookmarks;
+
+                } else {
+                    $scope.bookmarks = new Array();
+                    $scope.nodata = true;
+                }
 
 				// Let Angular know we have some data because of the Async nature of IBMBaaS
 				// This is required to make sure the information is uptodate
@@ -80,10 +89,30 @@ angular.module("gameboard.controllers.member", [])
 				// Trigger refresh complete on the pull to refresh action
 				$scope.$broadcast("scroll.refreshComplete");
 
-			}).catch(function (err) {
-				console.log(err);
-			});
-		};
+			},function (err) {
+
+                $ionicLoading.hide();
+                $scope.nodata = true;
+
+                // Show Connectivity Error
+                if (_.has(err, "info") && err.info.status == "error") {
+                    $scope.error = "Cannot connect to the cloud";
+                    $rootScope.wifi();
+                }
+
+                // Then We have not found anything
+                if (err.info.statusCode == 404) {
+                    $scope.error = "No Videos have been found with this query";
+                }
+
+                // Then We have not found anything
+                if (err.info.statusCode == 500) {
+                    $scope.error = "Internal server error, please contact App Support";
+                }
+
+            });
+
+        };
 
 		$scope.loadItems();
 
@@ -105,7 +134,7 @@ angular.module("gameboard.controllers.member", [])
 				case "CATEGORY" :
 
 					// Navigate the to a Category
-					$state.go("board.categories", {genid: bookmark.genid, gmid: bookmark.gmid});
+					$state.go("board.categories", {genid: bookmark.genid, gmid: bookmark.gemid});
 					break;
 
 				case "BOARD" :
@@ -147,7 +176,6 @@ angular.module("gameboard.controllers.member", [])
 		$scope.onShowDelete = function () {
 			$scope.showDelete = !$scope.showDelete;
 		}
-
 
 	})
 

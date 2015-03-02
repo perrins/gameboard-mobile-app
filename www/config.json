@@ -4,6 +4,8 @@
 	"applicationRoute": "http://gameboard-cloud.eu-gb.mybluemix.net",
 	"security": "P7Y2L-QgGFNW4XKgBOnQTB6xd3I",
 	"localserver": true,
-	"localsecurity": false,
-	"local": "http://localhost:3002"
+    "localsecurity": true,
+	"local": "http://localhost:3002",
+    "admobid" : "ca-app-pub-2283171672459446/6963593212",
+    "adtype"  : "SMART_BANNER"
 }

@@ -14,15 +14,40 @@
 
     <ion-content class="has-header ionic-scroll">
 
-        <div class="gameBanner imageButton">
+        <div class="imageButton" ng-show="board">
             <div class="spinner">
-                <img class="genre-image-load" ng-src="{{board.banner}}" lazyload>
+                <img class="Banner genre-image-load" ng-src="{{board.banner}}" lazyload>
             </div>
 
             <div class="summary">
                 <div class="title">{{board.title}}</div>
                 <div class="subtitle">{{board.subtitle}}</div>
             </div>
+        </div>
+
+        <div class="list card" ng-show="nodata">
+
+            <div class="item item-body">
+
+                <h1>Adding Videos is easy!</h1>
+
+                <p>
+                    This board does not have any videos registered with it, if you have
+                    game play that you want to register be the first to add it to this board
+                </p>
+
+                <p>
+                    Once videos have been registered the Gameboard ranking engine will then gets to work
+                    helping rank all the videos in the board and maybe help you qualify for a prize
+                </p>
+
+            </div>
+
+            <a class="item item-icon-left item-dark">
+                <i class="icon ion-videocamera"></i>
+                Click on the Video icon add a video.
+            </a>
+
         </div>
 
         <div class="list card" ng-show="error">
@@ -33,17 +58,17 @@
 
         </div>
 
-        <ion-list class="list" ng-show="videos">
+        <ion-refresher ng-show="!nodata"
+                pulling-text="Pull to refresh..."
+                on-refresh="onRefresh()">
+        </ion-refresher>
 
-            <div class="item item-divider" ng-show="videos">
-                Board
-            </div>
+        <ion-list class="list" ng-show="videos">
 
             <ion-item ng-show="videos" class="item item-thumbnail-left item-icon-right board-item"
                       ng-href="#/board/video/{{video._id}}" can-swipe="true" item="video"
                       collection-repeat="video in videos" collection-item-width="'100%'"
                       collection-item-height="100">
-
 
                  <img alt="{{video.ytimage}}" ng-src="{{video.ytimage}}" lazyload>
 
@@ -101,7 +126,7 @@
 
         </ion-list>
 
-        <ion-infinite-scroll class="progress" icon="ion-loading-c" on-infinite="loadMore()" distance="30%">
+        <ion-infinite-scroll ng-if="total>0 && videos.length < total" class="progress" icon="ion-loading-c" on-infinite="loadMore()" distance="30%">
         </ion-infinite-scroll>
 
     </ion-content>

@@ -168,7 +168,7 @@ angular.module("gameboard.controllers", [])
 					"avatar": "img/avatar.png",
 					"firstname": "Joe",
 					"lastname": "Perrins",
-					"registered": false
+					"registered": true
 				};
 				$rootScope.member = {
 					"muuid": 282992902,
@@ -233,6 +233,24 @@ angular.module("gameboard.controllers", [])
                     $rootScope.wifi();
                 }
 
+                // Create A Banner Add when in Cordova
+                if (! _.isUndefined(AdMob) ) {
+
+                    // Create the Banner Add Area through JS
+                    AdMob.createBanner(
+                        {
+                            adId: $rootScope.config.admobid,
+                            addSize: $rootScope.config.adtype,
+                            position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                            autoShow: true
+                        }, function () {
+                            console.log("banner created");
+                        }, function () {
+                            console.log("failed to create AdMob");
+                        });
+
+                }
+
                 // Handle the Cordova OAuth experience
                 OAuth.popup("google", {
                     cache: true,
@@ -253,6 +271,7 @@ angular.module("gameboard.controllers", [])
 
                         // Get the signing in Member and see if they are registered
                         MembersService.getMember(user.raw.id).then(function (member) {
+
 
                             // Check if we have a registered member ?
                             if (_.isObject(member)) {

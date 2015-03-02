@@ -1,7 +1,7 @@
 <ion-pane class="modal">
 
 	<!-- Modal header bar -->
-	<header class="bar bar-header bar-secondary">
+	<header class="bar bar-header bar-dark bar-secondary">
 
 		<button
 
@@ -37,9 +37,11 @@
 					<div class="item item-divider">
 						Your Youtube Videos
 					</div>
-					<div class="list" ng-show="videos">
 
-						<a ng-repeat="video in videos" class="item item-thumbnail-left item-icon-right" item="video"
+
+					<div class="list" ng-show="ytvideos">
+
+						<a ng-repeat="video in ytvideos" class="item item-thumbnail-left item-icon-right" item="video"
 						   ng-click="selectVideo(video)">
 
 							<img ng-src="{{video.snippet.thumbnails.default.url}}" lazyload>

@@ -1,9 +1,9 @@
 {
-    "version": "0.1.0",
+    "version": "0.1.4",
     "name": "com.hutchind.cordova.plugins.streamingmedia",
     "cordova_name": "StreamingMedia",
     "description": "\r\n\t\tThis plugin allows you to launch a fullscreen streaming player for audio or video on iOS and Android.\r\n\t",
-    "license": "GPLv2",
+    "license": "MIT",
     "repo": "https://github.com/nchutchind/Streaming-Media-Cordova-Plugin.git",
     "issue": "https://github.com/nchutchind/Streaming-Media-Cordova-Plugin/issues",
     "keywords": [

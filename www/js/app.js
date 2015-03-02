@@ -42,24 +42,6 @@ angular.module("gameboard", [
                 angular.element("#main").removeClass("hidden");
             }
 
-            // Create A Banner Add when in Cordova
-            if (! _.isUndefined(AdMob) ) {
-
-                // Create the Banner Add Area through JS
-                AdMob.createBanner(
-                    {
-                        adId: "ca-app-pub-2283171672459446/6963593212",
-                        addSize: 'SMART_BANNER',
-                        position: AdMob.AD_POSITION.BOTTOM_CENTER,
-                        autoShow: true
-                    }, function () {
-
-                        console.log("banner created");
-                    }, function () {
-                        console.log("failed to create AdMob");
-                    });
-
-            }
 
             // Check if we can hide the Splash screen
             if (window.StatusBar) {
@@ -72,8 +54,8 @@ angular.module("gameboard", [
 	})
 
 	.config(function ($ionicConfigProvider) {
-		$ionicConfigProvider.views.maxCache(0);
 
+		//$ionicConfigProvider.views.maxCache(0);
 		// note that you can also chain configs
 		//$ionicConfigProvider.backButton.text('Go Back').icon('ion-chevron-left');
 
@@ -96,6 +78,7 @@ angular.module("gameboard", [
 		VIDEOS: "/videos", // IBM CloudCode with Cloudant
 		YOUTUBE_YOURS: "/youtube/videos",
 		EMBED: "http://www.youtube.com/embed/",
+        WATCH: "http://www.youtube.com/watch?v=",
 		PRIZES: "/prizes",
         SOCIAL_AUTH_CODE : "/social/authcode",
         SOCIAL_AUTH : "/social/authorise"

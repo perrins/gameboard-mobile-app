@@ -29,12 +29,19 @@ angular.module("gameboard.search.controllers", [])
 				$scope.nodata = true;
 
 				$ionicLoading.hide();
-				$scope.videos = [];
+				$scope.videos = null;
+                $scope.first = true;
 
 			};
 
+            // Lets get the Query
+            var searchQuery = '';
+            if(!_.isUndefined($scope.searchQuery) && !_.isNull($scope.searchQuery)) {
+                searchQuery = $scope.searchQuery;
+            }
+
 			// "List is " is a service returning data from the
-			SearchService.all(searchParam, bookmark, pageSize).then(function (_videos) {
+			SearchService.all(searchQuery, bookmark, pageSize).then(function (_videos) {
 
 				$scope.first = false;
 
@@ -50,17 +57,17 @@ angular.module("gameboard.search.controllers", [])
 				}
 
 				// Reset the Array if we are on Page 1
-				if ($scope.page === 0) {
+				if (_.isNull($scope.bookmark)) {
 					// Prepare for the Query
-					videos = [];
+					var videos = [];
 				}
 
 				// Set the Title
-				$scope.title = searchParam;
+				$scope.title = $scope.searchQuery;
 
 				// Check what has been returned versus side of what we are returning
-				angular.forEach(_videos, function (value, key) {
-					videos.push(value);
+				angular.forEach(_videos.rows, function (value, key) {
+					videos.push(value.fields);
 				});
 
 				// Update the model with a list of Items
@@ -68,8 +75,7 @@ angular.module("gameboard.search.controllers", [])
 
 				// Take the details from the content
 				// Use the Calcualtion
-				$scope.total = videos.length;//board.videos.total_rows;
-				$scope.position = 0; //board.videos.offset;
+				$scope.total = _videos.total_rows;
 
 				// Let Angular know we have some data because of the Async nature of IBMBaaS
 				// This is required to make sure the information is uptodate
@@ -79,20 +85,6 @@ angular.module("gameboard.search.controllers", [])
 
 				// Hide the loading icons
 				$ionicLoading.hide();
-
-				// Refresh
-				if (!$scope.$$phase) {
-					$scope.$apply();
-				}
-
-
-				// Check we can move forward.
-				if ($scope.page && $scope.page <= parseInt(20)) {
-					$scope.page++;
-				} else {
-					// No More Data
-
-				}
 
 			}, function (err) {
 
@@ -138,16 +130,18 @@ angular.module("gameboard.search.controllers", [])
 			}
 		};
 
+
 		// Search for Members
-		$scope.findVideos = function () {
+		$scope.findVideos = function (search) {
 
 			$scope.first = true;
 			$scope.message = 'Fetching Videos...';
 
+            $scope.searchQuery = search.query;
 			// Clean Up
 			try {
 				delete $scope.message;
-				delete $scope.nodata;
+				$scope.nodata = true;
 				delete $scope.error;
 			} catch (e) {
 			}
@@ -155,8 +149,14 @@ angular.module("gameboard.search.controllers", [])
 			$scope.loadItems($scope.bookmark, $scope.pageSize);
 		};
 
-		$scope.$on("stateChangeSuccess", function () {
-			$scope.loadMore();
-		});
+        $scope.clearSearch = function(search) {
+
+            search.query = ""
+            // Lets Search for Clear
+            $scope.findVideos(search);
+
+        }
+
+        $scope.loadMore();
 
 	});

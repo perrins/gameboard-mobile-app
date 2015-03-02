@@ -52,6 +52,8 @@
   "cordovaPlugins": [
     "org.apache.cordova.splashscreen",
     "https://github.com/oauth-io/oauth-phonegap",
-    "org.apache.cordova.network-information"
+    "org.apache.cordova.network-information",
+    "com.hutchind.cordova.plugins.streamingmedia",
+    "org.apache.cordova.media"
   ]
 }

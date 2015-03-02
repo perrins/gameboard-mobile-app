@@ -11,38 +11,38 @@
 angular.module('gameboard.board.services', [])
 
 	/* board/search - search design document
-	 function(doc) {
+     function(doc) {
 
-	 index("fields",
-	 doc.title+" ",
-	 doc.description+" ",
-	 doc.bid+" ",
-	 doc.gametag+" ",
-	 doc.ytid+" ",
-	 doc.ytimage+" ",
-	 doc.muuid, +" ",
-	 doc.location+" ",
-	 doc.views+" ",
-	 doc.recorddate+" ",
-	 doc.platform+" ",
-	 doc.rating, {'store':true});
+     index('search',
+     doc.bid+" "+
+     doc.title+" "+
+     doc.description+" "+
+     doc.ytid+" "+
+     doc.ytimage+" "+
+     doc.views+" "+
+     doc.recorddate+" "+
+     doc.platform+" "+
+     doc.rating+" "+
+     doc.muuid +" "+
+     doc.location+" ",
+     {'store':false,'index':true});
 
-	 index("title", doc.title,{'store':true});
-	 index("description",doc.description,{'store':true});
-	 index('bid', doc.bid, {'store':true});
-	 index('gametag', doc.gametag, {'store':true});
-	 index('ytid', doc.ytid, { 'store':true});
-	 index('ytimage', doc.ytimage, {'store':true});
-	 index('rank', doc.rank, { 'facet': true ,'store':true});
-	 index('views', doc.views, {'store':true});
-	 index('muuid', doc.muuid, {'store':true});
-	 index('location', doc.location,{'store':true});
-	 index('views', doc.views,{'store':true});
-	 index('recorddate', doc.recorddate,{'store':true});
-	 index('platform', doc.platform,{'store':true});
-	 index('rating', doc.rating,{'store':true});
+     index('bid', doc.bid, {'store':true,'index':true});
+     index("title", doc.title,{'store':true});
+     index("description",doc.description,{'store':true});
+     index('ytid', doc.ytid, { 'store':true});
+     index('ytimage', doc.ytimage, {'store':true});
+     index('rank', doc.rank, { 'facet': true ,'store':true});
+     index('views', doc.views, {'store':true});
+     index('muuid', doc.muuid, {'store':true});
+     index('location', doc.location,{'store':true});
+     index('recorddate', doc.recorddate,{'store':true});
+     index('platform', doc.platform,{'store':true});
+     index('rating', doc.rating,{'store':true});
+     }
 
-	 }
+
+     }
 	 */
 
     /**

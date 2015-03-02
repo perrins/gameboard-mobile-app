@@ -2,61 +2,57 @@ angular.module('gameboard.board.controllers', [])
 
 
 // A simple controller that shows a tapped item's data
-	.controller('BoardCtrl', function ($rootScope, $scope, $state, $stateParams, $ionicTabsDelegate, $ionicPopup, $ionicModal, $ionicLoading, BoardService, YouTubeService, WizardHandler, BookmarksService, ACCESS, $ionicActionSheet, $timeout) {
+	.controller('BoardCtrl', function ($rootScope, $scope, $state, $stateParams, $cordovaMedia,$ionicTabsDelegate, $ionicPopup, $ionicModal, $ionicLoading, BoardService, YouTubeService, WizardHandler, BookmarksService, ACCESS, $ionicActionSheet, $timeout) {
 
-        $scope.board = [];
+        $scope.board = null;
         $scope.videos = [];
+        $scope.total = 0;
+        $scope.nodata = false;
 
-        // Lets Check they can Add Video Content
-        if($rootScope.user) {
-            $scope.registered = $rootScope.user.registered;
-        } else {
-            $scope.registerd = true;
-        }
+		$scope.$on('$ionicView.loaded', function() {
 
-        // Triggered on a button click, or some other target
-		$scope.showActions = function () {
+            $scope.board = null;
+            $scope.videos = [];
 
-			// Show the action sheet
-			var hideSheet = $ionicActionSheet.show({
-				buttons: [
-					{text: '<b>Share</b> This'},
-					{text: 'View'},
-					{text: '<b>Rate</b> this'}
-				],
-				titleText: 'Actions for this Video',
-				cancelText: 'Cancel',
-				cancel: function () {
-					// add cancel code..
-				},
-				buttonClicked: function (index) {
-					return true;
-				}
-			});
-
-		};
-
-		$scope.$on('$ionicView.enter', function() {
-
-            var board = [];
-            var videos = [];
-
-            $scope.bookmark = null;
+            $scope.bookmark = "g2o";
             $scope.pageSize = 20;
             $scope.total = 0;
-            $scope.position = 0;
+
+            // Clear the List before adding new items
+            // This needs to be improved
+            $scope.boardlist = [];
+
+            // Lets Check they can Add Video Content
+            if($rootScope.user) {
+                $scope.registered = $rootScope.user.registered;
+            } else {
+                $scope.registered = true;
+            }
+
+            // Triggered on a button click, or some other target
+            $scope.showActions = function () {
+
+                // Show the action sheet
+                var hideSheet = $ionicActionSheet.show({
+                    buttons: [
+                        {text: '<b>Share</b> This'},
+                        {text: 'View'},
+                        {text: '<b>Rate</b> this'}
+                    ],
+                    titleText: 'Actions for this Video',
+                    cancelText: 'Cancel',
+                    cancel: function () {
+                        // add cancel code..
+                    },
+                    buttonClicked: function (index) {
+                        return true;
+                    }
+                });
+
+            };
 
             // Load the Items
-            $scope.loadItems = function (page, size) {
-
-                // Clear the List before adding new items
-                // This needs to be improved
-                $scope.boardlist = [];
-
-                // Refresh
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
+            $scope.loadItems = function (size) {
 
                 // Because we are retrieving all the items every time we do something
                 // We need to clear the list before loading in some new values
@@ -73,26 +69,34 @@ angular.module('gameboard.board.controllers', [])
 
                     // Check we have some data and a book mark
                     // Reset the Array if we are on Page 1
-                    if ($scope.bookmark === null) {
+                    if ($scope.bookmark === "g2o") {
                         // Prepare for the Query
-                        boardlist = [];
+                        $scope.boardlist = [];
                     }
 
                     // Set the Title
                     $scope.title = board.title;
 
-                    // Check what has been returned versus side of what we are returning
-                    angular.forEach(board.videos.rows, function (value, key) {
-                        boardlist.push(value.doc);
-                    });
+                    if(board.videos.total_rows===0){
+                        $scope.nodata = true;
+                    } else {
 
-                    // Update the model with a list of Items
-                    $scope.videos = boardlist;
+                        // Check what has been returned versus side of what we are returning
+                        angular.forEach(board.videos.rows, function (value, key) {
+                            $scope.boardlist.push(value.fields);
+                        });
+
+                        // Update the model with a list of Items
+                        $scope.videos = $scope.boardlist;
+
+                        $scope.nodata = false;
+
+                    }
 
                     // Take the details from the content
                     // Use the Calcualtion
                     $scope.total = board.videos.total_rows;
-                    $scope.position = board.videos.offset;
+                    $scope.bookmark = board.videos.bookmark;
 
                     // Delete Video List
                     delete board.videos;
@@ -100,11 +104,15 @@ angular.module('gameboard.board.controllers', [])
                     // Add Board to Scope
                     $scope.board = board;
 
+                    // Set the Bookmark
+                    $scope.bookmark = board.bookmark;
+
                     // Let Angular know we have some data because of the Async nature of IBMBaaS
                     // This is required to make sure the information is uptodate
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
+
 
                     // Hide the loading icons
                     $ionicLoading.hide();
@@ -112,40 +120,34 @@ angular.module('gameboard.board.controllers', [])
                     // Lets Make a Call to the Service and then update the infinite scroll
                     $scope.$broadcast('scroll.infiniteScrollComplete');
 
-                    // Check we can move forward.
-                    if ($scope.page && $scope.page <= parseInt(board.videos.offset)) {
-                        $scope.page++;
-                    } else {
-                        // No More Data
-                        // Do something to handle this
-                    }
 
                 }, function (err) {
 
-                    // Lets Make a Call to the Service and then update the infinite scroll
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-
+                    // Handle Display of No Data and No Connection
                     $ionicLoading.hide();
-                    $scope.vidoes = [];
+
+                    $scope.board = null;
+                    $scope.videos = [];
+                    $scope.nodata = true;
 
                     // Show Connectivity Error
                     if (_.has(err, "info") && err.info.status == "error") {
-
                         $scope.error = "Cannot connect to the cloud";
-                        $scope.nodata = true;
-
-                        $scope.$emit('gb-error', err);
-
-                    } else {
-
-                        // Then We have not found anything
-                        if (_.has(err, "info") && err.info.statusCode == 404) {
-
-                            $scope.error = "No Videos have been found with this query";
-                            $scope.nodata = true;
-                        }
-
+                        $rootScope.wifi();
                     }
+
+                    // Then We have not found anything
+                    if (err.info.statusCode == 404) {
+                        $scope.error = "No Videos have been found with this query";
+                    }
+
+                    // Then We have not found anything
+                    if (err.info.statusCode == 500 || err.info.statusCode == 400) {
+                        $scope.error = "Internal server error, please contact App Support";
+                    }
+
+                    // Lets Make a Call to the Service and then update the infinite scroll
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
 
                 });
 
@@ -162,19 +164,16 @@ angular.module('gameboard.board.controllers', [])
 
                 // Check we can move one more page
                 // Add Some More
-                $scope.loadItems($scope.bookmark, $scope.pageSize);
+                $scope.loadItems($scope.pageSize);
+
             };
-
-            $scope.loadMore();
-
-        });
-
-		$scope.$on('$ionicView.loaded', function() {
 
             // Handle a Refresh to the Beginning
             $scope.onRefresh = function () {
-                $scope.page = null;
                 $scope.message = null;
+                $scope.videos  = null;
+                $scope.boardlist = null;
+                $scope.bookmark = "g2o";
                 $scope.loadMore();
             };
 
@@ -270,7 +269,7 @@ angular.module('gameboard.board.controllers', [])
                 YouTubeService.getYourVideos().then(function (data) {
 
                     // Paint the List of Youtube Videos
-                    $scope.videos = data.items;
+                    $scope.ytvideos = data.items;
 
                     // This is required to make sure the information is uptodate
                     if (!$scope.$$phase) {
@@ -363,7 +362,31 @@ angular.module('gameboard.board.controllers', [])
                 }
 
                 // Prepare Video URL
-                var videoUrl = ACCESS.EMBED + video.id;
+                var id = null;
+                if(_.has(video,"ytid")) {
+                    id=video.ytid;
+                } else {
+                    id=video.id;
+                }
+                var videoUrl = ACCESS.EMBED + id;
+
+                /*
+                var media = $cordovaMedia.newMedia(videoUrl).then(function() {
+                    // success
+                    console.log("Media Verified");
+                }, function () {
+                    // error
+                    console.log("Error");
+                });
+
+                var iOSPlayOptions = {
+                    numberOfLoops: 1,
+                    playAudioWhenScreenIsLocked : false
+                }
+
+                // Let Play the baby
+                media.play(options); // iOS only!
+                */
 
                 // Play a video with callbacks
                 var options = {
@@ -399,7 +422,7 @@ angular.module('gameboard.board.controllers', [])
                 $scope.add = {
                     title: $scope.video.snippet.title,
                     description: $scope.video.snippet.description,
-                    gametag: $scope.user.gametag,
+                    gametag: $scope.member.gametag,
                     ytid: $scope.video.id,
                     ytimage: $scope.video.snippet.thumbnails.default.url,
                     bid: bid,
@@ -457,7 +480,12 @@ angular.module('gameboard.board.controllers', [])
 		// Handle a Refresh to the Beginning
 		});
 
-	})
+        $scope.$on('$ionicView.enter', function() {
+            $scope.loadMore();
+        });
+
+
+    })
 
 // A simple controller that shows retrieves a list of You Tube Videos
 	.controller('YTVideoDetailCtrl', function ($scope, $stateParams, YouTubeService, $ionicLoading) {
