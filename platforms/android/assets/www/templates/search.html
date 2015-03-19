@@ -5,14 +5,15 @@
 	</ion-nav-buttons>
 
 	<ion-content start-y="55" padding="false" has-tabs="false" has-header="true">
-
 		<div id="search-box" class="bar bar-header item-input-inset">
 			<div class="item-input-wrapper">
-				<i class="icon ion-ios7-search placeholder-icon"></i>
-				<input type="search" placeholder="Search" ng-model="data.searchQuery">
-				<i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
+                    <input ng-model="search.query"
+                           name="search"
+                           type="search"
+                           placeholder="Search ?">
+                <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch(search)"></i>
 			</div>
-			<button class="button button-clear button-positive" ng-click="findVideos()">Find</button>
+			<button class="button button-clear button-positive" ng-click="findVideos(search)">Find</button>
 		</div>
 
 		<div class="list card" ng-show="error">
@@ -23,31 +24,61 @@
 
 		<div class="list" ng-show="videos">
 
-			<ion-item ng-show="members" class="item item-thumbnail-left item-icon-right board-item" item="member"
+			<ion-item  class="item item-thumbnail-left item-icon-right board-item"
 					  ng-href="#/board/video/{{video.uuid}}" can-swipe="true" collection-repeat="video in videos"
 					  collection-item-width="'100%'" collection-item-height="100">
 
-				<img ng-src="{{video.ytimage}}" lazyvideo>
+                <img alt="{{video.ytimage}}" ng-src="{{video.ytimage}}" lazyload>
 
-				<h2>{{video.title}}</h2>
+                 <span class="board-rank">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink">
 
-				<h3>{{video.gameTag}}</h2>
-					<p>{{video.description}}</p>
+                        <circle cx="25" cy="25" r="25"
+                                style="stroke:#grey;
+                                stroke-width: .7;
+                                fill:grey;
+                                fill-opacity:0.6"/>
+                        <text x="25" y="25" font-size="18" fill="white" font-weight="bold"
+                              text-anchor="middle" alignment-baseline="middle">
+                            {{video.rank}}
+                        </text>
+                    </svg>
+                </span>
 
-					<div class="btnFeed">
-						<button ng-class="tweet.userLikedTweet ? 'button button-small button-royal' : 'button button-small button-outline button-balanced'"
-								ng-click="like({{$index}})">
-							{{video.rank}}
-							<i class="ion-ios7-star"></i></a>
-						</button>
-						<button class="button button-small button-balanced button-outline"
-								ng-click="go('/tab/tweet/{{tweet.id}}')">
-							{{video.views}}
-							<i class="ion-chatboxes"></i></a>
-						</button>
-					</div>
+                <h2>{{video.title}}</h2>
 
-					<i class="icon ion-chevron-right icon-accessory"></i>
+                <!--h3>{{video.gameTag}}</h3-->
+
+                <p>{{video.description}}</p>
+
+                <div class="board-views">
+                    <button class= "button button-small button-royal" >
+                        {{video.views}}
+                        <i class="ion-ios7-star"></i>
+                        </a>
+                    </button>
+                    <button class="button button-small button-balanced">
+                        {{video.prize}}
+                        <i class="ion-chatboxes"></i>
+                        </a>
+                    </button>
+                </div>
+
+                <div star-rating rating-value="4" max="5" on-rating-selected="rateFunction(rating)"></div>
+
+                <ion-option-button class="button-positive" ng-click="showActions(video)">Menu
+                </ion-option-button>
+
+                <ion-option-button class="button-royal" ng-click="viewVideo(video)">
+                    <i class="icon ion-videocamera"></i>
+                </ion-option-button>
+
+                <ion-option-button class="button-royal" ng-click="addToFavourite(video)">
+                    <i class="icon ion-heart"></i>
+                </ion-option-button>
+
+                <i class="icon ion-chevron-right icon-accessory"></i>
 
 			</ion-item>
 
@@ -56,6 +87,7 @@
 		</div>
 
 		<ion-infinite-scroll
+                ng-if="total>0 && videos.length < total"
 				class="progress"
 				icon="ion-loading-c"
 				on-infinite="loadMore()"

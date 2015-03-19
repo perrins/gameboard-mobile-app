@@ -21,80 +21,78 @@ angular.module("gameboard.boards.games", [])
         // Lets check we have a
         var genid = $stateParams.genid;
 
-        //  $scope.$on('$ionicView.enter', function() {
+        $scope.$on('$ionicView.enter', function() {
 
+            $ionicLoading.show({
+                template: '<ion-spinner class="spinner-energized" icon="lines"></ion-spinner><h3>Loading Games</h3>'
+            });
 
-        // Lets load the Videos for the Youtube Channel
-        $ionicLoading.show({
-            template: "<i class=\"ion-loading-c\"></i><span>&nbsp;Loading Games...</span>"
-        });
+            // Access the Genres and get the Title and other information we need
+            GenresService.getGenre(genid).then(function (genre) {
 
-        // Access the Genres and get the Title and other information we need
-        GenresService.getGenre(genid).then(function (genre) {
+                // Display The Title
+                $scope.title = genre.title;
 
-            // Display The Title
-            $scope.title = genre.title;
+                // Get the Games
+                return GamesService.all(genid);
 
-            // Get the Games
-            return GamesService.all(genid);
+            }).then(function (data) {
 
-        }).then(function (data) {
+                // Check we have some Games for this Genre
+                if (_.isNull(data)) {
 
-            // Check we have some Games for this Genre
-            if (_.isNull(data)) {
+                    $ionicLoading.hide();
 
-                $ionicLoading.hide();
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Games',
+                        template: 'It seems we dont have a Games list defined for this Genre'
+                    });
 
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Games',
-                    template: 'It seems we dont have a Games list defined for this Genre'
-                });
+                    alertPopup.then(function (res) {
+                        // Go Back to the Main Genres Screen
+                        $state.go("board.genres");
+                    });
 
-                alertPopup.then(function (res) {
-                    // Go Back to the Main Genres Screen
-                    $state.go("board.genres");
-                });
+                } else {
 
-            } else {
+                    // Layout the Games and the Banners
+                    $scope.games = data.games;
+                    $scope.banners = data.banners;
+                    $scope.gid = data.gid;
+                    $scope.genid = data.genid;
 
-                // Layout the Games and the Banners
-                $scope.games = data.games;
-                $scope.banners = data.banners;
-                $scope.gid = data.gid;
-                $scope.genid = data.genid;
-
-                $ionicLoading.hide();
-                // Let Angular know we have some data because of the Async nature of IBMBaaS
-                // This is required to make sure the information is uptodate
-                if (!$scope.$$phase) {
-                    $scope.$apply();
+                    $ionicLoading.hide();
+                    // Let Angular know we have some data because of the Async nature of IBMBaaS
+                    // This is required to make sure the information is uptodate
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
                 }
-            }
 
-        }, function (err) {
+            }, function (err) {
 
-            $ionicLoading.hide();
-            $scope.nodata = true;
+                $ionicLoading.hide();
+                $scope.nodata = true;
 
-            // Show Connectivity Error
-            if (_.has(err, "info") && err.info.status == "error") {
-                $scope.error = "Cannot connect to the cloud";
-                $rootScope.wifi();
-            }
+                // Show Connectivity Error
+                if (_.has(err, "info") && err.info.status == "error") {
+                    $scope.error = "Cannot connect to the cloud";
+                    $rootScope.wifi();
+                }
 
-            // Then We have not found anything
-            if (err.info.statusCode == 404) {
-                $scope.error = "No Videos have been found with this query";
-            }
+                // Then We have not found anything
+                if (err.info.statusCode == 404) {
+                    $scope.error = "No Videos have been found with this query";
+                }
 
-            // Then We have not found anything
-            if (err.info.statusCode == 500) {
-                $scope.error = "Internal server error, please contact App Support";
-            }
+                // Then We have not found anything
+                if (err.info.statusCode == 500) {
+                    $scope.error = "Internal server error, please contact App Support";
+                }
+
+            });
 
         });
-
-        //    });
 
         // Define Scrop Variables
         //    $scope.$on('$ionicView.loaded', function() {

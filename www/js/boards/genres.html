@@ -6,6 +6,11 @@
 
 	<ion-content class="scroll-content ionic-scroll has-header" direction="y">
 
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="reload()">
+        </ion-refresher>
+
 		<ol class="unstyled">
 			<li class="genreItem masonryItem imageButton" ng-repeat="genre in genres">
 

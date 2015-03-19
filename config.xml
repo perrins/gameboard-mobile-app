@@ -14,7 +14,6 @@
   <access origin="https://api.twitter.com/*"/>
   <access origin="https://gameboard-cloud.eu-gb.mybluemix.net/*"/>
   <access origin="*"/>
-
   <preference name="fullscreen" value="true"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>

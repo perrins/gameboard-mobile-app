@@ -40,21 +40,20 @@ angular.module("gameboard.boards.genres", [])
         });
         */
 
-        // Handle the Load
-        $scope.$on('$ionicView.loaded', function() {
+        $scope.loadData = function(){
 
-            // Show what we are doing
             $ionicLoading.show({
-                template: "<i class=\"ion-loading-c\"></i><span>&nbsp;Loading Genres...</span>"
+                template: '<ion-spinner class="spinner-energized" icon="lines"></ion-spinner><h3>Loading Genres</h3>'
             });
 
             // Need to Check if we have got some already
             GenresService.all().then(function (genres) {
 
+                // Hide the Loading Message
+                $ionicLoading.hide();
+
                 // Check we have some Games for this Genre
                 if (_.isNull(genres)) {
-
-                    $ionicLoading.hide();
 
                     var alertPopup = $ionicPopup.alert({
                         title: 'Games',
@@ -67,12 +66,8 @@ angular.module("gameboard.boards.genres", [])
 
                 } else {
 
-
                     // Paint
                     $scope.genres = genres;
-
-                    // Hide the Loading Message
-                    $ionicLoading.hide();
 
                     // Let Angular know we have some data because of the Async nature of IBMBaaS
                     // This is required to make sure the information is uptodate
@@ -106,7 +101,17 @@ angular.module("gameboard.boards.genres", [])
 
             });
 
+        };
+
+        $scope.reload = function(){
+            $scope.loadData();
+        }
+
+        // Handle the Load
+        $scope.$on('$ionicView.loaded', function() {
+            $scope.loadData();
         });
+
     })
 
     /**

@@ -91,7 +91,7 @@
     <author email="info@game-board.co" href="http://game-board.co/">
         Game-board Ltd
     </author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.69:8100" />
     <access origin="https://oauth.io/*" />
     <access origin="https://google.com/*" />
     <access origin="https://graph.facebook.com/*" />

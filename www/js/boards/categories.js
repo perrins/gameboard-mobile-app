@@ -21,77 +21,77 @@ angular.module("gameboard.boards.categories", [])
         $scope.gmid = $stateParams.gmid;
         $scope.genid = $stateParams.genid;
 
-        //$scope.$on('$ionicView.enter', function() {
+        $scope.$on('$ionicView.enter', function() {
 
-        $ionicLoading.show({
-            template: 'Loading Categories...'
-        });
+            $ionicLoading.show({
+                template: '<ion-spinner class="spinner-energized" icon="lines"></ion-spinner><h3>Loading Categories</h3>'
+            });
 
-        // Access the Genres and get the Title and other information we need
-        GamesService.getGame($scope.genid, $scope.gmid).then(function (game) {
+            // Access the Genres and get the Title and other information we need
+            GamesService.getGame($scope.genid, $scope.gmid).then(function (game) {
 
-            // Display The Title
-            $scope.title = game.title;
+                // Display The Title
+                $scope.title = game.title;
 
-            // Get the Games
-            return CategoriesService.all($scope.gmid);
+                // Get the Games
+                return CategoriesService.all($scope.gmid);
 
-        }).then(function (data) {
+            }).then(function (data) {
 
-            // Check we have some Games for this Genre
-            if (_.isNull(data)) {
+                // Check we have some Games for this Genre
+                if (_.isNull(data)) {
 
-                $ionicLoading.hide();
+                    $ionicLoading.hide();
 
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Categoies',
-                    template: 'It seems we dont have a Category defined for this Game'
-                });
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Categoies',
+                        template: 'It seems we dont have a Category defined for this Game'
+                    });
 
-                alertPopup.then(function (res) {
-                    // Go Back to the Main Genres Screen
-                    $state.go("board.genres");
-                });
+                    alertPopup.then(function (res) {
+                        // Go Back to the Main Genres Screen
+                        $state.go("board.genres");
+                    });
 
-            } else {
-                // Paint
-                $scope.banner = data.banner;
-                $scope.categories = data.categories;
+                } else {
+                    // Paint
+                    $scope.banner = data.banner;
+                    $scope.categories = data.categories;
 
-                $ionicLoading.hide();
+                    $ionicLoading.hide();
 
-                // This is required to make sure the information is uptodate
-                if (!$scope.$$phase) {
-                    $scope.$apply();
+                    // This is required to make sure the information is uptodate
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
                 }
-            }
 
-        }, function (err) {
+            }, function (err) {
 
-            // Hide any Progress
-            $ionicLoading.hide();
+                // Hide any Progress
+                $ionicLoading.hide();
 
-            $scope.nodata = true;
+                $scope.nodata = true;
 
-            // Show Connectivity Error
-            if (_.has(err, "info") && err.info.status == "error") {
-                $scope.error = "Cannot connect to the cloud";
-                $rootScope.wifi();
-            }
+                // Show Connectivity Error
+                if (_.has(err, "info") && err.info.status == "error") {
+                    $scope.error = "Cannot connect to the cloud";
+                    $rootScope.wifi();
+                }
 
-            // Then We have not found anything
-            if (err.info.statusCode == 404) {
-                $scope.error = "No Videos have been found with this query";
-            }
+                // Then We have not found anything
+                if (err.info.statusCode == 404) {
+                    $scope.error = "No Videos have been found with this query";
+                }
 
-            // Then We have not found anything
-            if (err.info.statusCode == 500) {
-                $scope.error = "Internal server error, please contact App Support";
-            }
+                // Then We have not found anything
+                if (err.info.statusCode == 500) {
+                    $scope.error = "Internal server error, please contact App Support";
+                }
+
+            });
 
         });
-
-        //});
 
         //
         //$scope.$on('$ionicView.loaded', function() {
