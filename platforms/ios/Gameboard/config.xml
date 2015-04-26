@@ -1,17 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="co.gameboard.mobile.gb" version="0.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="co.gameboard.mobile.gb" version="{{build_version}}" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="AllowInlineMediaPlayback" value="false" />
-    <preference name="AutoHideSplashScreen" value="true" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="DisallowOverscroll" value="false" />
     <preference name="EnableViewportScale" value="false" />
-    <preference name="FadeSplashScreen" value="true" />
-    <preference name="FadeSplashScreenDuration" value=".25" />
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
-    <preference name="ShowSplashScreenSpinner" value="true" />
     <preference name="SuppressesIncrementalRendering" value="false" />
-    <preference name="TopActivityIndicator" value="gray" />
     <preference name="GapBetweenPages" value="0" />
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
@@ -74,6 +69,7 @@
     <icon height="152" src="resources/ios/icon/icon-76@2x.png" width="152" />
     <icon height="29" src="resources/ios/icon/icon-small.png" width="29" />
     <icon height="58" src="resources/ios/icon/icon-small@2x.png" width="58" />
+    <icon height="87" src="resources/ios/icon/icon-small@3x.png" width="87" />
     <splash height="1136" src="resources/ios/splash/Default-568h@2x~iphone.png" width="640" />
     <splash height="1334" src="resources/ios/splash/Default-667h.png" width="750" />
     <splash height="2208" src="resources/ios/splash/Default-736h.png" width="1242" />
@@ -87,11 +83,11 @@
     <name>Gameboard</name>
     <description>
         Video Ranking platform for Gamers
-    </description>
+  </description>
     <author email="info@game-board.co" href="http://game-board.co/">
-        Game-board Ltd
+        Gameboard Ltd
     </author>
-    <content original-src="index.html" src="http://192.168.1.69:8100" />
+    <content src="index.html" />
     <access origin="https://oauth.io/*" />
     <access origin="https://google.com/*" />
     <access origin="https://graph.facebook.com/*" />
@@ -107,7 +103,6 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <plugins>
-        <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
     </plugins>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
 </widget>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - www/js/directives/directives.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>www/js/directives/directives.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">76.19</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">164</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">20.85</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.18</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">angular.module(&quot;gameboard.directives&quot;, [])
+
+
+	.directive(&quot;starRating&quot;, function () {
+		return {
+			restrict: &quot;A&quot;,
+			template: &quot;&lt;ul class=&#039;rating&#039;&gt;&quot; +
+			&quot;  &lt;li ng-repeat=&#039;star in stars&#039; ng-class=&#039;star&#039; ng-click=&#039;toggle($index)&#039;&gt;&quot; +
+			&quot;    &lt;i class=&#039;fa fa-star&#039;&gt;&lt;/i&gt;&quot; + //&amp;#9733
+			&quot;  &lt;/li&gt;&quot; +
+			&quot;&lt;/ul&gt;&quot;,
+			scope: {
+				ratingValue: &quot;=&quot;,
+				max: &quot;=&quot;,
+				onRatingSelected: &quot;&amp;&quot;
+			},
+			link: function (scope, elem, attrs) {
+				var updateStars = function () {
+					scope.stars = [];
+					for (var i = 0; i &lt; scope.max; i++) {
+						scope.stars.push({
+							filled: i &lt; scope.ratingValue
+						});
+					}
+				};
+				scope.toggle = function (index) {
+					scope.ratingValue = index + 1;
+					scope.onRatingSelected({
+						rating: index + 1
+					});
+				};
+				scope.$watch(&quot;ratingValue&quot;, function (oldVal, newVal) {
+					if (newVal) {
+						updateStars();
+					}
+				});
+			}
+		};
+	})
+
+	.directive(&quot;gbMasonryGrid&quot;, function () {
+		return {
+			restrict: &quot;A&quot;,
+			link: function ($scope, $element, $attrs) {
+				// Register Masonary for our Directive.
+				if ($scope.$last) {
+					new Masonry($element[0].parentNode, {
+						// options
+						columnWidth: $scope.$eval($attrs.gbMasonryGrid),
+						itemSelector: &quot;.masonryItem&quot;
+					});
+				}
+			}
+		};
+	})
+
+	.directive(&quot;lazyload&quot;, function () {
+		return {
+			restrict: &quot;A&quot;,
+			link: function ($scope, $element, $attrs, $q) {
+
+				$element.bind(&quot;load&quot;, function () {
+
+					// Remove the Spinner
+					$($element.parent()).removeClass(&quot;spinner&quot;);
+
+					// Fade in the Image
+					$($element).addClass(&quot;genre-image-show&quot;);
+				});
+			}
+		};
+	})
+
+	.directive(&quot;swipe&quot;, function () {
+		return {
+			restrict: &quot;A&quot;,
+			link: function ($scope, $element, $attrs) {
+
+				// Register Masonary for our Directive.
+				if ($scope.$last) {
+
+					// Create the Slider
+					this.swipe = new Swipe($element.parent().parent()[0], {
+						startSlide: 0,
+						speed: 400,
+						auto: 3000,
+						continuous: true,
+						disableScroll: true,
+						stopPropagation: false
+					});
+				}
+			}
+		};
+	})
+
+
+	.directive(&quot;currentTime&quot;, function ($timeout, $filter) {
+		return {
+			restrict: &quot;E&quot;,
+			replace: true,
+			template: &quot;&lt;span class=&#039;current-time&#039;&gt;{{currentTime}}&lt;/span&gt;&quot;,
+			scope: {
+				localtz: &quot;=&quot;
+			},
+			link: function ($scope, $element, $attr) {
+				$timeout(function checkTime() {
+					if ($scope.localtz) {
+						// TMD: WTF?
+						$scope.currentTime = $filter(&quot;date&quot;)(+(new Date), &quot;h:mm&quot;) + $scope.localtz;
+					}
+					$timeout(checkTime, 500);
+				});
+			}
+		};
+	})
+
+	.directive(&quot;backgroundCycler&quot;, function ($compile, $animate) {
+		var animate = function ($scope, $element, newImageUrl) {
+			var child = $element.children()[0];
+
+			var scope = $scope.$new();
+			scope.url = newImageUrl;
+			var img = $compile(&quot;&lt;background-image&gt;&lt;/background-image&gt;&quot;)(scope);
+
+			$animate.enter(img, $element, null, function () {
+				console.log(&quot;Inserted&quot;);
+			});
+			if (child) {
+				$animate.leave(angular.element(child), function () {
+					console.log(&quot;Removed&quot;);
+				});
+			}
+		};
+
+		return {
+			restrict: &quot;E&quot;,
+			link: function ($scope, $element, $attr) {
+				$scope.$watch(&quot;activeBgImage&quot;, function (v) {
+					if (!v) {
+						return;
+					}
+					console.log(&quot;Active bg image changed&quot;, v);
+					// TMD: item never used
+					var item = v,
+						url = &quot;./img/call-of-duty-ghosts.jpg&quot;;
+					animate($scope, $element, url);
+				});
+			}
+		};
+	})
+
+	.directive(&quot;backgroundImage&quot;, function ($compile, $animate) {
+		return {
+			restrict: &quot;E&quot;,
+			template: &quot;&lt;div class=&#039;bg-image&#039;&gt;&lt;/div&gt;&quot;,
+			replace: true,
+			scope: true,
+			link: function ($scope, $element, $attr) {
+				if ($scope.url) {
+					$element[0].style.backgroundImage = &quot;url(&quot; + $scope.url + &quot;)&quot;;
+				}
+			}
+		};
+	});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

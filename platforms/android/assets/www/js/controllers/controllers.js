@@ -50,6 +50,34 @@ angular.module("gameboard.controllers", [])
 
 	.controller("MainCtrl", function ($rootScope,  $scope, $location, $state, $ionicSideMenuDelegate, $ionicHistory) {
 
+        // Check if we are in local testing mode and then fake a user
+        // and go to the Intro Views.
+        if ($rootScope.config.localsecurity || typeof OAuth == 'undefined') {
+
+            $rootScope.user = {
+                "id": "1292030202022",
+                "gametag": "lolperrins123",
+                "avatar": "img/avatar.png",
+                "firstname": "Joe",
+                "lastname": "Perrins",
+                "registered": false
+            };
+            $rootScope.member = {
+                "muuid": 282992902,
+                "gametag": "lolperrins123",
+                "name": "Joe",
+                "surname": "Perrins",
+                "memberSince": "01/01/2014",
+                "avatar": "img/avatar.png",
+                "bio": "The best minecraft player on the planet",
+                "prizes": "£23,456",
+                "views": "4,343"
+
+            };
+
+        };
+
+
         // Prepare User for Display
 		if ($rootScope.user) {
 

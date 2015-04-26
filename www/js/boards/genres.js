@@ -91,7 +91,7 @@ angular.module("gameboard.boards.genres", [])
 
                 // Then We have not found anything
                 if (err.info.statusCode == 404) {
-                    $scope.error = "No Videos have been found with this query";
+                    $scope.error = "No Genres have been found !";
                 }
 
                 // Then We have not found anything

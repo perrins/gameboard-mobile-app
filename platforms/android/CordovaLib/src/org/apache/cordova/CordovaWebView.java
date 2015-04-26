@@ -1,20 +1,41 @@
+/*
+       Licensed to the Apache Software Foundation (ASF) under one
+       or more contributor license agreements.  See the NOTICE file
+       distributed with this work for additional information
+       regarding copyright ownership.  The ASF licenses this file
+       to you under the Apache License, Version 2.0 (the
+       "License"); you may not use this file except in compliance
+       with the License.  You may obtain a copy of the License at
+         http://www.apache.org/licenses/LICENSE-2.0
+       Unless required by applicable law or agreed to in writing,
+       software distributed under the License is distributed on an
+       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+       KIND, either express or implied.  See the License for the
+       specific language governing permissions and limitations
+       under the License.
+*/
 package org.apache.cordova;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.webkit.WebChromeClient.CustomViewCallback;
 
+/**
+ * Main interface for interacting with a Cordova webview - implemented by CordovaWebViewImpl.
+ * This is an interface so that it can be easily mocked in tests.
+ * Methods may be added to this interface without a major version bump, as plugins & embedders
+ * are not expected to implement it.
+ */
 public interface CordovaWebView {
-    public static final String CORDOVA_VERSION = "4.0.0-dev";
+    public static final String CORDOVA_VERSION = "4.0.0";
 
-    void init(CordovaInterface cordova, List<PluginEntry> pluginEntries,
-            Whitelist internalWhitelist, Whitelist externalWhitelist,
-            CordovaPreferences preferences);
+    void init(CordovaInterface cordova, List<PluginEntry> pluginEntries, CordovaPreferences preferences);
+
+    boolean isInitialized();
 
     View getView();
 
@@ -24,6 +45,10 @@ public interface CordovaWebView {
 
     boolean canGoBack();
 
+    void clearCache();
+
+    /** Use parameter-less overload */
+    @Deprecated
     void clearCache(boolean b);
 
     void clearHistory();
@@ -34,15 +59,17 @@ public interface CordovaWebView {
 
     void onNewIntent(Intent intent);
 
-    void handleResume(boolean keepRunning, boolean activityResultKeepRunning);
+    void handleResume(boolean keepRunning);
+
+    void handleStart();
+
+    void handleStop();
 
     void handleDestroy();
 
     /**
      * Send JavaScript statement back to JavaScript.
-     * (This is a convenience method)
      *
-     * @param statement
      * Deprecated (https://issues.apache.org/jira/browse/CB-6851)
      * Instead of executing snippets of JS, you should use the exec bridge
      * to create a Java->JS communication channel.
@@ -64,12 +91,34 @@ public interface CordovaWebView {
     @Deprecated
     void sendJavascript(String statememt);
 
-    void showWebPage(String errorUrl, boolean b, boolean c, HashMap<String, Object> params);
+    /**
+     * Load the specified URL in the Cordova webview or a new browser instance.
+     *
+     * NOTE: If openExternal is false, only whitelisted URLs can be loaded.
+     *
+     * @param url           The url to load.
+     * @param openExternal  Load url in browser instead of Cordova webview.
+     * @param clearHistory  Clear the history stack, so new page becomes top of history
+     * @param params        Parameters for new app
+     */
+    void showWebPage(String url, boolean openExternal, boolean clearHistory, Map<String, Object> params);
 
+    /**
+     * Deprecated in 4.0.0. Use your own View-toggling logic.
+     */
+    @Deprecated
     boolean isCustomViewShowing();
 
+    /**
+     * Deprecated in 4.0.0. Use your own View-toggling logic.
+     */
+    @Deprecated
     void showCustomView(View view, CustomViewCallback callback);
 
+    /**
+     * Deprecated in 4.0.0. Use your own View-toggling logic.
+     */
+    @Deprecated
     void hideCustomView();
 
     CordovaResourceApi getResourceApi();
@@ -80,13 +129,10 @@ public interface CordovaWebView {
     void sendPluginResult(PluginResult cr, String callbackId);
 
     PluginManager getPluginManager();
-
-    Whitelist getWhitelist();
-    Whitelist getExternalWhitelist();
+    CordovaWebViewEngine getEngine();
     CordovaPreferences getPreferences();
+    ICordovaCookieManager getCookieManager();
 
-    void setNetworkAvailable(boolean online);
-    
     String getUrl();
 
     // TODO: Work on deleting these by removing refs from plugins.
