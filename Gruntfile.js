@@ -12,6 +12,9 @@ if (buildNo === undefined){
     buildNo = "00000";
 }
 
+// Date
+var _date = new Date();
+
 console.log("Build Number :"+buildNo);
 
 module.exports = function (grunt) {
@@ -26,71 +29,6 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
 
-        cordova_cli: {
-            prepare_ios: {
-                options: {
-                    cmd: 'prepare',
-                    platforms: ['ios']
-                }
-            },
-            build_ios: {
-                options: {
-                    cmd: 'build',
-                    platforms: ['ios']
-                }
-            },
-            compile_ios: {
-                options: {
-                    cmd: 'compile',
-                    platforms: ['ios']
-                }
-            },
-        },
-
-        xcode: {
-            options: {
-                project: 'platforms/ios/Gameboard.xcodeproj',
-                scheme: 'Release'
-            }
-        },
-
-        hockeyapp: {
-            /**
-             * Global options
-             */
-            options: {
-                notes: 'Latest release of the Android ',
-                tags: 'Gameboard,Android,Alpha', // comma-separated list of tags
-                download: true, // Enable/Disable download
-                notify: 1 // 0 - Don't notify, 1 - Notify all that can install this app, 2 - Notify all
-            },
-            /**
-             * App-specific options
-             */
-            Android: {
-                options: {
-                    token: '09694e98bdaf4fb9aa0273faeb3117d5', // Upload Token
-                    app_id: '27f846d3d03a41bab432cd3968b79d5b', // Application ID
-                    download: false, // Disable download of this app
-                    file: '/Users/matthewperrins/projects/gameboard-mobile-app/platforms/android/ant-build/CordovaApp-debug.apk' // Path to file
-                }
-            },
-
-            /**
-             * App-specific options
-             */
-            IOS: {
-                options: {
-                    token: '09694e98bdaf4fb9aa0273faeb3117d5', // Upload Token
-                    app_id: '27f846d3d03a41bab432cd3968b79d5b', // Application ID
-                    download: false, // Disable download of this app
-                    file: '/Users/matthewperrins/projects/gameboard-mobile-app/platforms/ios/build/Gameboard.ipa' // Path to file
-                }
-            }
-
-
-        },
-
         clean: {
             options: {
                 force: false
@@ -99,11 +37,12 @@ module.exports = function (grunt) {
                 files: [{
                     dot: true,
                     src: [
-                        'www/js/lib',
                         'tmp'
                     ]
                 }]
             },
+            js: ["www/lib/ionic/js/*.js", "!www/lib/ionic/js/*.min.js"]
+
         },
 
         // copy modified and customized libraries to the source folder
@@ -137,11 +76,6 @@ module.exports = function (grunt) {
                     {
                         src: "vendor/angular-cookies/angular-cookies.min.js",
                         dest: "www/lib/angular/angular-cookies.min.js"
-                    },
-
-                    {
-                        src: "vendor/collide/collide.js",
-                        dest: "www/lib/collide/collide.js"
                     },
 
                     {
@@ -182,25 +116,6 @@ module.exports = function (grunt) {
 
                 ]
 
-            },
-            apps: {
-                files: [
-                    {
-                        expand: true, flatten: true, filer: 'isFile',
-                        src: ['platforms/ios/build/CrocPad.ipa'],
-                        dest: '/<projectPath>/Dev/Client/buid/ios/'
-                    },
-                    {
-                        expand: true, flatten: true,
-                        src: ['platforms/android/bin/CrocPad-debug.apk'],
-                        dest: '/<projectPath>/Dev/Client/buid/android/'
-                    },
-                    {
-                        expand: true, flatten: true,
-                        src: ['package.json'],
-                        dest: '/<projectPath>/Dev/Client/buid/'
-                    }
-                ]
             }
 
         },
@@ -216,23 +131,12 @@ module.exports = function (grunt) {
                 },
                 src: [
                     'vendor/jquery/dist/jquery.js',
-                    'vendor/jquery-bridget/jquery.bridge.js',
-                    'vendor/get-style-property/get-style-property.js',
-                    'vendor/get-size/get-size.js',
-                    'vendor/eventEmitter/EventEmitter.js',
-                    'vendor/eventie/eventie.js',
-                    'vendor/doc-ready/doc-ready.js',
-                    'vendor/matches-selector/matches-selector.js',
-                    'vendor/outlayer/item.js',
-                    'vendor/outlayer/outlayer.js',
-                    'vendor/masonry/masonry.js',
-                    'vendor/swipe/swipe.js',
-                    'vendor/sizzle/sizzle.js',
-                    'vendor/spin/spin.min.js',
                     'vendor/ibmbluemix/js/IBMBluemix.js',
                     'vendor/ibmcloudcode/js/IBMCloudCode.js',
-                    'vendor/ibmdata/js/IBMData.js'
-
+                    'vendor/ibmdata/js/IBMData.js',
+                    'vendor/swipe/swipe.js',
+                    'vendor/sizzle/sizzle.js',
+                    'vendor/spin/spin.min.js'
 
                 ],
                 dest: 'tmp/js/<%= pkg.name%>.vendor.js'
@@ -298,13 +202,40 @@ module.exports = function (grunt) {
         'string-replace': {
             version: {
                 files: {
-                    'base/config.xml': 'www/config.xml'
+                    'config.xml': 'dev/config.xml',
+                    'www/config.json': 'dev/config.json'
                 },
                 options: {
                     replacements: [{
+                        pattern: /{{ BUILD_NO }}/g,
+                        replacement: '<%= BUILD_NO %>'
+                    },
+                    {
                         pattern: /{{ VERSION }}/g,
                         replacement: '<%= pkg.version %>'
-                    }]
+                    },
+                    {
+                        pattern: /{{ DATE }}/g,
+                        replacement: '<%= DATE %>'
+                    },
+                    {
+                        pattern: /{{ TIME }}/g,
+                        replacement: '<%= TIME %>'
+                    },
+                    {
+                        pattern: /{{ VERSION }}/g,
+                        replacement: '<%= pkg.version %>'
+                    },
+                    {
+                        pattern: /{{ CODENAME }}/g,
+                        replacement: '<%= pkg.codename %>'
+                    },
+                    {
+                        pattern: /{{ NAME }}/g,
+                        replacement: '<%= pkg.name %>'
+                    }
+
+                    ]
                 }
             }
         },
@@ -314,32 +245,6 @@ module.exports = function (grunt) {
                 commit: false,
                 createTag: false,
                 push: false
-            }
-        },
-        shell: {
-            IOSBuild: {
-                command: 'ionic build ios',
-                options: {
-                    async: false,
-                    execOptions: {
-                        cwd: '.'
-                    }
-                }
-            },
-            AndroidPrepare: {
-                command: 'ionic build android',
-                options: {
-                    async: false,
-                    execOptions: {
-                        cwd: '.'
-                    }
-                }
-            },
-
-            options: {
-                stdout: true,
-                stderr: true,
-                failOnError: true
             }
         },
 
@@ -359,32 +264,10 @@ module.exports = function (grunt) {
             ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
         },
         bumpup: ['package.json', 'www/js/build.json'],
-
-        shell: {
-            options: {
-                failOnError: true,
-                stdout: false,
-                stderr: true
-            },
-            build: {
-                command: 'cordova build ios android'
-            },
-            prepare: {
-                command: 'cordova prepare'
-            },
-            buildAPK: {
-                command: 'cordova build android --release'
-            },
-            buildIPAo: {
-                command: '/usr/bin/xcrun -sdk iphoneos PackageApplication -v "platforms/ios/build/emulator/Gameboard.app" -o "platforms/ios/build/Gameboard.ipa" --sign "iPhone Developer: Matthew Perrins (HQ89NV2SGV)" -o "Gameboard.ipa" --embed "dev/Gameboard_Adhoc.mobileprovision"'
-            },
-            buildIPA: {
-                command: '/usr/bin/xcrun -sdk iphoneos PackageApplication -v "platforms/ios/build/emulator/Gameboard.app" -o "platforms/ios/build/Gameboard.ipa" -o "Gameboard.ipa" --embed "dev/Gameboard_Adhoc.mobileprovision"'
-            }
-
-        },
-        BUILDNO : buildNo,
-        pkg: grunt.file.readJSON('package.json')
+        pkg: grunt.file.readJSON('package.json'),
+        BUILD_NO : buildNo,
+        DATE: grunt.template.today('yyyy-mm-dd'),
+        TIME: _date.getUTCHours() + ':' + _date.getUTCMinutes() + ':' + _date.getUTCSeconds()
     });
 
     require('load-grunt-tasks')(grunt);
@@ -394,8 +277,8 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'bump',
         'clean:dist',
+        'clean:js',
         'concat:vendor',
         'version',
         'string-replace',
@@ -409,7 +292,7 @@ module.exports = function (grunt) {
         [
             'build',
             'shell:prepare',
-//		'shell:build',
+		//    'shell:build',
             'shell:buildIPA',
             'copy:apps']);
 

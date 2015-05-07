@@ -137,7 +137,7 @@ angular.module("gameboard.controllers", [])
 
 			// Lets load the Videos for the Youtube Channel
 			$ionicLoading.show({
-                template: "<i class=\"ion-loading-c\"></i><span>&nbsp;Authenticating...</span>"
+                template: '<ion-spinner class="spinner-energized" icon="lines"></ion-spinner><h3>Authenticating...</h3>'
 			});
 
 			var nextView = function () {
@@ -349,8 +349,8 @@ angular.module("gameboard.controllers", [])
 // A simple controller that shows a tapped item"s data
 	.controller("AboutCtrl", function ($rootScope, $scope, Settings) {
 
-		$scope.name = "Screaming Foulup";
-		$scope.version = "0.0.4";
+        // Get the Configuration Information
+		$scope.info = $rootScope.config.info;
 
 		// Check
 		$scope.intro = Settings.get("INTRO");

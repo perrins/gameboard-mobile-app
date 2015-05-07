@@ -17,31 +17,26 @@
     "tests"
   ],
   "dependencies": {
-    "masonry": "*",
     "swipe": "*",
-    "fastclick": "*",
-    "outlayer": "*",
     "jquery": "*",
-    "angular-touch": "*",
+    "angular-touch": "#1.3.13",
+    "angular-animate": "#1.3.13",
     "ibmbluemix": "https://hub.jazz.net/git/bluemixmobilesdk/ibmbluemix-javascript/.git",
     "ibmcloudcode": "https://hub.jazz.net/git/bluemixmobilesdk/ibmcloudcode-javascript/.git",
     "ibmdata": "https://hub.jazz.net/git/bluemixmobilesdk/ibmdata-javascript/.git",
     "oauth-js": "*",
     "angular-wizard": "*",
-    "collide": "*",
     "ngCordova": "*",
     "components-font-awesome": "*",
     "ionicons": "*",
-    "angular": "*",
-    "angular-messages": "*",
-    "eventie": "1.0.6"
+    "angular": "#1.3.13",
+    "angular-messages": "#1.3.13"
   },
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.0.0-rc.4",
-    "browser": "~0.7.2",
-    "eventie": "1.0.6"
+    "ionic": "driftyco/ionic-bower#1.0.0-rc.5",
+    "browser": "~0.7.2"
   },
   "resolutions": {
-    "angular": "*"
+    "angular": "#1.3.13"
   }
 }

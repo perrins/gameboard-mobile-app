@@ -57,7 +57,8 @@ angular.module('gameboard.board.controllers', [])
                 // Because we are retrieving all the items every time we do something
                 // We need to clear the list before loading in some new values
                 $ionicLoading.show({
-                    template: '<i class=\"ion-loading-c\"></i><span>&nbsp;'+$scope.message+'</span>'
+                    template: '<ion-spinner class="spinner-energized" icon="lines"></ion-spinner><h3>'+$scope.message+'</h3>'
+
                 });
 
                 // Because we are retrieving all the items every time we do something

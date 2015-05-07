@@ -49,9 +49,8 @@ angular.module("gameboard.member.search", [])
             // Because we are retrieving all the items every time we do something
             // We need to clear the list before loading in some new values
             $ionicLoading.show({
-                template: $scope.message
+                template: '<ion-spinner class="spinner-energized" icon="lines"></ion-spinner><h3>'+$scope.message+'</h3>'
             });
-
 
             // "List is " is a service returning data from the
             MembersService.all(searchParam, page, size).then(function (_members) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget xmlns:cdv="http://cordova.apache.org/ns/1.0" id="co.gameboard.mobile.gb"
-        version="1.0.0"
-        android-versionCode="1.0.0-00000"
-        ios-CFBundleVersion="1.0.0-00000"
+        version="{{ VERSION }}"
+        android-versionCode="{{ VERSION }}-{{ BUILD_NO }}"
+        ios-CFBundleVersion="{{ VERSION }}-{{ BUILD_NO }}"
         xmlns="http://www.w3.org/ns/widgets">
 
   <name>Gameboard</name>
