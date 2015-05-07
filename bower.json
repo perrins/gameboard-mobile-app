@@ -19,8 +19,8 @@
   "dependencies": {
     "swipe": "*",
     "jquery": "*",
-    "angular-touch": "#1.3.13",
-    "angular-animate": "#1.3.13",
+    "angular-touch": "~1.3.x",
+    "angular-animate": "~1.3.x",
     "ibmbluemix": "https://hub.jazz.net/git/bluemixmobilesdk/ibmbluemix-javascript/.git",
     "ibmcloudcode": "https://hub.jazz.net/git/bluemixmobilesdk/ibmcloudcode-javascript/.git",
     "ibmdata": "https://hub.jazz.net/git/bluemixmobilesdk/ibmdata-javascript/.git",
@@ -29,14 +29,14 @@
     "ngCordova": "*",
     "components-font-awesome": "*",
     "ionicons": "*",
-    "angular": "#1.3.13",
-    "angular-messages": "#1.3.13"
+    "angular": "~1.3.x",
+    "angular-messages": "~1.3.x"
   },
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-rc.5",
     "browser": "~0.7.2"
   },
   "resolutions": {
-    "angular": "#1.3.13"
+    "angular": "~1.3.x"
   }
 }
