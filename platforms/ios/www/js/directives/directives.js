@@ -15,6 +15,7 @@ angular.module("gameboard.directives", [])
 				onRatingSelected: "&"
 			},
 			link: function (scope, elem, attrs) {
+
 				var updateStars = function () {
 					scope.stars = [];
 					for (var i = 0; i < scope.max; i++) {
@@ -62,7 +63,7 @@ angular.module("gameboard.directives", [])
 				$element.bind("load", function () {
 
 					// Remove the Spinner
-					$($element.parent()).removeClass("spinner");
+					$($element.parent()).removeClass("loading-image");
 
 					// Fade in the Image
 					$($element).addClass("genre-image-show");

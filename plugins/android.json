@@ -159,6 +159,10 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"StreamingMedia\"><param name=\"android-package\" value=\"com.hutchind.cordova.plugins.streamingmedia.StreamingMedia\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
                             "count": 1
                         },
@@ -171,19 +175,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<preference name=\"webView\" value=\"org.apache.cordova.engine.crosswalk.XWalkCordovaWebView\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"StreamingMedia\"><param name=\"android-package\" value=\"com.hutchind.cordova.plugins.streamingmedia.StreamingMedia\" /></feature>",
                             "count": 1
                         },
                         {
@@ -192,6 +184,14 @@
                         },
                         {
                             "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -224,28 +224,31 @@
         "com.google.cordova.admob-mobfox": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
+        "com.hutchind.cordova.plugins.streamingmedia": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
+        "com.oauthio.plugins.oauthio": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "co.gameboard.mobile.gb"
-        },
         "org.apache.cordova.engine.crosswalk": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "com.oauthio.plugins.oauthio": {
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
+        "org.apache.cordova.media": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
         "org.apache.cordova.network-information": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "com.hutchind.cordova.plugins.streamingmedia": {
-            "PACKAGE_NAME": "co.gameboard.mobile.gb"
-        },
-        "org.apache.cordova.media": {
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         }
     },
@@ -269,9 +272,6 @@
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
         "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "co.gameboard.mobile.gb"
-        },
-        "org.apache.cordova.file": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         }
     }

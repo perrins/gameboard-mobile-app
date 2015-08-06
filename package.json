@@ -62,5 +62,9 @@
     "org.apache.cordova.network-information",
     "com.hutchind.cordova.plugins.streamingmedia",
     "org.apache.cordova.media"
+  ],
+  "cordovaPlatforms": [
+    "ios",
+    "android"
   ]
 }

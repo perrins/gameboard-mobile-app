@@ -18,6 +18,10 @@ angular.module("gameboard.boards.genres", [])
 
         $scope.nodata = false;
 
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-energized" icon="lines"></ion-spinner><h3>Loading Games</h3>'
+        });
+
         // Handle the Load Events
         /*
         $scope.$on('$ionicView.enter', function() {
@@ -40,11 +44,7 @@ angular.module("gameboard.boards.genres", [])
         });
         */
 
-        $scope.loadData = function(){
-
-            $ionicLoading.show({
-                template: '<ion-spinner class="spinner-energized" icon="lines"></ion-spinner><h3>Loading Genres</h3>'
-            });
+        $scope.loadData = function(){            
 
             // Need to Check if we have got some already
             GenresService.all().then(function (genres) {
@@ -108,7 +108,7 @@ angular.module("gameboard.boards.genres", [])
         }
 
         // Handle the Load
-        $scope.$on('$ionicView.loaded', function() {
+        $scope.$on('$ionicView.beforeEnter', function() {
             $scope.loadData();
         });
 

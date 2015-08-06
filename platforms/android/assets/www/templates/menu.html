@@ -33,7 +33,7 @@
 
 				<a ng-if="user.registered" class="item item-dark item-avatar item-icon-right" nav-clear menu-close ng-href="#/account">
 
-                    <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
+                    <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}">
 
                     <h2 class="menu-name">{{user.firstname}}</h2>
 
@@ -46,7 +46,7 @@
                 </a>
                 <a ng-if="!user.registered" class="item item-dark item-avatar item-icon-right" nav-clear menu-close ng-href="#/register">
 
-                    <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
+                    <img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}">
 
 					<h2 class="menu-name">{{user.firstname}}</h2>
 

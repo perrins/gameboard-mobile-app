@@ -34,20 +34,32 @@ angular.module("gameboard", [
 		// Handle Loading of the Runtime
 		$ionicPlatform.ready(function () {
 
-            // Hide the Splash Screen after banner Add has been created
-            if (!_.isUndefined(navigator.splashscreen)) {
+            console.log("ready ...");
+
+ 			// Hide the Splash Screen after banner Add has been created
+			console.log("about to hide splash screen");
+			console.log(navigator.splashscreen);
+            if (navigator.splashscreen) {
+            	console.log("hiding slpash screen");
                 navigator.splashscreen.hide();
-                angular.element("#main").removeClass("hidden");
-            } else {
-                angular.element("#main").removeClass("hidden");
             }
+			// Unhide , this probably needs a nice animation
+			//angular.element("#main").removeClass("hidden");
 
+  			// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+		    // for form inputs)
+		    if (window.cordova && window.cordova.plugins.Keyboard) {
+		      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		      cordova.plugins.Keyboard.disableScroll(true);
 
-            // Check if we can hide the Splash screen
-            if (window.StatusBar) {
-				// org.apache.cordova.statusbar required
-				//window.StatusBar.styleDefault();
-			}
+		    }
+
+		    if (window.StatusBar) {
+		      // org.apache.cordova.statusbar required
+		      StatusBar.styleDefault();
+		    }
+
+           
 
         });
 

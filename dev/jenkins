@@ -1,0 +1,9 @@
+
+
+sudo npm install -g cordova
+sudo npm install -g ionic
+
+export PATH="$PATH:/usr/local/bin"
+cd platforms/ios
+ipa build --trace --scheme Gameboard --configuration Release 
+ipa distribute:hockeyapp -f Gameboard.ipa --dsym Gameboard.app.dSYM.zip -a ab05b25241264d7e8525d8a42b2ee4d7 --release alpha -m "TESTING" --markdown --teams --notify --teams Developer

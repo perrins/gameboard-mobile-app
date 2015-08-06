@@ -233,6 +233,14 @@ module.exports = function (grunt) {
                     {
                         pattern: /{{ NAME }}/g,
                         replacement: '<%= pkg.name %>'
+                    },
+                    {
+                        pattern: /{{ LOCALSERVER }}/g,
+                        replacement: false
+                    },
+                    {
+                        pattern: /{{ LOCALSECURITY }}/g,
+                        replacement: false
                     }
 
                     ]

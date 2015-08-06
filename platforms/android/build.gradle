@@ -246,10 +246,10 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
-    debugCompile project(path: ":org.apache.cordova.engine.crosswalk:gb-xwalk_core_library", configuration: "debug")
-    releaseCompile project(path: ":org.apache.cordova.engine.crosswalk:gb-xwalk_core_library", configuration: "release")
     debugCompile project(path: ":CordovaLib", configuration: "debug")
     releaseCompile project(path: ":CordovaLib", configuration: "release")
+    debugCompile project(path: ":org.apache.cordova.engine.crosswalk:gb-xwalk_core_library", configuration: "debug")
+    releaseCompile project(path: ":org.apache.cordova.engine.crosswalk:gb-xwalk_core_library", configuration: "release")
     // SUB-PROJECT DEPENDENCIES END
 }
 

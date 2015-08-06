@@ -24,7 +24,7 @@
 	border-radius: 0%;
 }
 
-.spinner:before {
+.loading-image:before {
 	border: 8px solid green;
 	animation: 2s waiting 0s infinite;
 	transition: border-radius;

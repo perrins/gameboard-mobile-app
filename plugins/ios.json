@@ -9,155 +9,155 @@
                 "parents": {
                     "AdSupport.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 6
                         }
                     ],
                     "CoreGraphics.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 6
                         }
                     ],
                     "Foundation.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 4
                         }
                     ],
                     "MediaPlayer.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 5
                         }
                     ],
                     "Security.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 3
                         }
                     ],
                     "StoreKit.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 6
                         }
                     ],
                     "MessageUI.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 4
                         }
                     ],
                     "SystemConfiguration.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 5
                         },
                         {
-                            "xml": "true",
+                            "xml": true,
                             "count": 1
                         }
                     ],
                     "UIKit.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 4
                         }
                     ],
                     "libz.dylib": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 2
                         }
                     ],
                     "AudioToolbox.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 4
                         }
                     ],
                     "AVFoundation.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 4
                         }
                     ],
                     "CoreTelephony.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 3
                         }
                     ],
                     "EventKit.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 4
                         }
                     ],
                     "EventKitUI.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 3
                         }
                     ],
                     "CoreMotion.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 1
                         }
                     ],
                     "CoreLocation.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 3
                         }
                     ],
                     "Social.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 2
                         }
                     ],
                     "libsqlite3.0.dylib": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 1
                         }
                     ],
                     "CFNetwork.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 1
                         }
                     ],
                     "MobileCoreServices.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 2
                         }
                     ],
                     "PassKit.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 1
                         }
                     ],
                     "QuartzCore.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 1
                         }
                     ],
                     "iAd.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 1
                         }
                     ],
                     "AssetsLibrary.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 1
                         }
                     ]
@@ -183,6 +183,10 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"StreamingMedia\"><param name=\"ios-package\" value=\"StreamingMedia\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
                             "count": 1
                         },
@@ -199,7 +203,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Media\"><param name=\"ios-package\" value=\"CDVSound\" /></feature>",
                             "count": 1
                         },
                         {
@@ -207,15 +215,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"StreamingMedia\"><param name=\"ios-package\" value=\"StreamingMedia\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Media\"><param name=\"ios-package\" value=\"CDVSound\" /></feature>",
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -248,6 +248,12 @@
         "com.google.cordova.admob-mobfox": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
+        "com.hutchind.cordova.plugins.streamingmedia": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
+        "com.oauthio.plugins.oauthio": {
+            "PACKAGE_NAME": "co.gameboard.mobile.gb"
+        },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
@@ -257,19 +263,16 @@
         "org.apache.cordova.engine.crosswalk": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "org.apache.cordova.splashscreen": {
+        "org.apache.cordova.file": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "com.oauthio.plugins.oauthio": {
+        "org.apache.cordova.media": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
         "org.apache.cordova.network-information": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
-        "com.hutchind.cordova.plugins.streamingmedia": {
-            "PACKAGE_NAME": "co.gameboard.mobile.gb"
-        },
-        "org.apache.cordova.media": {
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         }
     },
@@ -293,9 +296,6 @@
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         },
         "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "co.gameboard.mobile.gb"
-        },
-        "org.apache.cordova.file": {
             "PACKAGE_NAME": "co.gameboard.mobile.gb"
         }
     }
