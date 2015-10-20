@@ -173,10 +173,13 @@ angular.module("gameboard.controllers", [])
                 $rootScope.states = states;
                 console.log("Connection : "+states[networkState]);
             }
+                
 
             //
             if(navigator.connection) {
                 checkConnection();
+                
+                
                 if(navigator.connection.type === Connection.NONE && !$rootScope.config.localsecurity){
                     $ionicLoading.hide();
                     $rootScope.wifi();
@@ -185,7 +188,7 @@ angular.module("gameboard.controllers", [])
                     console.log("We have a connection "+$rootScope.states[navigator.connection.type]);
                 }
             }
-
+                
             // Check if we are in local testing mode and then fake a user
 			// and go to the Intro Views.
 			if ($rootScope.config.localsecurity || typeof OAuth == 'undefined') {
@@ -233,6 +236,7 @@ angular.module("gameboard.controllers", [])
             // Get A Code
             Q.fcall ( function () {
 
+/*
                 // Request a Server Side Generated Auth Code
                 var def = $q.defer();
 
@@ -260,7 +264,7 @@ angular.module("gameboard.controllers", [])
                     $ionicLoading.hide();
                     $rootScope.wifi();
                 }
-
+*/
                 // Create A Banner Add when in Cordova
                 if (! _.isUndefined(AdMob) ) {
 
@@ -278,6 +282,7 @@ angular.module("gameboard.controllers", [])
                         });
 
                 }
+
 
                 // Handle the Cordova OAuth experience
                 OAuth.popup("google", {

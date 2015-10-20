@@ -3,8 +3,8 @@
 	"applicationSecret": "492fe7845a42921a1d60dc03f67db3509e887ff8",
 	"applicationRoute": "http://gameboard-cloud.eu-gb.mybluemix.net",
 	"security": "P7Y2L-QgGFNW4XKgBOnQTB6xd3I",
-	"localserver": true,
-    "localsecurity": true,
+	"localserver": false,
+    "localsecurity": false,
     "local" : "http://localhost:3002",
     "admobid" : "ca-app-pub-2283171672459446/6963593212",
     "adtype"  : "SMART_BANNER",
@@ -12,8 +12,8 @@
         "name"     : "gameboard-mobile-app",
         "version"  : "1.0.0",
         "codename" : "Alpha Release",
-        "date"     : "2015-08-06",
-        "time"     : "7:6:6",
+        "date"     : "2015-08-11",
+        "time"     : "6:11:18",
         "build"    : "00000"
     }
 }
