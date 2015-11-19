@@ -304,7 +304,6 @@ angular.module("gameboard.controllers", [])
                         // Get the signing in Member and see if they are registered
                         MembersService.getMember(user.raw.id).then(function (member) {
 
-
                             // Check if we have a registered member ?
                             if (_.isObject(member)) {
                                 $ionicLoading.hide();
