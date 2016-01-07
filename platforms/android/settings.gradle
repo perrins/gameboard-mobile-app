@@ -1,4 +1,0 @@
-// GENERATED FILE - DO NOT EDIT
-include ":"
-include ":CordovaLib"
-include ":org.apache.cordova.engine.crosswalk:gb-xwalk_core_library"
