@@ -1,0 +1,23 @@
+{
+    "version": "1.0.0",
+    "name": "com.google.cordova.admob-inmobi",
+    "cordova_name": "AdMob Mediation Adapter for InMobi",
+    "description": "AdMob Mediation Adapter for InMobi",
+    "repo": "https://github.com/floatinghotpot/cordova-admob-pro.git",
+    "issue": "https://github.com/floatinghotpot/cordova-admob-pro/issues",
+    "keywords": [
+        "admob",
+        "inmobi",
+        "mediation"
+    ],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0"
+        }
+    ]
+}

@@ -1,6 +1,23 @@
 {
-  "name": "gbma",
+  "name": "ganeboard-mobile-app",
   "email": "",
   "app_id": "",
-  "package_name": ""
+  "package_name": "",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/scss/*",
+    "!www/js/**/*.scss"
+  ],
+  "browsers": [
+    {
+      "platform": "android",
+      "browser": "crosswalk",
+      "version": "8.37.189.14"
+    }
+  ]
 }

@@ -1,0 +1,28 @@
+.genresView {
+	ion-content {
+		background: #000;
+	}
+	.imageButton {
+		width: 50%;
+		max-width: 222px;
+		overflow: hidden;
+		float: left;
+		a {
+			display: block;
+			height: 170px;
+		}
+	}
+	.genre-image {
+		width: 100%;
+		height: 100%;
+	}
+
+	.genre-image-load {
+		opacity: 0;
+	}
+
+	.genre-image-show {
+		opacity: 1;
+		transition: opacity .4s ease-in;
+	}
+}

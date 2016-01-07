@@ -1,0 +1,78 @@
+<ion-view title="{{video.title}}">
+
+	<ion-content class="has-header padding">
+
+		<div data-dojo-attach-point="notfound" class="card hidden" ng-show="!video">
+			<div class="item item-text-wrap">
+				member not found
+			</div>
+		</div>
+
+		<div class="list card">
+
+			<div class="item item-thumbnail-left">
+
+				<img ng-src="{{video.avatar}}">
+
+				<h1>{{video.gametag}}</h1>
+
+				<h2>{{video.name}}&nbsp{{video.surname}}</h2>
+
+				<p>{{video.videoSince}}</p>
+
+				<div class="bigPrize">{{video.prizes}}</div>
+				<div class="bigViews">{{video.views}}</div>
+
+			</div>
+			<div class="item">
+				<p>{{video.bio}}</p>
+
+				<p>
+					<a href="#" class="subdued">1 Like</a>
+					<a href="#" class="subdued">5 Comments</a>
+				</p>
+			</div>
+
+			<div class="item tabs tabs-secondary tabs-icon-left">
+				<a class="tab-item" href="#">
+					<i class="icon ion-thumbsup"></i>
+					Like
+				</a>
+				<a class="tab-item" href="#">
+					<i class="icon ion-chatbox"></i>
+					Comment
+				</a>
+				<a class="tab-item" href="#">
+					<i class="icon ion-share"></i>
+					Share
+				</a>
+			</div>
+
+			<div id="videosDivide" class="item item-divider">
+				Videos added
+				<span class="badge badge-assertive">£0,000</span>
+			</div>
+
+			<div class="list">
+
+				<div ng-repeat="video in videos" class="videoItem">
+					<a class="video item item-thumbnail-left" href="#/board/video/{{video.vid}}">
+						<div class="Video">
+							<img ng-src="{{video.thumb}}" lazyload>
+						</div>
+						<h2>{{video.title}}</h2>
+
+						<h3>{{video.gameTag}}</h3>
+
+						<p>{{video.description}}</p>
+						<span class="badge badge-balanced">{{video.vides}}</span>
+						<span class="badge badge-royal">{{video.rank}}</span>
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+
+	</ion-content>
+</ion-view>

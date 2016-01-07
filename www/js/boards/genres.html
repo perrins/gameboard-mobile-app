@@ -1,0 +1,41 @@
+<ion-view title="Genres" class="genresView">
+
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+
+	<ion-content class="scroll-content ionic-scroll has-header" direction="y">
+
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="reload()">
+        </ion-refresher>
+
+		<ol class="unstyled">
+			<li class="genreItem masonryItem imageButton" ng-repeat="genre in genres">
+
+				<a href="#/board/games/{{genre.gid}}" class="spinner">
+
+					<img class="genre-image genre-image-load" alt="{{genre.title}}" ng-src="{{genre.imageUrl}}"
+						 lazyload>
+
+					<ul class="unstyled summary">
+						<li class="title">{{genre.title}}</li>
+						<li class="subtitle">{{genre.subTitle}}</li>
+						<li class="count">{{genre.count}}</li>
+						<li class="enddate">{{genre.endDate}}</li>
+					</ul>
+				</a>
+			</li>
+		</ol>
+
+        <div class="list card" ng-show="nodata">
+            <div class="item item-icon-left">
+                <i class="icon ion-information-circled"></i> {{error}}
+            </div>
+        </div>
+
+
+	</ion-content>
+
+</ion-view>

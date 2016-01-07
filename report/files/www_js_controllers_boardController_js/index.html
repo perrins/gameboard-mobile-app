@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - www/js/controllers/boardController.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>www/js/controllers/boardController.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">70.68</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">535</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">32.67</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">3.33</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">angular.module(&#039;gameboard.board.controllers&#039;, [])
+
+
+// A simple controller that shows a tapped item&#039;s data
+	.controller(&#039;BoardCtrl&#039;, function ($rootScope, $scope, $state, $stateParams, $cordovaMedia,$ionicTabsDelegate, $ionicPopup, $ionicModal, $ionicLoading, BoardService, YouTubeService, WizardHandler, BookmarksService, ACCESS, $ionicActionSheet, $timeout) {
+
+        $scope.board = null;
+        $scope.videos = [];
+        $scope.total = 0;
+        $scope.nodata = false;
+
+		$scope.$on(&#039;$ionicView.loaded&#039;, function() {
+
+            $scope.board = null;
+            $scope.videos = [];
+
+            $scope.bookmark = &quot;g2o&quot;;
+            $scope.pageSize = 20;
+            $scope.total = 0;
+
+            // Clear the List before adding new items
+            // This needs to be improved
+            $scope.boardlist = [];
+
+            // Lets Check they can Add Video Content
+            if($rootScope.user) {
+                $scope.registered = $rootScope.user.registered;
+            } else {
+                $scope.registered = true;
+            }
+
+            // Triggered on a button click, or some other target
+            $scope.showActions = function () {
+
+                // Show the action sheet
+                var hideSheet = $ionicActionSheet.show({
+                    buttons: [
+                        {text: &#039;&lt;b&gt;Share&lt;/b&gt; This&#039;},
+                        {text: &#039;View&#039;},
+                        {text: &#039;&lt;b&gt;Rate&lt;/b&gt; this&#039;}
+                    ],
+                    titleText: &#039;Actions for this Video&#039;,
+                    cancelText: &#039;Cancel&#039;,
+                    cancel: function () {
+                        // add cancel code..
+                    },
+                    buttonClicked: function (index) {
+                        return true;
+                    }
+                });
+
+            };
+
+            // Load the Items
+            $scope.loadItems = function (size) {
+
+                // Because we are retrieving all the items every time we do something
+                // We need to clear the list before loading in some new values
+                $ionicLoading.show({
+                    template: &#039;&lt;i class=\&quot;ion-loading-c\&quot;&gt;&lt;/i&gt;&lt;span&gt;&amp;nbsp;&#039;+$scope.message+&#039;&lt;/span&gt;&#039;
+                });
+
+                // Because we are retrieving all the items every time we do something
+                // We need to clear the list before loading in some new values
+                $scope.bid = $stateParams.bid;
+
+                // &quot;List is &quot; is a service returning data from the
+                BoardService.all($scope.bid, $scope.bookmark, $scope.pageSize).then(function (board) {
+
+                    // Check we have some data and a book mark
+                    // Reset the Array if we are on Page 1
+                    if ($scope.bookmark === &quot;g2o&quot;) {
+                        // Prepare for the Query
+                        $scope.boardlist = [];
+                    }
+
+                    // Set the Title
+                    $scope.title = board.title;
+
+                    if(board.videos.total_rows===0){
+                        $scope.nodata = true;
+                    } else {
+
+                        // Check what has been returned versus side of what we are returning
+                        angular.forEach(board.videos.rows, function (value, key) {
+                            $scope.boardlist.push(value.fields);
+                        });
+
+                        // Update the model with a list of Items
+                        $scope.videos = $scope.boardlist;
+
+                        $scope.nodata = false;
+
+                    }
+
+                    // Take the details from the content
+                    // Use the Calcualtion
+                    $scope.total = board.videos.total_rows;
+                    $scope.bookmark = board.videos.bookmark;
+
+                    // Delete Video List
+                    delete board.videos;
+
+                    // Add Board to Scope
+                    $scope.board = board;
+
+                    // Set the Bookmark
+                    $scope.bookmark = board.bookmark;
+
+                    // Let Angular know we have some data because of the Async nature of IBMBaaS
+                    // This is required to make sure the information is uptodate
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+
+
+                    // Hide the loading icons
+                    $ionicLoading.hide();
+
+                    // Lets Make a Call to the Service and then update the infinite scroll
+                    $scope.$broadcast(&#039;scroll.infiniteScrollComplete&#039;);
+
+
+                }, function (err) {
+
+                    // Handle Display of No Data and No Connection
+                    $ionicLoading.hide();
+
+                    $scope.board = null;
+                    $scope.videos = [];
+                    $scope.nodata = true;
+
+                    // Show Connectivity Error
+                    if (_.has(err, &quot;info&quot;) &amp;&amp; err.info.status == &quot;error&quot;) {
+                        $scope.error = &quot;Cannot connect to the cloud&quot;;
+                        $rootScope.wifi();
+                    }
+
+                    // Then We have not found anything
+                    if (err.info.statusCode == 404) {
+                        $scope.error = &quot;No Videos have been found with this query&quot;;
+                    }
+
+                    // Then We have not found anything
+                    if (err.info.statusCode == 500 || err.info.statusCode == 400) {
+                        $scope.error = &quot;Internal server error, please contact App Support&quot;;
+                    }
+
+                    // Lets Make a Call to the Service and then update the infinite scroll
+                    $scope.$broadcast(&#039;scroll.infiniteScrollComplete&#039;);
+
+                });
+
+            };
+
+            // If we get close to the end of the list and we have more
+            $scope.loadMore = function () {
+
+                if (!$scope.message) {
+                    $scope.message = &#039;Loading videos...&#039;;
+                } else {
+                    $scope.message = &#039;More videos...&#039;;
+                }
+
+                // Check we can move one more page
+                // Add Some More
+                $scope.loadItems($scope.pageSize);
+
+            };
+
+            // Handle a Refresh to the Beginning
+            $scope.onRefresh = function () {
+                $scope.message = null;
+                $scope.videos  = null;
+                $scope.boardlist = null;
+                $scope.bookmark = &quot;g2o&quot;;
+                $scope.loadMore();
+            };
+
+            // Save a Bookmark
+            $scope.addBookmark = function () {
+
+                // Build the Bookmark
+                var data = {
+                    type: &quot;CATEGORY&quot;,
+                    bid: $scope.bid,
+                    title: $scope.title
+                };
+
+                BookmarksService.addBookmark(data).then(function (status) {
+
+                    // Tell User we have created the Book Mark
+                    var infoPopup = $ionicPopup.alert({
+                        title: &#039;Bookmark&#039;,
+                        template: &#039;Bookmark has been saved for this Board &#039; + $scope.title
+                    });
+
+                    infoPopup.then(function (res) {
+
+                    });
+
+                }, function (err) {
+
+                    if (err.info.status === &quot;error&quot;) {
+                        $scope.$emit(&#039;gb-error&#039;, err);
+                    } else {
+
+                        var alertPopup = $ionicPopup.alert({
+                            title: &#039;Bookmark&#039;,
+                            template: &#039;Failed to create the Bookmark&#039;
+                        });
+
+                        alertPopup.then(function (res) {
+
+                        });
+                    }
+
+                });
+            };
+
+            // Create our modal
+            $ionicModal.fromTemplateUrl(&#039;templates/add-video.html&#039;, function (modal) {
+                $scope.videoModal = modal;
+            }, {
+                scope: $scope,
+                animation: &#039;slide-in-up&#039;,
+                focusFirstInput: true
+            });
+
+            $scope.addVideo = function (video) {
+
+                // If they are not registered then you need to register
+                if (!$rootScope.user.registered) {
+                    $state.go(&#039;register&#039;);
+                }
+
+                // Add the Item and then hide the modal view
+                BoardService.add(video).then(
+                    function (payload) {
+                        console.log(&quot;Video Added&quot;);
+                    },
+                    function (err) {
+                        console.log(err);
+                    }
+                );
+
+                // Hide the Modal View
+                $scope.closeVideo();
+
+            };
+
+            $scope.newVideo = function () {
+
+                // Associate the User
+                $scope.user = $rootScope.user;
+
+                // Hide Back button
+                $scope.back = false;
+
+                // Start The Wizard from the Beginning
+                WizardHandler.wizard().goTo(0);
+
+                // Lets load the Videos for the Youtube Channel
+                $ionicLoading.show({
+                    template: &#039;Accessing Youtube ...&#039;
+                });
+
+                // Need to Check if we have got some already
+                YouTubeService.getYourVideos().then(function (data) {
+
+                    // Paint the List of Youtube Videos
+                    $scope.ytvideos = data.items;
+
+                    // This is required to make sure the information is uptodate
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+
+                    $ionicLoading.hide();
+
+                }, function (err) {
+                    console.log(err);
+                    $ionicLoading.hide();
+                });
+
+                // Reverse the Paint Bug
+                $scope.videoModal.show();
+
+            };
+
+            $scope.closeVideo = function () {
+                // Reverse the Paint Bug
+                $scope.videoModal.hide();
+            };
+
+            $scope.wizardBack = function () {
+
+                if ($scope.currentStep == &quot;Videos&quot;) {
+                    $scope.back = false;
+                }
+                WizardHandler.wizard().previous();
+            };
+
+            $scope.selectVideo = function (_video) {
+
+                $scope.video = null;
+
+                // Get the Video Details
+                $scope.back = true;
+
+                $ionicLoading.show({
+                    template: &#039;Fetching Video...&#039;
+                });
+
+                // Lets get the Information we need
+                var _id = null;
+                if (_.has(_video, &quot;snippet&quot;)) {
+                    var _id = _video.snippet.resourceId.videoId
+                } else {
+                    var alertPopup = $ionicPopup.alert({
+                        title: &#039;Youtube&#039;,
+                        template: &#039;The video item does not seem to be valid&#039;
+                    });
+                    return;
+                }
+
+                // Get the Video Details
+                YouTubeService.getVideo(_id).then(function (data) {
+
+                    // Paint the List of Youtube Videos
+                    $scope.video = data;
+
+                    // This is required to make sure the information is uptodate
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+
+                    $ionicLoading.hide();
+
+
+                }, function (err) {
+                    console.log(err);
+                    $ionicLoading.hide();
+                });
+
+                // Could make it display before, lets see how this works
+                // Initialize the Video Display
+                WizardHandler.wizard().next();
+
+            };
+
+            $scope.viewVideo = function (video) {
+
+                // Check we have something to display
+                if (!video) {
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: &#039;Youtube&#039;,
+                        template: &#039;The video item does not seem to be valid&#039;
+                    });
+                    return;
+                }
+
+                // Prepare Video URL
+                var id = null;
+                if(_.has(video,&quot;ytid&quot;)) {
+                    id=video.ytid;
+                } else {
+                    id=video.id;
+                }
+                var videoUrl = ACCESS.EMBED + id;
+
+                /*
+                var media = $cordovaMedia.newMedia(videoUrl).then(function() {
+                    // success
+                    console.log(&quot;Media Verified&quot;);
+                }, function () {
+                    // error
+                    console.log(&quot;Error&quot;);
+                });
+
+                var iOSPlayOptions = {
+                    numberOfLoops: 1,
+                    playAudioWhenScreenIsLocked : false
+                }
+
+                // Let Play the baby
+                media.play(options); // iOS only!
+                */
+
+                // Play a video with callbacks
+                var options = {
+                    successCallback: function () {
+                        console.log(&quot;Video was closed without error.&quot;);
+                    },
+                    errorCallback: function (errMsg) {
+                        console.log(&quot;Error! &quot; + errMsg);
+                    }
+                };
+
+                // Open the Media Player
+                window.plugins.streamingMedia.playVideo(videoUrl, options);
+
+            };
+
+            $scope.useVideo = function (video) {
+
+                // Flesh out the Video model from what we have let the user add the rest
+                // Lets build up an Object model for the gamer to edit
+                var bid = $scope.bid;
+                var views = $scope.video.statistics.viewCount;
+                try {
+                    bid = parseInt(bid);
+                    views = parseInt(views);
+                    rank = views;
+                } catch (e) {
+                    console.log(e);
+                }
+
+                // Build Model Object from known data and ask for a few more details
+                // This composite model will be used by
+                $scope.add = {
+                    title: $scope.video.snippet.title,
+                    description: $scope.video.snippet.description,
+                    gametag: $scope.member.gametag,
+                    ytid: $scope.video.id,
+                    ytimage: $scope.video.snippet.thumbnails.default.url,
+                    bid: bid,
+                    muuid: $scope.user.raw.id,
+                    location: $scope.user.location,
+                    views: views,
+                    rank: views,
+                    recorddate: $scope.video.snippet.publishedAt,
+                    platform: &quot;PS&quot;,
+                    rating: 0
+
+                };
+
+                // Initialize the Video Display
+                WizardHandler.wizard().next();
+
+            };
+
+            $scope.addVideo = function (add) {
+
+                console.log(&quot;Add Video&quot;);
+                if (!_.isObject(add)) {
+                    console.log(&quot;Video to add is not an object&quot;);
+                }
+
+                // Add the Video to the Board
+                BoardService.registerVideo(add).then(function (success) {
+
+                    // Move to the Finish Wizard Page
+                    // Initialize the Video Display
+                    WizardHandler.wizard().next();
+
+                }).catch(function (err) {
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: &#039;Register&#039;,
+                        template: &#039;Failed to register video&#039;
+                    });
+
+                })
+
+            };
+
+            // Finish the Wizard
+            $scope.finish = function () {
+
+                // Refresh the View
+                $scope.onRefresh();
+
+                // Hide The dialog
+                $scope.videoModal.hide();
+
+            };
+
+		// Handle a Refresh to the Beginning
+		});
+
+        $scope.$on(&#039;$ionicView.enter&#039;, function() {
+            $scope.loadMore();
+        });
+
+
+    })
+
+// A simple controller that shows retrieves a list of You Tube Videos
+	.controller(&#039;YTVideoDetailCtrl&#039;, function ($scope, $stateParams, YouTubeService, $ionicLoading) {
+
+		// Lets load the Videos for the Youtube Channel
+		$ionicLoading.show({
+			template: &#039;Loading ...&#039;
+		});
+
+
+	})
+
+// A simple controller that shows retrieves a list of You Tube Videos
+	.controller(&#039;VideoCtrl&#039;, function ($scope, $stateParams, VideoService, $ionicLoading) {
+
+		// Retrieve the Video content
+		// Lets load the Videos for the Youtube Channel
+		$ionicLoading.show({
+			template: &#039;Loading ...&#039;
+		});
+
+		// Need to Check if we have got some already
+		VideoService.get($stateParams.uuid).then(function (video) {
+
+			// Paint
+			$scope.video = video;
+
+			// This is required to make sure the information is uptodate
+			if (!$scope.$$phase) {
+				$scope.$apply();
+			}
+			$ionicLoading.hide();
+
+		}, function (err) {
+			console.log(err);
+			$ionicLoading.hide();
+		});
+
+		// Add Sharing
+
+		// Social information
+
+		// Likes helps etc etc
+
+		// Comments
+
+	});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

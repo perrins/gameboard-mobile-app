@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - www/js/app.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>www/js/app.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">60.46</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">280</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">14.88</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.55</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">// Gameboard Mobile Angular App
+
+angular.module(&quot;gameboard&quot;, [
+	&quot;ionic&quot;,
+	&quot;ngCordova&quot;,
+    &quot;ngMessages&quot;,
+    &quot;ngCookies&quot;,
+	&quot;mgo-angular-wizard&quot;,
+	&quot;gameboard.directives&quot;,
+	&quot;gameboard.controllers&quot;,
+
+	&quot;gameboard.board.controllers&quot;,
+
+    &quot;gameboard.boards.genres&quot;,
+    &quot;gameboard.boards.games&quot;,
+    &quot;gameboard.boards.categories&quot;,
+    &quot;gameboard.member.search&quot;,
+    &quot;gameboard.register&quot;,
+
+    &quot;gameboard.member.favourites&quot;,
+
+	&quot;gameboard.controllers.member&quot;,
+	&quot;gameboard.search.controllers&quot;,
+	&quot;gameboard.board.services&quot;,
+	&quot;gameboard.member.services&quot;,
+	&quot;gameboard.search.services&quot;,
+	&quot;gameboard.settings&quot;
+])
+
+// Handle Status Bar Styling on Load
+	.run(function ($ionicPlatform, $rootScope, $timeout) {
+
+		// Hide Splash Screen
+		// Handle Loading of the Runtime
+		$ionicPlatform.ready(function () {
+
+            // Hide the Splash Screen after banner Add has been created
+            if (!_.isUndefined(navigator.splashscreen)) {
+                navigator.splashscreen.hide();
+                angular.element(&quot;#main&quot;).removeClass(&quot;hidden&quot;);
+            } else {
+                angular.element(&quot;#main&quot;).removeClass(&quot;hidden&quot;);
+            }
+
+
+            // Check if we can hide the Splash screen
+            if (window.StatusBar) {
+				// org.apache.cordova.statusbar required
+				//window.StatusBar.styleDefault();
+			}
+
+        });
+
+	})
+
+	.config(function ($ionicConfigProvider) {
+
+		//$ionicConfigProvider.views.maxCache(0);
+		// note that you can also chain configs
+		//$ionicConfigProvider.backButton.text(&#039;Go Back&#039;).icon(&#039;ion-chevron-left&#039;);
+
+	})
+
+	.constant(&quot;ACCESS&quot;, {
+		GENRES: &quot;/genres&quot;, //IBM Data
+		GAMES: &quot;/games&quot;, //IBM Data
+		CATEGORIES: &quot;/categories&quot;, //IBM Data
+		BOARD: &quot;/videos/board&quot;, // IBM CloudCode with Cloudant
+		YOUR_VIDEOS: &quot;/videos/yours&quot;, // IBM CloudCode with YouTube API
+		YT_VIDEO_DETAIL: &quot;/youtube/video&quot;, // IBM CloudCode with YouTube API
+		MEMBERS: &quot;/members&quot;, // IBM CloudCode and Cloudant
+		SEARCH_MEMBERS: &quot;/members/search&quot;,
+		REGISTER: &quot;/members/register&quot;,
+		FAVOURITES: &quot;/favourites&quot;, // IBM Cloudant
+		BOOKMARKS: &quot;/bookmarks&quot;,
+		NOTIFICATIONS: &quot;/notifications&quot;,
+		SEARCH_VIDEOS: &quot;/search&quot;, // IBM CloudCode with Cloudant
+		VIDEOS: &quot;/videos&quot;, // IBM CloudCode with Cloudant
+		YOUTUBE_YOURS: &quot;/youtube/videos&quot;,
+		EMBED: &quot;http://www.youtube.com/embed/&quot;,
+        WATCH: &quot;http://www.youtube.com/watch?v=&quot;,
+		PRIZES: &quot;/prizes&quot;,
+        SOCIAL_AUTH_CODE : &quot;/social/authcode&quot;,
+        SOCIAL_AUTH : &quot;/social/authorise&quot;
+	})
+
+	// Configure the Angular Rules
+	.config(function ($stateProvider, $urlRouterProvider) {
+
+		// Init Function
+		var init = { 
+
+				IBMBluemix : function ($rootScope,$q,$http) {
+
+					// Create a defer
+					var defer = $q.defer();
+
+					// Check if we have been
+					if ($rootScope.initialized === true) {
+						defer.resolve($rootScope.IBMBluemix);
+					} else {
+
+						// Lets load the Configuration from the bluelist.json file
+						$http.get(&quot;./config.json&quot;).success(function (config) {
+							$rootScope.config = config;
+
+							// Initialise the SDK
+							// TMD: Does this initialize function not return a proper promise?
+							IBMBluemix.initialize(config).done(function () {
+
+								// Let the user no they have logged in and can do some stuff if they require
+								console.log(&quot;Sucessful initialisation with Application : &quot; + IBMBluemix.getConfig().getApplicationId());
+
+								// Initialize the Service
+								var data = IBMData.initializeService(),
+									cc = IBMCloudCode.initializeService();
+
+								// Make it handle Local serving if set to try and local url set
+								if (_.has(config, &quot;localserver&quot;) &amp;&amp; config.localserver ) {
+									// Set the Origin to Local Server for testing
+									cc.setBaseUrl(config.local);
+								}
+
+								// Let the user no they have logged in and can do some stuff if they require
+								console.log(&quot;Successful initialisation Services ...&quot;);
+
+								// Keep it Global
+								$rootScope.initialized = true;
+								$rootScope.IBMBluemix = IBMBluemix;
+
+								// Return the Data
+								defer.resolve(IBMBluemix);
+
+							}, function (response) {
+								// Error
+								console.log(&quot;Error:&quot;, response);
+								defer.reject(response);
+							});
+						});
+					}
+
+					return defer.promise;
+				}
+
+			};
+
+
+		// Ionic uses AngularUI Router which uses the concept of states
+		// Learn more here: https://github.com/angular-ui/ui-router
+		// Set up the various states which the app can be in.
+		// Each state&quot;s controller can be found in controllers.js
+
+		// Splash -&gt; Intro -&gt; Login -&gt; Main
+		// Splash -&gt; Login -&gt; Main
+
+		// Looking to do Splash in Native, and keep call back all IOS/Android
+
+		$stateProvider
+			.state(&quot;signin&quot;, {
+				url: &quot;/signin&quot;,
+				templateUrl: &quot;templates/signin.html&quot;,
+				controller: &quot;SignInCtrl&quot;,
+				resolve : init
+			})
+			.state(&quot;intro&quot;, {
+				url: &quot;/intro&quot;,
+				templateUrl: &quot;templates/intro.html&quot;,
+				controller: &quot;IntroCtrl&quot;
+			})
+
+			.state(&quot;board&quot;, {
+				url: &quot;/board&quot;,
+				abstract: true,
+				templateUrl: &quot;templates/menu.html&quot;,
+				controller: &quot;MainCtrl&quot;,
+				resolve : init
+			})
+
+			.state(&quot;board.videos&quot;, {
+				url: &quot;/videos/:bid&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/videos.html&quot;,
+						controller: &quot;BoardCtrl&quot;
+					}
+				}
+			})
+			.state(&quot;board.video&quot;, {
+				url: &quot;/video/:uuid&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/video-detail.html&quot;,
+						controller: &quot;VideoCtrl&quot;
+					}
+				}
+			})
+
+            .state(&quot;board.bookmarks&quot;, {
+				url: &quot;/bookmarks&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/bookmarks.html&quot;,
+						controller: &quot;BookmarksCtrl&quot;
+					}
+				}
+			})
+			.state(&quot;board.notifications&quot;, {
+				url: &quot;/notifications&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/notifications.html&quot;,
+						controller: &quot;NotificationsCtrl&quot;
+					}
+				}
+			})
+			.state(&quot;board.yourvideos&quot;, {
+				url: &quot;/yourvideos&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/yourvideos.html&quot;,
+						controller: &quot;YourVideosCtrl&quot;
+					}
+				}
+			})
+			.state(&quot;board.youtube&quot;, {
+				url: &quot;/youtube&quot;,
+				views: {
+					&quot;videoContent&quot;: {
+						templateUrl: &quot;templates/video-list.html&quot;,
+						controller: &quot;SelectVideoCtrl&quot;
+					}
+				}
+			})
+			.state(&quot;board.ytdetail&quot;, {
+				url: &quot;/ytdetail/:id&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/yt-video-detail.html&quot;,
+						controller: &quot;YTVideoDetailCtrl&quot;
+					}
+				}
+			})
+			.state(&quot;board.prizes&quot;, {
+				url: &quot;/prizes&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/prizes.html&quot;,
+						controller: &quot;PrizesCtrl&quot;
+					}
+				}
+			})
+			.state(&quot;board.search&quot;, {
+				url: &quot;/search&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/search.html&quot;,
+						controller: &quot;SearchCtrl&quot;
+					}
+				}
+			})
+			.state(&quot;board.settings&quot;, {
+				url: &quot;/settings&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/settings.html&quot;,
+						controller: &quot;SettingsCtrl&quot;
+					}
+				}
+			})
+			.state(&quot;board.about&quot;, {
+				url: &quot;/about&quot;,
+				views: {
+					&quot;menuContent&quot;: {
+						templateUrl: &quot;templates/about.html&quot;,
+						controller: &quot;AboutCtrl&quot;
+					}
+				}
+			});
+
+		// Default to Home
+		$urlRouterProvider.otherwise(&quot;signin&quot;);
+	});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

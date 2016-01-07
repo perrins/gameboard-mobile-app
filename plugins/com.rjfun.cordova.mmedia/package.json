@@ -1,0 +1,25 @@
+{
+    "version": "2.1.1",
+    "name": "com.rjfun.cordova.mmedia",
+    "cordova_name": "Millennial Media Ad",
+    "description": "Cordova/PhoneGap plugin for mMedia, support Banner, Interstitial and Video Ad.",
+    "license": "MIT",
+    "repo": "https://github.com/floatinghotpot/cordova-mmedia.git",
+    "issue": "https://github.com/floatinghotpot/cordova-mmedia/issues",
+    "keywords": [
+        "ad",
+        "millennial",
+        "mmedia",
+        "rjfun"
+    ],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0"
+        }
+    ]
+}

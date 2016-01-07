@@ -1,0 +1,390 @@
+<ion-pane>
+
+	<header class="bar bar-header bar-dark">
+
+        <button class="button button-clear button-assertive" ng-click="cancel()">Cancel</button>
+
+		<h1 class="title">Register</h1>
+
+        <button class="button button-clear button-assertive" ng-click="action(member)">{{actionText}}</button>
+
+    </header>
+
+	<ion-content class="has-header">
+
+		<wizard name="registerWizard" current-step="step" hide-indicators="true">
+
+            <div ng-init="init()"></div>
+
+            <wz-step title="start">
+
+                <div class="list card">
+
+                    <div class="item item-body">
+
+                        <h2>Thank you for using Gameboard!</h2>
+
+                        <p>
+                            To make the experience even richer you will need to register.
+                        </p>
+
+                        <p>
+                            This will enable you to add videos into the boards and then compete in the ranking
+                            competitions, this could enable you to win prizes. It will also unlock a whole
+                            range of features to make using Gameboard fun for a gamer.
+                        </p>
+
+                    </div>
+
+                    <div class="item item-image">
+                        <img src="img/call-of-duty-ghosts.jpg">
+                    </div>
+
+                    <a class="item item-icon-left assertive">
+                        <i class="icon ion-log-in"></i>
+                        Click Next to Continue Registration
+                    </a>
+
+                </div>
+
+			</wz-step>
+
+			<wz-step title="Personal">
+
+                <form novalidate="" name="personalForm">
+
+                <div class="list">
+                    <div ng-init="setPersonalForm(personalForm);"></div>
+
+					<div class="item item-divider">
+						Member
+					</div>
+
+					<div class="item item-avatar item-icon-right">
+						<img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}"
+							 lazyload>
+
+						<h2>{{user.firstname}}</h2>
+
+						<h2>{{user.lastname}}</h2>
+
+					</div>
+
+					<div class="item item-divider">
+						Game information
+					</div>
+
+                    <label class="item item-input"
+                           ng-class="{ 'has-error' : personalForm.emailaccount.$invalid}">
+
+                        <input ng-model="member.emailaccount"
+                               value="user.email"
+                               type="email"
+                               name="emailaccount"
+                               required
+                               placeholder="email">
+
+                    </label>
+                    <div class="form-errors" ng-messages="personalForm.emailaccount.$error"
+                         ng-messages-include="templates/form-errors.html">
+                        <div class="form-error" ng-message="email">This field must be a valid email address</div>
+                    </div>
+
+                    <label class="item item-input" ng-class="{ 'has-error' : personalForm.gametag.$invalid}">
+						<input ng-model="member.gametag"
+                               name="gametag"
+                               type="text"
+                               required
+                               placeholder="gametag">
+					</label>
+
+                    <div class="form-errors" ng-messages="personalForm.gametag.$error"
+                         ng-messages-include="templates/form-errors.html">
+                        <div class="form-error" ng-message="gametag">This field must be a valid gametag name</div>
+                    </div>
+
+                    <fancy-select ng-class="{ 'has-error' : personalForm.countries.$invalid}"
+                            header-text="Countries"
+                            allow-empty='false'
+                            value="member.country"
+                            name="countries"
+                            text="countries_text_single"
+                            items="countries">
+                    </fancy-select>
+
+                    <div class="form-errors" ng-messages="personalForm.countries.$error"
+                         ng-messages-include="templates/form-errors.html">
+                        <div class="form-error" ng-message="email">This field must be a valid email address</div>
+                    </div>
+
+                    <div class="item item-divider">
+						Platforms
+					</div>
+
+                    <fancy-select
+                            header-text="Platforms"
+                            allow-empty='false'
+                            value="member.platform"
+                            text="platforms_text_multiple"
+                            items="platforms"
+                            multi-select="true"
+                            >
+                    </fancy-select>
+
+					<div class="item item-divider">
+						Address
+					</div>
+
+					<label class="item item-input" ng-class="{ 'has-error' : personalForm.address1.$invalid}">
+						<input ng-model="member.address1"
+                               type="text"
+                               required
+                               name="address1"
+                               placeholder="address1">
+					</label>
+                    <div class="form-errors" ng-messages="personalForm.address1.$error"
+                         ng-messages-include="templates/form-errors.html">
+                        <div class="form-error" ng-message="address1">This field must be a valid address</div>
+                    </div>
+
+
+                    <label class="item item-input" ng-class="{ 'has-error' : personalForm.address2.$invalid}">
+						<input ng-model="member.address2"
+                               type="text"
+                               name="address2"
+                               placeholder="address2">
+					</label>
+                    <div class="form-errors" ng-messages="personalForm.address2.$error"
+                         ng-messages-include="templates/form-errors.html">
+                        <div class="form-error" ng-message="address2">This field must be a valid address</div>
+                    </div>
+
+                    <label class="item item-input" ng-class="{ 'has-error' : personalForm.towncity.$invalid}">
+						<input ng-model="member.towncity"
+                               type="text"
+                               required
+                               name="towncity"
+                               placeholder="town/city">
+					</label>
+                    <div class="form-errors" ng-messages="personalForm.towncity.$error"
+                         ng-messages-include="templates/form-errors.html">
+                        <div class="form-error" ng-message="towncity">This field must be a address value</div>
+                    </div>
+
+					<label class="item item-input" ng-class="{ 'has-error' : personalForm.postcode.$invalid}">
+						<input ng-model="member.postcode"
+                               type="text"
+                               required
+                               name="postcode"
+                               placeholder="postcode">
+					</label>
+
+                    <div class="form-errors" ng-messages="personalForm.postcode.$error"
+                         ng-messages-include="templates/form-errors.html">
+                        <div class="form-error" ng-message="postcode">This field must be valid postcode</div>
+                    </div>
+
+                    <fancy-select
+                            header-text="Countries"
+                            allow-empty='false'
+                            value="member.address_country"
+                            text="countries_text_single"
+                            items="countries">
+                    </fancy-select>
+
+					<label class="item item-input" ng-class="{ 'has-error' : personalForm.telephone.$invalid}">
+						<input ng-model="member.telephone"
+                               type="tel"
+                               name="telephone"
+                               required
+                               placeholder="telephone">
+					</label>
+
+                    <div class="form-errors" ng-messages="personalForm.telephone.$error"
+                         ng-messages-include="templates/form-errors.html">
+                        <div class="form-error" ng-message="telephone">This field must be a valid telephone</div>
+                    </div>
+
+                    <div class="item item-divider">
+						Declaration
+					</div>
+
+                    <label class="item item-input" ng-class="{ 'has-error' : personalForm.dob.$invalid}">
+                        <input ng-model="member.dob"
+                               type="date"
+                               required
+                               placeholder="DOB"
+                               name="dob"
+                               required>
+                    </label>
+
+                    <div class="form-errors" ng-messages="personalForm.dob.$error"
+                         ng-messages-include="templates/form-errors.html">
+                        <div class="form-error" ng-message="dob">This field must be a valid Date of Birth</div>
+                    </div>
+
+                    <li class="item  item-toggle">
+						<h2>Over 18 ?</h2>
+						<label class="toggle toggle-dark">
+							<input ng-model="member.over18" required type="checkbox" checked="true">
+
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+					</li>
+
+				</div>
+                </form>
+			</wz-step>
+			<wz-step title="Social">
+
+                <form name="socialForm" novalidate="">
+				<div class="list">
+
+                    <div ng-init="setSocialForm(socialForm);"></div>
+
+                    <div class="item item-divider">
+						Member
+					</div>
+
+					<div class="item item-avatar item-icon-right">
+						<img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}"
+							 lazyload>
+
+						<h2>{{user.firstname}}</h2>
+
+						<h2>{{user.lastname}}</h2>
+
+					</div>
+
+					<div class="item item-divider">
+						Social Notifications
+					</div>
+
+                    <div class="item item-body">
+                        <p>If you authorise Gameboard to use your social acttions, we can then share your videos
+                            with a wider audience. This will increase your ranking and views </p>
+                    </div>
+
+					<li class="item item-avatar item-toggle">
+						<img src="img/email.png">
+
+						<h2>eMail</h2>
+						<label class="toggle toggle-dark">
+							<input ng-model="member.email"
+                                   type="checkbox"
+                                   name="socialemail"
+                                   ng-click="authEMail()"
+                                   ng-checked="member.email">
+
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+                        <span ng-show="member.email">{{member.emailaccount}}</span>
+
+                    </li>
+
+					<li class="item item-avatar item-toggle">
+						<img src="img/twitter.png">
+						<h2>Twitter</h2>
+						<label class="toggle toggle-dark">
+
+							<input ng-model="member.twitter"
+                                   type="checkbox"
+                                   name="socialtwitter"
+                                   ng-checked="member.twitter"
+                                   ng-click="authSocial('twitter')">
+
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+
+						</label>
+                        <span ng-show="member.twitterid">@</span><span ng-show="member.twitterid">{{member.twitterid}}</span>
+
+                    </li>
+
+					<li class="item item-avatar item-toggle">
+						<img src="img/facebook.png">
+						<h2>Facebook</h2>
+						<label class="toggle toggle-dark" >
+							<input ng-model="member.facebook"
+                                   ng-click="authSocial('facebook')"
+                                   name="socialfacebook"
+                                   ng-checked="member.facebook"
+                                   type="checkbox">
+
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+                        <span ng-show="member.facebookid">{{member.facebookid}}</span>
+
+                    </li>
+
+					<li class="item item-avatar item-toggle">
+						<img src="img/googleplus.png">
+						<h2>Google+</h2>
+						<label class="toggle toggle-dark">
+							<input ng-model="member.google"
+                                   type="checkbox"
+                                   name="socialgoogle"
+                                   ng-click="authSocial('google')"
+                                   ng-checked="member.google">
+
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+                        <span ng-show="member.googleid">{{member.googleid}}</span>
+
+                    </li>
+
+                    <li class="item item-avatar item-toggle">
+                        <img src="img/sms.png">
+                        <h2>SMS</h2>
+                        <label class="toggle toggle-dark">
+                            <input ng-model="member.sms" type="checkbox" ng-click="authSMS" ng-checked="member.sms">
+
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                        <span ng-show="member.sms">{{member.telephone}}</span>
+
+                    </li>
+
+
+                </div>
+                </form>
+
+			</wz-step>
+
+			<wz-step title="videoFinish">
+
+				<div class="card">
+
+					<div class="item item-thumbnail-left">
+						<img src="img/finish.png">
+
+						<h2>{{member.gametag}}</h2>
+
+					</div>
+
+					<div class="item item-text-wrap">
+						You have been registered !
+					</div>
+
+				</div>
+
+
+			</wz-step>
+
+		</wizard>
+        </form>
+
+
+	</ion-content>
+	</ion-view>

@@ -1,0 +1,64 @@
+<ion-view title="Notifications">
+
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+
+	<ion-content class="has-header">
+
+		<ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh();">
+		</ion-refresher>
+
+		<div class="list-error card assertive-bg hidden" ng-show="!videos">
+			<div class="item item-text-wrap">
+				Cannot retrieve your notifications at this time
+			</div>
+		</div>
+
+		<div class="item item-divider" ng-show="bookmarks">
+			Your Notifications
+		</div>
+
+		<ion-list
+				can-delete="true"
+				can-swipe="true"
+				on-delete="onVideoDelete(notify)"
+				show-delete="showDelete"
+				delete-icon="ion-minus-circled"
+				option-buttons="itemButtons"
+				ng-show="notifications">
+
+			<ion-item ng-repeat="notify in notifications"
+					  class="item item-icon-right"
+					  ng-class="notify.color"
+					  type="item-text-wrap"
+					  item="notify"
+					  ng-click="selectNotification(notify)">
+
+				<div style="position:relative;width:25px;height:25px;">
+
+					<svg xmlns="http://www.w3.org/2000/svg"
+						 xmlns:xlink="http://www.w3.org/1999/xlink">
+
+						<circle cx="15" cy="20" r="15"
+								style="stroke:#006600;
+                            stroke-width: .5;
+                            fill:{{book.color}}"/>
+						<text x="15" y="22" font-size="16"
+							  text-anchor="middle" alignment-baseline="middle">
+							{{notify.tag}}
+						</text>
+					</svg>
+
+				</div>
+
+				<h2 style="position:relative;left:40px;top:-15px;">{{notify.title}}</h2>
+				<h4>{{notify.message}}</h4>
+
+				<i class="icon ion-chevron-right icon-accessory"></i>
+			</ion-item>
+
+		</ion-list>
+
+	</ion-content>
+</ion-view>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	id="com.inmobi.sdk"
+	version="4.5.1">
+      
+  	<engines>
+    	<engine name="cordova" version=">=3.0.0" />
+    </engines>
+        
+    <name>InMobi SDK</name>
+	<description>InMobi SDK only, as dependency of other plugins</description>
+	<keywords>inmobi,sdk</keywords>
+
+	<dependency id="com.google.playservices@19.0.0"/>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<activity android:name="com.inmobi.androidsdk.IMBrowserActivity"
+			    android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize"
+			    android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			    android:hardwareAccelerated="true" />
+			<receiver
+	            android:name="com.inmobi.commons.analytics.androidsdk.IMAdTrackerReceiver"
+	            android:enabled="true"
+	            android:exported="true" >
+	            <intent-filter>
+	                <action android:name="com.android.vending.INSTALL_REFERRER" />
+	                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+	                <action android:name="com.inmobi.share.id" />
+	            </intent-filter>
+	        </receiver>
+	        <service android:enabled="true" android:name="com.inmobi.commons.internal.ActivityRecognitionManager" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+			<!-- mandatory -->
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<!-- recommended -->
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+			<uses-permission android:name="android.permission.READ_LOGS" />
+			<uses-permission android:name="android.permission.VIBRATE"/>
+			<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+			<uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
+			<uses-permission android:name="android.permission.READ_CALENDAR"/>
+			<uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+          </config-file>
+          
+        <source-file src="src/android/InMobi-4.5.1.jar" target-dir="libs" />
+     </platform>
+
+     <!-- ios -->
+     <platform name="ios">    
+		 <header-file src="src/ios/InMobi.h"/>
+		 <header-file src="src/ios/InMobiAnalytics.h"/>
+		 <header-file src="src/ios/IMConstants.h"/>
+		 <header-file src="src/ios/IMBanner.h"/>
+		 <header-file src="src/ios/IMBannerDelegate.h"/>
+		 <header-file src="src/ios/IMError.h"/>
+		 <header-file src="src/ios/IMInterstitialDelegate.h"/>
+		 <header-file src="src/ios/IMInterstitial.h"/>
+		 <header-file src="src/ios/IMIncentivisedDelegate.h"/>
+		 <header-file src="src/ios/IMNative.h"/>
+		 <header-file src="src/ios/IMNativeDelegate.h"/>
+         <source-file src="src/ios/libInMobi-4.5.1.a" framework="true"/>
+          
+         <framework src="AdSupport.framework"/>
+         <framework src="AudioToolbox.framework" />
+         <framework src="AVFoundation.framework" />
+         <framework src="CoreLocation.framework" />
+         <framework src="CoreTelephony.framework" />
+         <framework src="EventKit.framework" />
+         <framework src="EventKitUI.framework" />
+         <framework src="MediaPlayer.framework" />
+         <framework src="MessageUI.framework" />
+         <framework src="Security.framework" />
+         <framework src="Social.framework"/>
+         <framework src="StoreKit.framework" />
+         <framework src="SystemConfiguration.framework" />
+         <framework src="libsqlite3.0.dylib" />
+         <framework src="libz.dylib" />
+	</platform>
+
+</plugin>

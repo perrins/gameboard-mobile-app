@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - www/js/member/members.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>www/js/member/members.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">71.06</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">301</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">33.45</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.82</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+angular.module(&quot;gameboard.member.search&quot;, [])
+
+    // Define Routing Paths
+    .config([&quot;$stateProvider&quot;, function ($stateProvider) {
+
+        $stateProvider.state(&quot;board.members&quot;, {
+            url: &quot;/members&quot;,
+            views: {
+                &quot;menuContent&quot;: {
+                    templateUrl: &quot;js/member/members.html&quot;,
+                    controller: &quot;MembersCtrl&quot;
+                }
+            }
+        });
+
+        $stateProvider.state(&quot;board.member&quot;, {
+            url: &quot;/member/:muuid&quot;,
+            views: {
+                &quot;menuContent&quot;: {
+                    templateUrl: &quot;js/member/member-detail.html&quot;,
+                    controller: &quot;MemberDetailCtrl&quot;
+                }
+            }
+        });
+    }])
+
+    // Define Controllers
+    .controller(&quot;MembersCtrl&quot;, function ($scope, $location, $ionicLoading, $stateParams, MembersService) {
+
+        var searchParam = &quot;&quot;;
+
+        var members = [];
+
+        $scope.page = 0;
+        $scope.pageSize = 20;
+        $scope.total = 0;
+        $scope.position = 0;
+
+        // Load the Items
+        $scope.loadItems = function (page, size) {
+
+            // Refresh
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
+            // Because we are retrieving all the items every time we do something
+            // We need to clear the list before loading in some new values
+            $ionicLoading.show({
+                template: $scope.message
+            });
+
+
+            // &quot;List is &quot; is a service returning data from the
+            MembersService.all(searchParam, page, size).then(function (_members) {
+
+                // Reset the Array if we are on Page 1
+                if ($scope.page === 0) {
+                    // Prepare for the Query
+                    members = [];
+                }
+
+                // Set the Title
+                $scope.title = searchParam;
+
+                // Check what has been returned versus side of what we are returning
+                angular.forEach(_members, function (value, key) {
+                    members.push(value);
+                });
+
+                // Update the model with a list of Items
+                $scope.members = members;
+
+                // Take the details from the content
+                // Use the Calcualtion
+                $scope.total = 20;//board.videos.total_rows;
+                $scope.position = 0; //board.videos.offset;
+                $scope.count = 20;
+                $scope.number = 20;
+
+                // Let Angular know we have some data because of the Async nature of IBMBaaS
+                // This is required to make sure the information is uptodate
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+
+                // Hide the loading icons
+                $ionicLoading.hide();
+
+                // Lets Make a Call to the Service and then update the infinite scroll
+                $scope.$broadcast(&#039;scroll.infiniteScrollComplete&#039;);
+
+                // Check we can move forward.
+                if ($scope.page &amp;&amp; $scope.page &lt;= parseInt(20)) {
+                    $scope.page++;
+                } else {
+                    // No More Data
+
+                }
+
+            }, function (err) {
+                console.log(err);
+                $ionicLoading.hide();
+                $scope.board = null;
+
+            });
+
+        };
+
+        // If we get close to the end of the list and we have more
+        $scope.loadMore = function () {
+
+            if (!$scope.message) {
+                $scope.message = &#039;Fetching Members...&#039;;
+            } else {
+                $scope.message = &#039;More Members...&#039;;
+            }
+
+            // Check we can move one more page
+            // Add Some More
+            if ($scope.page &lt;= $scope.total) {
+                $scope.loadItems($scope.page, $scope.pageSize);
+            }
+        };
+
+        // Search for Members
+        $scope.findMembers = function () {
+
+            $scope.page = 0;
+            $scope.loadMore();
+        };
+
+        $scope.$on(&quot;stateChangeSuccess&quot;, function () {
+            $scope.loadMore();
+        });
+    })
+
+    .controller(&quot;MemberDetailCtrl&quot;, function ($scope, $location, $stateParams, MembersService) {
+
+        // Need to Check if we have got some already
+        MembersService.getMember($stateParams.muuid).then(function (member) {
+            // Paint
+            $scope.member = member;
+            $scope.videos = member.videos;
+
+            // Let Angular know we have some data because of the Async nature of IBMBaaS
+            // This is required to make sure the information is uptodate
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        });
+
+	})
+
+    /**
+     * A simple example service that returns some data.
+     */
+    .factory(&quot;MembersService&quot;, function ($q, $rootScope, ACCESS) {
+
+        return {
+
+            all: function (search, page, size) {
+
+                // Create a deffered
+                var def = $q.defer();
+
+                // Get handle to the CloudCode service
+                var cc = IBMCloudCode.getService();
+
+                // USE THE CloudCode to Call the Board Services
+                // This will integrate with Cloudant to retrieve a list of videos for a Board
+                // Need to manage the Paging for this and sort it by ranking
+                // Lets build a
+                var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).toString();
+
+                // Add the Paging to the BoardList and Get back what we have
+                uri += &quot;?skip=&quot; + page + &quot;&amp;limit=&quot; + size;
+
+                var options =  {handleAs:&quot;json&quot;}
+
+                if($rootScope.google) {
+                    options.headers = {&quot;X-GB-ACCESS-TOKEN&quot;:$rootScope.google.access_token};
+                }
+
+                // Get the Videos for my Board
+                cc.get(uri, options).then(function (members) {
+
+                    debugger;
+                    def.resolve(members);
+
+                }).catch(function (err) {
+                    console.log(err);
+                    def.reject(err);
+                });
+
+                // Get the Objects for a particular Type
+                return def.promise;
+
+            },
+
+            search: function (search, page, size) {
+
+                // Create a deffered
+                var def = $q.defer();
+
+                // Get handle to the CloudCode service
+                var cc = IBMCloudCode.getService();
+
+                // USE THE CloudCode to Call the Board Services
+                // This will integrate with Cloudant to retrieve a list of videos for a Board
+                // Need to manage the Paging for this and sort it by ranking
+                // Lets build a
+                var uri = new IBMUriBuilder().append(ACCESS.SEARCH_MEMBERS).toString();
+                uri += &quot;?search=&quot; + search;
+
+                // Add the Paging to the BoardList and Get back what we have
+                uri += &quot;&amp;skip=&quot; + page + &quot;&amp;limit=&quot; + size;
+
+                // Get the Videos for my Board
+                cc.get(uri, {
+                    &quot;handleAs&quot;: &quot;json&quot;
+                }).then(function (members) {
+
+                    def.resolve(members);
+
+                }).catch(function (err) {
+                    console.log(err);
+                    def.reject(err);
+                });
+
+                // Get the Objects for a particular Type
+                return def.promise;
+
+            },
+
+            getMember: function (muuid) {
+                console.log(&quot;muuid&quot;, muuid);
+
+                // Get a Defered
+                var def = $q.defer();
+
+                // Get the Cloud Code
+                var cc = IBMCloudCode.getService();
+                var uri = new IBMUriBuilder().append(ACCESS.MEMBERS).append(muuid).toString();
+
+                // Prepare Headers
+                var options =  {handleAs:&quot;json&quot;}
+                // Create some Headers to Flow with Request
+                if($rootScope.google &amp;&amp; $rootScope.user) {
+                    options.headers = {&quot;GB-ACCESS-TOKEN&quot;:$rootScope.google.access_token,
+                                       &quot;GB-USER-ID&quot;:$rootScope.user.raw.id};
+                }
+
+                // TMD: When &#039;done&#039; somethimes and &#039;then&#039; other?
+                cc.get(uri,options).done(function (member) {
+
+                    // Check we have a member we can work with
+                    if (member) {
+                        if (member.error &amp;&amp; _member.error === &quot;not_found&quot;) {
+                            def.reject(null);
+                        } else {
+                            def.resolve(member);
+                        }
+                    } else {
+                        def.reject(null);
+                    }
+                }, function (err) {
+                    def.reject(null);
+                });
+
+                // Get the Objects for a particular Type
+                return def.promise;
+            },
+
+            registerMember: function (member) {
+                // Manage Defer on the Save
+                var def = $q.defer();
+
+                // get the Data Service
+                var cc = IBMCloudCode.getService();
+
+                // Send the Video request to the Bluemix to be added into the Cloudant Database
+                cc.post(ACCESS.REGISTER, member, {
+                    &quot;handleAs&quot;: &quot;json&quot;
+                }).then(function (member) {
+                    // Was added successfully
+                    def.resolve(member);
+
+                }).catch(function (err) {
+                    console.log(err);
+                    def.reject(err);
+                });
+
+                // Return a promise for the async operation of save
+                return def.promise;
+            }
+        };
+
+    });</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

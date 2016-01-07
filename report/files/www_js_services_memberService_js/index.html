@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - www/js/services/memberService.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>www/js/services/memberService.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">73.01</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">468</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">53.96</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">2.50</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/*
+ *  Licensed Materials - Property of Gameboard Ltd
+ *  2014 (C) Copyright Gameboard Ltd. 2011,2014. All Rights Reserved.
+ *  UK Government Users Restricted Rights - Use, duplication or
+ *  disclosure restricted by GSA ADP Schedule Contract with Gameboard Ltd.
+ *
+ *  Member Services
+ *
+ */
+
+angular.module(&quot;gameboard.member.services&quot;, [])
+
+    /**
+     * A simple example service that returns some data.
+     */
+	.factory(&quot;FavouritesService&quot;, function ($rootScope, $q, $cacheFactory, ACCESS) {
+
+		// Use an internal Cache for storing the List and map the operations to manage that from
+		// MBaaS SDK Calls
+		var cache = $cacheFactory(&quot;favourites&quot;);
+
+		return {
+			// Return all the Objects for a Given Class
+			allCloud: function () {
+
+				// Create a deffer
+				var def = $q.defer();
+
+				var items = cache.get(ACCESS.FAVOURITES);
+
+				// Check if we are already Cached
+				if (!_.isUndefined(items)) {
+					def.resolve(items);
+				} else {
+
+					// Get handle to the CloudCode service
+					var cc = IBMCloudCode.getService();
+
+					// Get the User Id
+					var userid = $rootScope.user.id;
+
+					// USE THE CloudCode to Call the Board Services
+					// This will integrate with Cloudant to retrieve a list of videos for a Board
+					// Need to manage the Paging for this and sort it by ranking
+					// Lets build a
+					var uri = new IBMUriBuilder().append(ACCESS.FAVOURITES).append(userid).toString();
+
+					// Clear the Cache with a new set
+					cache.remove(ACCESS.FAVOURITES);
+
+					// Get the Videos for my Board
+					cc.get(uri, {
+						&quot;handleAs&quot;: &quot;json&quot;
+					}).then(function (favourites) {
+
+						// Place the Items in the Cache
+						cache.put(ACCESS.FAVOURITES, favourites);
+						// return the Cache
+						def.resolve(cache.get(ACCESS.FAVOURITES));
+
+					}).catch(function (err) {
+						console.log(err);
+						def.reject(err);
+					});
+				}
+
+				// Get the Objects for a particular Type
+				return def.promise;
+			},
+
+			// Return the Cached List
+			allCache: function () {
+				// Return the Cached Items
+				return cache.get(ACCESS.FAVOURITES);
+			},
+
+			add: function (data) {
+
+
+			},
+
+			del: function (video) {
+				var def = $q.defer();
+
+				// Remove the Item from the Cache
+				var videos = cache.get(&quot;favorites&quot;).videos;
+				videos.splice(videos.indexOf(video), 1);
+
+				// AJAX DELETE
+				def.resolve(&quot;status&quot;);
+
+				// Remove it
+				// TMD: When a ASYNC defer when this is a sync process?
+				return def.promise;
+			}
+		};
+	})
+
+/**
+ * A simple example service that returns some data.
+ */
+	.factory(&quot;YourVideosService&quot;, function ($rootScope, $q, $cacheFactory, ACCESS) {
+
+		// Use an internal Cache for storing the List and map the operations to manage that from
+		// MBaaS SDK Calls
+		var cache = $cacheFactory(&quot;yourvideos&quot;);
+
+		return {
+			// Return all the Objects for a Given Class
+			allCloud: function () {
+
+				// Create a deffer
+				var def = $q.defer();
+
+				var items = cache.get(ACCESS.YOUR_VIDEOS);
+
+				// Check if we are already Cached
+				if (!_.isUndefined(items)) {
+					def.resolve(items);
+				} else {
+
+					// Get handle to the CloudCode service
+					var cc = IBMCloudCode.getService();
+
+					// Get the User Id
+					var userid = $rootScope.user.id;
+
+					// USE THE CloudCode to Call the Board Services
+					// This will integrate with Cloudant to retrieve a list of videos for a Board
+					// Need to manage the Paging for this and sort it by ranking
+					// Lets build a
+					var uri = new IBMUriBuilder().append(ACCESS.YOUR_VIDEOS).append(userid).toString();
+
+					// Clear the Cache with a new set
+					cache.remove(ACCESS.YOURR_VIDEOS);
+
+					// Get the Videos for my Board
+					cc.get(uri, {
+						&quot;handleAs&quot;: &quot;json&quot;
+					}).then(function (yourvideos) {
+
+						// Place the Items in the Cache
+						cache.put(ACCESS.YOUR_VIDEOS, yourvideos);
+						// return the Cache
+						def.resolve(cache.get(ACCESS.YOUR_VIDEOS));
+
+					}).catch(function (err) {
+						console.log(err);
+						def.reject(err);
+					});
+				}
+
+				// Get the Objects for a particular Type
+				return def.promise;
+			},
+
+			// Return the Cached List
+			allCache: function () {
+				// Return the Cached Items
+				return cache.get(ACCESS.YOUR_VIDEOS);
+			},
+
+			del: function (video) {
+				// Create a deffer
+				var def = $q.defer();
+
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
+
+				// Get the User Id
+				var userid = $rootScope.user.id;
+
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.YOUR_VIDEOS).append(userid).append(videos.uuid).toString();
+
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.YOUR_VIDEOS);
+
+				// Get the Videos for my Board
+				cc.del(uri, {
+					&quot;handleAs&quot;: &quot;json&quot;
+				}).then(function (status) {
+
+					// return the Cache
+					def.resolve(status);
+
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
+
+				return def.promise;
+			}
+		};
+	})
+
+
+/**
+ * A simple example service that returns some data.
+ */
+	.factory(&quot;BookmarksService&quot;, function ($rootScope, $q, $cacheFactory, ACCESS) {
+
+		// Use an internal Cache for storing the List and map the operations to manage that from
+		// MBaaS SDK Calls
+		var cache = $cacheFactory(&quot;bookmarks&quot;);
+
+		return {
+			// Return all the Objects for a Given Class
+			allCloud: function () {
+
+				// Create a deffer
+				var def = $q.defer();
+
+				var items = cache.get(ACCESS.BOOKMARKS);
+
+				// Check if we are already Cached
+				if (!_.isUndefined(items)) {
+					def.resolve(items);
+				} else {
+
+					// Get handle to the CloudCode service
+					var cc = IBMCloudCode.getService();
+
+					// Get the User Id
+					var userid = $rootScope.user.id;
+
+					// USE THE CloudCode to Call the Board Services
+					// This will integrate with Cloudant to retrieve a list of videos for a Board
+					// Need to manage the Paging for this and sort it by ranking
+					// Lets build a
+					var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
+
+					// Clear the Cache with a new set
+					cache.remove(ACCESS.BOOKMARKS);
+
+					// Get the Videos for my Board
+					cc.get(uri, {
+						&quot;handleAs&quot;: &quot;json&quot;
+					}).then(function (bookmarks) {
+
+						// Place the Items in the Cache
+						cache.put(ACCESS.BOOKMARKS, bookmarks);
+						// return the Cache
+						def.resolve(cache.get(ACCESS.BOOKMARKS));
+
+					}).catch(function (err) {
+						console.log(err);
+						def.reject(err);
+					});
+				}
+
+				// Get the Objects for a particular Type
+				return def.promise;
+			},
+
+			// Return the Cached List
+			allCache: function () {
+				// Return the Cached Items
+				return cache.get(ACCESS.BOOKMARKS);
+			},
+
+			addBookmark: function (data) {
+
+				// Create a deffer
+				var def = $q.defer();
+
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
+
+				// Get the User Id
+				var userid = $rootScope.user.id;
+
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
+
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.BOOKMARKS);
+
+				// Get the Videos for my Board
+				cc.post(uri, data, {
+					&quot;handleAs&quot;: &quot;json&quot;
+				}).then(function (status) {
+
+					// return the Cache
+					def.resolve(status);
+
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
+
+				return def.promise;
+
+			},
+
+			removeBookmark: function (bookmark) {
+
+				// Create a deffer
+				var def = $q.defer();
+
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
+
+				// Get the User Id
+				var userid = $rootScope.user.id;
+
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.BOOKMARKS).append(userid).toString();
+
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.BOOKMARKS);
+
+				// Get the Videos for my Board
+				cc.del(uri, {
+					&quot;handleAs&quot;: &quot;json&quot;
+				}).then(function (status) {
+
+					// return the Cache
+					def.resolve(status);
+
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
+
+				return def.promise;
+			}
+		};
+	})
+
+
+/**
+ * A simple example service that returns some data.
+ */
+	.factory(&quot;NotificationService&quot;, function ($rootScope, $q, $cacheFactory, ACCESS) {
+
+		// Use an internal Cache for storing the List and map the operations to manage that from
+		// MBaaS SDK Calls
+		var cache = $cacheFactory(&quot;notifications&quot;);
+
+		return {
+			// Return all the Objects for a Given Class
+			allCloud: function () {
+
+				// Create a deffer
+				var def = $q.defer();
+
+				var items = cache.get(ACCESS.NOTIFICATIONS);
+
+				// Check if we are already Cached
+				if (!_.isUndefined(items)) {
+					def.resolve(items);
+				} else {
+
+					// Get handle to the CloudCode service
+					var cc = IBMCloudCode.getService();
+
+					// Get the User Id
+					var userid = $rootScope.user.id;
+
+					// USE THE CloudCode to Call the Board Services
+					// This will integrate with Cloudant to retrieve a list of videos for a Board
+					// Need to manage the Paging for this and sort it by ranking
+					// Lets build a
+					var uri = new IBMUriBuilder().append(ACCESS.NOTIFICATIONS).append(userid).toString();
+
+					// Clear the Cache with a new set
+					cache.remove(ACCESS.NOTIFICATIONS);
+
+					// Get the Videos for my Board
+					cc.get(uri, {
+						&quot;handleAs&quot;: &quot;json&quot;
+					}).then(function (notifications) {
+
+						// Place the Items in the Cache
+						cache.put(ACCESS.NOTIFICATIONS, notifications);
+						// return the Cache
+						def.resolve(cache.get(ACCESS.NOTIFICATIONS));
+
+					}).catch(function (err) {
+						console.log(err);
+						def.reject(err);
+					});
+				}
+
+				// Get the Objects for a particular Type
+				return def.promise;
+			},
+
+			// Return the Cached List
+			allCache: function () {
+				// Return the Cached Items
+				return cache.get(ACCESS.NOTIFICATIONS);
+			},
+
+			addBookmark: function (data) {
+
+				// Create a deffer
+				var def = $q.defer();
+
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
+
+				// Get the User Id
+				var userid = $rootScope.user.id;
+
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.NOTIFICATIONS).append(userid).toString();
+
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.NOTIFICATIONS);
+
+				// Get the Videos for my Board
+				cc.post(uri, data, {
+					&quot;handleAs&quot;: &quot;json&quot;
+				}).then(function (status) {
+
+					// return the Cache
+					def.resolve(status);
+
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
+
+				return def.promise;
+
+			},
+
+			removeBookmark: function (bookmark) {
+
+				// Create a deffer
+				var def = $q.defer();
+
+				// Get handle to the CloudCode service
+				var cc = IBMCloudCode.getService();
+
+				// Get the User Id
+				var userid = $rootScope.user.id;
+
+				// USE THE CloudCode to Call the Board Services
+				// This will integrate with Cloudant to retrieve a list of videos for a Board
+				// Need to manage the Paging for this and sort it by ranking
+				// Lets build a
+				var uri = new IBMUriBuilder().append(ACCESS.NOTIFICATIONS).append(userid).toString();
+
+				// Clear the Cache with a new set
+				cache.remove(ACCESS.NOTIFICATIONS);
+
+				// Get the Videos for my Board
+				cc.del(uri, {
+					&quot;handleAs&quot;: &quot;json&quot;
+				}).then(function (status) {
+
+					// return the Cache
+					def.resolve(status);
+
+				}).catch(function (err) {
+					console.log(err);
+					def.reject(err);
+				});
+
+				return def.promise;
+			}
+		};
+	});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+@import "_variables";
+
+.yourVideos.pane {
+	background: url('#{$image-path}/backgrounds/mario.jpg');
+	background-size: cover;
+}

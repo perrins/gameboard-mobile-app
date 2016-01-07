@@ -1,0 +1,98 @@
+<ion-pane>
+
+	<header class="bar bar-header bar-dark">
+
+		<button class="button button-clear button-assertive" ng-click="cancel()">Cancel</button>
+
+		<h1 class="title">Account</h1>
+		<button class="button button-clear button-assertive" ng-click="save()">Save</button>
+	</header>
+
+	<ion-content class="has-header" padding="false">
+
+		<div class="list">
+
+			<div class="item item-divider">
+				Member
+			</div>
+
+			<div class="item item-avatar item-icon-right">
+				<img class="genre-image genre-image-load" alt="{{user.avatar}}" ng-src="{{user.avatar}}" lazyload>
+
+				<h2>{{user.firstname}}</h2>
+
+				<h2>{{user.lastname}}</h2>
+
+			</div>
+
+			<div class="item item-divider">
+				Game information
+			</div>
+
+			<label class="item item-input">
+				<input ng-model="member.gametag" type="text" placeholder="gametag">
+			</label>
+
+			<label class="item item-input">
+				<input ng-model="member.country" type="text" placeholder="country">
+			</label>
+
+			<label class="item item-input">
+				<input ng-model="member.age" type="text" placeholder="age">
+			</label>
+
+			<div class="item item-divider">
+				Main Platform
+			</div>
+
+			<ion-radio ng-model="add.platform" ng-value="'PS'">Playstation</ion-radio>
+			<ion-radio ng-model="add.platform" ng-value="'XBox'">XBox</ion-radio>
+			<ion-radio ng-model="add.platform" ng-value="'PC'">PC</ion-radio>
+			<ion-radio ng-model="add.platform" ng-value="'Tablet'">Tablet</ion-radio>
+
+			<div class="item item-divider">
+				Address
+			</div>
+
+			<label class="item item-input">
+				<input ng-model="member.address1" type="text" placeholder="address1">
+			</label>
+			<label class="item item-input">
+				<input ng-model="member.address2" type="text" placeholder="address2">
+			</label>
+			<label class="item item-input">
+				<input ng-model="member.towncity" type="text" placeholder="town/city">
+			</label>
+
+			<label class="item item-input">
+				<input ng-model="member.postcode" type="text" placeholder="postcode">
+			</label>
+
+			<label class="item item-input">
+				<input ng-model="member.country" type="text" placeholder="country">
+			</label>
+
+			<label class="item item-input">
+				<input ng-model="member.telephone" type="text" placeholder="telephone">
+			</label>
+
+
+			<div class="item item-divider">
+				Declaration
+			</div>
+
+			<li class="item  item-toggle">
+				<h2>Over 18 ?</h2>
+				<label class="toggle toggle-dark">
+					<input ng-model="member.over18" type="checkbox" checked="true">
+
+					<div class="track">
+						<div class="handle"></div>
+					</div>
+				</label>
+			</li>
+
+		</div>
+
+	</ion-content>
+</ion-pane>

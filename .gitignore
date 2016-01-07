@@ -1,0 +1,27 @@
+# IOS and Android Platforms
+platforms
+engine
+plugins
+
+# Keep these files
+!plugins/android.json
+!plugins/ios.json
+
+# Bower
+www/lib/**
+www/css/**
+
+# Other
+**/.DS_store
+**/.DS_STORE
+
+# NPM modules
+node_modules
+npm-debug.log
+
+# Bower modules
+vendor/*
+
+# IDE Stuff
+.idea
+tmp

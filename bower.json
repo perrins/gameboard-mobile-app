@@ -1,0 +1,42 @@
+{
+  "name": "gameboard-mobile-app",
+  "version": "0.0.1",
+  "description": "game-board mobile app",
+  "keywords": [
+    "game"
+  ],
+  "authors": [
+    "matthew.perrins@game-board.co"
+  ],
+  "license": "Gameboard Ltd",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor",
+    "tests"
+  ],
+  "dependencies": {
+    "swipe": "*",
+    "jquery": "*",
+    "angular": "~1.3.x",
+    "angular-touch": "*",
+    "angular-animate": "*",
+    "angular-wizard": "*",
+    "angular-messages": "*",
+    "ibmbluemix": "https://hub.jazz.net/git/bluemixmobilesdk/ibmbluemix-javascript/.git",
+    "ibmcloudcode": "https://hub.jazz.net/git/bluemixmobilesdk/ibmcloudcode-javascript/.git",
+    "ibmdata": "https://hub.jazz.net/git/bluemixmobilesdk/ibmdata-javascript/.git",
+    "oauth-js": "*",
+    "ngCordova": "*",
+    "components-font-awesome": "*",
+    "ionicons": "*"
+  },
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.1.0",
+    "browser": "~0.7.2"
+  },
+  "resolutions": {
+    "angular": "~1.3.*"
+  }
+}

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - www/js/boards/genres.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>www/js/boards/genres.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">73.90</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">203</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">18.45</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.96</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+angular.module(&quot;gameboard.boards.genres&quot;, [])
+
+	.config([&quot;$stateProvider&quot;, function ($stateProvider) {
+		$stateProvider.state(&quot;board.genres&quot;, {
+			url: &quot;/genres&quot;,
+			views: {
+				&quot;menuContent&quot;: {
+                    templateUrl: &quot;js/boards/genres.html&quot;,
+                    controller: &quot;GenresCtrl&quot;,
+				}
+			}
+		});
+	}])
+
+    .controller(&#039;GenresCtrl&#039;, function ($rootScope, $scope, $ionicPopup, $ionicLoading, GenresService) {
+
+        $scope.nodata = false;
+
+        // Handle the Load Events
+        /*
+        $scope.$on(&#039;$ionicView.enter&#039;, function() {
+
+        });
+
+        // Handle the Load
+        $scope.$on(&#039;$ionicView.leave&#039;, function() {
+
+        });
+
+        // Handle the Load
+        $scope.$on(&#039;$ionicView.beforeEnter&#039;, function() {
+
+        });
+
+        // Handle the Load
+        $scope.$on(&#039;$ionicView.unloaded&#039;, function() {
+
+        });
+        */
+
+        $scope.loadData = function(){
+
+            $ionicLoading.show({
+                template: &#039;&lt;ion-spinner class=&quot;spinner-energized&quot; icon=&quot;lines&quot;&gt;&lt;/ion-spinner&gt;&lt;h3&gt;Loading Genres&lt;/h3&gt;&#039;
+            });
+
+            // Need to Check if we have got some already
+            GenresService.all().then(function (genres) {
+
+                // Hide the Loading Message
+                $ionicLoading.hide();
+
+                // Check we have some Games for this Genre
+                if (_.isNull(genres)) {
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: &#039;Games&#039;,
+                        template: &#039;It seems we dont have any Genres to list&#039;
+                    });
+
+                    alertPopup.then(function (res) {
+                        // Handle the Next step
+                    });
+
+                } else {
+
+                    // Paint
+                    $scope.genres = genres;
+
+                    // Let Angular know we have some data because of the Async nature of IBMBaaS
+                    // This is required to make sure the information is uptodate
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }
+
+            }, function (err) {
+
+                // Handle Display of No Data and No Connection
+                $ionicLoading.hide();
+
+                $scope.nodata = true;
+
+                // Show Connectivity Error
+                if (_.has(err, &quot;info&quot;) &amp;&amp; err.info.status == &quot;error&quot;) {
+                    $scope.error = &quot;Cannot connect to the cloud&quot;;
+                    $rootScope.wifi();
+                }
+
+                // Then We have not found anything
+                if (err.info.statusCode == 404) {
+                    $scope.error = &quot;No Genres have been found !&quot;;
+                }
+
+                // Then We have not found anything
+                if (err.info.statusCode == 500 || err.info.statusCode == 400) {
+                    $scope.error = &quot;Internal server error, please contact App Support&quot;;
+                }
+
+            });
+
+        };
+
+        $scope.reload = function(){
+            $scope.loadData();
+        }
+
+        // Handle the Load
+        $scope.$on(&#039;$ionicView.loaded&#039;, function() {
+            $scope.loadData();
+        });
+
+    })
+
+    /**
+     * Service to Load list of Genres
+     */
+    .factory(&#039;GenresService&#039;, function ($q, $cacheFactory, ACCESS) {
+
+        // Use an internal Cache for storing the List and map the operations to manage that from
+        // Mobile Cloud SDK Calls
+        var cache = $cacheFactory(&#039;Genres&#039;);
+
+        return {
+
+            // Return all the Objects for a Given Class
+            all: function () {
+
+                // Create a Defer as this is an async operation
+                var defer = $q.defer();
+
+                var items = cache.get(ACCESS.GENRES);
+
+                if (!_.isUndefined(items)) {
+                    defer.resolve(items);
+                } else {
+
+                    // Clear the Cache with a new set
+                    cache.remove(ACCESS.GENRES);
+
+                    // Get handle to the CloudCode service
+                    var cc = IBMCloudCode.getService();
+
+                    // USE THE CloudCode to Call the Board Services
+                    // This will integrate with Cloudant to retrieve a list of videos for a Board
+                    // Need to manage the Paging for this and sort it by ranking
+                    // Lets build a
+                    var uri = new IBMUriBuilder().append(ACCESS.GENRES).toString();
+
+                    // Get the Genres
+                    cc.get(uri, {
+                        &quot;handleAs&quot;: &quot;json&quot;
+                    }).then(function (list) {
+
+                        // Place the Items in the Cache
+                        cache.put(ACCESS.GENRES, list);
+                        // return the Cache
+                        defer.resolve(cache.get(ACCESS.GENRES));
+
+                    }).catch(function (err) {
+                        defer.reject(err);
+                    })
+
+                }
+
+                // Get the Objects for a particular Type
+                return defer.promise;
+
+            },
+            getGenre: function (gid) {
+
+                var def = $q.defer();
+
+                // Resolve the Cache
+                this.all().then(function (genres) {
+
+                    var _genre = null;
+                    genres.forEach(function (genre) {
+                        if (genre.gid == gid) {
+                            _genre = genre;
+                        }
+                    });
+
+                    // Check if we have found one
+                    if (!_.isNull(_genre)) {
+                        def.resolve(_genre);
+                    } else {
+                        def.reject(_genre);
+                    }
+
+                }, function (err) {
+                    def.reject(err);
+                });
+
+                return def.promise;
+
+            }
+
+        }
+
+    });</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+    "version": "6.0.0",
+    "name": "com.google.cordova.admob-mobfox",
+    "cordova_name": "AdMob Mediation Adapter for MobFox",
+    "description": "AdMob Mediation Adapter for MobFox",
+    "repo": "https://github.com/floatinghotpot/cordova-admob-pro.git",
+    "issue": "https://github.com/floatinghotpot/cordova-admob-pro/issues",
+    "keywords": [
+        "admob",
+        "mobfox",
+        "mediation"
+    ],
+    "platforms": [],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0"
+        }
+    ]
+}
